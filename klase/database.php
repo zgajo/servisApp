@@ -27,6 +27,9 @@ class database {
         $expire = time() - 60 * 60 * 24;
         setcookie('user', '', $expire, '/', '', '', TRUE);
         setcookie('userId', '', $expire, '/', '', '', TRUE);
+        setcookie('odjel', '', '/', '', '', TRUE);
+        setcookie('centar', '', $expire, '/', '', '', TRUE);
+                
         header('Location: http://eurotrade.esy.es/login.php');
         exit();
     }
