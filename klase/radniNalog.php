@@ -156,11 +156,12 @@ class servisRN extends RN{
     
     public function sviRN() {
         
-        $query = $this->mysqli->query("SELECT rn.*, rn.status as status_rn, p.status, d.ime, d.prezime 
+        $query = $this->mysqli->query("SELECT rn.*, rn.status as status_rn, d.ime, d.prezime 
                                         FROM radniNaloziServisa rn 
                                         LEFT JOIN primka p ON rn.primka_id = p.primka_id 
                                         LEFT JOIN djelatnici d ON rn.djelatnik_zapoceoRn_id = d.djelatnik_id 
-                                        WHERE p.status != 'Kupac preuzeo'");
+                                        WHERE p.status != 'Kupac preuzeo' AND rn.status != 'Popravak završen u jamstvu' AND rn.status != 'Popravak završen van jamstva'
+                                        ORDER BY p.primka_id ASC ");
         
         
         if($query === false){
@@ -174,46 +175,14 @@ class servisRN extends RN{
         
     }
     
-    public function RNbyId($id) {
-       
-        
-        $query=$this->mysqli->prepare("SELECT * FROM radniNaloziServisa WHERE rn_id=?");
-        
-        if($query === false){
-            trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
-        }
-        
-        $query->bind_param("i", $id); 
-        
-        if($query->execute()){
-            $meta = $query->result_metadata(); 
-            while ($field = $meta->fetch_field()) 
-        { 
-            $params[] = &$row[$field->name]; 
-        } 
-
-        call_user_func_array(array($query, 'bind_result'), $params); 
-
-        while ($query->fetch()) { 
-            foreach($row as $key => $val) 
-            { 
-                $c[$key] = $val; 
-            } 
-            $result[] = $c; 
-        } 
-        
-        $query->close(); 
-        return $result;
-
-        
-        } 
-        
-    }
     
     public function RNbyPrimka($id) {
        
         
-        $query=$this->mysqli->prepare("SELECT rn_id FROM radniNaloziServisa WHERE primka_id=?");
+        $query=$this->mysqli->prepare("SELECT rn.rn_id, rn.status, rn.pocetakRada, rn.napomena,  d.ime, d.prezime "
+                . "FROM radniNaloziServisa rn "
+                . "LEFT JOIN djelatnici d ON rn.djelatnik_zapoceoRn_id = d.djelatnik_id "
+                . "WHERE primka_id=?");
         
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
@@ -222,10 +191,15 @@ class servisRN extends RN{
         $query->bind_param("i", $id); 
         
         if($query->execute()){
-            $query->bind_result($this->id);
+            $query->bind_result($this->id, $status, $pocetak, $napomena, $ime, $prezime);
             while($row = $query->fetch()){
                 $rn[] = array(
-                    "id" => $this->id
+                    "id" => $this->id,
+                    "status" => $status,
+                    "pocetak" => $pocetak,
+                    "napomena" => $napomena,
+                    "ime" => $ime,
+                    "prezime" => $prezime
                     );
             }
             $query->close();

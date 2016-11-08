@@ -84,12 +84,6 @@ if($_GET['action'] == 'logout'){
 <?php
 if($_POST){
 $con = new database();
-     /*  include_once '../../klase/radniNalog.php';
-    $rn= new servisRN();
-    $id = '105 or 1=1';
-    $rez=$rn->RNbyId(6);
-    
-    echo $rez->napomena;*/
         
     $con->chkLogin($_POST['username'], $_POST['password']);
 

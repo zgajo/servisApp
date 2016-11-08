@@ -48,8 +48,18 @@ class primka{
         return $result;
     }
     
-    
-    
+    public function svePrimkeRN() {
+        $query = $this->mysqli->query("SELECT p.*  FROM primka p 
+                                        WHERE p.status != 'Kupac preuzeo'");
+        if($query === false){
+            trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
+        }
+        while($row = $query->fetch_object()){
+            $result[]  = $row;
+        }
+        
+        return $result;
+    }
     
     
    
@@ -190,6 +200,7 @@ class primka{
         }
         return $result;
     }
+    
     
     
 }

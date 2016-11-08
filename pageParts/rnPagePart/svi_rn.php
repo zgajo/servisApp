@@ -1,10 +1,12 @@
 <?php
+
 $rn = new servisRN();
 $rn = $rn->sviRN();
 
 ?>
-
  <!-- TABLE: Svi otvoreni radni nalozi -->
+                        
+                        <!-- TABLE: Sve otvorene primke -->
                         <div class="box box-info">
                             <div class="box-header with-border">
                                 <h3 class="box-title">RADNI NALOZI</h3>
@@ -18,8 +20,8 @@ $rn = $rn->sviRN();
                                     <table class="table no-margin">
                                         <thead>
                                             <tr>
-                                                <th>Radni nalog</th>
                                                 <th>Primka</th>
+                                                <th>Radni nalog</th>
                                                 <th>Započeo rad</th>
                                                 <th>Početak rada</th>
                                                 <th>Status</th>
@@ -27,37 +29,53 @@ $rn = $rn->sviRN();
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            
-                                            
-                                            
                                             <?php
-                                           
-                                            if(!empty($rn)){
-                                                
-                                            foreach ($rn as $rn) {
-                                                    if($rn->status_rn != "Popravak završen u jamstvu"  && $rn->status_rn != "Popravak završen van jamstva"){
-                                                    $originalDate = strtotime($rn->pocetakRada);
-                                                    $zapoceto = date("d.m.Y H:i:s", $originalDate);
-                                                
+                                            $primka = new primka();
+                                            $primka = $primka->svePrimkeRN();
 
-                                                echo '<tr>
-                                                        <td><a href="rn.php?radni_nalog=' . $rn->rn_id . '">Uredi rn. ' . $rn->rn_id . '</a></td>
-                                                        <td><a href="primke.php?primka=' . $rn->primka_id . '">Pregledaj pr. ' . $rn->primka_id . '</a></td>
-                                                        <td><div class="sparkbar" data-color="#00a65a" data-height="20">' .  $rn->ime . ' '.$rn->prezime. '</div></td>
-                                                        <td><div class="sparkbar" data-color="#00a65a" data-height="20">' . $zapoceto . '</div></td>
-                                                        <td><span class="label label-success" style="font-size: 12px">' . $rn->status_rn . '</span></td>
-                                                        <td><div class="sparkbar" data-color="#00a65a" data-height="20">' . $rn->napomena . '</div></td>
-                                                    </tr>';
-                                               
-                                                
+                                            if(!empty($primka)){
+                                                foreach ($primka as $primka) {
+                                                    $rn = new servisRN();
+                                                    $rn = $rn->RNbyPrimka($primka->primka_id);
+                                                    
+                                                    if(!empty($rn)){
+                                                        
+                                                       echo '<tr>
+                                                        <td><a href="primke.php?primka=' . $primka->primka_id . '">Primka. ' . $primka->primka_id . '</a></td>
+                                                        <td>';
+                                                        foreach($rn as $radn){
+                                                              echo('<a href="rn.php?radni_nalog=' . $radn['id'] . '"> RN. ' . $radn['id'] . '</a><br>');
+                                                          }  
+                                                        echo '</td><td>';
+                                                         foreach($rn as $radn){
+                                                              echo('<div class="sparkbar" data-color="#00a65a" data-height="20">' .  $radn['ime'] . ' '.$radn['prezime']. '</div>');
+                                                          }  
+                                                        echo '</td><td>';
+                                                        foreach($rn as $radn){
+                                                              echo('<div class="sparkbar" data-color="#00a65a" data-height="20">' .  date("d.m.Y H:i:s",  strtotime($radn['pocetak'])). '</div>');
+                                                          }  
+                                                        echo '</td><td>';
+                                                        foreach($rn as $radn){
+                                                              echo('<div class="label label-success" style="font-size: 12px">' .  $radn['status'] . '</div><br>');
+                                                          }  
+                                                        echo '</td><td>';
+                                                        foreach($rn as $radn){
+                                                              echo('<div class="sparkbar" data-color="#00a65a" data-height="20">' .  $radn['napomena'] . '</div>');
+                                                          }  
+                                                        echo '</td></tr>';
+                                                    }
+                                                    unset($rn);
                                             }
-                                                }
                                             }
-                                            ?>
+                                            unset($primka);
                                             
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div><!-- /.table-responsive -->
                             </div><!-- /.box-body -->
+                            <div  class="box-footer clearfix">
+                                
+                            </div><!-- /.box-footer -->
                         </div><!-- /.box -->
                         
