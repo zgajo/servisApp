@@ -74,7 +74,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <?php if($_GET['action'] == "novi_rn"  && !empty($_GET['primka_id'])) { 
                         
                         $rn  = new servisRN();
-                        $rn->insertRN($_GET['primka_id'], $_COOKIE['id']);
+                        $last = $rn->insertRN($_GET['primka_id'], $_COOKIE['id']);
                         unset($rn);
                         
                         $primka = new primka();
@@ -91,10 +91,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             unset($primka);
                             $primka = new primka();
                             $primka->azurirajStatus("U servisu", $_GET['primka_id']);
+                            
                         }
                         
                         unset($primka);
-                        header("location: rn.php");
+                        echo '<script>alert("Otvoren novi nalog '.$last.'"); '
+                           . 'setTimeout(function(){ window.location.href="rn.php?radni_nalog='.$last.'";}, 100);'
+                           . '</script>';
+                      
                         
                         ?>
                                       

@@ -50,6 +50,7 @@ class servisRN extends RN{
            
         if($query->execute()){
             $query->close();
+            return $this->mysqli->insert_id;
         }
         else{
          $query->close();
@@ -182,7 +183,7 @@ class servisRN extends RN{
         $query=$this->mysqli->prepare("SELECT rn.rn_id, rn.status, rn.pocetakRada, rn.napomena,  d.ime, d.prezime "
                 . "FROM radniNaloziServisa rn "
                 . "LEFT JOIN djelatnici d ON rn.djelatnik_zapoceoRn_id = d.djelatnik_id "
-                . "WHERE primka_id=?");
+                . "WHERE primka_id=? ORDER BY rn.rn_id");
         
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);

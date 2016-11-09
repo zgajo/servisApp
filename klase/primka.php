@@ -37,7 +37,7 @@ class primka{
     public function svePrimke() {
         $query = $this->mysqli->query("SELECT p.*, s.ime as s_ime, s.prezime as s_prezime FROM primka p 
                                         LEFT JOIN stranka s ON  p.stranka_id = s.stranka_id
-                                        WHERE p.status != 'Kupac preuzeo'");
+                                        WHERE p.status != 'Kupac preuzeo' ORDER BY p.primka_id ASC");
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
         }
@@ -49,8 +49,8 @@ class primka{
     }
     
     public function svePrimkeRN() {
-        $query = $this->mysqli->query("SELECT p.*  FROM primka p 
-                                        WHERE p.status != 'Kupac preuzeo'");
+        $query = $this->mysqli->query("SELECT p.primka_id  FROM primka p 
+                                        WHERE p.status != 'Kupac preuzeo' ORDER BY p.primka_id ASC");
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
         }

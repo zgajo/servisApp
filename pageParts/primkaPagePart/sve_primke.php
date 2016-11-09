@@ -16,7 +16,7 @@
                                                 <th>Primka</th>
                                                 <th>Uređaj</th>
                                                 <th>Stranka</th>
-                                                <th>Status</th>
+                                                <th>Status primke</th>
                                                 <th>Datum zaprimanja</th>
                                             </tr>
                                         </thead>
@@ -83,10 +83,10 @@
                                         <thead>
                                             <tr>
                                                 <th>Primka</th>
-                                                <th>Radni nalog</th>
+                                                <?php if($_COOKIE['odjel']=="Servis"){ ?><th>Radni nalog</th><?php } ?>
                                                 <th>Uređaj</th>
                                                 <th>Stranka</th>
-                                                <th>Status</th>
+                                                <th>Status primke</th>
                                                 <th>Datum zaprimanja</th>
                                                 <?php  if( $_COOKIE['odjel'] == "Servis") { ?><th>Poslano iz</th><?php } ?>
                                                 <?php  if( $_COOKIE['odjel'] == "Servis") { ?><th>Započni servisiranje</th><?php } ?>
@@ -113,21 +113,24 @@
                                                 $do = $do->getDjelatnikById($primka->djelatnik_otvorio_id);
                                                 
                                                 echo '<tr>
-                                                <td><a href="primke.php?primka=' . $primka->primka_id . '">Primka. ' . $primka->primka_id . '</a></td>
-                                                <td>';
+                                                <td><a href="primke.php?primka=' . $primka->primka_id . '">Primka. ' . $primka->primka_id . '</a></td>';
                                                 
+                                                
+                                                if($_COOKIE['odjel']=="Servis"){ 
                                                 $rn = new servisRN();
                                                 $rn = $rn->RNbyPrimka($primka->primka_id);
+                                                echo '<td>';
+                                                
                                                 if(!empty($rn)){
                                                   foreach($rn as $rn){
                                                     echo('<a href="rn.php?radni_nalog=' . $rn['id'] . '"> RN. ' . $rn['id'] . '</a><br>');
                                                 }  
                                                 }
+                                                 echo '</td>';
+                                                }
                                                 
                                                 
-                                                
-                                                echo '</td>
-                                                <td>' . $primka->naziv . '</td>
+                                                echo '<td>' . $primka->naziv . '</td>
                                                 <td>' . $primka->s_ime. ' '.$primka->s_prezime.'</td>
                                                 <td><span class="label label-success" style="font-size: 12px">' . $primka->status . '</span></td>
                                                 <td><div class="sparkbar" data-color="#00a65a" data-height="20">' . $zaprimljeno . '</div></td>';

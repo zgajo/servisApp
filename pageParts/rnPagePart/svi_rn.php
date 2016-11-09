@@ -24,7 +24,7 @@ $rn = $rn->sviRN();
                                                 <th>Radni nalog</th>
                                                 <th>Započeo rad</th>
                                                 <th>Početak rada</th>
-                                                <th>Status</th>
+                                                <th>Status radnog naloga</th>
                                                 <th>Napomena</th>
                                             </tr>
                                         </thead>

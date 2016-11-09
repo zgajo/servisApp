@@ -93,7 +93,7 @@ $do = $do->getDjelatnikById($primka[0]["djelatnik_otvorio_id"]);
                 </div><!-- /.box-body -->
                 <div class="box-footer">
                     <?php if($_COOKIE["centar"] == $do["centar"]) { ?><button type="submit" name="submit"  class="btn btn-sm btn-info btn-flat pull-right">Unesi promjenu</button> <?php } ?>
-                    <a  style="margin-left: 5px; margin-right: 5px;" class="btn btn-sm btn-info btn-flat pull-left" href="../rn.php?action=novi_rn&primka_id=<?php echo $primka[0]['primka_id']; ?>">Novi radni nalog</a>
+                    <?php if($_COOKIE["odjel"] == "Servis") { ?><a  style="margin-left: 5px; margin-right: 5px;" class="btn btn-sm btn-info btn-flat pull-left" href="../rn.php?action=novi_rn&primka_id=<?php echo $primka[0]['primka_id']; ?>">Novi radni nalog</a><?php } ?>
                     <a class="btn btn-sm btn-info btn-flat pull-left" href="../rma.php?action=novi_rma&primka_id=<?php echo $primka[0]['primka_id'] ?>" >Novi RMA nalog</a>
                 </div>
 
@@ -126,7 +126,7 @@ $do = $do->getDjelatnikById($primka[0]["djelatnik_otvorio_id"]);
                 <i><strong>Opis popravka: </strong></i>  <?php echo $prim['opisPopravka']; ?> </strong><br>
                 <i><strong>Naplatiti: </strong></i>  <?php echo $prim['naplata']; ?> </strong><br>
                 <i><strong>Rad završio: </strong></i>  <?php echo $prim['zavrsioRn_ime'] . ' ' . $prim['zavrsioRn_prezime']; ?> </strong><br>
-                <i><strong>Završetak rada: </strong></i>  <?php echo date("d.m.Y  H:i:s",strtotime($prim['danZavrsetka']));?> </strong><br>
+              <i><strong>Završetak rada: </strong></i>  <?php if(!empty($prim['danZavrsetka'])) echo date("d.m.Y  H:i:s",strtotime($prim['danZavrsetka']));?> </strong><br>
               </address>
             </div>
            
