@@ -4,12 +4,12 @@ $primka = $primka->getByIdRN($_GET['primka']);
 
 if(empty($primka[0]['primka_id'])){ unset($primka) ; $primka=new primka(); $primka = $primka->getById($_GET['primka']); } 
 
-$datumZaprimanja = date("d.m.Y  H:i:s", strtotime($primka[0]['datumZaprimanja']));
+$datumZaprimanja = date("d.m.Y / H:i:s", strtotime($primka[0]['datumZaprimanja']));
 
 if($primka[0]['datumKupnje'] === "0000-00-00"){
     $kupljeno=NULL;
 }else{
-    $kupljeno = date("d.m.Y H:i:s", strtotime($primka[0]['datumKupnje']));
+    $kupljeno = date("d.m.Y / H:i:s", strtotime($primka[0]['datumKupnje']));
 }
 
 
@@ -126,7 +126,7 @@ $do = $do->getDjelatnikById($primka[0]["djelatnik_otvorio_id"]);
                 <i><strong>Opis popravka: </strong></i>  <?php echo $prim['opisPopravka']; ?> </strong><br>
                 <i><strong>Naplatiti: </strong></i>  <?php echo $prim['naplata']; ?> </strong><br>
                 <i><strong>Rad završio: </strong></i>  <?php echo $prim['zavrsioRn_ime'] . ' ' . $prim['zavrsioRn_prezime']; ?> </strong><br>
-              <i><strong>Završetak rada: </strong></i>  <?php if(!empty($prim['danZavrsetka'])) echo date("d.m.Y  H:i:s",strtotime($prim['danZavrsetka']));?> </strong><br>
+              <i><strong>Završetak rada: </strong></i>  <?php if(!empty($prim['danZavrsetka'])) echo date("d.m.Y / H:i:s",strtotime($prim['danZavrsetka']));?> </strong><br>
               </address>
             </div>
            

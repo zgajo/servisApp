@@ -32,7 +32,7 @@
 
 
                                                 $originalDate = strtotime($result->pocetakRada);
-                                                $zapoceto = date("d.m.Y H:i:s", $originalDate);
+                                                $zapoceto = date("d.m.Y / H:i:s", $originalDate);
                                                 
                                                 $djelatnik = new djelatnik();
                                                 $djelatnik = $djelatnik->getDjelatnikById($result->djelatnik_otvorio_id);

@@ -3,6 +3,7 @@ include_once './checkLogin.php';
 include_once './klase/radniNalog.php';
 include_once './klase/primka.php';
 include_once './klase/osoba.php';
+if($_COOKIE['odjel'] == "Servis"){
 ?>
 
 
@@ -15,7 +16,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>RMA RN</title>
+        <title>Servis RN</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.5 -->
@@ -70,24 +71,44 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- Main content -->
                 <section class="content">
 
-                    <?php if($_GET['action'] == "novi_rma" && !empty($_GET['primka_id'])) { 
-                        $rma  = new rmaNalog();
-                        $rn->insert($_GET['primka_id'], $_COOKIE['id']);
-                        unset($rma);
+                    <?php if($_GET['action'] == "novi_rma"  && !empty($_GET['primka_id'])) { 
+                        
+                        $rn  = new servisRN();
+                        $last = $rn->insert($_GET['primka_id'], $_COOKIE['id']);
+                        unset($rn);
+                        
                         $primka = new primka();
-                        $primka->azurirajStatus("U ovlaštenom servisu", $_GET['primka_id']);
+                        $primka = $primka->getById($_GET['primka_id']);
+                        
+                        if($primka[0]["p_status"] == "Poslano u CS - Rovinj" || $primka[0]["p_status"] == "Poslano u CS - Rovinj / Čeka dio" || $primka[0]["p_status"] == "Poslano u CS - Rovinj / Započelo servisiranje"){
+                           
+                            unset($primka);
+                            $primka = new primka();
+                            $primka->azurirajStatus("Poslano u CS - Rovinj / Započelo servisiranje", $_GET['primka_id']);
+                            
+                        }else{
+                           
+                            unset($primka);
+                            $primka = new primka();
+                            $primka->azurirajStatus("U servisu", $_GET['primka_id']);
+                            
+                        }
+                        
                         unset($primka);
-                        header("location: rn.php");
+                        echo '<script>alert("Otvoren novi nalog '.$last.'"); '
+                           . 'setTimeout(function(){ window.location.href="rn.php?radni_nalog='.$last.'";}, 100);'
+                           . '</script>';
+                      
                         
                         ?>
                                       
                     <?php } else if(!empty($_GET['radni_nalog'])){
                     
-                    require_once('./pageParts/rmaPagePart/uredi_rma.php');
+                    require_once('./pageParts/rnPagePart/uredi_rn.php');
                     
                     } else{  
                     
-                    require_once('./pageParts/rmaPagePart/svi_rma.php');
+                    require_once('./pageParts/rnPagePart/svi_rn.php');
                     
                     } ?>
                 </section><!-- /.content -->
@@ -211,3 +232,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
              fixed layout. -->
     </body>
 </html>
+<?php } else{
+    echo('Nemate prava pristupa');
+}

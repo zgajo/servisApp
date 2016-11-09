@@ -52,7 +52,7 @@ $rn = $rn->sviRN();
                                                           }  
                                                         echo '</td><td>';
                                                         foreach($rn as $radn){
-                                                              echo('<div class="sparkbar" data-color="#00a65a" data-height="20">' .  date("d.m.Y H:i:s",  strtotime($radn['pocetak'])). '</div>');
+                                                              echo('<div class="sparkbar" data-color="#00a65a" data-height="20">' .  date("d.m.Y / H:i:s",  strtotime($radn['pocetak'])). '</div>');
                                                           }  
                                                         echo '</td><td>';
                                                         foreach($rn as $radn){

@@ -36,7 +36,7 @@
                                                     if($_COOKIE['centar'] == $primka->centar){
                                                         
                                                         $datum = strtotime($primka->datumZaprimanja);
-                                                        $zaprimljeno = date("d.m.Y   -   H:i:s",$datum );
+                                                        $zaprimljeno = date("d.m.Y   /   H:i:s",$datum );
                                                 
                                                         echo '<tr>
                                                         <td><a href="primke.php?primka=' . $primka->primka_id . '">Pregledaj / Uredi ' . $primka->primka_id . '</a></td>
@@ -107,7 +107,7 @@
                                                     if($_COOKIE['centar'] == $primka->centar || $_COOKIE['odjel'] == "Servis"){
                                                         
                                                         $datum = strtotime($primka->datumZaprimanja);
-                                                $zaprimljeno = date("d.m.Y   -   H:i:s",$datum );
+                                                $zaprimljeno = date("d.m.Y   /   H:i:s",$datum );
                                                 
                                                 $do = new djelatnik();
                                                 $do = $do->getDjelatnikById($primka->djelatnik_otvorio_id);

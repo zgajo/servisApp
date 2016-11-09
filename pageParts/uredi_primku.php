@@ -6,7 +6,7 @@ if($primka[0]['datumKupnje'] === "0000-00-00"){
     $kupljeno=NULL;
 }else{
     $originalDate = strtotime($primka[0]['datumKupnje']);
-    $kupljeno = date("d.m.Y H:i:s", $originalDate);
+    $kupljeno = date("d.m.Y / H:i:s", $originalDate);
 }
 
 ?>

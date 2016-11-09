@@ -74,7 +74,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <?php if($_GET['action'] == "novi_rn"  && !empty($_GET['primka_id'])) { 
                         
                         $rn  = new servisRN();
-                        $last = $rn->insertRN($_GET['primka_id'], $_COOKIE['id']);
+                        $last = $rn->insert($_GET['primka_id'], $_COOKIE['id']);
                         unset($rn);
                         
                         $primka = new primka();

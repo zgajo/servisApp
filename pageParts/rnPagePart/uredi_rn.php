@@ -4,17 +4,17 @@
 $radni = new servisRN();
 $radni = $radni->RNjoinPrimkaOtvorenUredi($_GET['radni_nalog']);
 
-$rnPocetakRada = date("d.m.Y H:i:s", strtotime($radni[0]['pocetakRada']));
+$rnPocetakRada = date("d.m.Y / H:i:s", strtotime($radni[0]['pocetakRada']));
 
 
-$datumZaprimanja = date("d.m.Y H:i:s",  strtotime($radni[0]['datumZaprimanja']));
+$datumZaprimanja = date("d.m.Y / H:i:s",  strtotime($radni[0]['datumZaprimanja']));
 
 
 
 if($radni[0]['datumKupnje'] === "0000-00-00"){
     $kupljeno=NULL;
 }else{
-       $kupljeno = date("d.m.Y H:i:s", strtotime($radni[0]['datumKupnje']));
+       $kupljeno = date("d.m.Y / H:i:s", strtotime($radni[0]['datumKupnje']));
 }
 
 ?>

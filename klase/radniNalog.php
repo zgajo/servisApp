@@ -3,18 +3,17 @@ include_once 'database.php';
 
 abstract class RN{
     
-    protected $id,$naplata, $danZaprimanja, $danZavrsetka, $opisPopravka, $napomena, $primka_id, $djelatnik_otvorio_id, $djelatnik_zatvorio_id;
+    protected $id,$naplata, $danZaprimanja, $danZavrsetka, $opisPopravka, $napomena, $primka_id, $djelatnik_otvorio_id, $djelatnik_zatvorio_id, $mysqli;
+   function __construct() {
+        $con = new database();
+        $this->mysqli = $con->getConnection();
+    }
         
 }
 
 
-class rmaNalog{
-    private $pocetakRada, $mysqli; 
+class rmaNalog extends RN{
     
-    function __construct() {
-        $con = new database();
-        $this->mysqli = $con->getConnection();
-    }
     
     public function insert($primka, $djelatnik_otvorio){
         
@@ -25,14 +24,10 @@ class rmaNalog{
 
 class servisRN extends RN{
     
-    private $pocetakRada, $mysqli; 
+    private $pocetakRada; 
     
-    function __construct() {
-        $con = new database();
-        $this->mysqli = $con->getConnection();
-    }
     
-    public function insertRN($primka_id, $djelatnik_otvorio_id) {
+    public function insert($primka_id, $djelatnik_otvorio_id) {
         
         date_default_timezone_set('Europe/Zagreb');
         $date = date('Y-m-d H:i:s', time());
