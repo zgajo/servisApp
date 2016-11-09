@@ -6,6 +6,7 @@ if(empty($primka[0]['primka_id'])){ unset($primka) ; $primka=new primka(); $prim
 
 $datumZaprimanja = date("d.m.Y / H:i:s", strtotime($primka[0]['datumZaprimanja']));
 
+
 if($primka[0]['datumKupnje'] === "0000-00-00"){
     $kupljeno=NULL;
 }else{
