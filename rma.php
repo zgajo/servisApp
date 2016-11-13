@@ -16,7 +16,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Servis RN</title>
+        <title>RMA Nalozi</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.5 -->
@@ -73,30 +73,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                     <?php if($_GET['action'] == "novi_rma"  && !empty($_GET['primka_id'])) { 
                         
-                        $rn  = new servisRN();
-                        $last = $rn->insert($_GET['primka_id'], $_COOKIE['id']);
-                        unset($rn);
+                        $rma  = new rmaNalog();
+                        $last = $rma->insert($_GET['primka_id'], $_COOKIE['id']);
+                        unset($rma);
                         
+                       
                         $primka = new primka();
-                        $primka = $primka->getById($_GET['primka_id']);
+                        $primka->azurirajStatus("Pripremljeno za slanje OS-u", $_GET['primka_id']);
+                            
                         
-                        if($primka[0]["p_status"] == "Poslano u CS - Rovinj" || $primka[0]["p_status"] == "Poslano u CS - Rovinj / Čeka dio" || $primka[0]["p_status"] == "Poslano u CS - Rovinj / Započelo servisiranje"){
-                           
-                            unset($primka);
-                            $primka = new primka();
-                            $primka->azurirajStatus("Poslano u CS - Rovinj / Započelo servisiranje", $_GET['primka_id']);
-                            
-                        }else{
-                           
-                            unset($primka);
-                            $primka = new primka();
-                            $primka->azurirajStatus("U servisu", $_GET['primka_id']);
-                            
-                        }
                         
                         unset($primka);
-                        echo '<script>alert("Otvoren novi nalog '.$last.'"); '
-                           . 'setTimeout(function(){ window.location.href="rn.php?radni_nalog='.$last.'";}, 100);'
+                        echo '<script>alert("Otvoren novi RMA nalog '.$last.'"); '
+                           . 'setTimeout(function(){ window.location.href="rma.php?rma='.$last.'";}, 100);'
                            . '</script>';
                       
                         
@@ -104,11 +93,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       
                     <?php } else if(!empty($_GET['radni_nalog'])){
                     
-                    require_once('./pageParts/rnPagePart/uredi_rn.php');
+                    require_once('./pageParts/rmaPagePart/uredi_rma.php');
                     
                     } else{  
                     
-                    require_once('./pageParts/rnPagePart/svi_rn.php');
+                    require_once('./pageParts/rmaPagePart/svi_rma.php');
                     
                     } ?>
                 </section><!-- /.content -->

@@ -1,9 +1,4 @@
-<?php
 
-$rn = new servisRN();
-$rn = $rn->sviRN();
-
-?>
  <!-- TABLE: Svi otvoreni radni nalozi -->
                         
                         <!-- TABLE: Sve otvorene primke -->
@@ -31,7 +26,7 @@ $rn = $rn->sviRN();
                                         <tbody>
                                             <?php
                                             $primka = new primka();
-                                            $primka = $primka->svePrimkeRN();
+                                            $primka = $primka->svePrimke();
 
                                             if(!empty($primka)){
                                                 foreach ($primka as $primka) {

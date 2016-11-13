@@ -1,4 +1,7 @@
+
  <!-- TABLE: Svi otvoreni radni nalozi -->
+                        
+                        <!-- TABLE: Sve otvorene primke -->
                         <div class="box box-info">
                             <div class="box-header with-border">
                                 <h3 class="box-title">RADNI NALOZI</h3>
@@ -12,45 +15,65 @@
                                     <table class="table no-margin">
                                         <thead>
                                             <tr>
-                                                <th>Radni nalog</th>
                                                 <th>Primka</th>
+                                                <th>RMA nalog</th>
                                                 <th>Započeo rad</th>
-                                                <th>Početak rada</th>
+                                                <th>Poslano u OS</th>
+                                                <th>Status</th>
                                                 <th>Napomena</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $rn = new servisRN();
+                                            $primka = new primka();
+                                            $primka = $primka->svePrimke();
 
-                                            $rez = $rn->sviRN();
-                                            unset($rn);
-                                            //print_r($rez);
-                                            if(!empty($rez)){
-                                                
-                                            foreach ($rez as $result) {
-
-
-                                                $originalDate = strtotime($result->pocetakRada);
-                                                $zapoceto = date("d.m.Y / H:i:s", $originalDate);
-                                                
-                                                $djelatnik = new djelatnik();
-                                                $djelatnik = $djelatnik->getDjelatnikById($result->djelatnik_otvorio_id);
-
-                                                echo '<tr>
-                                                        <td><a href="rn.php?radni_nalog=' . $result->rn_id . '">Uredi rn. ' . $result->rn_id . '</a></td>
-                                                        <td><a href="primke.php?primka=' . $result->primka_id . '">Pregledaj pr. ' . $result->primka_id . '</a></td>
-                                                        <td><div class="sparkbar" data-color="#00a65a" data-height="20">' .  $djelatnik['ime'] . ' '.$djelatnik['prezime']. '</div></td>
-                                                        <td><div class="sparkbar" data-color="#00a65a" data-height="20">' . $zapoceto . '</div></td>
-                                                        <td><div class="sparkbar" data-color="#00a65a" data-height="20">' . $result->napomena . '</div></td>
-                                                    </tr>';
-                                                    unset($djelatnik);
+                                            if(!empty($primka)){
+                                                foreach ($primka as $primka) {
+                                                    $rma = new rmaNalog();
+                                                    $rma = $rma->RMAbyPrimka($primka->primka_id);
+                                                    
+                                                    if(!empty($rma)){
+                                                        
+                                                       echo '<tr>
+                                                        <td><a href="primke.php?primka=' . $primka->primka_id . '">Primka. ' . $primka->primka_id . '</a></td>
+                                                        <td>';
+                                                        foreach($rma as $r){
+                                                              echo('<a href="rn.php?radni_nalog=' . $r['id'] . '"> RMA. ' . $r['id'] . '</a><br>');
+                                                          }  
+                                                        echo '</td><td>';
+                                                         foreach($rma as $r){
+                                                              echo('<div class="sparkbar" data-color="#00a65a" data-height="20">' .  $r['ime'] . ' '.$r['prezime']. '</div>');
+                                                          }  
+                                                        echo '</td><td>';
+                                                        foreach($rma as $r){
+                                                            
+                                                            ($r['poslano'] == 0000-00-00) ? $p = NULL: $p = strtotime($r['poslano']);
+                                                            
+                                                              echo('<div class="sparkbar" data-color="#00a65a" data-height="20">' .  $p. '</div>');
+                                                          }  
+                                                        echo '</td><td>';
+                                                        foreach($rma as $r){
+                                                              echo('<div class="label label-success" style="font-size: 12px">' .  $r['status'] . '</div><br>');
+                                                          }  
+                                                        echo '</td><td>';
+                                                        foreach($rma as $r){
+                                                              echo('<div class="sparkbar" data-color="#00a65a" data-height="20">' .  $r['napomena'] . '</div>');
+                                                          }  
+                                                        echo '</td></tr>';
+                                                    }
+                                                    unset($rma);
                                             }
+                                            }
+                                            unset($primka);
                                             
-                                            }
                                             ?>
                                         </tbody>
                                     </table>
                                 </div><!-- /.table-responsive -->
                             </div><!-- /.box-body -->
+                            <div  class="box-footer clearfix">
+                                
+                            </div><!-- /.box-footer -->
                         </div><!-- /.box -->
+                        
