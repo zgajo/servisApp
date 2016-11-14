@@ -151,8 +151,9 @@ if($radni[0]['datumKupnje'] === "0000-00-00"){
             <!-- general form elements disabled -->
 
         </div>
-        
-    </div>
+   <div class="row" style="clear: both">
+           
+          </div>
 </form>
 
 <?php

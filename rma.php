@@ -92,7 +92,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         
                         ?>
                                       
-                    <?php } else if(!empty($_GET['radni_nalog'])){
+                    <?php } else if(!empty($_GET['rma'])){
                     
                     require_once('./pageParts/rmaPagePart/uredi_rma.php');
                     

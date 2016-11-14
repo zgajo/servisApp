@@ -34,9 +34,55 @@ class rmaNalog extends RN{
         
     }
     
+    
+        public function update( $rma,  $status, $opisPopravka, $napomena, $naplata, $r) {
+        
+        
+        $query = $this->mysqli->prepare("UPDATE radniNaloziRMA SET status = ?, napomena = ?, opisPopravka = ?, naplata = ?, rnOS=? WHERE rma_id = ?");
+        if($query === false){
+            trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
+        }
+        
+        $query->bind_param('sssssi',$status, $napomena, $opisPopravka, $naplata, $r, $rma);
+        
+        if($query->execute()){
+            $query->close();
+        }
+        else{
+             $query->close();
+        die("Neuspješno ažuriranje radnog naloga");
+        }
+       
+        
+    }
+    
+    
+    public function posalji( $rma,  $status) {
+        
+        date_default_timezone_set('Europe/Zagreb');
+        $date = date('Y-m-d H:i:s', time());
+        
+        $query = $this->mysqli->prepare("UPDATE radniNaloziRMA SET status = ?, poslanoOSu = ? WHERE rma_id = ?");
+        if($query === false){
+            trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
+        }
+        
+        $query->bind_param('ssi',$status,$date, $rma);
+        
+        if($query->execute()){
+            $query->close();
+        }
+        else{
+             $query->close();
+        die("Neuspješno ažuriranje radnog naloga");
+        }
+       
+        
+    }
+    
     public function RMAbyPrimka($p) {
         
-        $query=$this->mysqli->prepare("SELECT rma.rma_id, rma.status,  rma.napomena, rma.poslanoOSu,  d.ime, d.prezime "
+        $query=$this->mysqli->prepare("SELECT rma.rma_id, rma.status,  rma.napomena, rma.poslanoOSu, rma.rnOS,  d.ime, d.prezime "
                 . "FROM radniNaloziRMA rma "
                 . "LEFT JOIN djelatnici d ON rma.djelatnik_zapoceoRma_id = d.djelatnik_id "
                 . "WHERE primka_id=? ORDER BY rma.rma_id");
@@ -48,13 +94,14 @@ class rmaNalog extends RN{
         $query->bind_param("i", $p); 
         
         if($query->execute()){
-            $query->bind_result($this->id, $status,  $napomena, $poslano, $ime, $prezime);
+            $query->bind_result($this->id, $status,  $napomena, $poslano, $r, $ime, $prezime);
             while($row = $query->fetch()){
                 $rn[] = array(
                     "id" => $this->id,
                     "status" => $status,
                     "napomena" => $napomena,
                     "poslano" => $poslano,
+                    "rnOs" => $r,
                     "ime" => $ime,
                     "prezime" => $prezime,
                     
@@ -72,10 +119,10 @@ class rmaNalog extends RN{
     
     public function RMAjoinPrimkaOtvorenUredi($id){
         $query=$this->mysqli->prepare("SELECT rma.*, p.*, s.*, rma.status as status_rma, 
-                                            rnd1.ime as zapoceoRn_ime, rnd1.prezime as zapoceoRn_prezime, rnd2.ime as zavrsioRn_ime, rnd2.prezime as zavrsioRn_prezime, 
+                                            rnd1.ime as zapoceoRMA_ime, rnd1.prezime as zapoceoRMA_prezime, rnd2.ime as zavrsioRMA_ime, rnd2.prezime as zavrsioRMA_prezime, 
                                             pdo.ime as pot_ime, pdo.prezime as pot_prezime , pdz.ime as pzt_ime, pdz.prezime as pzt_prezime 
                                             FROM radniNaloziRMA rma
-                                            LEFT JOIN primka p on rn.primka_id = p.primka_id
+                                            LEFT JOIN primka p on rma.primka_id = p.primka_id
                                             LEFT JOIN djelatnici rnd1 on rma.djelatnik_zapoceoRma_id = rnd1.djelatnik_id
                                             LEFT JOIN djelatnici rnd2 on rma.djelatnik_zavrsioRma_id = rnd2.djelatnik_id
                                             LEFT JOIN djelatnici pdo on p.djelatnik_otvorio_id = pdo.djelatnik_id
@@ -112,6 +159,27 @@ class rmaNalog extends RN{
         
         } 
         
+        
+    }
+    
+    public function zatvori($rma,  $status, $opisPopravka, $napomena, $naplata, $djelatnik_id) {
+        date_default_timezone_set('Europe/Zagreb');
+        $zatvori = date('Y-m-d H:i:s', time());
+        
+        $query = $this->mysqli->prepare("UPDATE radniNaloziRMA SET status = ?, napomena = ?, opisPopravka = ?, naplata = ?, danZavrsetka = ?, djelatnik_zavrsioRma_id = ? WHERE rma_id = ?");
+        if($query === false){
+            trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
+        }
+        
+        $query->bind_param('sssssii',$status, $napomena, $opisPopravka, $naplata, $zatvori, $djelatnik_id, $rma);
+        
+       if($query->execute()){
+            $query->close();
+        }
+        else{
+             $query->close();
+        die("Neuspješno zatvaranje radnog naloga");
+        }
         
     }
     

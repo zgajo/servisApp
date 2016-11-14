@@ -1,20 +1,16 @@
 <?php
 
 
-$radni = new rmaNalog();
-$radni = $radni->RMAjoinPrimkaOtvorenUredi($_GET['rma']);
+$rma = new rmaNalog();
+$rma = $rma->RMAjoinPrimkaOtvorenUredi($_GET['rma']);
 
-$rnPocetakRada = date("d.m.Y / H:i:s", strtotime($radni[0]['pocetakRada']));
-
-
-$datumZaprimanja = date("d.m.Y / H:i:s",  strtotime($radni[0]['datumZaprimanja']));
+$rnPocetakRada = date("d.m.Y / H:i:s", strtotime($rma[0]['pocetakRada']));
 
 
-
-if($radni[0]['datumKupnje'] === "0000-00-00"){
+if($rma[0]['datumKupnje'] === "0000-00-00"){
     $kupljeno=NULL;
 }else{
-       $kupljeno = date("d.m.Y / H:i:s", strtotime($radni[0]['datumKupnje']));
+       $kupljeno = date("d.m.Y / H:i:s", strtotime($rma[0]['datumKupnje']));
 }
 
 ?>
@@ -26,19 +22,19 @@ if($radni[0]['datumKupnje'] === "0000-00-00"){
             <!-- Dio za primku -->
             <div class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Primka <?php echo $radni[0]['primka_id']  ?></h3>
+                    <h3 class="box-title">Primka <?php echo $rma[0]['primka_id']  ?></h3>
                     
                 </div><!-- /.box-header -->
                 <!-- form start -->
             <div id="stranka" class="col-sm-4 invoice-col"  >
               <h4>Stranka:</h4>
               <address>
-                <strong><?php echo $radni[0]['tvrtka'] ?></strong><br>
-                <?php echo $radni[0]['ime']. ' '.$radni[0]['prezime']  ?><br>
-                <?php echo $radni[0]['adresa'] ?><br>
-                <?php echo $radni[0]['grad']. ', '.$radni['postanskiBroj']  ?><br>
-                <i><strong>Kontakt: </strong></i><?php echo $radni[0]['kontakt'] ?><br>
-                <i><strong>Email: </strong></i><?php echo $radni[0]['email']?>
+                <strong><?php echo $rma[0]['tvrtka'] ?></strong><br>
+                <?php echo $rma[0]['ime']. ' '.$rma[0]['prezime']  ?><br>
+                <?php echo $rma[0]['adresa'] ?><br>
+                <?php echo $rma[0]['grad']. ', '.$rma['postanskiBroj']  ?><br>
+                <i><strong>Kontakt: </strong></i><?php echo $rma[0]['kontakt'] ?><br>
+                <i><strong>Email: </strong></i><?php echo $rma[0]['email']?>
               </address>
             </div>
                 
@@ -46,17 +42,17 @@ if($radni[0]['datumKupnje'] === "0000-00-00"){
                   <h4>Primka:</h4>
               <address>
                 <i><strong>Zaprimljeno: </strong></i> <?php echo $datumZaprimanja; ?><br>
-                <i><strong>Naziv: </strong></i>  <?php echo $radni[0]['naziv']; ?> </strong><br>
-                <i><strong>Primku otvorio: </strong></i>  <?php echo $radni[0]['pot_ime']. ' ' .$radni[0]['pot_prezime'] ; ?> </strong><br>
-                <?php if(!empty($radni[0]['serial'])){ ?> <i><strong>Serijski: </strong></i> <?php echo $radni[0]['serial']; ?></br> <?php } ?>
-                <?php if(!empty($radni[0]['brand'])){ ?>  <i><strong>Brand: </strong></i>  <?php echo $radni[0]['brand']; ?><br> <?php } ?>
-                <?php if(!empty($radni[0]['tip'])){ ?>  <i><strong>Tip: </strong></i>  <?php echo $radni[0]['tip']; ?><br> <?php } ?>
-                <?php if(!empty($radni[0]['$kupljeno'])){ ?>  <i><strong>Datum kupnje: </strong></i>  <?php echo $kupljeno; ?></br> <?php } ?>
-                <?php if(!empty($radni[0]['racun'])){ ?>  <i><strong>Broj računa: </strong></i>  <?php echo $radni[0]['racun']?></br> <?php } ?>
+                <i><strong>Naziv: </strong></i>  <?php echo $rma[0]['naziv']; ?> </strong><br>
+                <i><strong>Primku otvorio: </strong></i>  <?php echo $rma[0]['pot_ime']. ' ' .$rma[0]['pot_prezime'] ; ?> </strong><br>
+                <?php if(!empty($rma[0]['serial'])){ ?> <i><strong>Serijski: </strong></i> <?php echo $rma[0]['serial']; ?></br> <?php } ?>
+                <?php if(!empty($rma[0]['brand'])){ ?>  <i><strong>Brand: </strong></i>  <?php echo $rma[0]['brand']; ?><br> <?php } ?>
+                <?php if(!empty($rma[0]['tip'])){ ?>  <i><strong>Tip: </strong></i>  <?php echo $rma[0]['tip']; ?><br> <?php } ?>
+                <?php if(!empty($rma[0]['$kupljeno'])){ ?>  <i><strong>Datum kupnje: </strong></i>  <?php echo $kupljeno; ?></br> <?php } ?>
+                <?php if(!empty($rma[0]['racun'])){ ?>  <i><strong>Broj računa: </strong></i>  <?php echo $rma[0]['racun']?></br> <?php } ?>
                 <hr>
                
-                <?php if(!empty($radni[0]['opisKvara'])){ ?>  <i><strong>Opis kvara: </strong></i> <br> <?php echo $radni[0]['opisKvara']?></br></br> <?php } ?>
-               <?php if(!empty($radni[0]['prilozeno_primijeceno'])){ ?>   <i><strong>Priloženo / primijećeno uz uređaj: </strong></i><br>  <?php echo $radni[0]['prilozeno_primijeceno']?></br> <?php } ?>
+                <?php if(!empty($rma[0]['opisKvara'])){ ?>  <i><strong>Opis kvara: </strong></i> <br> <?php echo $rma[0]['opisKvara']?></br></br> <?php } ?>
+               <?php if(!empty($rma[0]['prilozeno_primijeceno'])){ ?>   <i><strong>Priloženo / primijećeno uz uređaj: </strong></i><br>  <?php echo $rma[0]['prilozeno_primijeceno']?></br> <?php } ?>
                 
               </address>
             </div>
@@ -76,7 +72,7 @@ if($radni[0]['datumKupnje'] === "0000-00-00"){
             <div class="box box-info">
               <div class="box-body" style="clear: both">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Uređivanje radnog naloga <?php echo $radni[0]['rn_id']; ?></h3>
+                    <h3 class="box-title">Uređivanje RMA naloga <?php echo $rma[0]['rma_id']; ?></h3>
                     
                 </div><!-- /.box-header -->
                 <!-- form start -->
@@ -84,7 +80,15 @@ if($radni[0]['datumKupnje'] === "0000-00-00"){
                   <label class="col-sm-2 control-label">Početak rada: </label>
                 <div class="col-sm-10" >
              
-                <p  class="form-control" style="border: 0px;"><?php echo $rnPocetakRada; ?></p>
+                    <p  class="form-control" style="border: 0px;"><?php echo($rma[0]['danZaprimanja']  != NULL)? date("d.m.Y / H:i:s", strtotime($rma[0]['danZaprimanja'])): ""; ?></p>
+            </div>
+           </div>
+                
+            <div class="form-group">
+                  <label class="col-sm-2 control-label">Poslano u OS: </label>
+                <div class="col-sm-10" >
+             
+                    <p  class="form-control" style="border: 0px;"><?php echo($rma[0]['poslanoOSu']  != NULL)? date("d.m.Y / H:i:s", strtotime($rma[0]['poslanoOSu'])): "" ; ?></p>
             </div>
            </div>
            
@@ -92,16 +96,22 @@ if($radni[0]['datumKupnje'] === "0000-00-00"){
                   <label class="col-sm-2 control-label">Rad započeo: </label>
                 <div class="col-sm-10" >
              
-                <p  class="form-control" style="border: 0px;"><?php echo $radni[0]['zapoceoRn_ime'] . ' ' . $radni[0]['zapoceoRn_prezime'] ?></p>
+                <p  class="form-control" style="border: 0px;"><?php echo $rma[0]['zapoceoRMA_ime'] . ' ' . $rma[0]['zapoceoRMA_prezime'] ?></p>
             </div>
            </div>
            
                <!-- textarea -->
+               <div class="form-group"  >
+                        <label for="inputPopravak" class="col-sm-2 control-label">RN OS-a</label>
+                        <div class="col-sm-10">
+                            <input id="inputPopravak" class="form-control" rows="3" placeholder="Broj naloga pod kojim je uređaj zaprimljen..." name="rnOS" value="<?php echo $rma[0]['rnOS']  ?>">
+                        </div>
+                    </div>
                
                     <div class="form-group"  >
                         <label for="inputPopravak" class="col-sm-2 control-label">Opis popravka</label>
                         <div class="col-sm-10">
-                            <textarea id="inputPopravak" class="form-control" rows="3" placeholder="Opis rada na reklamaciji ..." name="popravak" ><?php echo $radni[0]['opisPopravka']  ?></textarea>
+                            <textarea id="inputPopravak" class="form-control" rows="3" placeholder="Opis rada na reklamaciji ..." name="popravak" ><?php echo $rma[0]['opisPopravka']  ?></textarea>
                         </div>
                     </div>
                     
@@ -109,14 +119,14 @@ if($radni[0]['datumKupnje'] === "0000-00-00"){
                     <div class="form-group" >
                         <label for="inputNapomena" class="col-sm-2 control-label">Napomena</label>
                         <div class="col-sm-10">
-                            <textarea id="inputNapomena" class="form-control" rows="3" placeholder="Napomene" name="napomena" ><?php echo $radni[0]['napomena']  ?></textarea>
+                            <textarea id="inputNapomena" class="form-control" rows="3" placeholder="Napomene" name="napomena" ><?php echo $rma[0]['napomena']  ?></textarea>
                         </div>
                     </div>
                     
                     <div class="form-group">
                         <label for="inputNaplata" class="col-sm-2 control-label">Naplata</label>
                         <div class="col-sm-10">
-                            <input class="form-control" id="inputNaplata" placeholder="Upisati šifru ..." type="text" name="naplata" value="<?php echo $radni[0]['naplata']  ?>">
+                            <input class="form-control" id="inputNaplata" placeholder="Upisati šifru ..." type="text" name="naplata" value="<?php echo $rma[0]['naplata']  ?>">
                         </div>
                     </div>
                 
@@ -126,14 +136,16 @@ if($radni[0]['datumKupnje'] === "0000-00-00"){
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Ažuriraj</label>
                         <div class="col-sm-10">
-                            <select class="form-control" name='status_rn'>
+                            <select class="form-control" name='status_rma'>
                                 
                                 
-                                <option style="background-color: #DFDFDF" selected disabled=""><?php echo $radni[0]['status_rn']  ?></option>
-                                <option <?php if($radni[0]['status_rn'] == "Čeka dio") echo "selected"; ?> >Čeka dio</option>
-                                <option <?php if($radni[0]['status_rn'] == "Popravak završen u jamstvu") echo "selected"; ?> >Popravak završen u jamstvu</option>
-                                <option <?php if($radni[0]['status_rn'] == "Popravak završen van jamstva") echo "selected"; ?> >Popravak završen van jamstva</option>
-                                <option <?php if($radni[0]['status_rn'] == "Stranka odustala od popravka") echo "selected"; ?> >Stranka odustala od popravka</option>
+                                <option style="background-color: #DFDFDF" selected disabled=""><?php echo $rma[0]['status_rma']  ?></option>
+                                <option <?php if($rma[0]['status_rma'] == "Pripremljeno za slanje") echo "selected"; ?> >Pripremljeno za slanje</option>
+                                <option <?php if($rma[0]['status_rma'] == "Poslano u OS / Čeka dio") echo "selected"; ?> >Čeka dio</option>
+                                <option <?php if($rma[0]['status_rma'] == "Poslano u OS") echo "selected"; ?> >Pošalji u OS</option>
+                                <option <?php if($rma[0]['status_rma'] == "Popravak završen u jamstvu") echo "selected"; ?> >Popravak završen u jamstvu</option>
+                                <option <?php if($rma[0]['status_rma'] == "Popravak završen van jamstva") echo "selected"; ?> >Popravak završen van jamstva</option>
+                                <option <?php if($rma[0]['status_rma'] == "Stranka odustala od popravka") echo "selected"; ?> >Stranka odustala od popravka</option>
                                 
                                 
                                  
@@ -152,52 +164,67 @@ if($radni[0]['datumKupnje'] === "0000-00-00"){
 
         </div>
         
-    </div>
+    <div class="row" style="clear: both">
+           
+          </div>
 </form>
 
 <?php
                             
                             if(!empty($_POST)){
-                               
-                                if($_POST['status_rn'] == "Popravak završen u jamstvu"  || $_POST['status_rn'] == "Popravak završen van jamstva" || $_POST['status_rn']== 'Stranka odustala od popravka'){
-                                    
-                                    $rn = new servisRN();
-                                    $rn->zatvoriRN($radni[0]['rn_id'],  $_POST['status_rn'], $_POST['popravak'], $_POST['napomena'], $_POST['naplata'], $_COOKIE['id']);
-                                     
-                                    $primka = new primka();
-                                    
-                                    if($radni[0]['status'] == "Poslano u CS - Rovinj" || $radni[0]['status'] == "Poslano u CS - Rovinj / Započelo servisiranje"  || $radni[0]['status'] == "Poslano u CS - Rovinj / Čeka dio") {
-                                        $primka->updatePrimka("Završen popravak - poslano u centar", $radni[0]['primka_id']) ;
-                                        }else{
-                                            $primka->updatePrimka("Završen popravak", $radni[0]['primka_id']);
-                                        }
-                                    
-                                    unset($radni);
-                                    unset($rn);
-                                    unset($primka);
-                                    
-                                     header("refresh:0");
-                                     
-                                }  else{
-                                    $rn = new servisRN();
-                                    $rn->update($radni[0]['rn_id'],  $_POST['status_rn'], $_POST['popravak'], $_POST['napomena'], $_POST['naplata']);
-                                    $primka = new primka();
-                                    
-                                     if($radni[0]['status'] == "Poslano u CS - Rovinj" || $radni[0]['status'] == "Poslano u CS - Rovinj / Započelo servisiranje" || $radni[0]['status'] == "Poslano u CS - Rovinj / Čeka dio") {
-                                         
-                                        $primka->updatePrimka("Poslano u CS - Rovinj / Čeka dio", $radni[0]['primka_id']) ;
+                                
+                                switch ($_POST['status_rma']){
+                                    case ($_POST['status_rma'] == "Popravak završen u jamstvu"  || $_POST['status_rma'] == "Popravak završen van jamstva" || $_POST['status_rma']== 'Stranka odustala od popravka'):
+                                        $r = new rmaNalog();
+                                        $r->zatvori($rma[0]['rma_id'],  $_POST['status_rma'], $_POST['popravak'], $_POST['napomena'], $_POST['naplata'], $_COOKIE['id']);
+
+                                        $primka = new primka();
+
+                                        $primka->updatePrimka("Završen popravak", $rma[0]['primka_id']);
+
+
+                                        unset($rma);
+                                        unset($primka);
+                                        unset($r);
+                                        header("refresh:0");
+                                     break;
+                                    case 'Pošalji u OS':
+                                        $r = new rmaNalog();
+                                        $r->posalji($rma[0]['rma_id'], "Poslano u OS");
+
+                                        $primka = new primka();
+                                        $primka->updatePrimka("Poslano u OS", $rma[0]['primka_id']);
+
+                                        unset($rma);
+                                        unset($primka);
+                                        unset($r);
+                                        header("refresh:0");
+                                    break;
+                                    case  'Čeka dio':
+                                        $r = new rmaNalog();
+                                        $r->update($rma[0]['rma_id'],  "Poslano u OS / Čeka dio", $_POST['popravak'], $_POST['napomena'], $_POST['naplata'], $_POST['rnOS']);
+
+                                        $primka = new primka();                                    
+                                        $primka->updatePrimka( "Poslano u OS / Čeka dio",  $rma[0]['primka_id']);                                       
+
+                                        unset($rma);
+                                        unset($r);
+                                        unset($primka);
+                                        header("refresh:0");
+                                    break;
+                                    default:
+                                        $r = new rmaNalog();
+                                        $r->update($rma[0]['rma_id'],  $_POST['status_rma'], $_POST['popravak'], $_POST['napomena'], $_POST['naplata'], $_POST['rnOS']);
+
+                                        $primka = new primka();                                    
+                                        $primka->updatePrimka( $_POST['status_rma'],  $rma[0]['primka_id']);                                       
+
+                                        unset($rma);
+                                        unset($r);
+                                        unset($primka);
+                                        header("refresh:0");
                                         
-                                        }else{
-                                           
-                                            $primka->updatePrimka("Čeka dio", $radni[0]['primka_id']);
-                                        }
-                                    
-                                    
-                                    unset($radni);
-                                    unset($rn);
-                                    unset($primka);
-                                     header("refresh:0");
-                                   
+                                 
                                 }
                                
                             
