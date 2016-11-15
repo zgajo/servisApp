@@ -140,7 +140,7 @@ if($rma[0]['datumKupnje'] === "0000-00-00"){
                                 
                                 
                                 <option style="background-color: #DFDFDF" selected disabled=""><?php echo $rma[0]['status_rma']  ?></option>
-                                <option <?php if($rma[0]['status_rma'] == "Pripremljeno za slanje") echo "selected"; ?> >Pripremljeno za slanje</option>
+                                <option <?php if($rma[0]['status_rma'] == "Pripremljeno za slanje OS-u") echo "selected"; ?> >Pripremljeno za slanje OS-u</option>
                                 <option <?php if($rma[0]['status_rma'] == "Poslano u OS / Čeka dio") echo "selected"; ?> >Čeka dio</option>
                                 <option <?php if($rma[0]['status_rma'] == "Poslano u OS") echo "selected"; ?> >Pošalji u OS</option>
                                 <option <?php if($rma[0]['status_rma'] == "Popravak završen u jamstvu") echo "selected"; ?> >Popravak završen u jamstvu</option>

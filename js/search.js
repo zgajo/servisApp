@@ -11,7 +11,7 @@ $(document).ready(function(){
         
         if(value != ''){
             $('#search_result').show();
-            $.post('search.php', {value: value}, function(data){
+            $.post('search/searchStranku.php', {value: value}, function(data){
                 $('#search_result').html(data);
             });
         }else{

@@ -35,7 +35,7 @@ class primka{
     
     
     public function svePrimke() {
-        $query = $this->mysqli->query("SELECT p.*, s.ime as s_ime, s.prezime as s_prezime FROM primka p 
+        $query = $this->mysqli->query("SELECT p.*, s.ime as s_ime, s.prezime as s_prezime, s.tvrtka FROM primka p 
                                         LEFT JOIN stranka s ON  p.stranka_id = s.stranka_id
                                         WHERE p.status != 'Kupac preuzeo' ORDER BY p.primka_id ASC");
         if($query === false){

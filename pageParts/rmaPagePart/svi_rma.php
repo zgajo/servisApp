@@ -18,7 +18,7 @@
                                                 <th>Primka</th>
                                                 <th>RMA nalog</th>
                                                 <th>Radni nalog OS-a</th>
-                                                <th>Započeo rad</th>
+                                                <th>Stranka</th>
                                                 <th>Poslano u OS</th>
                                                 <th>Status</th>
                                                 <th>Napomena</th>
@@ -44,7 +44,7 @@
                                                           }  
                                                         echo '</td><td>'.$r['rnOs'].'</td><td>';
                                                          foreach($rma as $r){
-                                                              echo('<div class="sparkbar" data-color="#00a65a" data-height="20">' .  $r['ime'] . ' '.$r['prezime']. '</div>');
+                                                              echo('<div class="sparkbar" data-color="#00a65a" data-height="20">'); echo($primka->tvrtka==NULL)?"":$primka->tvrtka.', '; echo ($primka->s_ime . ' '.$primka->s_prezime. '</div>');
                                                           }  
                                                         echo '</td><td>';
                                                         foreach($rma as $r){
