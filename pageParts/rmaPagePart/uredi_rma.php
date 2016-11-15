@@ -102,9 +102,15 @@ if($rma[0]['datumKupnje'] === "0000-00-00"){
            
                <!-- textarea -->
                <div class="form-group"  >
-                        <label for="inputPopravak" class="col-sm-2 control-label">RN OS-a</label>
+                        <label for="inputrnOS" class="col-sm-2 control-label">RN OS-a</label>
                         <div class="col-sm-10">
-                            <input id="inputPopravak" class="form-control" rows="3" placeholder="Broj naloga pod kojim je uređaj zaprimljen..." name="rnOS" value="<?php echo $rma[0]['rnOS']  ?>">
+                            <input id="inputrnOS" class="form-control" rows="3" placeholder="Broj naloga pod kojim je uređaj zaprimljen..." name="rnOS" value="<?php echo $rma[0]['rnOS']  ?>">
+                        </div>
+                    </div>
+               <div class="form-group"  >
+                        <label for="inputOSnaziv" class="col-sm-2 control-label">OS naziv</label>
+                        <div class="col-sm-10">
+                            <input id="inputOSnaziv" class="form-control" rows="3" placeholder="Servis u koji je uređaj poslan..." name="nazivOS" value="<?php echo $rma[0]['nazivOS']  ?>">
                         </div>
                     </div>
                
@@ -141,7 +147,7 @@ if($rma[0]['datumKupnje'] === "0000-00-00"){
                                 
                                 <option style="background-color: #DFDFDF" selected disabled=""><?php echo $rma[0]['status_rma']  ?></option>
                                 <option <?php if($rma[0]['status_rma'] == "Pripremljeno za slanje OS-u") echo "selected"; ?> >Pripremljeno za slanje OS-u</option>
-                                <option <?php if($rma[0]['status_rma'] == "Poslano u OS / Čeka dio") echo "selected"; ?> >Čeka dio</option>
+                                <option <?php if($rma[0]['status_rma'] == "Čeka dio") echo "selected"; ?> >Čeka dio</option>
                                 <option <?php if($rma[0]['status_rma'] == "Poslano u OS") echo "selected"; ?> >Pošalji u OS</option>
                                 <option <?php if($rma[0]['status_rma'] == "Popravak završen u jamstvu") echo "selected"; ?> >Popravak završen u jamstvu</option>
                                 <option <?php if($rma[0]['status_rma'] == "Popravak završen van jamstva") echo "selected"; ?> >Popravak završen van jamstva</option>
@@ -190,31 +196,29 @@ if($rma[0]['datumKupnje'] === "0000-00-00"){
                                      break;
                                     case 'Pošalji u OS':
                                         $r = new rmaNalog();
-                                        $r->posalji($rma[0]['rma_id'], "Poslano u OS");
+                                        if($rma[0]['status_rma'] != "Poslano u OS"){
+                                            $r->posalji($rma[0]['rma_id'], "Poslano u OS");
 
                                         $primka = new primka();
                                         $primka->updatePrimka("Poslano u OS", $rma[0]['primka_id']);
 
-                                        unset($rma);
-                                        unset($primka);
-                                        unset($r);
-                                        header("refresh:0");
-                                    break;
-                                    case  'Čeka dio':
-                                        $r = new rmaNalog();
-                                        $r->update($rma[0]['rma_id'],  "Poslano u OS / Čeka dio", $_POST['popravak'], $_POST['napomena'], $_POST['naplata'], $_POST['rnOS']);
+                                        
+                                        }
+                                        else{
+                                            $r->update($rma[0]['rma_id'],  "Poslano u OS", $_POST['popravak'], $_POST['napomena'], $_POST['naplata'], $_POST['nazivOS'], $_POST['rnOS']);
 
                                         $primka = new primka();                                    
-                                        $primka->updatePrimka( "Poslano u OS / Čeka dio",  $rma[0]['primka_id']);                                       
+                                        $primka->updatePrimka( "Poslano u OS",  $rma[0]['primka_id']);                                       
 
+                                        }
                                         unset($rma);
-                                        unset($r);
                                         unset($primka);
+                                        unset($r);
                                         header("refresh:0");
                                     break;
                                     default:
                                         $r = new rmaNalog();
-                                        $r->update($rma[0]['rma_id'],  $_POST['status_rma'], $_POST['popravak'], $_POST['napomena'], $_POST['naplata'], $_POST['rnOS']);
+                                        $r->update($rma[0]['rma_id'],  $_POST['status_rma'], $_POST['popravak'], $_POST['napomena'], $_POST['naplata'], $_POST['nazivOS'], $_POST['rnOS']);
 
                                         $primka = new primka();                                    
                                         $primka->updatePrimka( $_POST['status_rma'],  $rma[0]['primka_id']);                                       

@@ -25,7 +25,7 @@ class rmaNalog extends RN{
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
         }
-        $s = "Pripremljeno za slanje";
+        $s = "Pripremljeno za slanje OS-u";
         $query->bind_param('siis',$date, $p, $d, $s);
         
         if($query->execute()) { $query->close(); return $this->mysqli->insert_id;}
@@ -35,15 +35,15 @@ class rmaNalog extends RN{
     }
     
     
-        public function update( $rma,  $status, $opisPopravka, $napomena, $naplata, $r) {
+        public function update( $rma,  $status, $opisPopravka, $napomena, $naplata, $os, $r) {
         
         
-        $query = $this->mysqli->prepare("UPDATE radniNaloziRMA SET status = ?, napomena = ?, opisPopravka = ?, naplata = ?, rnOS=? WHERE rma_id = ?");
+        $query = $this->mysqli->prepare("UPDATE radniNaloziRMA SET status = ?, napomena = ?, opisPopravka = ?, naplata = ?, rnOS=?, nazivOS=? WHERE rma_id = ?");
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
         }
         
-        $query->bind_param('sssssi',$status, $napomena, $opisPopravka, $naplata, $r, $rma);
+        $query->bind_param('ssssssi',$status, $napomena, $opisPopravka, $naplata, $r, $os, $rma);
         
         if($query->execute()){
             $query->close();
@@ -82,7 +82,7 @@ class rmaNalog extends RN{
     
     public function RMAbyPrimka($p) {
         
-        $query=$this->mysqli->prepare("SELECT rma.rma_id, rma.status,  rma.napomena, rma.poslanoOSu, rma.rnOS,  d.ime, d.prezime "
+        $query=$this->mysqli->prepare("SELECT rma.rma_id, rma.status,  rma.napomena, rma.poslanoOSu, rma.rnOS, rma.nazivOS,  d.ime, d.prezime "
                 . "FROM radniNaloziRMA rma "
                 . "LEFT JOIN djelatnici d ON rma.djelatnik_zapoceoRma_id = d.djelatnik_id "
                 . "WHERE primka_id=? ORDER BY rma.rma_id");
@@ -94,7 +94,7 @@ class rmaNalog extends RN{
         $query->bind_param("i", $p); 
         
         if($query->execute()){
-            $query->bind_result($this->id, $status,  $napomena, $poslano, $r, $ime, $prezime);
+            $query->bind_result($this->id, $status,  $napomena, $poslano, $r, $os, $ime, $prezime);
             while($row = $query->fetch()){
                 $rn[] = array(
                     "id" => $this->id,
@@ -102,6 +102,7 @@ class rmaNalog extends RN{
                     "napomena" => $napomena,
                     "poslano" => $poslano,
                     "rnOs" => $r,
+                    "nazivOS" => $os,
                     "ime" => $ime,
                     "prezime" => $prezime,
                     

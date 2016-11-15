@@ -51,7 +51,7 @@
                                                           }  
                                                         echo '</td><td>';
                                                         foreach($rn as $radn){
-                                                              echo('<div class="label label-success" style="font-size: 12px">' .  $radn['status'] . '</div><br>');
+                                                              echo($radn['status'] != NULL)?('<div class="label label-success" style="font-size: 12px;display: block;margin-bottom: 2px;">' .  $radn['status'] . '</div>'):"<br>";
                                                           }  
                                                         echo '</td><td>';
                                                         foreach($rn as $radn){
