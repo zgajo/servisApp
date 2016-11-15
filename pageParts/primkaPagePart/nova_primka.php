@@ -417,7 +417,7 @@ $td = $td->getDjelatnikById($_COOKIE['id']);
                             if (isset($_GET['stranka_id'])) {
                                 $last_p = $primka->insertPrimka($_COOKIE['centar'], $_POST['sifra'], $_POST['brand'], $_POST['tip'], $_POST['naziv'], $_POST['serijski'], $_POST['opis'], $_POST['prilozeno'], $_POST['racun'], "Zaprimljeno", $_POST['dk'], $_COOKIE['id'], $_GET['stranka_id']);
                                 echo '<script>alert("Unešena je nova primka '.$last_p.'"); '
-                                        . 'setTimeout(function(){ window.open.href="../../ispis/potvrda_zaprimanja.php?primka='.$last_p.'";}, 100);'
+                                        . 'setTimeout(function(){ window.open("../../ispis/potvrda_zaprimanja.php?primka='.$last_p.'", "_blank")}, 100);'
                                         . '</script>';
                             }
                             /*
@@ -429,7 +429,7 @@ $td = $td->getDjelatnikById($_COOKIE['id']);
                                 $last = $stranka->insert($_POST['tvrtka'], $_POST['ime'], $_POST['prezime'], $_POST['adresa'], $_POST['grad'], $_POST['post_broj'], $_POST['kontakt_broj'], $_POST['email']);
                                 $last_p = $primka->insertPrimka($_COOKIE['centar'],$_POST['sifra'], $_POST['brand'], $_POST['tip'], $_POST['naziv'], $_POST['serijski'], $_POST['opis'], $_POST['prilozeno'], $_POST['racun'], "Zaprimljeno", $_POST['dk'], $_COOKIE['id'], $last);
                                 echo '<script>alert("Unešena je nova primka '.$last_p.'"); '
-                                        . 'setTimeout(function(){ window.open.href="../../ispis/potvrda_zaprimanja.php?primka='.$last_p.'";}, 100);'
+                                        . 'setTimeout(function(){ window.open("../../ispis/potvrda_zaprimanja.php?primka='.$last_p.'", "_blank")}, 100);'
                                         . '</script>';
                                 
                             }
