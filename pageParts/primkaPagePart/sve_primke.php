@@ -83,6 +83,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Primka</th>
+                                                <?php if($_COOKIE['odjel']=="Servis"){ ?><th>Radni nalog</th><?php } ?>
                                                 <th>Uređaj</th>
                                                 <th>Stranka</th>
                                                 <th>Status primke</th>
@@ -114,6 +115,19 @@
                                                 echo '<tr>
                                                 <td><a href="primke.php?primka=' . $primka->primka_id . '">Primka. ' . $primka->primka_id . '</a></td>';
                                                 
+                                                   if($_COOKIE['odjel']=="Servis"){ 
+                                                $rn = new servisRN();
+                                                $rn = $rn->RNbyPrimka($primka->primka_id);
+                                              echo '<td>';
+                                              
+                                              if(!empty($rn)){
+                                                 foreach($rn as $rn){
+                                                    echo('<a href="rn.php?radni_nalog=' . $rn['id'] . '"> RN. ' . $rn['id'] . '</a><br>');
+                                                }  
+                                                }
+                                                echo '</td>';
+                                               }
+                                               
                                                 
                                                 echo '<td>' . $primka->naziv . '</td>
                                                 <td>'; echo($primka->tvrtka==NULL)?"":$primka->tvrtka.', '; echo $primka->s_ime. ' '.$primka->s_prezime.'</td>
