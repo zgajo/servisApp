@@ -2,8 +2,7 @@
 $primka=new primka();
 $primka = $primka->getByIdRN($_GET['primka']);
 
-if(empty($primka[0]['primka_id'])){ unset($primka) ; $primka=new primka(); $primka = $primka->getById($_GET['primka']); } 
-
+print_r($primka);
 $datumZaprimanja = date("d.m.Y / H:i:s", strtotime($primka[0]['datumZaprimanja']));
 
 
@@ -29,7 +28,7 @@ $do = $do->getDjelatnikById($primka[0]["djelatnik_otvorio_id"]);
             <!-- Dio za primku -->
             <div class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Uređivanje primke <?php echo $primka[0]['primka_id']; ?></h3>
+                    <h3 class="box-title">Uređivanje primke <?php echo $primka[0]['id']; ?></h3>
                     
                 </div><!-- /.box-header -->
                 <!-- PODACI STRANKE -->
@@ -50,13 +49,13 @@ $do = $do->getDjelatnikById($primka[0]["djelatnik_otvorio_id"]);
                   <h4>Primka:</h4>
               <address>
                 <i><strong>Zaprimljeno: </strong></i> <?php echo $datumZaprimanja; ?><br>
-                <i><strong>Primku otvorio: </strong></i>  <?php echo $primka[0]['pot_ime']. ' ' .$primka[0]['pot_prezime'] ; ?> </strong><br>
+                <i><strong>Primku otvorio: </strong></i>  <?php echo $primka[0]['pot_ime']. ' ' .$primka[0]['pot_prezime'] ; ?> </strong><hr>
                 <i><strong>Naziv uređaja: </strong></i>  <?php echo $primka[0]['naziv']; ?> </strong><br>
                 
                 <?php if(!empty($primka[0]['serial'])){ ?> <i><strong>Serijski: </strong></i> <?php echo $primka[0]['serial']; ?></br> <?php } ?>
                 <?php if(!empty($primka[0]['brand'])){ ?>  <i><strong>Brand: </strong></i>  <?php echo $primka[0]['brand']; ?><br> <?php } ?>
                 <?php if(!empty($primka[0]['tip'])){ ?>  <i><strong>Tip: </strong></i>  <?php echo $primka[0]['tip']; ?><br> <?php } ?>
-                <?php if(!empty($kupljeno)){ ?>  <i><strong>Datum kupnje: </strong></i>  <?php echo $kupljeno; ?></br> <?php } ?>
+                <?php if(!empty($primka[0]['kupljeno'])){ ?>  <i><strong>Datum kupnje: </strong></i>  <?php echo $kupljeno; ?></br> <?php } ?>
                 <?php if(!empty($primka[0]['racun'])){ ?>  <i><strong>Broj računa: </strong></i>  <?php echo $primka[0]['racun']?></br> <?php } ?>
                 <hr>
                
@@ -95,7 +94,7 @@ $do = $do->getDjelatnikById($primka[0]["djelatnik_otvorio_id"]);
                 <div class="box-footer">
                     <?php if($_COOKIE["centar"] == $do["centar"]) { ?><button type="submit" name="submit"  class="btn btn-sm btn-info btn-flat pull-right">Unesi promjenu</button> <?php } ?>
                     <?php if($_COOKIE["odjel"] == "Servis") { ?><a  style="margin-left: 5px; margin-right: 5px;" class="btn btn-sm btn-info btn-flat pull-left" href="../rn.php?action=novi_rn&primka_id=<?php echo $primka[0]['primka_id']; ?>">Novi radni nalog</a><?php } ?>
-                    <a class="btn btn-sm btn-info btn-flat pull-left" href="../rma.php?action=novi_rma&primka_id=<?php echo $primka[0]['primka_id'] ?>" >Novi RMA nalog</a>
+                    <a class="btn btn-sm btn-info btn-flat pull-left" href="../rma.php?action=novi_rma&primka_id=<?php echo $primka[0]['id'] ?>" >Novi RMA nalog</a>
                 </div>
 
             </div><!-- /.box -->

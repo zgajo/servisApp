@@ -93,17 +93,21 @@ class primka{
     }
     
     public function getByIdRN($id){
-        $query=$this->mysqli->prepare("SELECT p.*, p.status as p_status,rn.primka_id as rnpid, rn.status as status_rn, rn.*, s.*,   
+        $query=$this->mysqli->prepare("SELECT p.primka_id as id, p.*, p.status as p_status, rn.status as status_rn, rn.*, s.*, 
+                                                    rma.status as status_rma, rma.*,   
                                             rndo.ime as zapoceoRn_ime, rndo.prezime as zapoceoRn_prezime, 
                                             rndz.ime as zavrsioRn_ime, rndz.prezime as zavrsioRn_prezime, 
-                                            pdo.ime as pot_ime, pdo.prezime as pot_prezime , 
-                                            pdz.ime as pzt_ime, pdz.prezime as pzt_prezime 
+                                            rmao.ime as zapoceoRma_ime, rmao.prezime as zapoceoRma_prezime, 
+                                            rmaz.ime as zavrsioRma_ime, rmaz.prezime as zavrsioRma_prezime, 
+                                            pdo.ime as pot_ime, pdo.prezime as pot_prezime 
                                             FROM primka p
                                             LEFT JOIN radniNaloziServisa rn on rn.primka_id = p.primka_id
                                             LEFT JOIN djelatnici rndo on rn.djelatnik_zapoceoRn_id = rndo.djelatnik_id
                                             LEFT JOIN djelatnici rndz on rn.djelatnik_zavrsioRn_id = rndz.djelatnik_id
                                             LEFT JOIN djelatnici pdo on p.djelatnik_otvorio_id = pdo.djelatnik_id
-                                            LEFT JOIN djelatnici pdz on p.djelatnik_zatvorio_id = pdz.djelatnik_id
+                                            LEFT JOIN radniNaloziRMA rma on rma.primka_id = p.primka_id
+                                            LEFT JOIN djelatnici rmao on rma.djelatnik_zapoceoRma_id = rndo.djelatnik_id
+                                            LEFT JOIN djelatnici rmaz on rma.djelatnik_zavrsioRma_id = rndz.djelatnik_id
                                             left JOIN stranka s ON p.stranka_id = s.stranka_id
                                         WHERE p.primka_id = ?");
         
