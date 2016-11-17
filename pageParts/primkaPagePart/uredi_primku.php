@@ -106,7 +106,45 @@ $do = $do->getDjelatnikById($primka[0]["djelatnik_otvorio_id"]);
     <div class="row" id="urn">
     <?php
         if(!empty($primka[0]['rn_id'])){
-          $prim=$primka[0];
+         
+          foreach($primka as $prim){
+            ?>
+            <div class="col-md-6" style="width: 100%">
+            <!-- Dio za primku -->
+            
+            <div class="box box-info" style="border-top-color:#00a65a">
+              <div class="box-body" style="clear: both">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Radni nalog servisa br. <?php echo $prim['rn_id']; ?></h3>
+                    
+                </div><!-- /.box-header -->
+                <!-- form start -->
+                 <div  id="primka" class="col-sm-4 invoice-col" >
+              <address>
+                <i><strong>Početak rada: </strong></i> <?php echo date("d.m.Y H:i:s",strtotime($prim['pocetakRada'])); ?><br>
+                <i><strong>Rad započeo: </strong></i>  <?php echo $prim['zapoceoRn_ime'] . ' ' .$prim['zapoceoRn_prezime'] ?> </strong><br>
+                <i><strong>Opis popravka: </strong></i>  <?php echo $prim['opisPopravka']; ?> </strong><br>
+                <i><strong>Naplatiti: </strong></i>  <?php echo $prim['naplata']; ?> </strong><br>
+                <i><strong>Rad završio: </strong></i>  <?php echo $prim['zavrsioRn_ime'] . ' ' . $prim['zavrsioRn_prezime']; ?> </strong><br>
+              <i><strong>Završetak rada: </strong></i>  <?php if(!empty($prim['danZavrsetka'])) echo date("d.m.Y / H:i:s",strtotime($prim['danZavrsetka']));?> </strong><br>
+              </address>
+            </div>
+           
+           
+           
+               <!-- textarea -->
+            </div><!-- /.box -->
+            <!-- general form elements disabled -->
+
+        </div>
+        </div>
+        
+        <?php
+          }
+        }
+        
+        if(!empty($primka[0]['rn_id'])){
+         
           foreach($primka as $prim){
             ?>
             <div class="col-md-6" style="width: 100%">
@@ -143,6 +181,15 @@ $do = $do->getDjelatnikById($primka[0]["djelatnik_otvorio_id"]);
           }
         }
         ?>
+        
+    </div>
+        
+        <div class="row" style="clear: both">
+           
+          </div>
+        
+        
+        
     </div>
     
 </form>

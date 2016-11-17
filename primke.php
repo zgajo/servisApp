@@ -58,7 +58,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     float: left; width: 100%; margin: auto;
                 }
                 #urn{
-                     float: left; width: 100%;margin: auto;
+                     float: right; width: 100%;margin: auto;
                 }
             }
             

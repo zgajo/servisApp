@@ -94,22 +94,16 @@ class primka{
     
     public function getByIdRN($id){
         $query=$this->mysqli->prepare("SELECT p.primka_id as id, p.*, p.status as p_status, rn.status as status_rn, rn.*, s.*, 
-                                                    rma.status as status_rma, rma.*,   
                                             rndo.ime as zapoceoRn_ime, rndo.prezime as zapoceoRn_prezime, 
                                             rndz.ime as zavrsioRn_ime, rndz.prezime as zavrsioRn_prezime, 
-                                            rmao.ime as zapoceoRma_ime, rmao.prezime as zapoceoRma_prezime, 
-                                            rmaz.ime as zavrsioRma_ime, rmaz.prezime as zavrsioRma_prezime, 
                                             pdo.ime as pot_ime, pdo.prezime as pot_prezime 
                                             FROM primka p
                                             LEFT JOIN radniNaloziServisa rn on rn.primka_id = p.primka_id
                                             LEFT JOIN djelatnici rndo on rn.djelatnik_zapoceoRn_id = rndo.djelatnik_id
                                             LEFT JOIN djelatnici rndz on rn.djelatnik_zavrsioRn_id = rndz.djelatnik_id
-                                            LEFT JOIN djelatnici pdo on p.djelatnik_otvorio_id = pdo.djelatnik_id
-                                            LEFT JOIN radniNaloziRMA rma on rma.primka_id = p.primka_id
-                                            LEFT JOIN djelatnici rmao on rma.djelatnik_zapoceoRma_id = rndo.djelatnik_id
-                                            LEFT JOIN djelatnici rmaz on rma.djelatnik_zavrsioRma_id = rndz.djelatnik_id
+                                            LEFT JOIN djelatnici pdo on p.djelatnik_otvorio_id = pdo.djelatnik_id 
                                             left JOIN stranka s ON p.stranka_id = s.stranka_id
-                                        WHERE p.primka_id = ?");
+                                        WHERE p.primka_id = ? ORDER BY rn.rn_id  ASC");
         
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
