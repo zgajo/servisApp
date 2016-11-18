@@ -2,7 +2,6 @@
 $primka=new primka();
 $primka = $primka->getByIdRN($_GET['primka']);
 
-print_r($primka);
 $datumZaprimanja = date("d.m.Y / H:i:s", strtotime($primka[0]['datumZaprimanja']));
 
 
@@ -123,7 +122,9 @@ $do = $do->getDjelatnikById($primka[0]["djelatnik_otvorio_id"]);
               <address>
                 <i><strong>Početak rada: </strong></i> <?php echo date("d.m.Y / H:i:s",strtotime($prim['pocetakRada'])); ?><br>
                 <i><strong>Rad započeo: </strong></i>  <?php echo $prim['zapoceoRn_ime'] . ' ' .$prim['zapoceoRn_prezime'] ?> </strong><br>
+              
                 <i><strong>Opis popravka: </strong></i>  <?php echo $prim['opisPopravka']; ?> </strong><br>
+              <hr>
                 <i><strong>Naplatiti: </strong></i>  <?php echo $prim['naplata']; ?> </strong><br>
                 <i><strong>Rad završio: </strong></i>  <?php echo $prim['zavrsioRn_ime'] . ' ' . $prim['zavrsioRn_prezime']; ?> </strong><br>
               <i><strong>Završetak rada: </strong></i>  <?php if(!empty($prim['danZavrsetka'])) echo date("d.m.Y / H:i:s",strtotime($prim['danZavrsetka']));?> </strong><br>
@@ -144,7 +145,6 @@ $do = $do->getDjelatnikById($primka[0]["djelatnik_otvorio_id"]);
         }
         $rma = new rmaNalog();
         $rma = $rma->RMAbyPrimka($_GET['primka']);
-        print_r($rma);
         if(!empty($rma[0]['id'])){
          
           foreach($rma as $r){
@@ -152,7 +152,7 @@ $do = $do->getDjelatnikById($primka[0]["djelatnik_otvorio_id"]);
             <div class="col-md-6" style="width: 100%">
             <!-- Dio za primku -->
             
-            <div class="box box-info" style="border-top-color:#00a65a">
+            <div class="box box-info"  style="border-top-color:#dd4b39">
               <div class="box-body" style="clear: both">
                 <div class="box-header with-border">
                     <h3 class="box-title">RMA nalog br. <?php echo $r['id']; ?></h3>
@@ -164,10 +164,12 @@ $do = $do->getDjelatnikById($primka[0]["djelatnik_otvorio_id"]);
                 <i><strong>Pripremljeno za slanje: </strong></i> <?php echo date("d.m.Y / H:i:s",strtotime($r['pripremljeno'])); ?><br>
                 <i><strong>Poslano u ovlašteni servis: </strong></i>  <?php if(!empty($r['poslano'])) echo date("d.m.Y / H:i:s",strtotime($r['poslano']));?> </strong><br>
                 <i><strong>Uređaj poslao: </strong></i>  <?php echo $r['doime'] . ' ' .$r['doprezime'] ?> </strong><br>
+              <hr>
                 <i><strong>Ovlašteni servis: </strong></i>  <?php echo $r['nazivOS']; ?> </strong><br>
                 <i><strong>Radni nalog ovlaštenog servisa: </strong></i>  <?php echo $r['rnOs']; ?> </strong><br>
-                <i><strong>Opis popravka: </strong></i>  <?php echo $r['opis']; ?> </strong><br>                
+                <i><strong>Opis popravka: </strong></i>  <?php echo $r['opis']; ?> </strong><br>  
                 <i><strong>Status reklamacije: </strong></i>  <?php echo $r['status']; ?> </strong><br>
+              <hr> 
                 <i><strong>Vraćeno iz ovlaštenog servisa: </strong></i>  <?php echo $r['zavrseno']; ?> </strong><br>
                <i><strong>Zatvorio nalog: </strong></i>  <?php echo $r['dzime'] . ' ' .$r['dzprezime'] ?> </strong><br>
                 <i><strong>Naplatiti: </strong></i>  <?php echo $r['naplata']; ?> </strong><br>
