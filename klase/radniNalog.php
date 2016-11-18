@@ -57,17 +57,17 @@ class rmaNalog extends RN{
     }
     
     
-    public function posalji( $rma,  $status) {
+    public function posalji( $rma,  $status, $did) {
         
         date_default_timezone_set('Europe/Zagreb');
         $date = date('Y-m-d H:i:s', time());
         
-        $query = $this->mysqli->prepare("UPDATE radniNaloziRMA SET status = ?, poslanoOSu = ? WHERE rma_id = ?");
+        $query = $this->mysqli->prepare("UPDATE radniNaloziRMA SET status = ?, poslanoOSu = ?, djelatnik_zapoceoRma_id = ? WHERE rma_id = ?");
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
         }
         
-        $query->bind_param('ssi',$status,$date, $rma);
+        $query->bind_param('ssii',$status,$date,$did, $rma);
         
         if($query->execute()){
             $query->close();
@@ -82,9 +82,12 @@ class rmaNalog extends RN{
     
     public function RMAbyPrimka($p) {
         
-        $query=$this->mysqli->prepare("SELECT rma.rma_id, rma.status,  rma.napomena, rma.poslanoOSu, rma.rnOS, rma.nazivOS,  d.ime, d.prezime "
+        $query=$this->mysqli->prepare("SELECT rma.rma_id, rma.status,  rma.napomena, rma.poslanoOSu, rma.rnOS, "
+                . "rma.nazivOS, rma.naplata, rma.danZaprimanja,  rma.opisPopravka, rma.danZavrsetka, "
+                . "do.ime as doi, do.prezime as dop, dz.ime as dzi, dz.prezime as dzp "
                 . "FROM radniNaloziRMA rma "
-                . "LEFT JOIN djelatnici d ON rma.djelatnik_zapoceoRma_id = d.djelatnik_id "
+                . "LEFT JOIN djelatnici do ON rma.djelatnik_zapoceoRma_id = do.djelatnik_id "
+                . "LEFT JOIN djelatnici dz ON rma.djelatnik_zavrsioRma_id = dz.djelatnik_id "
                 . "WHERE primka_id=? ORDER BY rma.rma_id");
         
         if($query === false){
@@ -94,26 +97,33 @@ class rmaNalog extends RN{
         $query->bind_param("i", $p); 
         
         if($query->execute()){
-            $query->bind_result($this->id, $status,  $napomena, $poslano, $r, $os, $ime, $prezime);
+            
+            $query->bind_result($this->id, $status,  $napomena, $poslano, $r, $os, $naplata, $prip, $opis, $zavrseno, $oime, $oprezime, $zime, $zprezime);
             while($row = $query->fetch()){
-                $rn[] = array(
+                $rma[] = array(
                     "id" => $this->id,
                     "status" => $status,
                     "napomena" => $napomena,
                     "poslano" => $poslano,
                     "rnOs" => $r,
+                    "naplata" => $naplata,
+                    "pripremljeno" => $prip,
+                    "opis" => $opis,
+                    "zavrseno" => $zavrseno,
                     "nazivOS" => $os,
-                    "ime" => $ime,
-                    "prezime" => $prezime,
-                    
+                    "doime" => $oime,
+                    "doprezime" => $oprezime,
+                    "dzime" => $zime,
+                    "dzprezime" => $zprezime
                     );
             }
             $query->close();
-            return $rn;
+            return $rma;
+            
         
         }else{
              $query->close();
-        die("Neuspješno ažuriranje radnog naloga");
+        die("Neuspješno dohvaćanje rma naloga po primci");
         } 
         
     }
