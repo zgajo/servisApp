@@ -197,7 +197,7 @@ if($rma[0]['datumKupnje'] === "0000-00-00"){
                                     case 'Pošalji u OS':
                                         $r = new rmaNalog();
                                         if($rma[0]['status_rma'] != "Poslano u OS"){
-                                            $r->posalji($rma[0]['rma_id'], "Poslano u OS");
+                                            $r->posalji($rma[0]['rma_id'], "Poslano u OS", $_COOKIE['id']);
 
                                         $primka = new primka();
                                         $primka->updatePrimka("Poslano u OS", $rma[0]['primka_id']);
