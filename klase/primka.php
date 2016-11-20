@@ -127,7 +127,7 @@ class primka{
             } 
             $result[] = $c; 
         } 
-        
+         echo json_encode($result, JSON_UNESCAPED_UNICODE);
         $query->close(); 
         return $result;
 
