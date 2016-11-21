@@ -35,10 +35,19 @@
                                                     $rma = new rmaNalog();
                                                     $rma = $rma->RMAbyPrimka($primka->primka_id);
                                                     
+                                                    $date1=date_create(date('d.m.Y', strtotime($primka->datumZaprimanja)));
+                                                $date2=date_create(date('d.m.Y'));
+                                                $diff=date_diff($date1,$date2);
+                                                
+                                               if($diff->format('%a')>24 && $diff->format('%a')<=35) $style = "color:orange;";
+                                               elseif ($diff->format('%a')>35) $style = "color:red;";
+                                               else $style = "";
+                                                    
+                                                    
                                                     if(!empty($rma)){
                                                         
                                                        echo '<tr>
-                                                        <td><a href="primke.php?primka=' . $primka->primka_id . '">Primka. ' . $primka->primka_id . '</a></td>
+                                                        <td><a  style="'.$style.'"  href="primke.php?primka=' . $primka->primka_id . '">Primka. ' . $primka->primka_id . '</a></td>
                                                         <td>';
                                                         foreach($rma as $r){
                                                               echo('<a href="rma.php?rma=' . $r['id'] . '"> RMA. ' . $r['id'] . '</a><br>');

@@ -38,8 +38,16 @@
                                                         $datum = strtotime($primka->datumZaprimanja);
                                                         $zaprimljeno = date("d.m.Y   /   H:i:s",$datum );
                                                 
-                                                        echo '<tr>
-                                                        <td><a href="primke.php?primka=' . $primka->primka_id . '">Pregledaj / Uredi ' . $primka->primka_id . '</a></td>
+                                                $date1=date_create(date('d.m.Y', strtotime($primka->datumZaprimanja)));
+                                                $date2=date_create(date('d.m.Y'));
+                                                $diff=date_diff($date1,$date2);
+                                                
+                                               if($diff->format('%a')>9 && $diff->format('%a')<=19) $style = "color:orange;";
+                                               elseif ($diff->format('%a')>20) $style = "color:red;";
+                                               else $style = "";
+                                               
+                                                        echo '<tr >
+                                                        <td><a  style="'.$style.'" href="primke.php?primka=' . $primka->primka_id . '">Pregledaj / Uredi ' . $primka->primka_id . '</a></td>
                                                         <td>' . $primka->naziv . '</td>
                                                         <td>'; echo($primka->tvrtka==NULL)?"":$primka->tvrtka.', '; echo $primka->s_ime. ' '.$primka->s_prezime.'</td>
                                                         <td><span class="label label-success" style="font-size: 12px">' . $primka->status . '</span></td>
