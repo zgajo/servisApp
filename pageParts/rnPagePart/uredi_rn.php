@@ -42,7 +42,7 @@ if($radni[0]['datumKupnje'] === "0000-00-00"){
               </address>
             </div>
                 
-                <div class="col-sm-4 invoice-col" style="border-left: 1px outset ;" id="primka">
+                <div class="col-sm-4 invoice-col" id="primka">
                   <h4>Primka:</h4>
               <address>
                 <i><strong>Zaprimljeno: </strong></i> <?php echo $datumZaprimanja; ?><br>
