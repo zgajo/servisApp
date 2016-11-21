@@ -36,7 +36,7 @@ if($radni[0]['datumKupnje'] === "0000-00-00"){
                 <strong><?php echo $radni[0]['tvrtka'] ?></strong><br>
                 <?php echo $radni[0]['ime']. ' '.$radni[0]['prezime']  ?><br>
                 <?php echo $radni[0]['adresa'] ?><br>
-                <?php echo $radni[0]['grad']. ', '.$radni['postanskiBroj']  ?><br>
+                <?php echo $primka[0]['grad']; echo($primka[0]['postBroj']==NULL)? '': ', '.$primka[0]['postBroj']  ?><br>
                 <i><strong>Kontakt: </strong></i><?php echo $radni[0]['kontakt'] ?><br>
                 <i><strong>Email: </strong></i><?php echo $radni[0]['email']?>
               </address>

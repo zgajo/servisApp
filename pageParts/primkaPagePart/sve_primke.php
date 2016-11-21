@@ -42,15 +42,15 @@
                                                 $date2=date_create(date('d.m.Y'));
                                                 $diff=date_diff($date1,$date2);
                                                 
-                                               if($diff->format('%a')>9 && $diff->format('%a')<=19) $style = "color:orange;";
-                                               elseif ($diff->format('%a')>20) $style = "color:red;";
+                                               if($diff->format('%a')>6 && $diff->format('%a')<=10) $style = "color:orange;";
+                                               elseif ($diff->format('%a')>11) $style = "color:red;";
                                                else $style = "";
                                                
                                                         echo '<tr >
                                                         <td><a  style="'.$style.'" href="primke.php?primka=' . $primka->primka_id . '">Pregledaj / Uredi ' . $primka->primka_id . '</a></td>
                                                         <td>' . $primka->naziv . '</td>
                                                         <td>'; echo($primka->tvrtka==NULL)?"":$primka->tvrtka.', '; echo $primka->s_ime. ' '.$primka->s_prezime.'</td>
-                                                        <td><span class="label label-success" style="font-size: 12px">' . $primka->status . '</span></td>
+                                                        <td style="width:1px"><span class="label label-success" style="font-size: 12px; display:block">' . $primka->status . '</span></td>
                                                         <td><div class="sparkbar" data-color="#00a65a" data-height="20">' . $zaprimljeno . '</div></td>
                                                         </tr>';
                                                         
@@ -139,7 +139,7 @@
                                                 
                                                 echo '<td>' . $primka->naziv . '</td>
                                                 <td>'; echo($primka->tvrtka==NULL)?"":$primka->tvrtka.', '; echo $primka->s_ime. ' '.$primka->s_prezime.'</td>
-                                                <td><span class="label label-success" style="font-size: 12px">' . $primka->status . '</span></td>
+                                                <td  style="width:1px"><span class="label label-success" style="font-size: 12px; display:block">' . $primka->status . '</span></td>
                                                 <td><div class="sparkbar" data-color="#00a65a" data-height="20">' . $zaprimljeno . '</div></td>';
                                                 if( $_COOKIE['odjel'] == "Servis") { 
                                                 echo '<td>'.$do['odjel'].' '. $primka->centar. '</td>

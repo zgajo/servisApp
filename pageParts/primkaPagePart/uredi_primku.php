@@ -92,7 +92,7 @@ $do = $do->getDjelatnikById($primka[0]["djelatnik_otvorio_id"]);
                 </div><!-- /.box-body -->
                 <div class="box-footer">
                     <?php if($_COOKIE["centar"] == $do["centar"]) { ?><button type="submit" name="submit"  class="btn btn-sm btn-info btn-flat pull-right">Unesi promjenu</button> <?php } ?>
-                    <?php if($_COOKIE["odjel"] == "Servis") { ?><a  style="margin-left: 5px; margin-right: 5px;" class="btn btn-sm btn-info btn-flat pull-left" href="../rn.php?action=novi_rn&primka_id=<?php echo $primka[0]['primka_id']; ?>">Novi radni nalog</a><?php } ?>
+                    <?php if($_COOKIE["odjel"] == "Servis") { ?><a  style="margin-left: 5px; margin-right: 5px;" class="btn btn-sm btn-info btn-flat pull-left" href="../rn.php?action=novi_rn&primka_id=<?php echo $primka[0]['id']; ?>">Novi radni nalog</a><?php } ?>
                     <a class="btn btn-sm btn-info btn-flat pull-left" href="../rma.php?action=novi_rma&primka_id=<?php echo $primka[0]['id'] ?>" >Novi RMA nalog</a>
                 </div>
 

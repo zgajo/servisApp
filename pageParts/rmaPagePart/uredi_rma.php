@@ -32,7 +32,7 @@ if($rma[0]['datumKupnje'] === "0000-00-00"){
                 <strong><?php echo $rma[0]['tvrtka'] ?></strong><br>
                 <?php echo $rma[0]['ime']. ' '.$rma[0]['prezime']  ?><br>
                 <?php echo $rma[0]['adresa'] ?><br>
-                <?php echo $rma[0]['grad']. ', '.$rma['postanskiBroj']  ?><br>
+                <?php echo $primka[0]['grad']; echo($primka[0]['postBroj']==NULL)? '': ', '.$primka[0]['postBroj']  ?><br>
                 <i><strong>Kontakt: </strong></i><?php echo $rma[0]['kontakt'] ?><br>
                 <i><strong>Email: </strong></i><?php echo $rma[0]['email']?>
               </address>

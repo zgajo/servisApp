@@ -33,10 +33,19 @@
                                                     $rn = new servisRN();
                                                     $rn = $rn->RNbyPrimka($primka->primka_id);
                                                     
+                                                    
+                                                $date1=date_create(date('d.m.Y', strtotime($primka->datumZaprimanja)));
+                                                $date2=date_create(date('d.m.Y'));
+                                                $diff=date_diff($date1,$date2);
+                                                
+                                               if($diff->format('%a')>6 && $diff->format('%a')<=10) $style = "color:orange;";
+                                               elseif ($diff->format('%a')>11) $style = "color:red;";
+                                               else $style = "";
+                                                    
                                                     if(!empty($rn)){
                                                         
                                                        echo '<tr>
-                                                        <td><a href="primke.php?primka=' . $primka->primka_id . '">Primka. ' . $primka->primka_id . '</a></td>
+                                                        <td><a style="'.$style.'" href="primke.php?primka=' . $primka->primka_id . '">Primka. ' . $primka->primka_id . '</a></td>
                                                         <td>';
                                                         foreach($rn as $radn){
                                                               echo('<a href="rn.php?radni_nalog=' . $radn['id'] . '"> RN. ' . $radn['id'] . '</a><br>');
@@ -49,9 +58,9 @@
                                                         foreach($rn as $radn){
                                                               echo('<div class="sparkbar" data-color="#00a65a" data-height="20">' .  date("d.m.Y / H:i:s",  strtotime($radn['pocetak'])). '</div>');
                                                           }  
-                                                        echo '</td><td>';
+                                                        echo '</td><td style="width: 1px;">';
                                                         foreach($rn as $radn){
-                                                              echo($radn['status'] != NULL)?('<div class="label label-success" style="font-size: 12px;display: block;margin-bottom: 2px;">' .  $radn['status'] . '</div>'):"<br>";
+                                                              echo($radn['status'] != NULL)?('<div class="label label-success" style="font-size: 12px; display: block; margin-bottom: 2px; ">' .  $radn['status'] . '</div>'):"<br>";
                                                           }  
                                                         echo '</td><td>';
                                                         foreach($rn as $radn){

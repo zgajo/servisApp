@@ -68,9 +68,9 @@
                                                         foreach($rma as $r){
                                                             echo($r['poslano']  != NULL)? date("d.m.Y / H:i:s", strtotime($r['poslano'])): " " ;echo ('<br>');
                                                           }  
-                                                        echo '</td><td>';
+                                                        echo '</td><td style="width: 1px;">';
                                                         foreach($rma as $r){
-                                                              echo($r['status'] != NULL) ? ('<div class="label label-success" style="font-size: 12px;display: block;margin-bottom: 2px;">' .  $r['status'] . '</div>'):"<br>";
+                                                              echo($r['status'] != NULL) ? ('<div class="label label-success" style="font-size: 12px;display: block;margin-bottom: 2px;">' .  $r['status'] . '</div>'):" <br>";
                                                           }  
                                                         echo '</td><td>';
                                                         foreach($rma as $r){

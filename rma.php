@@ -3,7 +3,6 @@ include_once './checkLogin.php';
 include_once './klase/radniNalog.php';
 include_once './klase/primka.php';
 include_once './klase/osoba.php';
-if($_COOKIE['odjel'] == "Servis"){
 ?>
 
 
@@ -222,6 +221,3 @@ scratch. This page gets rid of all links and provides the needed markup only.
              fixed layout. -->
     </body>
 </html>
-<?php } else{
-    echo('Nemate prava pristupa');
-}
