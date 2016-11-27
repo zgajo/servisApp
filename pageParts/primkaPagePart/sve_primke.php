@@ -28,12 +28,8 @@
                                             if(!empty($primka)){
                                                 
                                                 foreach ($primka as $primka) {
-
-                                                if($primka->status != "Poslano u CS - Rovinj" && $primka->status !=  "Poslano u CS - Rovinj / Započelo servisiranje" &&  $primka->status !=  "Poslano u CS - Rovinj / Čeka dio"){
-                                                    
+  
                                                 
-                                                
-                                                    if($_COOKIE['centar'] == $primka->centar){
                                                         
                                                         $datum = strtotime($primka->datumZaprimanja);
                                                         $zaprimljeno = date("d.m.Y   /   H:i:s",$datum );
@@ -55,10 +51,7 @@
                                                         </tr>';
                                                         
                                                     
-                                                    }
-                                                    
-                                                
-                                                    }
+                                                        
                                                 
                                             }
                                             }
@@ -103,13 +96,11 @@
                                         <tbody>
                                             <?php
                                             $primka = new primka();
-                                            $primka = $primka->svePrimke();
+                                            $primka = $primka->svePoslanePrimke();
 
                                             if(!empty($primka)){
                                                 foreach ($primka as $primka) {
                                                     
-                                                    if($primka->status == "Poslano u CS - Rovinj" || $primka->status ==  "Poslano u CS - Rovinj / Započelo servisiranje" || $primka->status ==  "Poslano u CS - Rovinj / Čeka dio"){
-                                                        
                                                         
                                                 
                                                     if($_COOKIE['centar'] == $primka->centar || $_COOKIE['odjel'] == "Servis"){
@@ -146,7 +137,6 @@
                                                 <td><a  style="margin-left: 5px; margin-right: 5px;" class="btn btn-sm btn-info btn-flat pull-left" href="../rn.php?action=novi_rn&primka_id='.$primka->primka_id.'">Novi radni nalog</a></td>';
                                                 }
                                                 echo '</tr>';
-                                                    }
                                                     }
                                                 
                                             }

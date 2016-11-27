@@ -32,7 +32,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
               apply the skin class to the body tag so the changes take effect.
         -->
         <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
-        <script src="search/search.js"></script>
         <link href="search/search.css" rel="stylesheet">
         <style>
                 #stranka{ width: 35%;
@@ -83,7 +82,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 <!-- Main content -->
                 <section class="content">
-
+                    
                     <?php 
                     /*
                     UKOLIKO SE PROVJERAVA PRIMKA
@@ -133,7 +132,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="../../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
         <script src="../../plugins/input-mask/jquery.inputmask.extensions.js"></script>
 
-        <script src="search/search.js"></script>
+        
         <script>
             $(document).ready(function () {
                 var left = $('#box').position().left;
@@ -148,14 +147,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                     if (value != '') {
                         $('#search_result').show();
-                        $.post('search/searchStranku.php', {value: value}, function (data) {
+                        $.post('search/pretrazi_kupca.php', {value: value}, function (data) {
                             $('#search_result').html(data);
                         });
+                        
                     } else {
                         $('#search_result').hide();
                     }
 
                 });
+                
+                $('#search_result').click(function(e) {
+                    e.preventDefault();
+                    alert('Test');
+                  });
 
 
             });

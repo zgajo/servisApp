@@ -37,7 +37,12 @@ class primka{
     public function svePrimke() {
         $query = $this->mysqli->query("SELECT p.*, s.ime as s_ime, s.prezime as s_prezime, s.tvrtka FROM primka p 
                                         LEFT JOIN stranka s ON  p.stranka_id = s.stranka_id
-                                        WHERE p.status != 'Kupac preuzeo' ORDER BY p.primka_id ASC");
+                                        WHERE p.status != 'Kupac preuzeo' 
+                                        AND p.status != 'Poslano u CS - Rovinj'  
+                                        AND p.status != 'Poslano u CS - Rovinj / Započelo servisiranje'  
+                                        AND p.status != 'Poslano u CS - Rovinj / Čeka dio' 
+                                        and p.centar LIKE '".$_COOKIE['centar']."'
+                                        ORDER BY p.primka_id ASC");
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
         }
@@ -48,6 +53,24 @@ class primka{
         return $result;
     }
     
+    
+       public function svePoslanePrimke() {
+        $query = $this->mysqli->query("SELECT p.*, s.ime as s_ime, s.prezime as s_prezime, s.tvrtka FROM primka p 
+                                        LEFT JOIN stranka s ON  p.stranka_id = s.stranka_id
+                                        WHERE p.status != 'Kupac preuzeo' AND 
+                                       ( p.status = 'Poslano u CS - Rovinj'  
+                                        OR p.status = 'Poslano u CS - Rovinj / Započelo servisiranje'  
+                                        OR p.status = 'Poslano u CS - Rovinj / Čeka dio') 
+                                        ORDER BY p.primka_id ASC");
+        if($query === false){
+            trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
+        }
+        while($row = $query->fetch_object()){
+            $result[]  = $row;
+        }
+        
+        return $result;
+    }
     
     public function getById($id){
          $query=$this->mysqli->prepare("SELECT p.status as p_status, p.*,  s.*, 
@@ -103,7 +126,7 @@ class primka{
                                             LEFT JOIN djelatnici rndz on rn.djelatnik_zavrsioRn_id = rndz.djelatnik_id
                                             LEFT JOIN djelatnici pdo on p.djelatnik_otvorio_id = pdo.djelatnik_id 
                                             left JOIN stranka s ON p.stranka_id = s.stranka_id
-                                        WHERE p.primka_id = ? ORDER BY rn.rn_id  ASC");
+                                        WHERE p.primka_id = ? ORDER BY p.primka_id ASC,  rn.rn_id  ASC");
         
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
@@ -127,7 +150,7 @@ class primka{
             } 
             $result[] = $c; 
         } 
-         echo json_encode($result, JSON_UNESCAPED_UNICODE);
+        
         $query->close(); 
         return $result;
 
