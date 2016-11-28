@@ -193,16 +193,17 @@
                                 
                                 var status = $('#status_primke').val();
                                 var p_id = $('#primka_id').text();
-                                alert(status +' '+p_id);
                                 
                                 $.post('testUpdate.php', { "status" : status, "id" : p_id });
                                 
                             });
                             
+                            var pid = <?php echo $_GET['primka'] ?>
                             // Dohvaćanje i pregled upita
                             $.ajax({
                                 type: 'GET',
-                                url: "testUpdatePrimkaJson.php?id="+<?php echo $_GET['primka'] ?>,
+                                url: "testUpdatePrimkaJson.php",
+                                data: {"id":pid},
                                 dataType: 'json',
                                 contentType: "application/json; charset=utf-8",
                                 success: function (data) {

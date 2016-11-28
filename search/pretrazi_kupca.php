@@ -14,8 +14,8 @@ while ($run = $result->fetch_array()){
     $ime = $run['ime'];
     $prezime = $run['prezime'];
     $tvrtka = $run['tvrtka'];
-    if($tvrtka != NULL) {echo '<li class="a"><a href="#" id="id">'.$tvrtka.', '.$ime.' '.$prezime.'</a></li>';}
-    else echo '<li class="a" ><a href="#" id="id">'.$ime.' '.$prezime.'</a></li>';
+    if($tvrtka != NULL) {echo '<li class="a" id="'.$id.'"><a href="#" >'.$tvrtka.', '.$ime.' '.$prezime.'</a></li>';}
+    else echo '<li class="a"  id="'.$id.'"><a href="#">'.$ime.' '.$prezime.'</a></li>';
     
 }
 echo '</ul>';

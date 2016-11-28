@@ -147,7 +147,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                     if (value != '') {
                         $('#search_result').show();
-                        $.post('search/pretrazi_kupca.php', {value: value}, function (data) {
+                        $.post('search/searchStranku.php', {value: value}, function (data) {
                             $('#search_result').html(data);
                         });
                         
@@ -157,10 +157,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 });
                 
-                $('#search_result').click(function(e) {
+                  
+                  $('#search_button').click(function(e) {
                     e.preventDefault();
-                    alert('Test');
+                    $("#search_box").val("");
+                    $('#search_result').hide();
                   });
+                  
 
 
             });

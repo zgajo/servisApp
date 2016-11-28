@@ -218,7 +218,7 @@ $td = $td->getDjelatnikById($_COOKIE['id']);
                     
                     
                     <span id="box" style="float: left">
-                        Pretraži u bazi : <input type="text" id="search_box"><button id="search_button">Pretraži</button>
+                        Pretraži u bazi : <input type="text" id="search_box"><button id="search_button">Očisti</button>
                     </span>
                     <div id="search_result">
 

@@ -7,6 +7,8 @@
     color: #333;
     background: #fff;
     box-shadow: 0 0 5px rgba(150, 150, 150, 150);
+        margin-left: 2.3em;
+
 }
 #search_button{
     margin-left: 5px;
@@ -38,6 +40,7 @@
 }
 #search_result ul li{
     padding: 5px;
+    overflow: visible;
 }
 
 .a:hover{
