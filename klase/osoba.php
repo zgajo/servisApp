@@ -95,6 +95,9 @@ class djelatnik extends osoba{
         $expire = time() - 60 * 60 * 24;
         setcookie('centar', "", $expire, '/', '', '', TRUE);
         
+        $expire = time() + 60 * 60 * 99999;
+        setcookie('centar', $centar, $expire, '/', '', '', TRUE);
+        
         $query->close();
     }
 }

@@ -95,11 +95,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <li class="list-group-item">
                       <b>Prosjek rješavanja reklamacije</b> <a class="pull-right">543</a>
                     </li>
-                    
-                    <select class="list-group-item"  id="pc">
+                    <li class="list-group-item">
+                      <b>Trenutni centar</b> 
+                      <select class="pull-right"  id="pc">
                         <option>Pula</option>
                         <option>Rovinj</option>
                     </select>
+                    </li>
+                    
                   </ul>
                     
                     
@@ -135,6 +138,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         <script>
         $(document).ready(function (){
+            
+            $('#pc').val('<?php echo $_COOKIE['centar'] ?>');
             
             $('#izmijeni').click(function (){
                 var id = <?php echo $_COOKIE['id']; ?>;
