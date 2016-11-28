@@ -133,7 +133,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="../../plugins/input-mask/jquery.inputmask.extensions.js"></script>
 
         
-        <script>
+       <script>
             $(document).ready(function () {
                 var left = $('#box').position().left;
                 var top = $('#box').position().top;
@@ -147,8 +147,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                     if (value != '') {
                         $('#search_result').show();
-                        $.post('search/searchStranku.php', {value: value}, function (data) {
-                            $('#search_result').html(data);
+                        
+                        //Ispis kupaca
+                        $.post('/search/pretrazi_kupca.php', {value: value}, function (data) {
+                            
+                            //Dohvat json podataka
+                            var primka = JSON.parse(JSON.stringify(data));
+                            console.log(JSON.parse(JSON.stringify(data)));
+                            
+                            //Prikaz pronađenih podataka
+                            var output ='<ul >';
+                            for(var i=0; i < primka.length; ++i){
+                                output += '<li><a class="a" id="k" name="'+ primka[i].id + '"> ';
+                                if(primka[i].tvrtka) output += primka[i].tvrtka+', '; 
+                                output += primka[i].ime+' ' + primka[i].prezime + ', ' + primka[i].grad +', ' + primka[i].adresa +'</a></li>'
+                            } 
+                            
+                            output +='</ul>';   //kraj ispis liste
+                            
+                            $('#search_result').html(output);
+                            
                         });
                         
                     } else {
@@ -157,13 +175,113 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 });
                 
+                //  Upis podataka  odabranog kupca u polja
+                $('#search_result').on("click", "#k", function(e){
+                    e.preventDefault();
+                    
+                    var idkupca = $( this ).attr('name');
+
+                    $.post('/json/kupac/dohvatiKupcaJson.php', {"id": idkupca}, function (data) {
+                       console.log(JSON.parse(JSON.stringify(data)));
+                        var osoba = JSON.parse(JSON.stringify(data));
+                        $('#inputid').text(osoba.id);
+                        (osoba.tvrtka) ? $('#inputTvrtka').val(osoba.tvrtka).prop( "disabled", true ) : $('#divTvrtka').hide();
+                        $('#inputIme').val(osoba.ime).prop( "disabled", true );
+                        $('#inputPrezime').val(osoba.prezime).prop( "disabled", true );
+                        $('#inputAdresa').val(osoba.adresa).prop( "disabled", true );
+                        $('#inputGrad').val(osoba.grad).prop( "disabled", true );
+                        $('#inputPB').val(osoba.postanskiBroj).prop( "disabled", true );
+                        $('#inputKontakt').val(osoba.kontakt).prop( "disabled", true );
+                        $('#inputEmail').val(osoba.email).prop( "disabled", true );
+                        
+                        $('#editBtn').show();
+        
+                        $("#search_box").val("");
+                        $('#search_result').hide();
+                    });
+                });
                   
+                  // ČIŠĆENJE SEARCH BOX-A
                   $('#search_button').click(function(e) {
                     e.preventDefault();
                     $("#search_box").val("");
                     $('#search_result').hide();
                   });
                   
+                  //   OMOGUĆAVANJE IZMJENE KUPCA
+                  $('#editBtn').click(function (e){
+                        e.preventDefault();
+                        $('#divTvrtka').show().prop( "disabled", false );
+                        $('#inputTvrtka').prop( "disabled", false );
+                        $('#inputIme').prop( "disabled", false );
+                        $('#inputPrezime').prop( "disabled", false );
+                        $('#inputAdresa').prop( "disabled", false );
+                        $('#inputGrad').prop( "disabled", false );
+                        $('#inputPB').prop( "disabled",false );
+                        $('#inputKontakt').prop( "disabled", false );
+                        $('#inputEmail').prop( "disabled", false );
+                        
+                        $("#box").hide();
+                        $('#submit').prop("disabled", true);
+                        
+                        $('#spremiKupca').show();
+                        $('#editBtn').hide();
+                  });
+                  
+                  //    SPREMANJE IZMJENE KUPCA
+                  $('#spremiKupca').click(function (e){
+                      e.preventDefault();
+                      
+                      var tvrtka = $('#inputTvrtka').val();
+                      var ime = $('#inputIme').val();
+                      var prezime = $('#inputPrezime').val();
+                      var adresa = $('#inputAdresa').val();
+                      var grad = $('#inputGrad').val();
+                      var pb = $('#inputPB').val();
+                      var kontakt = $('#inputKontakt').val();
+                      var email = $('#inputEmail').val();
+                       var idkupca = $( '#inputid' ).text();
+                       
+                       $.post('/json/kupac/updateKupca.php', {
+                           "tvrtka" : tvrtka,
+                           "ime":ime,
+                           "prezime":prezime, 
+                           "adresa" : adresa, 
+                           "grad" : grad, 
+                           "pb" : pb, 
+                           "kontakt":kontakt, 
+                           "email":email,
+                           "id" : idkupca
+                       });
+                       
+                       
+                       
+
+                    $.post('/json/kupac/dohvatiKupcaJson.php', {"id": idkupca}, function (data) {
+                       console.log(JSON.parse(JSON.stringify(data)));
+                        var osoba = JSON.parse(JSON.stringify(data));
+                        $('#inputid').text(osoba.id);
+                        (osoba.tvrtka) ? $('#inputTvrtka').val(osoba.tvrtka).prop( "disabled", true ) : $('#divTvrtka').hide();
+                        $('#inputIme').val(osoba.ime).prop( "disabled", true );
+                        $('#inputPrezime').val(osoba.prezime).prop( "disabled", true );
+                        $('#inputAdresa').val(osoba.adresa).prop( "disabled", true );
+                        $('#inputGrad').val(osoba.grad).prop( "disabled", true );
+                        $('#inputPB').val(osoba.postanskiBroj).prop( "disabled", true );
+                        $('#inputKontakt').val(osoba.kontakt).prop( "disabled", true );
+                        $('#inputEmail').val(osoba.email).prop( "disabled", true );
+                        
+                        $('#editBtn').show();
+                        $('#spremiKupca').css('display','none');
+                        
+                        $("#box").show();
+                        $('#submit').prop("disabled", false);
+        
+                        //alert('Trebam namjestiti ažuriranje podataka izmjena kupca');
+                        $("#search_box").val("");
+                        $('#search_result').hide();
+                    });
+                      
+                  });
 
 
             });

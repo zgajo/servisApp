@@ -101,9 +101,11 @@ class djelatnik extends osoba{
         $query->close();
     }
 }
+// -----------  KRAJ DJELATNIKA -------------//
 
 
 
+// ----------   STRANKA  ------------//
 class stranka extends osoba{
     private  $mysqli, $grad, $adresa, $post_broj, $kontakt_broj, $email;
             
@@ -129,7 +131,7 @@ class stranka extends osoba{
     }
     
     public function getById($id) {
-        $query = $this->mysqli->prepare("SELECT ime, prezime, adresa, grad, postBroj,kontaktBroj, email FROM stranka WHERE stranka_id = ? ");
+        $query = $this->mysqli->prepare("SELECT tvrtka, ime, prezime, adresa, grad, postBroj,kontaktBroj, email FROM stranka WHERE stranka_id = ? ");
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
         }
@@ -137,11 +139,12 @@ class stranka extends osoba{
         $query->bind_param('i', $id);
         
        if($query->execute()) { 
-           $query->bind_result($ime, $prezime, $adresa, $grad, $postanski_broj, $kontakt, $email);
+           $query->bind_result($tvrtka, $ime, $prezime, $adresa, $grad, $postanski_broj, $kontakt, $email);
            $query->fetch();
            
            $result = array(
                "id" => $id,
+               "tvrtka" => $tvrtka,
                "ime" => $ime,
                "prezime" => $prezime,
                "adresa" =>$adresa,
@@ -161,6 +164,22 @@ class stranka extends osoba{
         
     }
     
+    public function update($tvrtka, $ime,$prezime,$adresa=NULL, $grad=NULL,$post_broj=null, $kontakt_broj=NULL, $email=NULL, $id){
+        
+        $query = $this->mysqli->prepare("UPDATE stranka SET tvrtka = ?, ime = ?, prezime = ?, adresa = ?, grad = ?, postBroj = ?,kontaktBroj = ?, email = ? "
+                . "WHERE stranka_id = ?");
+        
+        if($query === false){
+            trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
+        }
+        
+        $query->bind_param('sssssissi',$tvrtka, $ime,$prezime,$adresa, $grad,$post_broj, $kontakt_broj, $email,$id);
+        
+        if($query->execute()) { $query->close(); }
+        
+        else {$query->close(); die("NIJE USPJEŠNO UNEŠENO U BAZU: STRANKA");}
+       
+    }
     
     
     
