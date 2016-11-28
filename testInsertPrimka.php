@@ -314,7 +314,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     if (value != '') {
                         $('#search_result').show();
                         $.post('search/pretrazi_kupca.php', {value: value}, function (data) {
-                            $('#search_result').html(data);
+                            
+                            //Dohvat json podataka
+                            var primka = JSON.parse(JSON.stringify(data));
+                            console.log(JSON.parse(JSON.stringify(data)));
+                            
+                            //Prikaz pronađenih podataka
+                            var output ='<ul >';
+                            for(var i=0; i < primka.length; ++i){
+                                output += '<li><a id="k" class="a"> ';
+                                if(!!primka[i].tvrtka) output += primka[i].tvrtka+', '; 
+                                output += primka[i].ime+' ' + primka[i].prezime +'</a></li>'
+                            }
+                            
+                            output +='</ul>';
+                            
+                            $('#search_result').html(output);
+                            
                         });
                         
                     } else {
@@ -323,10 +339,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 });
                 
-                $('#search_result kupac li').click(function(e) {
-                    e.preventDefault();
-                    alert($('#search_result ul li').text());
-                  });
+                $('#k').click(function(e){
+                    alert('kliknijo si na k');
+                });
                   
                   $('#search_button').click(function(e) {
                     e.preventDefault();

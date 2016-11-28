@@ -22,7 +22,7 @@ class primka{
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
         }
-        echo $datum_kupnje;
+        
         $query->bind_param("sissssssssssii", $centar, $sifra, $brand, $tip, $naziv, $serijski, $zaprimljeno,$opisKvara, $prilozeno_primijeceno, $racun, $status, $datum_kupnje, $djelatnik_otvorio_id, $stranka_id);
         
         if($query->execute()) { $query->close(); return $this->mysqli->insert_id;}
