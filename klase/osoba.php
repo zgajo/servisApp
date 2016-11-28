@@ -82,7 +82,21 @@ class djelatnik extends osoba{
         
     }
     
-    
+    public function izmijeniCentar($centar, $id) {
+        
+        $query = $this->mysqli->prepare("UPDATE djelatnici SET p_centar = ? WHERE djelatnik_id = ?");
+        if($query === false){
+            trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
+        }
+        
+        $query->bind_param("si", $centar, $id);
+        $query->execute();
+        
+        $expire = time() - 60 * 60 * 24;
+        setcookie('centar', "", $expire, '/', '', '', TRUE);
+        
+        $query->close();
+    }
 }
 
 

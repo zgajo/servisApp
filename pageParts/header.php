@@ -33,7 +33,6 @@
                             
                             <p>
                                 <?php echo $_COOKIE['user'] ?>
-                                <small>Member since Nov. 2012</small>
                             </p>
                         </li>
                         <!-- Menu Body -->
@@ -41,7 +40,7 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <a href="korisnik.php?id=<?php echo $_COOKIE['id']?>" class="btn btn-default btn-flat">Profile</a>
                             </div>
                             <div class="pull-right">
                                 <a href="./login.php?action=logout" class="btn btn-default btn-flat">Odlogiraj se</a>
