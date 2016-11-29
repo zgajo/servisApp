@@ -46,6 +46,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 #urn{
                      float: right; width: 45%; margin-right: 2%;
                 }
+                #required:after { content:" *"; color: red}
                 
                 @media (max-width: 1024px){
                    #stranka{ width: 100%;
@@ -59,6 +60,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 #urn{
                      float: right; width: 100%;margin: auto;
                 }
+                #required:after { content:" *"; }
             }
             
         </style>
@@ -142,6 +144,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 $('#search_result').css('left', left).css('top', top + 27).css('width', width + 100).css('z-index', 4);
 
+                //  PRETRAGA ZA KUPCEM
                 $('#search_box').keyup(function () {
                     var value = $(this).val();
 
@@ -174,8 +177,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     }
 
                 });
+                //  KRAJ * PRETRAGA ZA KUPCEM * KRAJ
                 
-                //  Upis podataka  odabranog kupca u polja
+                //  UPIS PODATAKA ODABRANOG KUPCA U POLJE
                 $('#search_result').on("click", "#k", function(e){
                     e.preventDefault();
                     
@@ -200,6 +204,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         $('#search_result').hide();
                     });
                 });
+                //  KRAJ * UPIS PODATAKA ODABRANOG KUPCA U POLJE * KRAJ
                   
                   // ČIŠĆENJE SEARCH BOX-A
                   $('#search_button').click(function(e) {
@@ -207,6 +212,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     $("#search_box").val("");
                     $('#search_result').hide();
                   });
+                  //  KRAJ * ČIŠĆENJE SEARCH BOX-A * KRAJ
                   
                   //   OMOGUĆAVANJE IZMJENE KUPCA
                   $('#editBtn').click(function (e){
@@ -227,6 +233,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         $('#spremiKupca').show();
                         $('#editBtn').hide();
                   });
+                  //  KRAJ * OMOGUĆAVANJE IZMJENE KUPCA * KRAJ
                   
                   //    SPREMANJE IZMJENE KUPCA
                   $('#spremiKupca').click(function (e){
@@ -282,6 +289,34 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     });
                       
                   });
+                  //  KRAJ * SPREMANJE IZMJENE KUPCA * KRAJ
+                  
+               
+
+                  
+                  // UNOS PRIMKE
+                   
+                   $('#submit').click(function (e){
+                      e.preventDefault();
+                      
+                      var ime = $('#inputIme').val();
+                      var prezime = $('#inputPrezime').val();
+                      var kontakt = $('#inputKontakt').val();
+                      var pk = $('#inputPK').val();
+                      var naziv = $('#inputNaziv').val();
+                      
+                      if(ime === '' || prezime === '' || kontakt === '' || pk === '' || naziv === '') {
+                          alert('Molim vas da ispunite sva polja');
+                      }
+                      else{
+                          var idkupca = $( '#inputid' ).text();
+                          if(idkupca === '') alert('nema ga');
+                          else alert(idkupca);
+                         //$.post("/json/primka/insertPrimka.php", {});
+                      }
+                      
+                  });
+                  //  KRAJ * UNOS PRIMKE * KRAJ
 
 
             });

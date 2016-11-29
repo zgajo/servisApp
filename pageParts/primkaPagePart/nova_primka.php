@@ -1,5 +1,5 @@
                     
-<form class="form-horizontal" action="" method="POST" onsubmit="return confirm('Jeste li sigurni da želite stvoriti primku sa upisanim podacima?');">
+<form id="unosPrimke" class="form-horizontal" action="" method="POST" >
     <div class="row">
         <div class="col-md-6">
             <!-- Dio za stranku -->
@@ -35,13 +35,13 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="inputIme" class="col-sm-2 control-label">Ime</label>
-                        <div class="col-sm-10">
+                        <label for="inputIme" class="col-sm-2 control-label"  id="required">Ime</label>
+                        <div class="col-sm-10" >
                             <input name="ime" class="form-control" id="inputIme" placeholder="Ime" type="text" required="">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputPrezime" class="col-sm-2 control-label">Prezime</label>
+                        <label for="inputPrezime" class="col-sm-2 control-label"  id="required">Prezime</label>
                         <div class="col-sm-10">
                             <input name="prezime" class="form-control" id="inputPrezime" placeholder="Prezime" type="text" required="">
                         </div>
@@ -68,14 +68,14 @@
 
 
                     <div class="form-group">
-                        <label for="inputKontakt" class="col-sm-2 control-label">Kontakt broj</label>
+                        <label for="inputKontakt" class="col-sm-2 control-label"  id="required">Kontakt broj</label>
                         <div class="col-sm-10">
 
                             <div class="input-group" >
                                 <div class="input-group-addon" style="">
                                     <i class="fa fa-phone"></i>
                                 </div>
-                                <input name="kontakt_broj" type="text" id="inputKontakt" class="form-control" data-inputmask="&quot;mask&quot;: &quot;999 999 99 99&quot;" data-mask="">
+                                <input name="kontakt_broj" type="text" id="inputKontakt"  required="" class="form-control" data-inputmask="&quot;mask&quot;: &quot;999 999 99 99&quot;" data-mask="">
                             </div><!-- /.input group -->
                         </div>
                     </div>
@@ -136,7 +136,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputNaziv" class="col-sm-2 control-label">Naziv</label>
+                        <label for="inputNaziv" class="col-sm-2 control-label"  id="required">Naziv</label>
                         <div class="col-sm-10">
                             <input class="form-control" id="inputNaziv" placeholder="PC Računalo Feniks, Lenovo G50-70 ..." type="text" name="naziv" required="">
                         </div>
@@ -175,7 +175,7 @@
 
                     <!-- textarea -->
                     <div class="form-group" >
-                        <label for="inputPK" class="col-sm-2 control-label">Prijava kvara</label>
+                        <label for="inputPK" class="col-sm-2 control-label"  id="required">Prijava <br>kvara</label>
                         <div class="col-sm-10">
                             <textarea id="inputPK" class="form-control" rows="3" placeholder="Kvar koji stranka prijavljuje ..." name="opis" required=""></textarea>
                         </div>
@@ -213,13 +213,13 @@
                          *  UKOLIKO SE POTVRDIO SUBMIT GUMB  
                          *                          */
                         if ($_POST) {
-                            $primka = new primka();
+                           
+                            /* $primka = new primka();
                             $stranka = new stranka();
 
-                            /*
                              * UKOLIKO SE ODABRALA VEĆ UNEŠENA STRANKA, POPRIMI ID I UNESI U PRIMKU
                              * 
-                             */
+                             
                             if (isset($_GET['stranka_id'])) {
                                 $last_p = $primka->insertPrimka($_COOKIE['centar'], $_POST['sifra'], $_POST['brand'], $_POST['tip'], $_POST['naziv'], $_POST['serijski'], $_POST['opis'], $_POST['prilozeno'], $_POST['racun'], "Zaprimljeno", $_POST['dk'], $_COOKIE['id'], $_GET['stranka_id']);
                                 echo '<script>alert("Unešena je nova primka '.$last_p.'"); '
@@ -229,7 +229,7 @@
                             /*
                              * 
                              * UNOS NOVE STRANKE I PRIMKE
-                             */ else {
+                              else {
 
                                 
                                 $last = $stranka->insert($_POST['tvrtka'], $_POST['ime'], $_POST['prezime'], $_POST['adresa'], $_POST['grad'], $_POST['post_broj'], $_POST['kontakt_broj'], $_POST['email']);
@@ -238,7 +238,14 @@
                                         . 'setTimeout(function(){ window.open("../../ispis/potvrda_zaprimanja.php?primka='.$last_p.'", "_blank")}, 100);'
                                         . '</script>';
                                 
-                            }
+                            }*/
+                            
+                            ?>
+                            
+                            
+                            
+                            
+                   <?php          
                         }
 
 ?>
