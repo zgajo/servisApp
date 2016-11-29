@@ -71,7 +71,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- Main content -->
                 <section class="content">
 
-                    <?php if($_GET['action'] == "novi_rn"  && !empty($_GET['primka_id'])) { 
+                    <?php if(isset($_GET['action'])) {if($_GET['action'] == "novi_rn"  && !empty($_GET['primka_id'])) { 
                         
                         $rn  = new servisRN();
                         $last = $rn->insert($_GET['primka_id'], $_COOKIE['id']);
@@ -102,7 +102,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         
                         ?>
                                       
-                    <?php } else if(!empty($_GET['radni_nalog'])){
+<?php }} else if(!empty($_GET['radni_nalog'])){
                     
                     require_once('./pageParts/rnPagePart/uredi_rn.php');
                     

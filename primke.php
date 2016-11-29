@@ -1,8 +1,8 @@
 <?php
-include_once './checkLogin.php';
-include_once './klase/radniNalog.php';
-include_once './klase/primka.php';
-include_once './klase/osoba.php';
+include_once 'checkLogin.php';
+include_once 'klase/radniNalog.php';
+include_once 'klase/primka.php';
+include_once 'klase/osoba.php';
 
 ?>
 
@@ -31,7 +31,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               page. However, you can choose any other skin. Make sure you
               apply the skin class to the body tag so the changes take effect.
         -->
-        <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
+        <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
         <link href="search/search.css" rel="stylesheet">
         <style>
                 #stranka{ width: 35%;
@@ -75,8 +75,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
 
-            <?php include './pageParts/header.php'; ?>
-            <?php include './pageParts/sidebar.php'; ?>
+            <?php include 'pageParts/header.php'; ?>
+            <?php include 'pageParts/sidebar.php'; ?>
 
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
@@ -91,23 +91,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     */
                     if (isset($_GET['primka'])) {
                         
-                        require_once './pageParts/primkaPagePart/uredi_primku.php';
+                        require_once 'pageParts/primkaPagePart/uredi_primku.php';
                         
                     }
                     /*
                     Otvaranje nove primke
                     */
-                    else if ($_GET['action'] == "nova_primka") {
+                    else if(isset($_GET['action'])){
+                        if ($_GET['action'] == "nova_primka") {
 
-                        require_once './pageParts/primkaPagePart/nova_primka.php';
+                        require_once 'pageParts/primkaPagePart/nova_primka.php';
 
                        
                        }
+                    }
+                    
                        /*
                        Prikaz svih naloga
                        */
                        else { 
-                    require_once './pageParts/primkaPagePart/sve_primke.php';
+                    require_once 'pageParts/primkaPagePart/sve_primke.php';
                     
                     } ?>
 
@@ -115,7 +118,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div><!-- /.content-wrapper -->
 
             <!-- Main Footer -->
-            <?php require_once('./pageParts/footer.php') ?>
+            <?php require_once('pageParts/footer.php') ?>
 
         </div><!-- ./wrapper -->
 
@@ -128,15 +131,78 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- AdminLTE App -->
         <script src="dist/js/app.min.js"></script>
         <!-- Select2 -->
-        <script src="../../plugins/select2/select2.full.min.js"></script>
+        <script src="plugins/select2/select2.full.min.js"></script>
         <!-- InputMask -->
-        <script src="../../plugins/input-mask/jquery.inputmask.js"></script>
-        <script src="../../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-        <script src="../../plugins/input-mask/jquery.inputmask.extensions.js"></script>
-
+        <script src="plugins/input-mask/jquery.inputmask.js"></script>
+        <script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+        <script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>
         
+        <?php if (!isset($_GET['action']) && !isset($_GET['primka'])){ ?>
+        
+          <script>
+        //    LISTANJE SVIH OTVORENIH PRIMKI
+                  $.ajax({
+                                type: 'POST',
+                                url: "json/primka/sveOtvorenePrimke.php",
+                                dataType: 'json',
+                                contentType: "application/json; charset=utf-8",
+                                success: function (data) {
+                                    var danas = new Date();
+                                    
+                                      var primka = JSON.parse(JSON.stringify(data));
+                                      var output = "";
+                                      
+                                     
+                                      
+                                      for(var i =0; i<primka.length; ++i){
+                                          var datum = new Date(primka[i].datumZaprimanja);
+                                          var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+
+                                            var diffDays = Math.round(Math.abs((danas.getTime() - datum.getTime())/(oneDay)));
+                                        
+                                            if(diffDays<=7)  var sty = "label label-success";
+                                            if(diffDays>7 && diffDays<=14)  var sty = "label label-warning";
+                                            if(diffDays>14) var sty = "label label-danger";
+                                        
+                                            output +=   '<tr> \n\
+                                                        <td  style="text-align: center;"><a class="glyphicon glyphicon-pencil" href="primke.php?primka='+primka[i].primka_id+'"></a></td>';
+                                                                                                                   
+                                            output +=     '<td><span class="'+sty+'">Primka ' +primka[i].primka_id+ '</span></td>';
+                                           
+                                            output +=     '<td>'+ primka[i].naziv +'</td>\n\
+                                                                <td>'+ primka[i].s_ime + ' ' + primka[i].s_prezime+'</td>\n\
+                                                                <td>'+ primka[i].status +'</td>\n\
+                                                                <td>'+ [datum.getDate(), datum.getMonth()+1, datum.getFullYear()].join('.') +' /  '+[(datum.getHours()<10?'0':'') + datum.getHours(), (datum.getMinutes()<10?'0':'') + datum.getMinutes()].join(':')  + '<td>\n\
+                                                            </tr>';
+                                                         
+                                      }
+                                      $('#sveprimke').html(output);
+                                      
+                                      console.log(JSON.parse(JSON.stringify(data)));
+                                      
+                                },
+                                error: function (e) {
+                                    alert(e.message);
+                                }
+                            });
+                  //    KRAJ    *   LISTANJE SVIH OTVORENIH PRIMKI  * KRAJ
+                
+                
+                //      HOVER NA RED SVIH PRIMKI
+                                $( "#sveprimke" ).on("mouseover", "tr",function() {
+                                  $( this ).css("background-color", "#efefef");
+                              } );
+                                
+                                $( "#sveprimke" ).on("mouseout", "tr",function() {
+                                  $( this ).css("background-color", "white");
+                              } );
+                //      KRAJ    *    HOVER NA RED SVIH PRIMKI   *   KRAJ
+        </script>
+        <?php } elseif(isset($_GET['action'])) { ?>
+      
        <script>
             $(document).ready(function () {
+                
                 var left = $('#box').position().left;
                 var top = $('#box').position().top;
                 var width = $('#box').width();
@@ -152,7 +218,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         $('#search_result').show();
                         
                         //Ispis kupaca
-                        $.post('/search/pretrazi_kupca.php', {value: value}, function (data) {
+                        $.post('search/pretrazi_kupca.php', {value: value}, function (data) {
                             
                             //Dohvat json podataka
                             var primka = JSON.parse(JSON.stringify(data));
@@ -185,7 +251,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     
                     var idkupca = $( this ).attr('name');
 
-                    $.post('/json/kupac/dohvatiKupcaJson.php', {"id": idkupca}, function (data) {
+                    $.post('json/kupac/dohvatiKupcaJson.php', {"id": idkupca}, function (data) {
                        console.log(JSON.parse(JSON.stringify(data)));
                         var osoba = JSON.parse(JSON.stringify(data));
                         $('#inputid').text(osoba.id);
@@ -249,7 +315,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       var email = $('#inputEmail').val();
                        var idkupca = $( '#inputid' ).text();
                        
-                       $.post('/json/kupac/updateKupca.php', {
+                       $.post('json/kupac/updateKupca.php', {
                            "tvrtka" : tvrtka,
                            "ime":ime,
                            "prezime":prezime, 
@@ -264,7 +330,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                        
                        
 
-                    $.post('/json/kupac/dohvatiKupcaJson.php', {"id": idkupca}, function (data) {
+                    $.post('json/kupac/dohvatiKupcaJson.php', {"id": idkupca}, function (data) {
                        console.log(JSON.parse(JSON.stringify(data)));
                         var osoba = JSON.parse(JSON.stringify(data));
                         $('#inputid').text(osoba.id);
@@ -321,25 +387,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       var opis = $('#inputPK').val();
                       var prilozeno = $('#inputPP').val();
                       
-                      
+                      //  UKOLIKO SU PRAZNA BITNA POLJA
                       if(ime === '' || prezime === '' || kontakt === '' || pk === '' || naziv === '') {
                           alert('Molim vas da ispunite sva polja');
                       }
+                      
+                      //    
                       else{
                           var idkupca = $( '#inputid' ).text();
                           
                           if(idkupca === '') {
-                              alert('Ovdje ide post kad nema već unešenog kupca');
-                          }
-                          else{ 
-                              
-                              $.ajax({
+                              if (confirm('Jeste li sigurni da želite unijeti ubisane podatke?')) {
+                                $.ajax({
                                  type: 'POST',
-                                 url: "/json/primka/insertPrimka.php",
-                                 data: {"sifra":sifra,"brand":brand, "tip":tip, "naziv":naziv, "serijski": serijski, "opis":opis, "prilozeno":prilozeno, "racun":racun, "dk": dat_k, "stranka_id": idkupca },
+                                 url: "json/primka/insertPrimka.php",
+                                 data: {"sifra":sifra,"brand":brand, "tip":tip, "naziv":naziv, "serijski": serijski, "opis":opis, "prilozeno":prilozeno, "racun":racun, "dk": dat_k, "stranka_id": idkupca,
+                                 "tvrtka" : tvrtka, "ime":ime, "prezime":prezime, "adresa" : adresa, "grad":grad, "post_broj": pb, "kontakt_broj":kontakt, "email" : email},
                                  success: function (data) {
                                      var primkaID = JSON.parse(JSON.stringify(data));
-                                        var win = window.open('/ispis/potvrda_zaprimanja.php?'+primkaID, '_blank');
+                                     window.location.href = "primke.php";
+                                        var win = window.open('ispis/potvrda_zaprimanja.php?primka='+primkaID, '_blank');
                                         if (win) {
                                             //Browser has allowed it to be opened
                                             win.focus();
@@ -347,6 +414,37 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             //Browser has blocked it
                                             alert('Molim Vas, omogućite prikaz skočnih prozora');
                                         }
+                                         
+                                        
+                                    },
+                                    
+                                    error: function (e) {
+                                    alert(e.message);
+                                        }
+                                    });
+                                } else {
+                                    alert('Odustali ste od upisa podataka. Ispravite upis');
+                                }
+                              
+                          }
+                          else{ 
+                              if (confirm('Jeste li sigurni da želite unijeti upisane podatke?')) {
+                              $.ajax({
+                                 type: 'POST',
+                                 url: "json/primka/insertPrimka.php",
+                                 data: {"sifra":sifra,"brand":brand, "tip":tip, "naziv":naziv, "serijski": serijski, "opis":opis, "prilozeno":prilozeno, "racun":racun, "dk": dat_k, "stranka_id": idkupca },
+                                 success: function (data) {
+                                     var primkaID = JSON.parse(JSON.stringify(data));
+                                     window.location.href = "primke.php";
+                                        var win = window.open('ispis/potvrda_zaprimanja.php?primka='+primkaID, '_blank');
+                                        if (win) {
+                                            //Browser has allowed it to be opened
+                                            win.focus();
+                                        } else {
+                                            //Browser has blocked it
+                                            alert('Molim Vas, omogućite prikaz skočnih prozora');
+                                        }
+                                         window.location.href = "primke.php";
                                         
                                     },
                                     
@@ -354,80 +452,74 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     alert(e.message);
                                 }
                               });
+                          }else {
+                                    alert('Odustali ste od upisa podataka. Ispravite upis');
+                                }
                               
                                 };
-                         //$.post("/json/primka/insertPrimka.php", {});
+                         
                       }
                       
                   });
                   //  KRAJ * UNOS PRIMKE * KRAJ
-
-
+                  
             });
 
         </script>
-
+        <?php } elseif(isset($_GET['primka'])) { ?>
+        <script>
+                        $(document).ready(function (){
+                            
+                            var pid = <?php echo $_GET['primka'] ?>
+                            // Dohvaćanje i pregled upita
+                            $.ajax({
+                                type: 'GET',
+                                url: "json/primka/updatePrimkaJson.php",
+                                data: {"id":pid},
+                                dataType: 'json',
+                                contentType: "application/json; charset=utf-8",
+                                success: function (data) {
+                                      
+                                     var pp = JSON.parse(JSON.stringify(data));
+                                     $('#ip_kupca').text(pp[0].ime + ' ' + pp[0].prezime);
+                                     if(pp[0].tvrtka) $('#tvrtka').text(pp[0].tvrtka).show();
+                                     $('#kontakt').after("<p style='display:inline'>"+pp[0].kontaktBroj+"</i>");
+                                     if(pp[0].email) $('#email').after("<p style='display:inline'>"+pp[0].email+"</i>"); else{ $('#email').hide()};
+                                     
+                                      console.log(pp);
+                                      
+                                },
+                                error: function (e) {
+                                    alert(e.message);
+                                }
+                            });
+                            
+                            //Ažuriranje upita
+                            $('#azuriraj').click(function (){
+                                
+                                var status = $('#status_primke').val();
+                                var p_id = $('#primka_id').text();
+                                
+                                $.post('json/primka/primkaUpdate.php', { "status" : status, "id" : p_id });
+                                
+                            });
+                            
+                            
+                            
+                                                       
+                        });
+                        </script>
+        <?php } ?>
         <!-- date-range-picker -->
         <script>
             $(function () {
-                //Initialize Select2 Elements
-                $(".select2").select2();
-
+                
                 //Datemask dd/mm/yyyy
                 $("#datemask").inputmask("dd.mm.yyyy", {"placeholder": "dd.mm.yyyy"});
-                //Datemask2 mm/dd/yyyy
-                $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
+                
                 //Money Euro
                 $("[data-mask]").inputmask();
 
-                //Date range picker
-                $('#reservation').daterangepicker();
-                //Date range picker with time picker
-                $('#reservationtime').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
-                //Date range as a button
-                $('#daterange-btn').daterangepicker(
-                        {
-                            ranges: {
-                                'Today': [moment(), moment()],
-                                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                                'This Month': [moment().startOf('month'), moment().endOf('month')],
-                                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                            },
-                            startDate: moment().subtract(29, 'days'),
-                            endDate: moment()
-                        },
-                        function (start, end) {
-                            $('#reportrange span').php(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-                        }
-                );
-
-                //iCheck for checkbox and radio inputs
-                $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-                    checkboxClass: 'icheckbox_minimal-blue',
-                    radioClass: 'iradio_minimal-blue'
-                });
-                //Red color scheme for iCheck
-                $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
-                    checkboxClass: 'icheckbox_minimal-red',
-                    radioClass: 'iradio_minimal-red'
-                });
-                //Flat red color scheme for iCheck
-                $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-                    checkboxClass: 'icheckbox_flat-green',
-                    radioClass: 'iradio_flat-green'
-                });
-
-                //Colorpicker
-                $(".my-colorpicker1").colorpicker();
-                //color picker with addon
-                $(".my-colorpicker2").colorpicker();
-
-                //Timepicker
-                $(".timepicker").timepicker({
-                    showInputs: false
-                });
             });
         </script>
         <!-- Optionally, you can add Slimscroll and FastClick plugins.

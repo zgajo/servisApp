@@ -30,13 +30,13 @@ if($primka[0]['datumKupnje'] === "0000-00-00"){
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
-    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -141,10 +141,10 @@ if($primka[0]['datumKupnje'] === "0000-00-00"){
           <!-- accepted payments column -->
           <div class="col-xs-6">
             <p class="lead">Payment Methods:</p>
-            <img src="../../dist/img/credit/visa.png" alt="Visa">
-            <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
-            <img src="../../dist/img/credit/american-express.png" alt="American Express">
-            <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
+            <img src="../dist/img/credit/visa.png" alt="Visa">
+            <img src="../dist/img/credit/mastercard.png" alt="Mastercard">
+            <img src="../dist/img/credit/american-express.png" alt="American Express">
+            <img src="../dist/img/credit/paypal2.png" alt="Paypal">
             <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
               Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
             </p>
@@ -177,6 +177,6 @@ if($primka[0]['datumKupnje'] === "0000-00-00"){
     </div><!-- ./wrapper -->
 
     <!-- AdminLTE App -->
-    <script src="../../dist/js/app.min.js"></script>
+    <script src="../dist/js/app.min.js"></script>
   </body>
 </html>

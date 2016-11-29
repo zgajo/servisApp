@@ -23,7 +23,7 @@
                     <!-- Menu Toggle Button -->
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <!-- The user image in the navbar-->
-                       
+                        <span class="glyphicon glyphicon-user"></span>
                         <!-- hidden-xs hides the username on small devices so only the image appears. -->
                         <span class="hidden-xs"><?php echo $_COOKIE['user'] ?></span>
                     </a>

@@ -1,4 +1,3 @@
-
  <!-- TABLE: Sve otvorene primke -->
                         <div class="box box-info">
                             <div class="box-header with-border">
@@ -13,6 +12,7 @@
                                     <table class="table no-margin">
                                         <thead>
                                             <tr>
+                                                <th  style="text-align: center;">Uredi</th>
                                                 <th>Primka</th>
                                                 <th>Uređaj</th>
                                                 <th>Stranka</th>
@@ -20,43 +20,10 @@
                                                 <th>Datum zaprimanja</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <?php
-                                            $primka = new primka();
-                                            $primka = $primka->svePrimke();
-
-                                            if(!empty($primka)){
-                                                
-                                                foreach ($primka as $primka) {
-  
-                                                
-                                                        
-                                                        $datum = strtotime($primka->datumZaprimanja);
-                                                        $zaprimljeno = date("d.m.Y   /   H:i:s",$datum );
-                                                
-                                                $date1=date_create(date('d.m.Y', strtotime($primka->datumZaprimanja)));
-                                                $date2=date_create(date('d.m.Y'));
-                                                $diff=date_diff($date1,$date2);
-                                                
-                                               if($diff->format('%a')>6 && $diff->format('%a')<=10) $style = "color:orange;";
-                                               elseif ($diff->format('%a')>11) $style = "color:red;";
-                                               else $style = "";
-                                               
-                                                        echo '<tr >
-                                                        <td><a  style="'.$style.'" href="primke.php?primka=' . $primka->primka_id . '">Pregledaj / Uredi ' . $primka->primka_id . '</a></td>
-                                                        <td>' . $primka->naziv . '</td>
-                                                        <td>'; echo($primka->tvrtka==NULL)?"":$primka->tvrtka.', '; echo $primka->s_ime. ' '.$primka->s_prezime.'</td>
-                                                        <td style="width:1px"><span class="label label-success" style="font-size: 12px; display:block">' . $primka->status . '</span></td>
-                                                        <td><div class="sparkbar" data-color="#00a65a" data-height="20">' . $zaprimljeno . '</div></td>
-                                                        </tr>';
-                                                        
-                                                    
-                                                        
-                                                
-                                            }
-                                            }
-                                            unset($primka);
-                                            ?>
+                                        <tbody id="sveprimke">
+                                           <!--
+                                           AJAX - Sve primke
+                                           -->
                                         </tbody>
                                     </table>
                                 </div><!-- /.table-responsive -->
@@ -65,8 +32,8 @@
                                 <a href="primke.php?action=nova_primka" class="btn btn-sm btn-info btn-flat pull-right">NOVA PRIMKA</a>
                             </div><!-- /.box-footer -->
                         </div><!-- /.box -->
-                        
-                        
+
+     
                         
                         
                          <!-- TABLE: Sve otvorene primke -->

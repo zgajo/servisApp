@@ -5,7 +5,7 @@ class database {
     private $mysqli;
 
     function __construct() {
-        $this->mysqli = new mysqli("mysql.hostinger.hr", "u273306295_euro", "casino12", "u273306295_euro");
+        $this->mysqli = new mysqli("localhost", "root", "", "u273306295_euro");
         
         if (mysqli_connect_errno()) {
             die('DOGODILA SE GREŠKA: ' . mysqli_connect_error());
@@ -30,7 +30,7 @@ class database {
         setcookie('odjel', '', '/', '', '', TRUE);
         setcookie('centar', '', $expire, '/', '', '', TRUE);
                 
-        header('Location: http://eurotrade.esy.es/login.php');
+        header('Location: login.php');
         exit();
     }
 

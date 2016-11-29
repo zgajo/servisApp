@@ -36,14 +36,13 @@ class djelatnik extends osoba{
                 $query->fetch();
 
                 $expire = time() + 60 * 60 * 999999;
-                setcookie('user', "$this->ime $this->prezime", $expire, '/', '', '', TRUE);
-                setcookie('id', $this->id, $expire, '/', '', '', TRUE);
-                setcookie('odjel', $this->odjel, $expire, '/', '', '', TRUE);
-                setcookie('centar', $this->p_centar, $expire, '/', '', '', TRUE);
+                setcookie("user", "$this->ime $this->prezime", time()+86400, '/', '', '', TRUE);
+                setcookie("id", $this->id, time()+86400, '/', '', '', TRUE);
+                setcookie("odjel", $this->odjel, time()+86400, '/', '', '', TRUE);
+                setcookie("centar", $this->p_centar, time()+86400, '/', '', '', TRUE);
 
                 $query->close();
-
-                header('Location: http://eurotrade.esy.es/primke.php');
+                header('Location: ./primke.php');
                 exit();
             } else {
                 $query->close();

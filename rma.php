@@ -71,7 +71,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- Main content -->
                 <section class="content">
 
-                    <?php if($_GET['action'] == "novi_rma"  && !empty($_GET['primka_id'])) { 
+                    <?php if(isset($_GET['action'])){ if($_GET['action'] == "novi_rma"  && !empty($_GET['primka_id'])) { 
                         
                         $rma  = new rmaNalog();
                         $last = $rma->insert($_GET['primka_id'], $_COOKIE['id']);
@@ -91,7 +91,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         
                         ?>
                                       
-                    <?php } else if(!empty($_GET['rma'])){
+                    <?php }} else if(!empty($_GET['rma'])){
                     
                     require_once('./pageParts/rmaPagePart/uredi_rma.php');
                     

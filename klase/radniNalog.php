@@ -118,7 +118,7 @@ class rmaNalog extends RN{
                     );
             }
             $query->close();
-            return $rma;
+            if(isset($rma))return $rma;
             
         
         }else{
@@ -322,7 +322,7 @@ class servisRN extends RN{
                     );
             }
             $query->close();
-            return $rn;
+            if(isset($rn))return $rn;
         
         }else{
              $query->close();

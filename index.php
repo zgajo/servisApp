@@ -280,7 +280,7 @@ include_once './checkLogin.php';
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
-                      <a href="http://eurotrade.esy.es/pages/examples/login.php?action=logout" class="btn btn-default btn-flat">Sign out</a>
+                      <a href="pages/examples/login.php?action=logout" class="btn btn-default btn-flat">Sign out</a>
                     </div>
                   </li>
                 </ul>
