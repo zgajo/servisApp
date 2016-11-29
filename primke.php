@@ -299,19 +299,63 @@ scratch. This page gets rid of all links and provides the needed markup only.
                    $('#submit').click(function (e){
                       e.preventDefault();
                       
+                      //kupac
+                      var tvrtka = $('#inputTvrtka').val();
                       var ime = $('#inputIme').val();
                       var prezime = $('#inputPrezime').val();
+                      var adresa = $('#inputAdresa').val();
+                      var grad = $('#inputGrad').val();
+                      var pb = $('#inputPB').val();
                       var kontakt = $('#inputKontakt').val();
+                      var email = $('#inputEmail').val();
+                      
+                      //primka
                       var pk = $('#inputPK').val();
                       var naziv = $('#inputNaziv').val();
+                      var sifra = $('#inputSifra').val();
+                      var brand = $('#inputBrand').val();
+                      var tip = $('#inputTip').val();
+                      var serijski = $('#inputSerijski').val();
+                      var dat_k = $('#inputDK').val();
+                      var racun = $('#inputRacun').val();
+                      var opis = $('#inputPK').val();
+                      var prilozeno = $('#inputPP').val();
+                      
                       
                       if(ime === '' || prezime === '' || kontakt === '' || pk === '' || naziv === '') {
                           alert('Molim vas da ispunite sva polja');
                       }
                       else{
                           var idkupca = $( '#inputid' ).text();
-                          if(idkupca === '') alert('nema ga');
-                          else alert(idkupca);
+                          
+                          if(idkupca === '') {
+                              alert('Ovdje ide post kad nema već unešenog kupca');
+                          }
+                          else{ 
+                              
+                              $.ajax({
+                                 type: 'POST',
+                                 url: "/json/primka/insertPrimka.php",
+                                 data: {"sifra":sifra,"brand":brand, "tip":tip, "naziv":naziv, "serijski": serijski, "opis":opis, "prilozeno":prilozeno, "racun":racun, "dk": dat_k, "stranka_id": idkupca },
+                                 success: function (data) {
+                                     var primkaID = JSON.parse(JSON.stringify(data));
+                                        var win = window.open('/ispis/potvrda_zaprimanja.php?'+primkaID, '_blank');
+                                        if (win) {
+                                            //Browser has allowed it to be opened
+                                            win.focus();
+                                        } else {
+                                            //Browser has blocked it
+                                            alert('Molim Vas, omogućite prikaz skočnih prozora');
+                                        }
+                                        
+                                    },
+                                    
+                                error: function (e) {
+                                    alert(e.message);
+                                }
+                              });
+                              
+                                };
                          //$.post("/json/primka/insertPrimka.php", {});
                       }
                       
