@@ -481,10 +481,54 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 success: function (data) {
                                       
                                      var pp = JSON.parse(JSON.stringify(data));
-                                     $('#ip_kupca').text(pp[0].ime + ' ' + pp[0].prezime);
+                                     
+                                     var dz = new Date(pp[0].datumZaprimanja);
+                                     var dk = new Date(pp[0].datumKupnje);
+                                    
+                                    // PODACI KUPCA
+                                    
+                                    $('#ip_kupca').text(pp[0].ime + ' ' + pp[0].prezime);
                                      if(pp[0].tvrtka) $('#tvrtka').text(pp[0].tvrtka).show();
-                                     $('#kontakt').after("<p style='display:inline'>"+pp[0].kontaktBroj+"</i>");
+                                     $('#kontakt').text(pp[0].kontaktBroj);
                                      if(pp[0].email) $('#email').after("<p style='display:inline'>"+pp[0].email+"</i>"); else{ $('#email').hide()};
+                                     $('#grad').text(pp[0].grad);
+                                     $('#adresa').text(pp[0].adresa);
+                                     
+                                     //     PODACI PRIMKE
+                                     
+                                     $('#zap').text([dz.getDate(), dz.getMonth()+1, dz.getFullYear()].join('.') +' /  '+[(dz.getHours()<10?'0':'') + dz.getHours(), (dz.getMinutes()<10?'0':'') + dz.getMinutes()].join(':'));
+                                     $('#po').text(pp[0].pot_ime + ' ' + pp[0].pot_prezime);
+                                     $('#nu').text(pp[0].naziv);
+                                     $('#serijski').text(pp[0].serijski);
+                                     $('#brand').text(pp[0].brand);
+                                     $('#tip').text(pp[0].tip);
+                                     (isNaN(dk.getDate())) ? $('#dk').text() : $('#dk').text([dk.getDate(), dk.getMonth()+1, dk.getFullYear()].join('.'));
+                                     $('#br').text(pp[0].racun);
+                                     $('#ok').text(pp[0].opisKvara);
+                                     $('#pp').text(pp[0].prilozeno_primijeceno);
+                                     $('select').prepend("<option disabled='disabled' value='"+pp[0].p_status+"'>"+pp[0].p_status+"</option>");
+                                     $('select').val(pp[0].p_status);
+                                     
+                                        $('#inputTvrtka').val(pp[0].tvrtka);
+                                        $('#inputIme').val(pp[0].ime);
+                                        $('#inputPrezime').val(pp[0].prezime);
+                                        $('#inputAdresa').val(pp[0].adresa);
+                                        $('#inputGrad').val(pp[0].grad);
+                                        $('#inputPB').val(pp[0].postBroj);
+                                        $('#inputKontakt').val(pp[0].kontaktBroj);
+                                        $('#inputEmail').val(pp[0].email);
+                                        $('#inputid').text(pp[0].stranka_id);
+                                        
+                                        //primka u input
+                                        $('#inputPK').val(pp[0].opisKvara);
+                                        $('#inputNaziv').val(pp[0].naziv);
+                                        $('#inputSifra').val(pp[0].sifraUredaja);
+                                        $('#inputBrand').val(pp[0].brand);
+                                        $('#inputTip').val(pp[0].tip);
+                                        $('#inputSerijski').val(pp[0].serijski);
+                                        if(!isNaN(dk.getDate())) $('#inputDK').val([dk.getDate(), dk.getMonth()+1, dk.getFullYear()].join('.'));
+                                        $('#inputRacun').val(pp[0].racun);
+                                        $('#inputPP').val(pp[0].prilozeno_primijeceno);
                                      
                                       console.log(pp);
                                       
@@ -496,15 +540,130 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             
                             //Ažuriranje upita
                             $('#azuriraj').click(function (){
-                                
-                                var status = $('#status_primke').val();
-                                var p_id = $('#primka_id').text();
-                                
-                                $.post('json/primka/primkaUpdate.php', { "status" : status, "id" : p_id });
+                                var status = $('select').val();
+                                $.post('json/primka/primkaStatusUpdate.php', { "status" : status, "id" : pid }, function (data){
+                                    alert('Uspješno ažuriran status');
+                                });
                                 
                             });
                             
                             
+                            
+                            
+                            //    SPREMANJE IZMJENE KUPCA
+                  $('#spremiKupca').click(function (e){
+                      e.preventDefault();
+                      
+                      var tvrtka = $('#inputTvrtka').val();
+                      var ime = $('#inputIme').val();
+                      var prezime = $('#inputPrezime').val();
+                      var adresa = $('#inputAdresa').val();
+                      var grad = $('#inputGrad').val();
+                      var pb = $('#inputPB').val();
+                      var kontakt = $('#inputKontakt').val();
+                      var email = $('#inputEmail').val();
+                       var idkupca = $( '#inputid' ).text();
+                       
+                       if(ime === '' || prezime === '' || kontakt === '') {
+                          alert('Molim vas da ispunite sva polja');
+                      }
+                       else{
+                           $.post('json/kupac/updateKupca.php', {
+                           "tvrtka" : tvrtka,
+                           "ime":ime,
+                           "prezime":prezime, 
+                           "adresa" : adresa, 
+                           "grad" : grad, 
+                           "pb" : pb, 
+                           "kontakt":kontakt, 
+                           "email":email,
+                           "id" : idkupca
+                       });
+                       
+                        $('#ip_kupca').text(ime + ' ' + prezime);
+                        $('#tvrtka').text(tvrtka);
+                        $('#kontakt').text(kontakt);
+                        if(email) $('#email').after("<p style='display:inline'>"+email+"</i>"); else{ $('#email').hide()};
+                        $('#grad').text(grad);
+                        $('#adresa').text(adresa);
+                        
+                        $('#upr').show();
+                        $('#uredi_kupca').hide();
+                        
+                   
+                       }
+                       
+                  });
+                  //  KRAJ * SPREMANJE IZMJENE KUPCA * KRAJ
+                            
+                            
+                       
+                       //   SPREMANJE IZMJENE PRIMKE
+                       $('#spremiPrimku').click(function (){
+                       //primka
+                      var naziv = $('#inputNaziv').val();
+                      var sifra = $('#inputSifra').val();
+                      var brand = $('#inputBrand').val();
+                      var tip = $('#inputTip').val();
+                      var serijski = $('#inputSerijski').val();
+                      var dat_k = $('#inputDK').val();
+                      var racun = $('#inputRacun').val();
+                      var opis = $('#inputPK').val();
+                      var prilozeno = $('#inputPP').val();
+                      
+                      if(opis === '' || naziv === '') {
+                          alert('Molim vas da ispunite obavezna sva polja');
+                      }
+                      else{
+                          $.post("json/primka/updatePrimka.php", { 
+                          "su" : sifra, "b": brand ,  "t": tip, "n" : naziv, "s" : serijski, 
+                          "ok" : opis, "pp" : prilozeno, "r" : racun, "dk" : dat_k, "id" : pid
+                      });
+                      
+                      $('#nu').text(naziv);
+                      $('#serijski').text(serijski);
+                                     $('#brand').text(brand);
+                                     $('#tip').text(tip);
+                                     $('#dk').text(dat_k);
+                                     $('#br').text(racun);
+                                     $('#ok').text(opis);
+                                     $('#pp').text(prilozeno);
+                                     
+                                     
+                                     $('#upr').show();
+                                $('#uredi_primku').hide();
+                      }
+                      
+                      
+                      
+                       });
+                        
+                      
+                       //   KRAJ    *   SPREMANJE IZMJENE PRIMKE   *   KRAJ
+                            
+                            //  OMOGUĆAVANJE UREĐIVANJE KUPCA / PRIMKE
+                            
+                            $('#uk').click(function(){
+                                $('#upr').hide();
+                                $('#uredi_kupca').show();
+                            });
+                            
+                            $('#ponistiK').click(function(){
+                                $('#upr').show();
+                                $('#uredi_kupca').hide();
+                            });
+                            
+                            $('#up').click(function(){
+                                $('#upr').hide();
+                                $('#uredi_primku').show();
+                            });
+                            
+                            $('#ponistiUK').click(function(){
+                                $('#upr').show();
+                                $('#uredi_primku').hide();
+                            });
+                            
+                            //  KRAJ    *   OMOGUĆAVANJE UREĐIVANJE KUPCA / PRIMKE   *   KRAJ
                             
                                                        
                         });

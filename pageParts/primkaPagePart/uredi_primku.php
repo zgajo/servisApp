@@ -7,47 +7,54 @@
                     <h3 class="box-title" id="uprim">Uređivanje primke </h3>
                     
                 </div><!-- /.box-header -->
+                <div id="pregled">
                 <!-- PODACI STRANKE -->
-            <div id="stranka" class="col-sm-4 invoice-col">
-              <h4>Stranka:</h4>
+                <div id="stranka" class="col-sm-4 invoice-col">
+                    
+                    <h4 style="display: inline-block">Stranka:</h4><i id="uk" style="display: inline; margin-left: 2em" class="fa fa-fw fa-edit"></i>
               <address>
-                  <strong id="tvrtka" style="display: none">sddssadsds</strong>
+                <strong id="tvrtka"></strong>
                 <p id="ip_kupca"></p>
                 <p id="grad"></p>
                 <p id="adresa"></p>
                 <p id="pb"></p>
-                <i  id="kontakt"><strong>Kontakt: </strong></i><br>
-                <i id="email"><strong>Email: </strong></i>
+                <i><strong>Kontakt: </strong></i><p style="display: inline" id="kontakt"></p><br>
+                <i><strong>Email: </strong><p style="display: inline" id="email"></p></i>
+                
               </address>
             </div>
             
                 <!-- PODACI PRIMKE -->
                 <div  id="primka" class="col-sm-4 invoice-col">
-                  <h4>Primka:</h4>
+                    <h4 style="display: inline-block">Primka:</h4><i id="up" style="display: inline; margin-left: 2em" class="fa fa-fw fa-edit"></i>
               <address>
-                  <i id="zap"><strong>Zaprimljeno: </strong></i> <br>
-                  <i id="po"><strong>Primku otvorio: </strong></i>  <br>
-                <i id="nu"><strong>Naziv uređaja: </strong></i>  <br>
-                
-                <i id="serijski"><strong>Serijski: </strong></i> </br>
-                <i id="brand"><strong>Brand: </strong></i>  <br> 
-                <i id="tip"><strong>Tip: </strong></i><br>
-                <i id="dk"><strong>Datum kupnje: </strong></i></br> 
-                <i id="br"><strong>Broj računa: </strong></i></br>
+                  <i><strong>Zaprimljeno: </strong></i><p  id="zap" style="display: inline"></p>  <br>
+                  <i><strong>Primku otvorio: </strong></i><p  id="po" style="display: inline"></p>  <br>
+                  <hr>
+                  
+                <i><strong>Naziv uređaja: </strong></i><p  id="nu" style="display: inline"></p>   <br>
+                <i><strong>Serijski: </strong></i><p  id="serijski" style="display: inline"></p>  </br>
+                <i ><strong>Brand: </strong></i><p id="brand" style="display: inline"></p>   <br> 
+                <i ><strong>Tip: </strong></i><p id="tip" style="display: inline"></p> <br>
+                <i><strong>Datum kupnje: </strong></i><p  id="dk" style="display: inline"></p> </br> 
+                <i><strong>Broj računa: </strong></i><p   id="br" style="display: inline"></p> </br>
                 <hr>
                
-                <i id="ok"><strong>Opis kvara: </strong></i> </br></br>
-                <i id="pp"><strong>Priloženo / primijećeno uz uređaj: </strong></i> <br> <br>
+                <i><strong>Opis kvara: </strong></i><br> <p id="ok" style="display: inline"></p> </br></br>
+                <i><strong>Priloženo / primijećeno uz uređaj: </strong></i><br><p id="pp" style="display: inline"></p>  <br> <br>
                 
               </address>
             </div>
                 
-                <div id="azuriraj" class="box-body" style="clear: both">
+                </div>
+                
+                
+                <div class="box-body" style="clear: both">
 
                                                                       
                          <div class="form-group">
-                        <label class="col-sm-2 control-label">Ažuriraj</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-2 control-label">Statu</label>
+                        <div    class="col-sm-10">
                             <select class="form-control" name='status_primke'>
                                 <option>Pošalji u CS - Rovinj</option>
                                 <option>Čeka preuzimanje stranke</option>
@@ -62,7 +69,7 @@
 
                 </div><!-- /.box-body -->
                 <div class="box-footer">
-                    <button type="submit" name="submit"  class="btn btn-sm btn-info btn-flat pull-right">Unesi promjenu</button> 
+                    <button  id="azuriraj" name="submit"  class="btn btn-sm btn-info btn-flat pull-right">Izmijeni status</button> 
                    <a  style="margin-left: 5px; margin-right: 5px;" class="btn btn-sm btn-info btn-flat pull-left" href="#">Novi radni nalog</a>
                     <a class="btn btn-sm btn-info btn-flat pull-left" href="#" >Novi RMA nalog</a>
                 </div>
@@ -73,103 +80,213 @@
         </div>
         
     </div>
-    <div class="row" id="urn">
-    <?php
-        if(!empty($primka[0]['rn_id'])){
-         
-          foreach($primka as $prim){
-            ?>
-            <div class="col-md-6" style="width: 100%">
-            <!-- Dio za primku -->
-            
-            <div class="box box-info" style="border-top-color:#00a65a">
-              <div class="box-body" style="clear: both">
+    
+   
+                
+    <div class="col-md-6" id="uredi_kupca" style="display:none ">
+            <!-- Dio za stranku -->
+           
+            <div class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Radni nalog servisa br. <?php echo $prim['rn_id']; ?></h3>
+                    <h3 class="box-title">Uređivanje stranke</h3>
+                    <br>
+                    <br>
+                    
                     
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                 <div  id="primka" class="col-sm-4 invoice-col" >
-              <address>
-                <i><strong>Početak rada: </strong></i> <?php echo date("d.m.Y / H:i:s",strtotime($prim['pocetakRada'])); ?><br>
-                <i><strong>Rad započeo: </strong></i>  <?php echo $prim['zapoceoRn_ime'] . ' ' .$prim['zapoceoRn_prezime'] ?> </strong><br>
-              
-                <i><strong>Opis popravka: </strong></i>  <?php echo $prim['opisPopravka']; ?> </strong><br>
-              <hr>
-                <i><strong>Naplatiti: </strong></i>  <?php echo $prim['naplata']; ?> </strong><br>
-                <i><strong>Rad završio: </strong></i>  <?php echo $prim['zavrsioRn_ime'] . ' ' . $prim['zavrsioRn_prezime']; ?> </strong><br>
-              <i><strong>Završetak rada: </strong></i>  <?php if(!empty($prim['danZavrsetka'])) echo date("d.m.Y / H:i:s",strtotime($prim['danZavrsetka']));?> </strong><br>
-              </address>
+
+                <div class="box-body">
+
+                    <div class="form-group" id="divTvrtka">
+                        <label for="inputTvrtka" class="col-sm-2 control-label">Tvrtka</label>
+                        <div class="col-sm-10">
+                            <div id="inputid" style="display: none"></div>
+                            <input name="tvrtka" class="form-control" id="inputTvrtka" placeholder="Tvrtka" type="text">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="inputIme" class="col-sm-2 control-label"  id="required">Ime</label>
+                        <div class="col-sm-10" >
+                            <input name="ime" class="form-control" id="inputIme" placeholder="Ime" type="text" required="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPrezime" class="col-sm-2 control-label"  id="required">Prezime</label>
+                        <div class="col-sm-10">
+                            <input name="prezime" class="form-control" id="inputPrezime" placeholder="Prezime" type="text" required="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAdresa" class="col-sm-2 control-label">Adresa</label>
+                        <div class="col-sm-10">
+                            <input name="adresa" class="form-control" id="inputAdresa" placeholder="Adresa" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputGrad" class="col-sm-2 control-label">Grad</label>
+                        <div class="col-sm-10">
+                            <input name="grad" class="form-control" id="inputGrad" placeholder="Grad" type="text">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputPB" class="col-sm-2 control-label">Poštanski broj</label>
+                        <div class="col-sm-10">
+                            <input name="post_broj" class="form-control" id="inputPB" placeholder="Poštanski broj" type="number">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="inputKontakt" class="col-sm-2 control-label"  id="required">Kontakt broj</label>
+                        <div class="col-sm-10">
+
+                            <div class="input-group" >
+                                <div class="input-group-addon" style="">
+                                    <i class="fa fa-phone"></i>
+                                </div>
+                                <input name="kontakt_broj" type="text" id="inputKontakt"  required="" class="form-control" data-inputmask="&quot;mask&quot;: &quot;999 999 99 99&quot;" data-mask="">
+                            </div><!-- /.input group -->
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputEmail" class="col-sm-2 control-label">Kontakt email</label>
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon">@</span>
+                                <input name="email" type=email id="inputEmail" class="form-control" placeholder="primjer@domena.hr">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a class="btn btn-app"  id="spremiKupca" style=" float: right">
+                    <i class="fa fa-save"></i> Spremi promjene
+                    </a>
+                    
+                    <a class="btn btn-app"  id="ponistiK" style=" float: right">
+                    <i class="fa  fa-undo"></i> Poništi
+                    </a>
+
+                </div><!-- /.box -->
+                <!-- general form elements disabled -->
+
             </div>
            
-           
-           
-               <!-- textarea -->
+        </div>
+
+    <div class="col-md-6" id="uredi_primku" style="display: none">
+            <!-- Dio za primku -->
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Ažuriranje primke</h3>
+                </div><!-- /.box-header -->
+                <!-- form start -->
+
+                <div class="box-body">
+
+
+                    <div class="form-group">
+                        <label for="inputSifra" class="col-sm-2 control-label">Šifra</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" id="inputSifra" placeholder="Šifra uređaja" type="number" name="sifra">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputBrand" class="col-sm-2 control-label">Brand</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" id="inputBrand" placeholder="Toshiba, Lenovo, Epson ..." type="text" name="brand">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputTip" class="col-sm-2 control-label">Tip</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" id="inputTip" placeholder="Printer, laptop, računalo ..." type="text" name="tip">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputNaziv" class="col-sm-2 control-label"  id="required">Naziv</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" id="inputNaziv" placeholder="PC Računalo Feniks, Lenovo G50-70 ..." type="text" name="naziv" required="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputSerijski" class="col-sm-2 control-label">Serijski broj</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" id="inputSerijski" placeholder="Serijski broj ..." type="text" name="serijski">
+                        </div>
+                    </div>
+
+                    <hr>
+
+
+                    <div class="form-group">
+                        <label for="inputDK" class="col-sm-2 control-label">Datum kupnje</label>
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                      <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                      </div>
+                                <input type="text" id="inputDK" name="dk" class="form-control" data-inputmask="'alias': 'dd.mm.yyyy'" data-mask>
+                    </div><!-- /.input group -->
+                    
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputRacun" class="col-sm-2 control-label">Račun</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" id="inputRacun" placeholder="Broj računa ..." type="text" name="racun">
+                        </div>
+                    </div>
+
+
+
+                    <!-- textarea -->
+                    <div class="form-group" >
+                        <label for="inputPK" class="col-sm-2 control-label"  id="required">Prijava <br>kvara</label>
+                        <div class="col-sm-10">
+                            <textarea id="inputPK" class="form-control" rows="3" placeholder="Kvar koji stranka prijavljuje ..." name="opis" required=""></textarea>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group" >
+                        <label for="inputPP" class="col-sm-2 control-label">Priloženo / Primijećeno uz uređaj</label>
+                        <div class="col-sm-10">
+                            <textarea name="prilozeno" id="inputPP" class="form-control" rows="3" placeholder="Upisati što se zaprima uz uređaj (punjač, kablovi, torba i sl.) i primijećena oštećenja ..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <a class="btn btn-app"  id="spremiPrimku" style=" float: right">
+                    <i class="fa fa-save"></i> Spremi promjene
+                    </a>
+                    
+                    <a class="btn btn-app"  id="ponistiUK" style=" float: right">
+                    <i class="fa  fa-undo"></i> Poništi
+                    </a>
+
+                </div><!-- /.box-body -->
+                
+
             </div><!-- /.box -->
             <!-- general form elements disabled -->
 
         </div>
-        </div>
-        
-        <?php
-          }
-        }
-        $rma = new rmaNalog();
-        $rma = $rma->RMAbyPrimka($_GET['primka']);
-        if(!empty($rma[0]['id'])){
-         
-          foreach($rma as $r){
-            ?>
-            <div class="col-md-6" style="width: 100%">
-            <!-- Dio za primku -->
-            
-            <div class="box box-info"  style="border-top-color:#dd4b39">
-              <div class="box-body" style="clear: both">
-                <div class="box-header with-border">
-                    <h3 class="box-title">RMA nalog br. <?php echo $r['id']; ?></h3>
-                    
-                </div><!-- /.box-header -->
-                <!-- form start -->
-                 <div  id="primka" class="col-sm-4 invoice-col" >
-              <address>
-                <i><strong>Pripremljeno za slanje: </strong></i> <?php echo date("d.m.Y / H:i:s",strtotime($r['pripremljeno'])); ?><br>
-                <i><strong>Poslano u ovlašteni servis: </strong></i>  <?php if(!empty($r['poslano'])) echo date("d.m.Y / H:i:s",strtotime($r['poslano']));?> </strong><br>
-                <i><strong>Uređaj poslao: </strong></i>  <?php echo $r['doime'] . ' ' .$r['doprezime'] ?> </strong><br>
-              <hr>
-                <i><strong>Ovlašteni servis: </strong></i>  <?php echo $r['nazivOS']; ?> </strong><br>
-                <i><strong>Radni nalog ovlaštenog servisa: </strong></i>  <?php echo $r['rnOs']; ?> </strong><br>
-                <i><strong>Opis popravka: </strong></i>  <?php echo $r['opis']; ?> </strong><br>  
-                <i><strong>Status reklamacije: </strong></i>  <?php echo $r['status']; ?> </strong><br>
-              <hr> 
-                <i><strong>Vraćeno iz ovlaštenog servisa: </strong></i>  <?php echo $r['zavrseno']; ?> </strong><br>
-               <i><strong>Zatvorio nalog: </strong></i>  <?php echo $r['dzime'] . ' ' .$r['dzprezime'] ?> </strong><br>
-                <i><strong>Naplatiti: </strong></i>  <?php echo $r['naplata']; ?> </strong><br>
-              </address>
-            </div>
-           
-           
-           
-               <!-- textarea -->
-            </div><!-- /.box -->
-            <!-- general form elements disabled -->
 
-        </div>
-        </div>
-        
-        <?php
-          }
-        }
-        ?>
-        
-    </div>
-        
+    
+    
         <div class="row" style="clear: both">
            
           </div>
         
         
         
-    </div>
     
 </form>
 
@@ -177,24 +294,5 @@
 
 
 
-<div class="row" style="clear: both">
-           
-          </div>
+
           
-          <?php
-                          
-                          if($_POST){
-                            
-                            $p = new primka();
-                            $status = $_POST['s_status_primke'];
-                            if($_POST['s_status_primke'] == "Pošalji u CS - Rovinj") $status = "Poslano u CS - Rovinj";
-                            ($_POST['s_status_primke'] == "Kupac preuzeo") ? $p->zatvori($primka[0]['primka_id'], $_COOKIE['id'], $_POST['s_status_primke']) : $p->updatePrimka($status, $primka[0]['primka_id']);
-                            
-                           
-                            unset($primka);
-                            unset($p);
-                            
-                            header('location:primke.php');
-                        }
-                        
-            ?>

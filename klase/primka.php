@@ -162,12 +162,14 @@ class primka{
     
     
     
-    public function updatePrimka($status, $id) {
-        $query = $this->mysqli->prepare("UPDATE primka SET status = ? WHERE primka_id = ?");
+    public function updatePrimka($su,$b, $t, $n, $s, $ok, $pp, $r, $dk, $id) {
+        $dk=date("Y-m-d" , strtotime($dk));
+        $query = $this->mysqli->prepare("UPDATE primka SET sifraUredaja = ?,brand=?,tip=?,naziv=?, "
+                . "serial=?,opisKvara=?, prilozeno_primijeceno=?, racun=?, datumKupnje=?   WHERE primka_id = ?");
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
         }
-        $query->bind_param('si', $status, $id);
+        $query->bind_param('issssssssi', $su,$b, $t, $n, $s, $ok, $pp, $r, $dk, $id);
         ($query->execute()) ? $query->close(): die('Neuspješno ažuriranje statusa primke');
         
         
@@ -195,8 +197,8 @@ class primka{
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
         }
-        $query->bind_param("si", $status, $primka_id);
-        $query->execute();
+        $query->bind_param('si', $status, $id);
+        ($query->execute()) ? $query->close(): die('Neuspješno ažuriranje statusa primke');
     }
     
     public function isprintajID(){
