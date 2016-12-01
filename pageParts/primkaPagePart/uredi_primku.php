@@ -42,6 +42,12 @@
                
                 <i><strong>Opis kvara: </strong></i><br> <p id="ok" style="display: inline"></p> </br></br>
                 <i><strong>Priloženo / primijećeno uz uređaj: </strong></i><br><p id="pp" style="display: inline"></p>  <br> <br>
+                <div id="skp" style="display: none">
+                    <i><strong>Status: </strong></i><p id="st" style="display: inline"></p>  <br>
+                    <hr>
+                    <i><strong>Završeno: </strong></i><p  id="zav"  style="display: none; display: inline"></p>  <br>
+                    <i><strong>Primku zatvorio: </strong></i><p  id="pz" style="display: none; display: inline"></p>  <br>
+                </div>  
                 
               </address>
             </div>
@@ -49,7 +55,7 @@
                 </div>
                 
                 
-                <div class="box-body" style="clear: both">
+                <div id="azurirajDiv" class="box-body" style="clear: both">
 
                                                                       
                          <div class="form-group">
@@ -69,9 +75,12 @@
 
                 </div><!-- /.box-body -->
                 <div class="box-footer">
-                    <button  id="azuriraj" name="submit"  class="btn btn-sm btn-info btn-flat pull-right">Izmijeni status</button> 
+                    <div id="pregledFooter" >
+                        <button  id="azuriraj" name="submit"  class="btn btn-sm btn-info btn-flat pull-right">Izmijeni status</button> 
                    <a  style="margin-left: 5px; margin-right: 5px;" class="btn btn-sm btn-info btn-flat pull-left" href="#">Novi radni nalog</a>
                     <a class="btn btn-sm btn-info btn-flat pull-left" href="#" >Novi RMA nalog</a>
+                    </div>
+                    
                 </div>
 
             </div><!-- /.box -->
@@ -81,6 +90,13 @@
         
     </div>
     
+    
+    <div class="row" id="urn">
+            
+            
+        
+        
+    </div>
    
                 
     <div class="col-md-6" id="uredi_kupca" style="display:none ">

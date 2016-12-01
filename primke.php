@@ -484,6 +484,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                      
                                      var dz = new Date(pp[0].datumZaprimanja);
                                      var dk = new Date(pp[0].datumKupnje);
+                                     var dztv = new Date(pp[0].datumZatvaranja);
                                     
                                     // PODACI KUPCA
                                     
@@ -529,6 +530,127 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         if(!isNaN(dk.getDate())) $('#inputDK').val([dk.getDate(), dk.getMonth()+1, dk.getFullYear()].join('.'));
                                         $('#inputRacun').val(pp[0].racun);
                                         $('#inputPP').val(pp[0].prilozeno_primijeceno);
+                                        
+                                        //  AKO JE KUPAC PREUZEO PRIMKU
+                                        if(pp[0].p_status=='Kupac preuzeo'){
+                                            $('#skp').show();
+                                            
+                                            $('#azurirajDiv').hide();
+                                            $('#pregledFooter').hide();
+                                             $('#uk').hide();
+                                            $('#up').hide();
+                                            
+                                            $('#zav').text([dztv.getDate(), dztv.getMonth()+1, dztv.getFullYear()].join('.') +' /  '+[(dztv.getHours()<10?'0':'') + dztv.getHours(), (dztv.getMinutes()<10?'0':'') + dztv.getMinutes()].join(':')).show();
+                                            $('#pz').text(pp[0].pzt_ime + ' ' + pp[0].pzt_prezime).show();
+                                            $('#st').text(pp[0].p_status);
+                                        }
+                                        
+                                        
+                                        //  ISPIS RADNIH I RMA NALOGA KOJI SU POVEZANI SA PRIMKOM
+                                        $.post("json/rn/getRNbyPrimka.php", {"primka":pid}, function(e){
+                                           
+                                            var rn = JSON.parse(JSON.stringify(e));
+                                            console.log(rn);
+                                            var output = '';
+                                            
+                                            if(rn !== null && rn.length>0){
+                                            for(var i=0; i<rn.length; ++i){
+                                                console.log(rn[i]);
+                                                var rnp = new Date(rn[i].pocetak);
+                                                var rnz = new Date(rn[i].zavrsetak);
+                                                
+                                                output += '<div class="col-md-6" style="width: 100%">'+
+                                                        '<div class="box box-info" style="border-top-color:#00a65a">'+
+                                                          '<div class="box-body" style="clear: both">'+
+                                                            '<div class="box-header with-border">'+
+                                                                '<h3 class="box-title">Radni nalog servisa br. ' +rn[i].id+ '</h3> '+
+                                                        '</div>'+
+                                                            
+                                                             '<div  id="primka" class="col-sm-4 invoice-col" >'+
+                                                          '<address>'+
+                                                            '<i><strong>Početak rada: </strong></i>'+ [rnp.getDate(), rnp.getMonth()+1, rnp.getFullYear()].join('.') +' /  '+[(rnp.getHours()<10?'0':'') + rnp.getHours(), (rnp.getMinutes()<10?'0':'') + rnp.getMinutes()].join(':')  +'<br>'+
+                                                            '<i><strong>Rad započeo: </strong></i></strong>'+ rn[i].d1ime + ' '+ rn[i].d1prezime +'<br>'+
+                                                            '<i><strong>Opis popravka: </strong></i></strong><br>';
+                                                            output += (rn[i].opis) ? rn[i].opis : "";
+                                                            output+='<br>'+
+                                                            '<i><strong>Naplatiti: </strong></i></strong>';
+                                                            output += (rn[i].naplata) ? rn[i].naplata : "";
+                                                            output+='<br>'+
+                                                            '<i><strong>Rad završio: </strong></i></strong>';
+                                                    output += (rn[i].d2ime) ? rn[i].d2ime+' '+rn[i].d2prezime : "";
+                                                            output+='<br>'+
+                                                          '<i><strong>Završetak rada: </strong></i> </strong>';
+                                                  output += (rnz && rnz.getFullYear()!= "1970") ? [rnz.getDate(), rnz.getMonth()+1, rnz.getFullYear()].join('.') +' /  '+[(rnz.getHours()<10?'0':'') + rnz.getHours(), (rnz.getMinutes()<10?'0':'') + rnz.getMinutes()].join(':') : "";
+                                                            output+='<br>'+
+                                                          '</address>'+
+                                                       ' </div>'+
+                                                        '</div>'+
+                                                       '</div>'+
+                                                    '</div>';
+                                            }
+                                            
+                                            }
+                                            
+                                            
+                                            $('#urn').html(output);
+                                            
+                                        });
+                                        
+                                        $.post("json/rma/getRmaByPrimka.php", {"primka":pid}, function(e){
+                                           
+                                            var rn = JSON.parse(JSON.stringify(e));
+                                            console.log(rn);
+                                            var output = '';
+                                            
+                                            output += $('#urn').html();
+                                            
+                                            if(rn !== null && rn.length>0){
+                                            for(var i=0; i<rn.length; ++i){
+                                                console.log(rn[i]);
+                                                var rnp = new Date(rn[i].pocetak);
+                                                var rnz = new Date(rn[i].zavrsetak);
+                                                
+                                                output += '<div class="col-md-6" style="width: 100%">'+
+                                                                '<div class="box box-info" style="border-top-color:#ec971f">'+
+                                                                  '<div class="box-body" style="clear: both">'+
+                                                                    '<div class="box-header with-border">'+
+                                                                        '<h3 class="box-title">RMA nalog br. </h3>'+
+
+                                                                   ' </div>'+
+
+                                                                     '<div  id="primka" class="col-sm-4 invoice-col" >'+
+                                                                  '<address>'+
+                                                                    '<i><strong>Pripremljeno za slanje: </strong></i><br>'+
+                                                                    '<i><strong>Poslano u ovlašteni servis: </strong></i>   </strong><br>'+
+                                                                    '<i><strong>Uređaj poslao: </strong></i>   </strong><br>'+
+                                                                    '<i><strong>Ovlašteni servis: </strong></i> </strong><br>'+
+                                                                    '<i><strong>Radni nalog ovlaštenog servisa: </strong></i>  </strong><br>'+
+                                                                    '<i><strong>Opis popravka: </strong></i>   </strong><br>                '+
+                                                                    '<i><strong>Status reklamacije: </strong></i>   </strong><br>'+
+                                                                   ' <i><strong>Vraćeno iz ovlaštenog servisa: </strong></i> </strong><br>'+
+                                                                   '<i><strong>Zatvorio nalog: </strong></i>  </strong><br>'+
+                                                                    '<i><strong>Naplatiti: </strong></i>  </strong><br>'+
+                                                                  '</address>'+
+                                                                '</div>'+
+                                                                '</div>'+
+
+
+                                                           ' </div>'+
+                                                            '</div>';
+                                                
+                                            }
+                                            
+                                            }
+                                            
+                                            
+                                            $('#urn').html(output);
+                                            
+                                        });
+                                        //  KRAJ    *   ISPIS RADNIH I RMA NALOGA KOJI SU POVEZANI SA PRIMKOM   *   KRAJ
+                                        
+                                        
+                                        
+                                        
                                      
                                       console.log(pp);
                                       
@@ -646,21 +768,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             $('#uk').click(function(){
                                 $('#upr').hide();
                                 $('#uredi_kupca').show();
+                                $('#urn').hide();
                             });
                             
                             $('#ponistiK').click(function(){
-                                $('#upr').show();
-                                $('#uredi_kupca').hide();
+                               window.location = "primke.php?primka="+pid;
                             });
                             
                             $('#up').click(function(){
                                 $('#upr').hide();
                                 $('#uredi_primku').show();
+                                $('#urn').hide();
                             });
                             
                             $('#ponistiUK').click(function(){
-                                $('#upr').show();
-                                $('#uredi_primku').hide();
+                                window.location = "primke.php?primka="+pid;
+                                
                             });
                             
                             //  KRAJ    *   OMOGUĆAVANJE UREĐIVANJE KUPCA / PRIMKE   *   KRAJ
