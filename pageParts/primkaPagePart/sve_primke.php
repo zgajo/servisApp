@@ -60,7 +60,7 @@
                                                 <?php  if( $_COOKIE['odjel'] == "Servis") { ?><th>Započni servisiranje</th><?php } ?>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="svePoslanePrimke">
                                             <?php
                                             $primka = new primka();
                                             $primka = $primka->svePoslanePrimke();

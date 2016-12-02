@@ -192,7 +192,7 @@ class primka{
     }
     
     
-    public function azurirajStatus($status, $primka_id) {
+    public function azurirajStatus($status, $id) {
         $query = $this->mysqli->prepare("UPDATE primka SET status = ? WHERE primka_id = ?");
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);

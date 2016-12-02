@@ -76,7 +76,7 @@
                 </div><!-- /.box-body -->
                 <div class="box-footer">
                     <div id="pregledFooter" >
-                        <button  id="azuriraj" name="submit"  class="btn btn-sm btn-info btn-flat pull-right">Izmijeni status</button> 
+                        <a  id="azuriraj_status" name="submit"  class="btn btn-sm btn-info btn-flat pull-right">Izmijeni status</a> 
                    <a  style="margin-left: 5px; margin-right: 5px;" class="btn btn-sm btn-info btn-flat pull-left" href="#">Novi radni nalog</a>
                     <a class="btn btn-sm btn-info btn-flat pull-left" href="#" >Novi RMA nalog</a>
                     </div>

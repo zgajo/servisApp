@@ -140,7 +140,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <?php if (!isset($_GET['action']) && !isset($_GET['primka'])){ ?>
         
           <script>
-        //    LISTANJE SVIH OTVORENIH PRIMKI
+                    //    LISTANJE SVIH OTVORENIH PRIMKI
                   $.ajax({
                                 type: 'POST',
                                 url: "json/primka/sveOtvorenePrimke.php",
@@ -170,7 +170,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             output +=     '<td><span class="'+sty+'">Primka ' +primka[i].primka_id+ '</span></td>';
                                            
                                             output +=     '<td>'+ primka[i].naziv +'</td>\n\
-                                                                <td>'+ primka[i].s_ime + ' ' + primka[i].s_prezime+'</td>\n\
+                                                                <td>'; output+= (primka[i].tvrtka) ? "<i>"+primka[i].tvrtka +"</i>, " : "";
+                                                                    output += primka[i].s_ime + ' ' + primka[i].s_prezime+'</td>\n\
                                                                 <td>'+ primka[i].status +'</td>\n\
                                                                 <td>'+ [datum.getDate(), datum.getMonth()+1, datum.getFullYear()].join('.') +' /  '+[(datum.getHours()<10?'0':'') + datum.getHours(), (datum.getMinutes()<10?'0':'') + datum.getMinutes()].join(':')  + '<td>\n\
                                                             </tr>';
@@ -186,6 +187,35 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 }
                             });
                   //    KRAJ    *   LISTANJE SVIH OTVORENIH PRIMKI  * KRAJ
+                
+                //    LISTANJE SVIH  POSLANIH PRIMKI
+                  $.ajax({
+                                type: 'POST',
+                                url: "json/primka/svePoslanePrimke.php",
+                                dataType: 'json',
+                                contentType: "application/json; charset=utf-8",
+                                success: function (data) {
+                                    var danas = new Date();
+                                    
+                                      var primka = JSON.parse(JSON.stringify(data));
+                                      var output = "";
+                                      
+                                     
+                                      
+                                      for(var i =0; i<primka.length; ++i){
+                                          
+                                                         
+                                      }
+                                      //$('#svePoslanePrimke').html(output);
+                                      
+                                      console.log(primka);
+                                      
+                                },
+                                error: function (e) {
+                                    alert(e.message);
+                                }
+                            });
+                  //    KRAJ    *   LISTANJE SVIH POSLANIH PRIMKI  * KRAJ
                 
                 
                 //      HOVER NA RED SVIH PRIMKI
@@ -471,7 +501,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         $(document).ready(function (){
                             
                             var pid = <?php echo $_GET['primka'] ?>
-                            // Dohvaćanje i pregled upita
+                           
+                             function funPrimka(){
+                        // Dohvaćanje i pregled upita
                             $.ajax({
                                 type: 'GET',
                                 url: "json/primka/updatePrimkaJson.php",
@@ -507,8 +539,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                      $('#br').text(pp[0].racun);
                                      $('#ok').text(pp[0].opisKvara);
                                      $('#pp').text(pp[0].prilozeno_primijeceno);
-                                     $('select').prepend("<option disabled='disabled' value='"+pp[0].p_status+"'>"+pp[0].p_status+"</option>");
+                                         
                                      $('select').val(pp[0].p_status);
+                                     $('select').prepend("<option style='background-color:#ebebeb' disabled='disabled' value='"+pp[0].p_status+"'>"+pp[0].p_status+"</option>");
                                      
                                         $('#inputTvrtka').val(pp[0].tvrtka);
                                         $('#inputIme').val(pp[0].ime);
@@ -550,12 +583,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         $.post("json/rn/getRNbyPrimka.php", {"primka":pid}, function(e){
                                            
                                             var rn = JSON.parse(JSON.stringify(e));
-                                            console.log(rn);
+                                            
                                             var output = '';
                                             
                                             if(rn !== null && rn.length>0){
                                             for(var i=0; i<rn.length; ++i){
-                                                console.log(rn[i]);
+                                                
                                                 var rnp = new Date(rn[i].pocetak);
                                                 var rnz = new Date(rn[i].zavrsetak);
                                                 
@@ -587,49 +620,54 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         '</div>'+
                                                        '</div>'+
                                                     '</div>';
-                                            }
                                             
                                             }
-                                            
-                                            
                                             $('#urn').html(output);
+                                            }
+                                          
                                             
                                         });
                                         
                                         $.post("json/rma/getRmaByPrimka.php", {"primka":pid}, function(e){
                                            
-                                            var rn = JSON.parse(JSON.stringify(e));
-                                            console.log(rn);
+                                            var rma = JSON.parse(JSON.stringify(e));
+                                            console.log(rma);
                                             var output = '';
                                             
                                             output += $('#urn').html();
-                                            
-                                            if(rn !== null && rn.length>0){
-                                            for(var i=0; i<rn.length; ++i){
-                                                console.log(rn[i]);
-                                                var rnp = new Date(rn[i].pocetak);
-                                                var rnz = new Date(rn[i].zavrsetak);
+                                            console.log(rma);
+                                            if(rma !== null && rma.length>0){
+                                            for(var i=0; i<rma.length; ++i){
+                                                
+                                                var rnp = new Date(rma[i].pripremljeno);
+                                                var rnpos = new Date(rma[i].poslano);
+                                                var rnvr = new Date(rma[i].zavrseno);
                                                 
                                                 output += '<div class="col-md-6" style="width: 100%">'+
                                                                 '<div class="box box-info" style="border-top-color:#ec971f">'+
                                                                   '<div class="box-body" style="clear: both">'+
                                                                     '<div class="box-header with-border">'+
-                                                                        '<h3 class="box-title">RMA nalog br. </h3>'+
+                                                                        '<h3 class="box-title">RMA nalog br. '+rma[i].id+' </h3>'+
 
                                                                    ' </div>'+
 
                                                                      '<div  id="primka" class="col-sm-4 invoice-col" >'+
                                                                   '<address>'+
-                                                                    '<i><strong>Pripremljeno za slanje: </strong></i><br>'+
-                                                                    '<i><strong>Poslano u ovlašteni servis: </strong></i>   </strong><br>'+
-                                                                    '<i><strong>Uređaj poslao: </strong></i>   </strong><br>'+
-                                                                    '<i><strong>Ovlašteni servis: </strong></i> </strong><br>'+
-                                                                    '<i><strong>Radni nalog ovlaštenog servisa: </strong></i>  </strong><br>'+
-                                                                    '<i><strong>Opis popravka: </strong></i>   </strong><br>                '+
-                                                                    '<i><strong>Status reklamacije: </strong></i>   </strong><br>'+
-                                                                   ' <i><strong>Vraćeno iz ovlaštenog servisa: </strong></i> </strong><br>'+
-                                                                   '<i><strong>Zatvorio nalog: </strong></i>  </strong><br>'+
-                                                                    '<i><strong>Naplatiti: </strong></i>  </strong><br>'+
+                                                                    '<i><strong>Pripremljeno za slanje: </strong></i>'+[rnp.getDate(), rnp.getMonth()+1, rnp.getFullYear()].join('.') +' /  '+[(rnp.getHours()<10?'0':'') + rnp.getHours(), (rnp.getMinutes()<10?'0':'') + rnp.getMinutes()].join(':')+'<br>'+
+                                                                    '<i><strong>Poslano u ovlašteni servis: </strong></i>   </strong>';
+                                                            output += (rnpos && rnpos.getFullYear()!= "1970") ? [rnpos.getDate(), rnpos.getMonth()+1, rnpos.getFullYear()].join('.') +' /  '+[(rnpos.getHours()<10?'0':'') + rnpos.getHours(), (rnpos.getMinutes()<10?'0':'') + rnpos.getMinutes()].join(':') : "";
+                                                            output+='<br>'+
+                                                                    '<i><strong>Uređaj poslao:  </strong></i>   </strong>'+rma[i].doime+' '+rma[i].doprezime +  '<hr>'+
+                                                                    '<i><strong>Ovlašteni servis: </strong></i> </strong>'+rma[i].nazivOS+'<br>'+
+                                                                    '<i><strong>Radni nalog ovlaštenog servisa: </strong></i>  </strong>'+rma[i].rnOs+'<br>'+
+                                                                    '<i><strong>Opis popravka: </strong></i>   </strong> '+rma[i].opis+'<br>                '+
+                                                                    '<i><strong>Status reklamacije: </strong></i>   </strong>'+rma[i].status+'<hr>'+
+                                                                   ' <i><strong>Vraćeno iz ovlaštenog servisa: </strong></i> </strong>';
+                                                            output += (rnvr && rnvr.getFullYear()!= "1970") ? [rnvr.getDate(), rnvr.getMonth()+1, rnvr.getFullYear()].join('.') +' /  '+[(rnvr.getHours()<10?'0':'') + rnvr.getHours(), (rnvr.getMinutes()<10?'0':'') + rnvr.getMinutes()].join(':') : "";
+                                                            output+='<br><i><strong>Zatvorio nalog: </strong></i>  </strong>';
+                                                            output+=(rma[i].dzime) ? rma[i].dzime + ' '+ rma[i].dzprezime:"";
+                                                            output+= '<br>'+
+                                                                    '<i><strong>Naplatiti: </strong></i>  </strong>'+rma[i].naplata+'<br>'+
                                                                   '</address>'+
                                                                 '</div>'+
                                                                 '</div>'+
@@ -639,129 +677,143 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             '</div>';
                                                 
                                             }
-                                            
-                                            }
-                                            
-                                            
                                             $('#urn').html(output);
-                                            
+                                            }
+                                             
                                         });
                                         //  KRAJ    *   ISPIS RADNIH I RMA NALOGA KOJI SU POVEZANI SA PRIMKOM   *   KRAJ
                                         
+                                        $('#urn').show();
+                               $('#upr').show();
+                               $('#uredi_kupca').hide();
+                               $('#uredi_primku').hide();
                                         
-                                        
-                                        
-                                     
+                                       
                                       console.log(pp);
                                       
                                 },
                                 error: function (e) {
                                     alert(e.message);
                                 }
-                            });
+                            });  
                             
+                            }
                             //Ažuriranje upita
-                            $('#azuriraj').click(function (){
+                            $('#azuriraj_status').click(function (){
+                            
                                 var status = $('select').val();
-                                $.post('json/primka/primkaStatusUpdate.php', { "status" : status, "id" : pid }, function (data){
-                                    alert('Uspješno ažuriran status');
-                                });
+                                
+                                
+                                $.ajax({
+                                        url: "json/primka/primkaStatusUpdate.php",
+                                        type: "POST",
+                                        data: {
+                                            "status" : status, "id" : pid
+                                        },
+                                        success: function(e){
+                                            alert('Izmijenjen status: '+status);
+                                            window.location="primke.php?primka="+pid;
+                                        },
+                                        error: function(e){
+                                            alert('nije u redu'+e);
+                                        }
+                                    });
                                 
                             });
                             
-                            
-                            
+                           
+                            funPrimka();
                             
                             //    SPREMANJE IZMJENE KUPCA
-                  $('#spremiKupca').click(function (e){
-                      e.preventDefault();
-                      
-                      var tvrtka = $('#inputTvrtka').val();
-                      var ime = $('#inputIme').val();
-                      var prezime = $('#inputPrezime').val();
-                      var adresa = $('#inputAdresa').val();
-                      var grad = $('#inputGrad').val();
-                      var pb = $('#inputPB').val();
-                      var kontakt = $('#inputKontakt').val();
-                      var email = $('#inputEmail').val();
-                       var idkupca = $( '#inputid' ).text();
-                       
-                       if(ime === '' || prezime === '' || kontakt === '') {
-                          alert('Molim vas da ispunite sva polja');
-                      }
-                       else{
-                           $.post('json/kupac/updateKupca.php', {
-                           "tvrtka" : tvrtka,
-                           "ime":ime,
-                           "prezime":prezime, 
-                           "adresa" : adresa, 
-                           "grad" : grad, 
-                           "pb" : pb, 
-                           "kontakt":kontakt, 
-                           "email":email,
-                           "id" : idkupca
-                       });
-                       
-                        $('#ip_kupca').text(ime + ' ' + prezime);
-                        $('#tvrtka').text(tvrtka);
-                        $('#kontakt').text(kontakt);
-                        if(email) $('#email').after("<p style='display:inline'>"+email+"</i>"); else{ $('#email').hide()};
-                        $('#grad').text(grad);
-                        $('#adresa').text(adresa);
-                        
-                        $('#upr').show();
-                        $('#uredi_kupca').hide();
-                        
-                   
-                       }
-                       
-                  });
-                  //  KRAJ * SPREMANJE IZMJENE KUPCA * KRAJ
+                            $('#spremiKupca').click(function (e){
+                                e.preventDefault();
+
+                                var tvrtka = $('#inputTvrtka').val();
+                                var ime = $('#inputIme').val();
+                                var prezime = $('#inputPrezime').val();
+                                var adresa = $('#inputAdresa').val();
+                                var grad = $('#inputGrad').val();
+                                var pb = $('#inputPB').val();
+                                var kontakt = $('#inputKontakt').val();
+                                var email = $('#inputEmail').val();
+                                 var idkupca = $( '#inputid' ).text();
+
+                                 if(ime === '' || prezime === '' || kontakt === '') {
+                                    alert('Molim vas da ispunite sva polja');
+                                }
+                                 else{
+                                     $.post('json/kupac/updateKupca.php', {
+                                     "tvrtka" : tvrtka,
+                                     "ime":ime,
+                                     "prezime":prezime, 
+                                     "adresa" : adresa, 
+                                     "grad" : grad, 
+                                     "pb" : pb, 
+                                     "kontakt":kontakt, 
+                                     "email":email,
+                                     "id" : idkupca
+                                 });
+
+                                  $('#ip_kupca').text(ime + ' ' + prezime);
+                                  $('#tvrtka').text(tvrtka);
+                                  $('#kontakt').text(kontakt);
+                                  if(email) $('#email').after("<p style='display:inline'>"+email+"</i>"); else{ $('#email').hide()};
+                                  $('#grad').text(grad);
+                                  $('#adresa').text(adresa);
+
+                                  $('#upr').show();
+                                  $('#uredi_kupca').hide();
+                                  $('#urn').show();
+
+                                 }
+
+                            });
+                            //  KRAJ * SPREMANJE IZMJENE KUPCA * KRAJ
                             
                             
                        
-                       //   SPREMANJE IZMJENE PRIMKE
-                       $('#spremiPrimku').click(function (){
-                       //primka
-                      var naziv = $('#inputNaziv').val();
-                      var sifra = $('#inputSifra').val();
-                      var brand = $('#inputBrand').val();
-                      var tip = $('#inputTip').val();
-                      var serijski = $('#inputSerijski').val();
-                      var dat_k = $('#inputDK').val();
-                      var racun = $('#inputRacun').val();
-                      var opis = $('#inputPK').val();
-                      var prilozeno = $('#inputPP').val();
-                      
-                      if(opis === '' || naziv === '') {
-                          alert('Molim vas da ispunite obavezna sva polja');
-                      }
-                      else{
-                          $.post("json/primka/updatePrimka.php", { 
-                          "su" : sifra, "b": brand ,  "t": tip, "n" : naziv, "s" : serijski, 
-                          "ok" : opis, "pp" : prilozeno, "r" : racun, "dk" : dat_k, "id" : pid
-                      });
-                      
-                      $('#nu').text(naziv);
-                      $('#serijski').text(serijski);
-                                     $('#brand').text(brand);
-                                     $('#tip').text(tip);
-                                     $('#dk').text(dat_k);
-                                     $('#br').text(racun);
-                                     $('#ok').text(opis);
-                                     $('#pp').text(prilozeno);
-                                     
-                                     
-                                     $('#upr').show();
-                                $('#uredi_primku').hide();
-                      }
-                      
-                      
-                      
-                       });
-                        
-                      
-                       //   KRAJ    *   SPREMANJE IZMJENE PRIMKE   *   KRAJ
+                            //   SPREMANJE IZMJENE PRIMKE
+                            $('#spremiPrimku').click(function (){
+                            //primka
+                           var naziv = $('#inputNaziv').val();
+                           var sifra = $('#inputSifra').val();
+                           var brand = $('#inputBrand').val();
+                           var tip = $('#inputTip').val();
+                           var serijski = $('#inputSerijski').val();
+                           var dat_k = $('#inputDK').val();
+                           var racun = $('#inputRacun').val();
+                           var opis = $('#inputPK').val();
+                           var prilozeno = $('#inputPP').val();
+
+                           if(opis === '' || naziv === '') {
+                               alert('Molim vas da ispunite obavezna sva polja');
+                           }
+                           else{
+                               $.post("json/primka/updatePrimka.php", { 
+                               "su" : sifra, "b": brand ,  "t": tip, "n" : naziv, "s" : serijski, 
+                               "ok" : opis, "pp" : prilozeno, "r" : racun, "dk" : dat_k, "id" : pid
+                           });
+
+                                            $('#nu').text(naziv);
+                                            $('#serijski').text(serijski);
+                                          $('#brand').text(brand);
+                                          $('#tip').text(tip);
+                                          $('#dk').text(dat_k);
+                                          $('#br').text(racun);
+                                          $('#ok').text(opis);
+                                          $('#pp').text(prilozeno);
+
+                                          $('#urn').show();
+                                          $('#upr').show();
+                                     $('#uredi_primku').hide();
+                           }
+
+
+
+                            });
+
+
+                            //   KRAJ    *   SPREMANJE IZMJENE PRIMKE   *   KRAJ
                             
                             //  OMOGUĆAVANJE UREĐIVANJE KUPCA / PRIMKE
                             
@@ -772,7 +824,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             });
                             
                             $('#ponistiK').click(function(){
-                               window.location = "primke.php?primka="+pid;
+                               funPrimka();
+                               
                             });
                             
                             $('#up').click(function(){
@@ -782,7 +835,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             });
                             
                             $('#ponistiUK').click(function(){
-                                window.location = "primke.php?primka="+pid;
+                               funPrimka();
+                               
                                 
                             });
                             
