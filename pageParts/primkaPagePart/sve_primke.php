@@ -169,6 +169,10 @@
                     <a class="btn btn-app"  id="spremiKupca" style="display: none;  float: right">
                     <i class="fa fa-save"></i> Spremi promjene
                   </a>
+                    
+                     <a class="btn btn-app"  id="ponistiK" style="display: none; float: right">
+                    <i class="fa  fa-undo"></i> Poništi
+                    </a>
 
                 </div><!-- /.box -->
                 <!-- general form elements disabled -->

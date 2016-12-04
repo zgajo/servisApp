@@ -43,8 +43,29 @@
     overflow: visible;
 }
 
+#search_result_kupac{
+    padding: 5px;
+    box-shadow: 0 0 5px rgba(150, 150, 150, 150);
+    background: #fff;
+    color: #333;
+    position: absolute;
+    display: none;
+    z-index: 100;
+}
+
+#search_result_kupac ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+#search_result_kupac ul li{
+   
+    overflow: visible;
+}
+
+
 .a:hover{
-    background: #076194;
+    background: #4aaee7;
     color: #fff;
     text-decoration: none;
     padding: 5px;
@@ -52,7 +73,7 @@
 }
 .a{
     background: #fff;
-    color: #076194;
+    color: #001F3F;
     text-decoration: none;
     padding: 5px;
     display: block;

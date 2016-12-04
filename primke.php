@@ -136,327 +136,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="plugins/input-mask/jquery.inputmask.js"></script>
         <script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
         <script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>
+        <script type="text/javascript" src="search/searchkupca.js"></script>
         
         <?php if (!isset($_GET['primka'])){ ?>
         
-          <script>
-              
-              
-                
-                var left = $('#box').position().left;
-                var top = $('#box').position().top;
-                var width = $('#box').width();
-
-
-                $('#search_result').css('left', left).css('top', top + 27).css('margin-top', '27px').css('width', width + 400).css('z-index', 4);
-
-                //  PRETRAGA ZA KUPCEM
-                $('#search_box').keyup(function () {
-                    var value = $(this).val();
-
-                    if (value != '') {
-                        $('#search_result').show();
-                        
-                        //Ispis kupaca
-                        $.post('search/pretrazi_kupca.php', {value: value}, function (data) {
-                            
-                            //Dohvat json podataka
-                            var primka = JSON.parse(JSON.stringify(data));
-                            console.log(JSON.parse(JSON.stringify(data)));
-                            
-                            //Prikaz pronađenih podataka
-                            var output ='<ul >';
-                            for(var i=0; i < primka.length; ++i){
-                                output += '<li><a class="a" id="k" name="'+ primka[i].id + '"> ';
-                                if(primka[i].tvrtka) output += primka[i].tvrtka+', '; 
-                                output += primka[i].ime+' ' + primka[i].prezime + ', ' + primka[i].grad +', ' + primka[i].adresa +'</a></li>'
-                            } 
-                            
-                            output +='</ul>';   //kraj ispis liste
-                            
-                            $('#search_result').html(output);
-                            
-                        });
-                        
-                    } else {
-                        $('#search_result').hide();
-                    }
-
-                });
-                //  KRAJ * PRETRAGA ZA KUPCEM * KRAJ
-                
-                //  UPIS PODATAKA ODABRANOG KUPCA U POLJE
-                $('#search_result').on("click", "#k", function(e){
-                    e.preventDefault();
-                    
-                    var idkupca = $( this ).attr('name');
-
-                    $.post('json/kupac/dohvatiKupcaJson.php', {"id": idkupca}, function (data) {
-                       console.log(JSON.parse(JSON.stringify(data)));
-                        var osoba = JSON.parse(JSON.stringify(data));
-                        $('#inputid').text(osoba.id);
-                        (osoba.tvrtka) ? $('#inputTvrtka').val(osoba.tvrtka).prop( "disabled", true ) : $('#divTvrtka').hide();
-                        $('#inputIme').val(osoba.ime).prop( "disabled", true );
-                        $('#inputPrezime').val(osoba.prezime).prop( "disabled", true );
-                        $('#inputAdresa').val(osoba.adresa).prop( "disabled", true );
-                        $('#inputGrad').val(osoba.grad).prop( "disabled", true );
-                        $('#inputPB').val(osoba.postanskiBroj).prop( "disabled", true );
-                        $('#inputKontakt').val(osoba.kontakt).prop( "disabled", true );
-                        $('#inputEmail').val(osoba.email).prop( "disabled", true );
-                        
-                        $('#editBtn').show();
+        <script src="search/unos_primke.js" type="text/javascript"></script>
         
-                        $("#search_box").val("");
-                        $('#search_result').hide();
-                    });
-                });
-                //  KRAJ * UPIS PODATAKA ODABRANOG KUPCA U POLJE * KRAJ
-                  
-                  // ČIŠĆENJE SEARCH BOX-A
-                  $('#search_button').click(function(e) {
-                    e.preventDefault();
-                    $("#search_box").val("");
-                    $('#search_result').hide();
-                  });
-                  //  KRAJ * ČIŠĆENJE SEARCH BOX-A * KRAJ
-                  
-                  //   OMOGUĆAVANJE IZMJENE KUPCA
-                  $('#editBtn').click(function (e){
-                        e.preventDefault();
-                        $('#divTvrtka').show().prop( "disabled", false );
-                        $('#inputTvrtka').prop( "disabled", false );
-                        $('#inputIme').prop( "disabled", false );
-                        $('#inputPrezime').prop( "disabled", false );
-                        $('#inputAdresa').prop( "disabled", false );
-                        $('#inputGrad').prop( "disabled", false );
-                        $('#inputPB').prop( "disabled",false );
-                        $('#inputKontakt').prop( "disabled", false );
-                        $('#inputEmail').prop( "disabled", false );
-                        
-                        $("#box").hide();
-                        $('#submit').prop("disabled", true);
-                        
-                        $('#spremiKupca').show();
-                        $('#editBtn').hide();
-                  });
-                  //  KRAJ * OMOGUĆAVANJE IZMJENE KUPCA * KRAJ
-                  
-                  //    SPREMANJE IZMJENE KUPCA
-                  $('#spremiKupca').click(function (e){
-                      e.preventDefault();
-                      
-                      var tvrtka = $('#inputTvrtka').val();
-                      var ime = $('#inputIme').val();
-                      var prezime = $('#inputPrezime').val();
-                      var adresa = $('#inputAdresa').val();
-                      var grad = $('#inputGrad').val();
-                      var pb = $('#inputPB').val();
-                      var kontakt = $('#inputKontakt').val();
-                      var email = $('#inputEmail').val();
-                       var idkupca = $( '#inputid' ).text();
-                       
-                       $.post('json/kupac/updateKupca.php', {
-                           "tvrtka" : tvrtka,
-                           "ime":ime,
-                           "prezime":prezime, 
-                           "adresa" : adresa, 
-                           "grad" : grad, 
-                           "pb" : pb, 
-                           "kontakt":kontakt, 
-                           "email":email,
-                           "id" : idkupca
-                       });
-                       
-                       
-                       
-
-                    $.post('json/kupac/dohvatiKupcaJson.php', {"id": idkupca}, function (data) {
-                       console.log(JSON.parse(JSON.stringify(data)));
-                        var osoba = JSON.parse(JSON.stringify(data));
-                        $('#inputid').text(osoba.id);
-                        (osoba.tvrtka) ? $('#inputTvrtka').val(osoba.tvrtka).prop( "disabled", true ) : $('#divTvrtka').hide();
-                        $('#inputIme').val(osoba.ime).prop( "disabled", true );
-                        $('#inputPrezime').val(osoba.prezime).prop( "disabled", true );
-                        $('#inputAdresa').val(osoba.adresa).prop( "disabled", true );
-                        $('#inputGrad').val(osoba.grad).prop( "disabled", true );
-                        $('#inputPB').val(osoba.postanskiBroj).prop( "disabled", true );
-                        $('#inputKontakt').val(osoba.kontakt).prop( "disabled", true );
-                        $('#inputEmail').val(osoba.email).prop( "disabled", true );
-                        
-                        $('#editBtn').show();
-                        $('#spremiKupca').css('display','none');
-                        
-                        $("#box").show();
-                        $('#submit').prop("disabled", false);
-        
-                        //alert('Trebam namjestiti ažuriranje podataka izmjena kupca');
-                        $("#search_box").val("");
-                        $('#search_result').hide();
-                    });
-                      
-                  });
-                  //  KRAJ * SPREMANJE IZMJENE KUPCA * KRAJ
-                  
-               
-
-                  
-                  // UNOS PRIMKE
-                   
-                   $('#submit').click(function (e){
-                      e.preventDefault();
-                      
-                      //kupac
-                      var tvrtka = $('#inputTvrtka').val();
-                      var ime = $('#inputIme').val();
-                      var prezime = $('#inputPrezime').val();
-                      var adresa = $('#inputAdresa').val();
-                      var grad = $('#inputGrad').val();
-                      var pb = $('#inputPB').val();
-                      var kontakt = $('#inputKontakt').val();
-                      var email = $('#inputEmail').val();
-                      
-                      //primka
-                      var pk = $('#inputPK').val();
-                      var naziv = $('#inputNaziv').val();
-                      var sifra = $('#inputSifra').val();
-                      var brand = $('#inputBrand').val();
-                      var tip = $('#inputTip').val();
-                      var serijski = $('#inputSerijski').val();
-                      var dat_k = $('#inputDK').val();
-                      var racun = $('#inputRacun').val();
-                      var opis = $('#inputPK').val();
-                      var prilozeno = $('#inputPP').val();
-                      
-                      //  UKOLIKO SU PRAZNA BITNA POLJA
-                      if(ime === '' || prezime === '' || kontakt === '' || pk === '' || naziv === '') {
-                          alert('Molim vas da ispunite sva polja');
-                      }
-                      
-                      //    
-                      else{
-                          var idkupca = $( '#inputid' ).text();
-                          
-                          if(idkupca === '') {
-                              if (confirm('Jeste li sigurni da želite unijeti ubisane podatke?')) {
-                                $.ajax({
-                                 type: 'POST',
-                                 url: "json/primka/insertPrimka.php",
-                                 data: {"sifra":sifra,"brand":brand, "tip":tip, "naziv":naziv, "serijski": serijski, "opis":opis, "prilozeno":prilozeno, "racun":racun, "dk": dat_k, "stranka_id": idkupca,
-                                 "tvrtka" : tvrtka, "ime":ime, "prezime":prezime, "adresa" : adresa, "grad":grad, "post_broj": pb, "kontakt_broj":kontakt, "email" : email},
-                                 success: function (data) {
-                                     var primkaID = JSON.parse(JSON.stringify(data));
-                                     window.location.href = "primke.php";
-                                        var win = window.open('ispis/potvrda_zaprimanja.php?primka='+primkaID, '_blank');
-                                        if (win) {
-                                            //Browser has allowed it to be opened
-                                            win.focus();
-                                        } else {
-                                            //Browser has blocked it
-                                            alert('Molim Vas, omogućite prikaz skočnih prozora');
-                                        }
-                                         
-                                        
-                                    },
-                                    
-                                    error: function (e) {
-                                    alert(e.message);
-                                        }
-                                    });
-                                } else {
-                                    alert('Odustali ste od upisa podataka. Ispravite upis');
-                                }
-                              
-                          }
-                          else{ 
-                              if (confirm('Jeste li sigurni da želite unijeti upisane podatke?')) {
-                              $.ajax({
-                                 type: 'POST',
-                                 url: "json/primka/insertPrimka.php",
-                                 data: {"sifra":sifra,"brand":brand, "tip":tip, "naziv":naziv, "serijski": serijski, "opis":opis, "prilozeno":prilozeno, "racun":racun, "dk": dat_k, "stranka_id": idkupca },
-                                 success: function (data) {
-                                     var primkaID = JSON.parse(JSON.stringify(data));
-                                     window.location.href = "primke.php";
-                                        var win = window.open('ispis/potvrda_zaprimanja.php?primka='+primkaID, '_blank');
-                                        if (win) {
-                                            //Browser has allowed it to be opened
-                                            win.focus();
-                                        } else {
-                                            //Browser has blocked it
-                                            alert('Molim Vas, omogućite prikaz skočnih prozora');
-                                        }
-                                         window.location.href = "primke.php";
-                                        
-                                    },
-                                    
-                                error: function (e) {
-                                    alert(e.message);
-                                }
-                              });
-                          }else {
-                                    alert('Odustali ste od upisa podataka. Ispravite upis');
-                                }
-                              
-                                };
-                         
-                      }
-                      
-                  });
-                  //  KRAJ * UNOS PRIMKE * KRAJ
-                 
-
-              
-              
-              
-              
-                    //    LISTANJE SVIH OTVORENIH PRIMKI
-                  $.ajax({
-                                type: 'POST',
-                                url: "json/primka/sveOtvorenePrimke.php",
-                                dataType: 'json',
-                                contentType: "application/json; charset=utf-8",
-                                success: function (data) {
-                                    var danas = new Date();
-                                    
-                                      var primka = JSON.parse(JSON.stringify(data));
-                                      var output = "";
-                                      
-                                     
-                                      
-                                      for(var i =0; i<primka.length; ++i){
-                                          var datum = new Date(primka[i].datumZaprimanja);
-                                          var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
-
-                                            var diffDays = Math.round(Math.abs((danas.getTime() - datum.getTime())/(oneDay)));
-                                        
-                                            if(diffDays<=7)  var sty = "label label-success";
-                                            if(diffDays>7 && diffDays<=14)  var sty = "label label-warning";
-                                            if(diffDays>14) var sty = "label label-danger";
-                                        
-                                            output +=   '<tr> \n\
-                                                        <td  style="text-align: center;"><a class="glyphicon glyphicon-pencil" href="primke.php?primka='+primka[i].primka_id+'"></a></td>';
-                                                                                                                   
-                                            output +=     '<td><span class="'+sty+'">Primka ' +primka[i].primka_id+ '</span></td>';
-                                           
-                                            output +=     '<td>'+ primka[i].naziv +'</td>\n\
-                                                                <td>'; output+= (primka[i].tvrtka) ? "<i>"+primka[i].tvrtka +"</i>, " : "";
-                                                                    output += primka[i].s_ime + ' ' + primka[i].s_prezime+'</td>\n\
-                                                                <td>'+ primka[i].status +'</td>\n\
-                                                                <td>'+ [datum.getDate(), datum.getMonth()+1, datum.getFullYear()].join('.') +' /  '+[(datum.getHours()<10?'0':'') + datum.getHours(), (datum.getMinutes()<10?'0':'') + datum.getMinutes()].join(':')  + '<td>\n\
-                                                            </tr>';
-                                                         
-                                      }
-                                      $('#sveprimke').html(output);
-                                      
-                                      console.log(JSON.parse(JSON.stringify(data)));
-                                      
-                                },
-                                error: function (e) {
-                                    alert(e.message);
-                                }
-                            });
-                  //    KRAJ    *   LISTANJE SVIH OTVORENIH PRIMKI  * KRAJ
-                
-                //    LISTANJE SVIH  POSLANIH PRIMKI
+        <script src="search/sve_primke.js" type="text/javascript"></script>
+        <script>
+            //    LISTANJE SVIH  POSLANIH PRIMKI
                   $.ajax({
                                 type: 'POST',
                                 url: "json/primka/svePoslanePrimke.php",
@@ -555,25 +243,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 }
                             });
                   //    KRAJ    *   LISTANJE SVIH POSLANIH PRIMKI  * KRAJ
-                
-                
-                //      HOVER NA RED SVIH PRIMKI
-                                $( "#sveprimke" ).on("mouseover", "tr",function() {
-                                  $( this ).css("background-color", "#efefef");
-                              } );
-                                
-                                $( "#sveprimke" ).on("mouseout", "tr",function() {
-                                  $( this ).css("background-color", "white");
-                              } );
-                              $( "#svePoslanePrimke" ).on("mouseover", "tr",function() {
-                                  $( this ).css("background-color", "#efefef");
-                              } );
-                                
-                                $( "#svePoslanePrimke" ).on("mouseout", "tr",function() {
-                                  $( this ).css("background-color", "white");
-                              } );
-                //      KRAJ    *    HOVER NA RED SVIH PRIMKI   *   KRAJ
-        </script>
+                          </script>
         <?php } else{ ?>
         <script>
                         $(document).ready(function (){
@@ -617,9 +287,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                      $('#br').text(pp[0].racun);
                                      $('#ok').text(pp[0].opisKvara);
                                      $('#pp').text(pp[0].prilozeno_primijeceno);
-                                         
-                                     $('select').val(pp[0].p_status);
-                                     $('select').prepend("<option style='background-color:#ebebeb' disabled='disabled' value='"+pp[0].p_status+"'>"+pp[0].p_status+"</option>");
+                                     
+                                     var st = pp[0].p_status;
+                                     console.log(st);
+                                     
+                                     // POSTAVLJANJE ZA SELECTED
+                                        var o = new Option(st, st);
+                                        /// jquerify the DOM object 'o' so we can use the html method
+                                        $(o).html(st);
+                                        $("select").append(o);
+                                        $('select option[value="'+st+'"]').attr("selected",true);
                                      
                                         $('#inputTvrtka').val(pp[0].tvrtka);
                                         $('#inputIme').val(pp[0].ime);
@@ -705,7 +382,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                           
                                             
                                         });
-                                        console.log(pid);
+
                                         $.get("json/rma/getRmaByPrimka.php", {"primka":pid}, function(e){
                                            
                                             var rma = JSON.parse(JSON.stringify(e));
@@ -777,12 +454,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             
                             }
                             //Ažuriranje upita
-                            $('#azuriraj_status').click(function (){
+                            $('#azuriraj_status').on("click",this, function (){
                             
                                 var status = $('select').val();
                                 
-                                
                                 $.ajax({
+                                        async: false,
                                         url: "json/primka/primkaStatusUpdate.php",
                                         type: "POST",
                                         data: {

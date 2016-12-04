@@ -1,0 +1,41 @@
+var left = $('#sk').position().left;
+                var top = $('#sk').position().top;
+                var width = $('#sk').width();
+
+
+                $('#search_result_kupac').css('top', top + 27).css('width', width+100 ).css('z-index', 4);
+
+                //  PRETRAGA ZA KUPCEM
+                $('#search_kupca').keyup(function () {
+                    var value = $(this).val();
+
+                    if (value != '') {
+                        $('#search_result_kupac').show();
+                        console.log(value);
+                        //Ispis kupaca
+                        $.post('search/pretrazi_kupca.php', {value: value}, function (data) {
+                            
+                            //Dohvat json podataka
+                            var primka = JSON.parse(JSON.stringify(data));
+                            console.log(JSON.parse(JSON.stringify(data)));
+                            
+                            //Prikaz pronađenih podataka
+                            var output ='<ul >';
+                            for(var i=0; i < primka.length; ++i){
+                                output += '<li><a style="color:#001F3F" class="a" id="k" name="'+ primka[i].id + '"> ';
+                                if(primka[i].tvrtka) output += primka[i].tvrtka+', '; 
+                                output += primka[i].ime+' ' + primka[i].prezime + ', ' + primka[i].grad +', ' + primka[i].adresa +'</a></li>'
+                            } 
+                            
+                            output +='</ul>';   //kraj ispis liste
+                            
+                            $('#search_result_kupac').html(output);
+                            
+                        });
+                        
+                    } else {
+                        $('#search_result_kupac').hide();
+                    }
+
+                });
+                //  KRAJ * PRETRAGA ZA KUPCEM * KRAJ
