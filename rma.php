@@ -122,11 +122,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>
 
         <script>
-            
+            var odjel = "<?php echo $_COOKIE['odjel'] ?>";
          //    LISTANJE SVIH OTVORENIH PRIMKI
+         var podaci;
+         if( odjel === "Servis" || odjel === "Reklamacije") {
+             podaci = "json/primka/svePrimkeRNServis.php";
+         }
+         else{
+             podaci = "json/primka/sveOtvorenePrimke.php";
+         }
+         
                   $.ajax({
                                 type: 'POST',
-                                url: "json/primka/svePrimkeRN.php",
+                                url: podaci,
                                 dataType: 'json',
                                 contentType: "application/json; charset=utf-8",
                                 success: function (data) {

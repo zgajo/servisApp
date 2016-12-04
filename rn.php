@@ -283,11 +283,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </script>
         <?php } else{ ?>
         <script>
+            
+            $( "#sviRN" ).on("mouseover", "tr",function() {
+                                  $( this ).css("background-color", "#efefef");
+                              } );
+                                
+                                $( "#sviRN" ).on("mouseout", "tr",function() {
+                                  $( this ).css("background-color", "white");
+                              } );
              
          //    LISTANJE SVIH OTVORENIH PRIMKI
                   $.ajax({
                                 type: 'POST',
-                                url: "json/primka/svePrimkeRN.php",
+                                url: "json/primka/svePrimkeRNServis.php",
                                 dataType: 'json',
                                 contentType: "application/json; charset=utf-8",
                                 success: function (data) {

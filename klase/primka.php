@@ -53,6 +53,21 @@ class primka{
         return $result;
     }
     
+    public function svePrimkeRNServis() {
+        $query = $this->mysqli->query("SELECT p.*, s.ime as s_ime, s.prezime as s_prezime, s.tvrtka FROM primka p 
+                                        LEFT JOIN stranka s ON  p.stranka_id = s.stranka_id
+                                        WHERE p.status != 'Kupac preuzeo' 
+                                        
+                                        ORDER BY p.primka_id ASC");
+        if($query === false){
+            trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
+        }
+        while($row = $query->fetch_object()){
+            $result[]  = $row;
+        }
+        
+        return $result;
+    }
     
     public function svePrimkeRN() {
         $query = $this->mysqli->query("SELECT p.*, s.ime as s_ime, s.prezime as s_prezime, s.tvrtka FROM primka p 
