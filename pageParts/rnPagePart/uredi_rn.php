@@ -65,8 +65,10 @@ if($radni[0]['datumKupnje'] === "0000-00-00"){
                
                 <i><strong>Opis kvara: </strong></i><br> <p id="ok" style="display: inline"></p> </br></br>
                 <i><strong>Priloženo / primijećeno uz uređaj: </strong></i><br><p id="pp" style="display: inline"></p>  <br> <br>
+                <i><strong>Status: </strong></i><p id="st" style="display: inline"></p>  <br>
                 <div id="skp" style="display: none">
-                    <i><strong>Status: </strong></i><p id="st" style="display: inline"></p>  <br>
+                    <p id="primka_id"></p>
+                    
                     <hr>
                     <i><strong>Završeno: </strong></i><p  id="zav"  style="display: none; display: inline"></p>  <br>
                     <i><strong>Primku zatvorio: </strong></i><p  id="pz" style="display: none; display: inline"></p>  <br>
@@ -136,6 +138,22 @@ if($radni[0]['datumKupnje'] === "0000-00-00"){
                             <input class="form-control" id="inputNaplata" placeholder="Upisati šifru ..." type="text" name="naplata" >
                         </div>
                     </div>
+                     
+                     <div id="zr" class="form-group" style="display: none">
+                    <label class="col-sm-2 control-label" >Završen rad: </label>
+                <div class="col-sm-10" >
+             
+                <p  class="form-control" style="border: 0px;"  id="zavrseno"></p>
+            </div>
+           </div>
+           
+                     <div class="form-group" id="zavrad"  style="display: none">
+                  <label class="col-sm-2 control-label">Rad zavrsio: </label>
+                <div class="col-sm-10" >
+             
+                    <p  class="form-control" style="border: 0px;" id="zavrsio"></p>
+            </div>
+           </div>
                 
                 <div class="box-body" >
 
@@ -173,52 +191,3 @@ if($radni[0]['datumKupnje'] === "0000-00-00"){
            
           </div>
 </form>
-
-<?php
-                            
-                            if(!empty($_POST)){
-                               
-                                if($_POST['status_rn'] == "Popravak završen u jamstvu"  || $_POST['status_rn'] == "Popravak završen van jamstva" || $_POST['status_rn']== 'Stranka odustala od popravka'){
-                                    
-                                    $rn = new servisRN();
-                                    $rn->zatvoriRN($radni[0]['rn_id'],  $_POST['status_rn'], $_POST['popravak'], $_POST['napomena'], $_POST['naplata'], $_COOKIE['id']);
-                                     
-                                    $primka = new primka();
-                                    
-                                    if($radni[0]['status'] == "Poslano u CS - Rovinj" || $radni[0]['status'] == "Poslano u CS - Rovinj / Započelo servisiranje"  || $radni[0]['status'] == "Poslano u CS - Rovinj / Čeka dio") {
-                                        $primka->updatePrimka("Završen popravak - poslano u centar", $radni[0]['primka_id']) ;
-                                        }else{
-                                            $primka->updatePrimka("Završen popravak", $radni[0]['primka_id']);
-                                        }
-                                    
-                                    unset($radni);
-                                    unset($rn);
-                                    unset($primka);
-                                    
-                                     header("refresh:0");
-                                     
-                                }  else{
-                                    $rn = new servisRN();
-                                    $rn->update($radni[0]['rn_id'],  $_POST['status_rn'], $_POST['popravak'], $_POST['napomena'], $_POST['naplata']);
-                                    $primka = new primka();
-                                    
-                                     if($radni[0]['status'] == "Poslano u CS - Rovinj" || $radni[0]['status'] == "Poslano u CS - Rovinj / Započelo servisiranje" || $radni[0]['status'] == "Poslano u CS - Rovinj / Čeka dio") {
-                                         
-                                        $primka->updatePrimka("Poslano u CS - Rovinj / Čeka dio", $radni[0]['primka_id']) ;
-                                        
-                                        }else{
-                                           
-                                            $primka->updatePrimka("Čeka dio", $radni[0]['primka_id']);
-                                        }
-                                    
-                                    
-                                    unset($radni);
-                                    unset($rn);
-                                    unset($primka);
-                                     header("refresh:0");
-                                   
-                                }
-                               
-                            
-                        }
-?>

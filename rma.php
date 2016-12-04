@@ -126,7 +126,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
          //    LISTANJE SVIH OTVORENIH PRIMKI
                   $.ajax({
                                 type: 'POST',
-                                url: "json/primka/sveOtvorenePrimke.php",
+                                url: "json/primka/svePrimkeRN.php",
                                 dataType: 'json',
                                 contentType: "application/json; charset=utf-8",
                                 success: function (data) {

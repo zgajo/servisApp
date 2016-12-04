@@ -140,11 +140,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             
                             var rnid = <?php echo $_GET['radni_nalog'] ?>
                            
-                           
                            $.post("json/rn/getById.php", {"id":rnid},
                            function(rn){
                                console.log(rn);
                                var pocetak = new Date(rn[0].pocetakRada);
+                               var zavrseno = new Date(rn[0].danZavrsetka);
                                //   UPIS RADNOG NALOGA
                                $('#pocetak').text([pocetak.getDate(), pocetak.getMonth(), pocetak.getFullYear()].join('.') + ' / ' + [((pocetak.getHours()<10) ? '0':'') + pocetak.getHours(), (pocetak.getMinutes()<10?'0':'') + pocetak.getMinutes()].join(':'));
                                $('#zapoceo').text(rn[0].zapoceoRn_ime + ' ' + rn[0].zapoceoRn_prezime);
@@ -153,7 +153,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                $('#inputNaplata').val(rn[0].naplata);
                                $('select').val(rn[0].status);
                                $('select').prepend("<option style='background-color:#ebebeb' disabled='disabled' value='"+rn[0].status+"'>"+rn[0].status+"</option>");
-                                    
+                               if(zavrseno && zavrseno.getFullYear()!="1970") {
+                                   $('#zavrseno').text([zavrseno.getDate(), zavrseno.getMonth(), zavrseno.getFullYear()].join('.') + ' / ' + [((zavrseno.getHours()<10) ? '0':'') + zavrseno.getHours(), (zavrseno.getMinutes()<10?'0':'') + zavrseno.getMinutes()].join(':'));
+                                   $('#zr').show();
+                               }
+                               if(rn[0].zavrsioRn_ime !== '' && rn[0].zavrsioRn_ime !== null) {
+                                   $('#zavrad').show();
+                                   $('#zavrsio').text(rn[0].zavrsioRn_ime + ' ' + rn[0].zavrsioRn_prezime);
+                               }
                                
                                //       UPIS PRIMKE
                                $.get("json/primka/getById.php", {"id": rn[0].primka_id}, 
@@ -184,20 +191,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                      $('#ok').text(primka[0].opisKvara);
                                      $('#pp').text(primka[0].prilozeno_primijeceno);
                                      $('#st').text(primka[0].p_status);
-                                   
+                                     $('#primka_id').text(primka[0].primka_id);
                                }
                                 );
                                
                            }
-                            );
+                           );
                            
                            
                             //Ažuriranje upita
-                            $('#azuriraj_status').click(function (){
+                            $('#azuriraj_status').on("click", this, function(){
                             
-                                var status = $('select').val();
-                                
-                                if(status === "Popravak završen u jamstvu"  || status == "Popravak završen van jamstva" || status == 'Stranka odustala od popravka'){
+                            var status_primke = $('#st').text();
+                            var primka_id = $('#primka_id').text();
+                            var status = $('select').val();
+                            
+                            //  UKOLIKO SE ZATVARA RADNI NALOG
+                            if(status === "Popravak završen u jamstvu"  || status === "Popravak završen van jamstva" || status === 'Stranka odustala od popravka'){
+                               
                                     $.post("json/rn/zatvori.php", 
                                             {"id":rnid, 
                                             "status": status, 
@@ -206,18 +217,62 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             "naplata" : $("inputNaplata").val()},
                                         function(){
                                             alert("Ažuriran radni nalog " + rnid);
-                                            window.location = "rn.php?radni_nalog="+ rnid;
+                                            
+                                        }
+                                        );
+                                        
+                                        //  AŽURIRANJE STATUSA PRIMKE
+                                        if(status_primke === "Poslano u CS - Rovinj" || status_primke === "Poslano u CS - Rovinj / Započelo servisiranje"  || status_primke === "Poslano u CS - Rovinj / Čeka dio") { 
+                                            $.post("json/primka/primkaStatusUpdate.php", {"status": "Završen popravak - poslano u centar", "id":primka_id}, function(){
+                                                
+                                                window.location = "rn.php?radni_nalog="+ rnid;
+
+                                            });
+                                        }else{
+                                             
+                                           $.post("json/primka/primkaStatusUpdate.php", {"status": "Završen popravak", "id":primka_id}, function(){
+                                                
+                                                window.location = "rn.php?radni_nalog="+ rnid;
+
+                                            });
+                                        }
+                                        //  KRAJ *  AŽURIRANJE STATUSA PRIMKE   *   KRAJ
+                                }
+                                // KRAJ *   ZATVARANJE RADNOG NALOGA    *   KRAJ
+                                
+                                //  AŽURIRAJ STATUSE
+                            else{
+                                    $.post("json/rn/azuriraj.php", 
+                                            {"id":rnid, 
+                                            "status": status, 
+                                            "popravak": $('#inputPopravak').val(), 
+                                            "napomena": $('#inputNapomena').val(),
+                                            "naplata" : $("inputNaplata").val()},
+                                        function(){
+                                            alert("Ažuriran radni nalog " + rnid);
+                                            
                                         }
                                         );
                                 
-                                
-                                
-                                }else{
+                                    //  AŽURIRANJE STATUSA PRIMKE
+                                        if(status_primke === "Poslano u CS - Rovinj" || status_primke === "Poslano u CS - Rovinj / Započelo servisiranje"  || status_primke === "Poslano u CS - Rovinj / Čeka dio") { 
+                                            $.post("json/primka/primkaStatusUpdate.php", {"status": "Poslano u CS - Rovinj / Čeka dio", "id":primka_id}, function(){
+                                                
+                                                window.location = "rn.php?radni_nalog="+ rnid;
+
+                                            });
+                                        }else{
+                                             console.log("2");
+                                           $.post("json/primka/primkaStatusUpdate.php", {"status": "Čeka dio", "id":primka_id}, function(){
+                                                
+                                                window.location = "rn.php?radni_nalog="+ rnid;
+
+                                            });
+                                        }
                                     
+                                
                                 }
-                                
-                                
-                                
+                             //  KRAJ    *   AŽURIRAJ STATUSE    *   KRAJ
                             });
                             
                            
@@ -232,14 +287,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
          //    LISTANJE SVIH OTVORENIH PRIMKI
                   $.ajax({
                                 type: 'POST',
-                                url: "json/primka/sveOtvorenePrimke.php",
+                                url: "json/primka/svePrimkeRN.php",
                                 dataType: 'json',
                                 contentType: "application/json; charset=utf-8",
                                 success: function (data) {
                                     var output = "";
                                       var primka = JSON.parse(JSON.stringify(data));
                                       var danas = new Date();
-                                      
+                                      console.log(primka);
                                       
                                       for(var i =0; i<primka.length; ++i){
                                           var datum = new Date(primka[i].datumZaprimanja);
@@ -287,14 +342,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     output += '</td>';
                                                     
                                                     output += '<td>';
-                                                    for(var j=0; j<rn.length;++j) output += rn[j].d1ime + ' ' + rn[j].d1prezime;
+                                                    for(var j=0; j<rn.length;++j) output += rn[j].d1ime + ' ' + rn[j].d1prezime + '<br>';
                                                     output += '</td>';
                                                     
                                                     output += '<td>';
-                                                    for(var j=0; j<rn.length;++j)
+                                                    for(var j=0; j<rn.length;++j){
                                                     var pocetak = new Date(rn[j].pocetak);
-                                                    output +=  (pocetak && pocetak.getFullYear()!= "1970") ?  [pocetak.getDate(), pocetak.getMonth()+1, pocetak.getFullYear()].join('.') +' /  '+[(pocetak.getHours()<10?'0':'') + pocetak.getHours(), (pocetak.getMinutes()<10?'0':'') + pocetak.getMinutes()].join(':') : '';
-
+                                                    output +=  (pocetak && pocetak.getFullYear()!= "1970") ?  [pocetak.getDate(), pocetak.getMonth()+1, pocetak.getFullYear()].join('.') +' /  '+[(pocetak.getHours()<10?'0':'') + pocetak.getHours(), (pocetak.getMinutes()<10?'0':'') + pocetak.getMinutes()].join(':') + '<br>' : ' <br>';
+                                                }
                                                        
                                                     output += '</td>';
                                                     

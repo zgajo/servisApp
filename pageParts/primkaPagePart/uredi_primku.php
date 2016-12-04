@@ -62,9 +62,9 @@
                         <label class="col-sm-2 control-label">Statu</label>
                         <div    class="col-sm-10">
                             <select class="form-control" name='status_primke'>
-                                <option>Pošalji u CS - Rovinj</option>
-                                <option>Čeka preuzimanje stranke</option>
-                                <option>Kupac preuzeo</option>
+                                <option value="Poslano u CS - Rovinj">Pošalji u CS - Rovinj</option>
+                                <option value="Čeka preuzimanje stranke">Čeka preuzimanje stranke</option>
+                                <option value="Kupac preuzeo">Kupac preuzeo</option>
                             </select>
                         </div>
                     </div>
@@ -77,7 +77,7 @@
                 <div class="box-footer">
                     <div id="pregledFooter" >
                         <a  id="azuriraj_status" name="submit"  class="btn btn-sm btn-info btn-flat pull-right">Izmijeni status</a> 
-                   <a  style="margin-left: 5px; margin-right: 5px;" class="btn btn-sm btn-info btn-flat pull-left" href="#">Novi radni nalog</a>
+                   <a  style="margin-left: 5px; margin-right: 5px;" class="btn btn-sm btn-info btn-flat pull-left" href="rn.php?action=novi_rn&primka_id=<?php  echo $_GET['primka']?>">Novi radni nalog</a>
                     <a class="btn btn-sm btn-info btn-flat pull-left" href="rma.php?action=novi_rma&primka_id=<?php  echo $_GET['primka']?>" >Novi RMA nalog</a>
                     </div>
                     
