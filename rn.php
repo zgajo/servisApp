@@ -32,8 +32,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
               apply the skin class to the body tag so the changes take effect.
         -->
         <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
-        <script src="search/search.js"></script>
-        <link href="search/search.css" rel="stylesheet">
         <style>
                 #stranka{ width: 35%;
                 }
@@ -128,104 +126,214 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- AdminLTE App -->
         <script src="dist/js/app.min.js"></script>
         <!-- Select2 -->
-        <script src="../../plugins/select2/select2.full.min.js"></script>
+        <script src="plugins/select2/select2.full.min.js"></script>
         <!-- InputMask -->
-        <script src="../../plugins/input-mask/jquery.inputmask.js"></script>
-        <script src="../../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-        <script src="../../plugins/input-mask/jquery.inputmask.extensions.js"></script>
+        <script src="plugins/input-mask/jquery.inputmask.js"></script>
+        <script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+        <script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>
 
-        <script src="search/search.js"></script>
+        
+        
+        <?php if(!empty($_GET['radni_nalog'])){ ?>
         <script>
-            $(document).ready(function () {
-                var left = $('#box').position().left;
-                var top = $('#box').position().top;
-                var width = $('#box').width();
-
-
-                $('#search_result').css('left', left).css('top', top + 27).css('width', width + 100).css('z-index', 4);
-
-                $('#search_box').keyup(function () {
-                    var value = $(this).val();
-
-                    if (value != '') {
-                        $('#search_result').show();
-                        $.post('search/searchStranku.php', {value: value}, function (data) {
-                            $('#search_result').html(data);
+                        $(document).ready(function (){
+                            
+                            var rnid = <?php echo $_GET['radni_nalog'] ?>
+                           
+                           
+                           $.post("json/rn/getById.php", {"id":rnid},
+                           function(rn){
+                               console.log(rn);
+                               var pocetak = new Date(rn[0].pocetakRada);
+                               //   UPIS RADNOG NALOGA
+                               $('#pocetak').text([pocetak.getDate(), pocetak.getMonth(), pocetak.getFullYear()].join('.') + ' / ' + [((pocetak.getHours()<10) ? '0':'') + pocetak.getHours(), (pocetak.getMinutes()<10?'0':'') + pocetak.getMinutes()].join(':'));
+                               $('#zapoceo').text(rn[0].zapoceoRn_ime + ' ' + rn[0].zapoceoRn_prezime);
+                               $('#inputPopravak').val(rn[0].opisPopravka);
+                               $('#inputNapomena').val(rn[0].napomena);
+                               $('#inputNaplata').val(rn[0].naplata);
+                               $('select').val(rn[0].status);
+                               $('select').prepend("<option style='background-color:#ebebeb' disabled='disabled' value='"+rn[0].status+"'>"+rn[0].status+"</option>");
+                                    
+                               
+                               //       UPIS PRIMKE
+                               $.get("json/primka/getById.php", {"id": rn[0].primka_id}, 
+                               function(primka){
+                                   console.log(primka);
+                                   
+                                    var dz = new Date(primka[0].datumZaprimanja);
+                                   var dk = new Date(primka[0].datumKupnje);
+                                   // PODACI KUPCA
+                                    
+                                    $('#ip_kupca').text(primka[0].ime + ' ' + primka[0].prezime);
+                                     if(primka[0].tvrtka) $('#tvrtka').text(primka[0].tvrtka).show();
+                                     $('#kontakt').text(primka[0].kontaktBroj);
+                                     if(primka[0].email) $('#email').after("<p style='display:inline'>"+primka[0].email+"</i>"); else{ $('#email').hide()};
+                                     $('#grad').text(primka[0].grad);
+                                     $('#adresa').text(primka[0].adresa);
+                                     
+                                     //     PODACI PRIMKE
+                                     $('#primkanaslov').text('Primka ' + primka[0].primka_id);
+                                     $('#zap').text([dz.getDate(), dz.getMonth()+1, dz.getFullYear()].join('.') +' /  '+[(dz.getHours()<10?'0':'') + dz.getHours(), (dz.getMinutes()<10?'0':'') + dz.getMinutes()].join(':'));
+                                     $('#po').text(primka[0].pot_ime + ' ' + primka[0].pot_prezime);
+                                     $('#nu').text(primka[0].naziv);
+                                     $('#serijski').text(primka[0].serijski);
+                                     $('#brand').text(primka[0].brand);
+                                     $('#tip').text(primka[0].tip);
+                                     (isNaN(dk.getDate())) ? $('#dk').text() : $('#dk').text([dk.getDate(), dk.getMonth()+1, dk.getFullYear()].join('.'));
+                                     $('#br').text(primka[0].racun);
+                                     $('#ok').text(primka[0].opisKvara);
+                                     $('#pp').text(primka[0].prilozeno_primijeceno);
+                                     $('#st').text(primka[0].p_status);
+                                   
+                               }
+                                );
+                               
+                           }
+                            );
+                           
+                           
+                            //Ažuriranje upita
+                            $('#azuriraj_status').click(function (){
+                            
+                                var status = $('select').val();
+                                
+                                if(status === "Popravak završen u jamstvu"  || status == "Popravak završen van jamstva" || status == 'Stranka odustala od popravka'){
+                                    $.post("json/rn/zatvori.php", 
+                                            {"id":rnid, 
+                                            "status": status, 
+                                            "popravak": $('#inputPopravak').val(), 
+                                            "napomena": $('#inputNapomena').val(),
+                                            "naplata" : $("inputNaplata").val()},
+                                        function(){
+                                            alert("Ažuriran radni nalog " + rnid);
+                                            window.location = "rn.php?radni_nalog="+ rnid;
+                                        }
+                                        );
+                                
+                                
+                                
+                                }else{
+                                    
+                                }
+                                
+                                
+                                
+                            });
+                            
+                           
+                            
+                            
+                                                       
                         });
-                    } else {
-                        $('#search_result').hide();
-                    }
-
-                });
-
-
-            });
-
-        </script>
-
-        <!-- date-range-picker -->
+                        </script>
+        <?php } else{ ?>
         <script>
-            $(function () {
-                //Initialize Select2 Elements
-                $(".select2").select2();
+             
+         //    LISTANJE SVIH OTVORENIH PRIMKI
+                  $.ajax({
+                                type: 'POST',
+                                url: "json/primka/sveOtvorenePrimke.php",
+                                dataType: 'json',
+                                contentType: "application/json; charset=utf-8",
+                                success: function (data) {
+                                    var output = "";
+                                      var primka = JSON.parse(JSON.stringify(data));
+                                      var danas = new Date();
+                                      
+                                      
+                                      for(var i =0; i<primka.length; ++i){
+                                          var datum = new Date(primka[i].datumZaprimanja);
+                                          var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
 
-                //Datemask dd/mm/yyyy
-                $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
-                //Datemask2 mm/dd/yyyy
-                $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
-                //Money Euro
-                $("[data-mask]").inputmask();
+                                            var diffDays = Math.round(Math.abs((danas.getTime() - datum.getTime())/(oneDay)));
+                                        
+                                            if(diffDays<=15)  var sty = "label label-success";
+                                            if(diffDays>15 && diffDays<=30)  var sty = "label label-warning";
+                                            if(diffDays>30) var sty = "label label-danger";
+                                            
+                                            var rn = null;
+                                            var pid = primka[i].primka_id;
+                                            
+                                            //  TRAŽENJE RADNIH NALOGA POVEZANIH SA PRIMKAMA
+                                          $.ajax({
+                                                async: false,
+                                                 url:"json/rn/getRNbyPrimka.php",
+                                                 type: 'POST',
+                                                 data: {"primka":pid},
+                                                 success:function(data){
+                                                    console.log(data);
+                                                rn= data;
+                                                
+                                                },
+                                                error: function(){
+                                                    console.log("greška");
+                                                }
+                                            });
+                                           
+                                            if(rn !== null && rn.length>0){
+                                                
+                                                
+                                                
+                                                
+                                                output += '<tr>';
+                                                   output +=  '<td  style="text-align: center;">';
+                                                    for(var j=0; j<rn.length;++j) output += '<a class="glyphicon glyphicon-pencil" href="rn.php?radni_nalog='+rn[j].id+'"></a><br>';
+                                                    output +=   '</td>';
+                                                                                                                   
+                                                    output +=     '<td><span class="'+sty+'">Primka ' +primka[i].primka_id+ '</span></td>';
+                                                    
+                                                    output += '<td>';
+                                                    for(var j=0; j<rn.length;++j) output += '<strong>RN. ' +rn[j].id+ '</strong><br>';
+                                                    output += '</td>';
+                                                    
+                                                    output += '<td>';
+                                                    for(var j=0; j<rn.length;++j) output += rn[j].d1ime + ' ' + rn[j].d1prezime;
+                                                    output += '</td>';
+                                                    
+                                                    output += '<td>';
+                                                    for(var j=0; j<rn.length;++j)
+                                                    var pocetak = new Date(rn[j].pocetak);
+                                                    output +=  (pocetak && pocetak.getFullYear()!= "1970") ?  [pocetak.getDate(), pocetak.getMonth()+1, pocetak.getFullYear()].join('.') +' /  '+[(pocetak.getHours()<10?'0':'') + pocetak.getHours(), (pocetak.getMinutes()<10?'0':'') + pocetak.getMinutes()].join(':') : '';
 
-                //Date range picker
-                $('#reservation').daterangepicker();
-                //Date range picker with time picker
-                $('#reservationtime').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
-                //Date range as a button
-                $('#daterange-btn').daterangepicker(
-                        {
-                            ranges: {
-                                'Today': [moment(), moment()],
-                                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                                'This Month': [moment().startOf('month'), moment().endOf('month')],
-                                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                            },
-                            startDate: moment().subtract(29, 'days'),
-                            endDate: moment()
-                        },
-                        function (start, end) {
-                            $('#reportrange span').php(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-                        }
-                );
-
-                //iCheck for checkbox and radio inputs
-                $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-                    checkboxClass: 'icheckbox_minimal-blue',
-                    radioClass: 'iradio_minimal-blue'
-                });
-                //Red color scheme for iCheck
-                $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
-                    checkboxClass: 'icheckbox_minimal-red',
-                    radioClass: 'iradio_minimal-red'
-                });
-                //Flat red color scheme for iCheck
-                $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-                    checkboxClass: 'icheckbox_flat-green',
-                    radioClass: 'iradio_flat-green'
-                });
-
-                //Colorpicker
-                $(".my-colorpicker1").colorpicker();
-                //color picker with addon
-                $(".my-colorpicker2").colorpicker();
-
-                //Timepicker
-                $(".timepicker").timepicker({
-                    showInputs: false
-                });
-            });
-        </script>
+                                                       
+                                                    output += '</td>';
+                                                    
+                                                    output += '<td>';
+                                                    for(var j=0; j<rn.length;++j) output += rn[j].status + '<br>';
+                                                    output += '</td>';
+                                                    
+                                                    output += '<td>';
+                                                    for(var j=0; j<rn.length;++j) output += (rn[j].napomena) ? rn[j].napomena + '<br>' : '';
+                                                    output += '</td>';
+                                                    
+                                                output += '</tr>';
+                                                
+                                            }
+                                            
+                                                         
+                                      }
+                                      
+                                      $('#sviRN').html(output);
+                                      
+                                      
+                                      
+                                      
+                                },
+                                error: function (e) {
+                                    alert(e.message);
+                                }
+                            });   
+            
+            $( "#sviRMA" ).on("mouseover", "tr",function() {
+                                  $( this ).css("background-color", "#efefef");
+                              } );
+                                
+                                $( "#sviRMA" ).on("mouseout", "tr",function() {
+                                  $( this ).css("background-color", "white");
+                              } );
+        
+        </script>                
+        <?php } ?>
         <!-- Optionally, you can add Slimscroll and FastClick plugins.
              Both of these plugins are recommended to enhance the
              user experience. Slimscroll is required when using the

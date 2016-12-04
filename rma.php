@@ -32,8 +32,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
               apply the skin class to the body tag so the changes take effect.
         -->
         <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
-        <script src="search/search.js"></script>
-        <link href="search/search.css" rel="stylesheet">
         <style>
                 #stranka{ width: 35%;
                 }
@@ -60,8 +58,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
 
-            <?php include './pageParts/header.php'; ?>
-            <?php include './pageParts/sidebar.php'; ?>
+            <?php include 'pageParts/header.php'; ?>
+            <?php include 'pageParts/sidebar.php'; ?>
 
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
@@ -93,17 +91,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       
                     <?php }} else if(!empty($_GET['rma'])){
                     
-                    require_once('./pageParts/rmaPagePart/uredi_rma.php');
+                    require_once('pageParts/rmaPagePart/uredi_rma.php');
                     
                     } else{  
                     
-                    require_once('./pageParts/rmaPagePart/svi_rma.php');
+                    require_once('pageParts/rmaPagePart/svi_rma.php');
                     
                     } ?>
                 </section><!-- /.content -->
             </div><!-- /.content-wrapper -->
 
-           <?php require_once('./pageParts/footer.php') ?>
+           <?php require_once('pageParts/footer.php') ?>
 
             
         </div><!-- ./wrapper -->
@@ -117,104 +115,132 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- AdminLTE App -->
         <script src="dist/js/app.min.js"></script>
         <!-- Select2 -->
-        <script src="../../plugins/select2/select2.full.min.js"></script>
+        <script src="plugins/select2/select2.full.min.js"></script>
         <!-- InputMask -->
-        <script src="../../plugins/input-mask/jquery.inputmask.js"></script>
-        <script src="../../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-        <script src="../../plugins/input-mask/jquery.inputmask.extensions.js"></script>
+        <script src="plugins/input-mask/jquery.inputmask.js"></script>
+        <script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+        <script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>
 
-        <script src="search/search.js"></script>
         <script>
-            $(document).ready(function () {
-                var left = $('#box').position().left;
-                var top = $('#box').position().top;
-                var width = $('#box').width();
+            
+         //    LISTANJE SVIH OTVORENIH PRIMKI
+                  $.ajax({
+                                type: 'POST',
+                                url: "json/primka/sveOtvorenePrimke.php",
+                                dataType: 'json',
+                                contentType: "application/json; charset=utf-8",
+                                success: function (data) {
+                                    
+                                      var primka = JSON.parse(JSON.stringify(data));
+                                      
+                                      var danas = new Date();
+                                      
+                                      var output = "";
+                                      for(var i =0; i<primka.length; ++i){
+                                          var datum = new Date(primka[i].datumZaprimanja);
+                                          var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
 
+                                            var diffDays = Math.round(Math.abs((danas.getTime() - datum.getTime())/(oneDay)));
+                                        
+                                            if(diffDays<=15)  var sty = "label label-success";
+                                            if(diffDays>15 && diffDays<=30)  var sty = "label label-warning";
+                                            if(diffDays>30) var sty = "label label-danger";
+                                            
+                                            var rma = null;
+                                            
+                                          $.ajax({
+                                                async: false,
+                                                url:"json/rma/getRmaByPrimka.php",
+                                                type: 'GET',
+                                                data: {"primka": primka[i].primka_id},
+                                                dataType: 'json',
+                                                contentType: "application/json; charset=utf-8",
+                                                success: function(data){
+                                                    
+                                                rma= data;
+                                                
+                                                },
+                                                error: function(){
+                                                    console.log("greška");
+                                                }
+                                            });
+                                            
+                                            if(rma !== null && rma.length>0){
+                                                console.log(rma);
+                                                
+                                                
+                                                
+                                                output += '<tr>';
+                                                   output +=  '<td  style="text-align: center;">';
+                                                    for(var j=0; j<rma.length;++j) output += '<a class="glyphicon glyphicon-pencil" href="rma.php?rma='+rma[j].id+'"></a><br>';
+                                                    output +=   '</td>';
+                                                                                                                   
+                                                    output +=     '<td><span class="'+sty+'">Primka ' +primka[i].primka_id+ '</span></td>';
+                                                    
+                                                    output += '<td>';
+                                                    for(var j=0; j<rma.length;++j) output += '<strong>RMA. ' +rma[j].id+ '</strong><br>';
+                                                    output += '</td>';
+                                                    
+                                                    output += '<td>';
+                                                    for(var j=0; j<rma.length;++j) 
+                                                    output += (rma[j].rnOs) ? rma[j].rnOs+ '<br>' :"";
+                                                    output += '</td>';
+                                                    
+                                                    output += '<td>';
+                                                    for(var j=0; j<rma.length;++j) 
+                                                    output += (rma[j].nazivOS) ? rma[j].nazivOS+ '<br>' : "";
+                                                    output += '</td>';
+                                                    
+                                                    output += '<td>';
+                                                    output+= (primka[i].tvrtka) ?  '<i>'+primka[i].tvrtka +'</i>, ' : '';
+                                                    output += primka[i].s_ime + ' ' + primka[i].s_prezime;
+                                                    output += '</td>';
+                                                    
+                                                    output += '<td>';
+                                                        
+                                                            var poslano = new Date(rma[rma.length-1].poslano);
+                                                            output +=  (poslano && poslano.getFullYear()!= "1970") ?  [poslano.getDate(), poslano.getMonth()+1, poslano.getFullYear()].join('.') +' /  '+[(poslano.getHours()<10?'0':'') + poslano.getHours(), (poslano.getMinutes()<10?'0':'') + poslano.getMinutes()].join(':') : '';
 
-                $('#search_result').css('left', left).css('top', top + 27).css('width', width + 100).css('z-index', 4);
-
-                $('#search_box').keyup(function () {
-                    var value = $(this).val();
-
-                    if (value != '') {
-                        $('#search_result').show();
-                        $.post('search/searchStranku.php', {value: value}, function (data) {
-                            $('#search_result').html(data);
-                        });
-                    } else {
-                        $('#search_result').hide();
-                    }
-
-                });
-
-
-            });
-
+                                                       
+                                                    output += '</td>';
+                                                    
+                                                    output += '<td>';
+                                                    for(var j=0; j<rma.length;++j) output += rma[j].status + '<br>';
+                                                    output += '</td>';
+                                                    
+                                                    output += '<td>';
+                                                    for(var j=0; j<rma.length;++j) output += (rma[j].napomena) ? rma[j].napomena + '<br>' : '';
+                                                    output += '</td>';
+                                                    
+                                                output += '</tr>';
+                                                
+                                            }
+                                            
+                                                         $('#sviRMA').html(output);
+                                      }
+                                      
+                                      
+                                      
+                                      
+                                      
+                                      
+                                },
+                                error: function (e) {
+                                    alert(e.message);
+                                }
+                            });   
+            
+            $( "#sviRMA" ).on("mouseover", "tr",function() {
+                                  $( this ).css("background-color", "#efefef");
+                              } );
+                                
+                                $( "#sviRMA" ).on("mouseout", "tr",function() {
+                                  $( this ).css("background-color", "white");
+                              } );
+        
         </script>
+            
 
-        <!-- date-range-picker -->
-        <script>
-            $(function () {
-                //Initialize Select2 Elements
-                $(".select2").select2();
-
-                //Datemask dd/mm/yyyy
-                $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
-                //Datemask2 mm/dd/yyyy
-                $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
-                //Money Euro
-                $("[data-mask]").inputmask();
-
-                //Date range picker
-                $('#reservation').daterangepicker();
-                //Date range picker with time picker
-                $('#reservationtime').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
-                //Date range as a button
-                $('#daterange-btn').daterangepicker(
-                        {
-                            ranges: {
-                                'Today': [moment(), moment()],
-                                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                                'This Month': [moment().startOf('month'), moment().endOf('month')],
-                                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                            },
-                            startDate: moment().subtract(29, 'days'),
-                            endDate: moment()
-                        },
-                        function (start, end) {
-                            $('#reportrange span').php(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-                        }
-                );
-
-                //iCheck for checkbox and radio inputs
-                $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-                    checkboxClass: 'icheckbox_minimal-blue',
-                    radioClass: 'iradio_minimal-blue'
-                });
-                //Red color scheme for iCheck
-                $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
-                    checkboxClass: 'icheckbox_minimal-red',
-                    radioClass: 'iradio_minimal-red'
-                });
-                //Flat red color scheme for iCheck
-                $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-                    checkboxClass: 'icheckbox_flat-green',
-                    radioClass: 'iradio_flat-green'
-                });
-
-                //Colorpicker
-                $(".my-colorpicker1").colorpicker();
-                //color picker with addon
-                $(".my-colorpicker2").colorpicker();
-
-                //Timepicker
-                $(".timepicker").timepicker({
-                    showInputs: false
-                });
-            });
-        </script>
         <!-- Optionally, you can add Slimscroll and FastClick plugins.
              Both of these plugins are recommended to enhance the
              user experience. Slimscroll is required when using the

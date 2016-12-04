@@ -15,6 +15,7 @@
                                     <table class="table no-margin">
                                         <thead>
                                             <tr>
+                                                <th>Uredi RMA</th>
                                                 <th>Primka</th>
                                                 <th>RMA nalog</th>
                                                 <th>Radni nalog OS-a</th>
@@ -25,65 +26,8 @@
                                                 <th>Napomena</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <?php
-                                            $primka = new primka();
-                                            $primka = $primka->svePrimke();
-
-                                            if(!empty($primka)){
-                                                foreach ($primka as $primka) {
-                                                    $rma = new rmaNalog();
-                                                    $rma = $rma->RMAbyPrimka($primka->primka_id);
-                                                    
-                                                    $date1=date_create(date('d.m.Y', strtotime($primka->datumZaprimanja)));
-                                                $date2=date_create(date('d.m.Y'));
-                                                $diff=date_diff($date1,$date2);
-                                                
-                                               if($diff->format('%a')>24 && $diff->format('%a')<=35) $style = "color:orange;";
-                                               elseif ($diff->format('%a')>35) $style = "color:red;";
-                                               else $style = "";
-                                                    
-                                                    
-                                                    if(!empty($rma)){
-                                                        
-                                                       echo '<tr>
-                                                        <td><a  style="'.$style.'"  href="primke.php?primka=' . $primka->primka_id . '">Primka. ' . $primka->primka_id . '</a></td>
-                                                        <td>';
-                                                        foreach($rma as $r){
-                                                              echo('<a href="rma.php?rma=' . $r['id'] . '"> RMA. ' . $r['id'] . '</a><br>');
-                                                          }  
-                                                        echo '</td><td>';
-                                                         foreach($rma as $r){
-                                                              echo($r['rnOs'] . "<br>");
-                                                          } 
-                                                         echo '</td><td>';
-                                                         foreach($rma as $r){
-                                                              echo($r['nazivOS'] . "<br>");
-                                                          } 
-                                                         echo '</td><td>';
-                                                         foreach($rma as $r){
-                                                              echo('<div class="sparkbar" data-color="#00a65a" data-height="20">'); echo($primka->tvrtka==NULL)?"":$primka->tvrtka.', '; echo ($primka->s_ime . ' '.$primka->s_prezime. '</div>');
-                                                          }  
-                                                        echo '</td><td>';
-                                                        foreach($rma as $r){
-                                                            echo($r['poslano']  != NULL)? date("d.m.Y / H:i:s", strtotime($r['poslano'])): " " ;echo ('<br>');
-                                                          }  
-                                                        echo '</td><td style="width: 1px;">';
-                                                        foreach($rma as $r){
-                                                              echo($r['status'] != NULL) ? ('<div class="label label-success" style="font-size: 12px;display: block;margin-bottom: 2px;">' .  $r['status'] . '</div>'):" <br>";
-                                                          }  
-                                                        echo '</td><td>';
-                                                        foreach($rma as $r){
-                                                              echo('<div class="sparkbar" data-color="#00a65a" data-height="20">' .  $r['napomena'] . '</div>');
-                                                          }  
-                                                        echo '</td></tr>';
-                                                    }
-                                                    unset($rma);
-                                            }
-                                            }
-                                            unset($primka);
+                                        <tbody id="sviRMA">
                                             
-                                            ?>
                                         </tbody>
                                     </table>
                                 </div><!-- /.table-responsive -->

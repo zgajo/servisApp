@@ -118,7 +118,7 @@ class rmaNalog extends RN{
                     );
             }
             $query->close();
-            if(isset($rma))return $rma;
+            if(isset($rma)) return $rma;
             
         
         }else{
@@ -383,5 +383,48 @@ class servisRN extends RN{
         
         
     }
+    
+    public function getById($id){
+        $query=$this->mysqli->prepare("SELECT rn.*, 
+                                            rnd1.ime as zapoceoRn_ime, rnd1.prezime as zapoceoRn_prezime, 
+                                            rnd2.ime as zavrsioRn_ime, rnd2.prezime as zavrsioRn_prezime
+                                             FROM radniNaloziServisa rn
+                                            
+                                            LEFT JOIN djelatnici rnd1 on rn.djelatnik_zapoceoRn_id = rnd1.djelatnik_id
+                                            LEFT JOIN djelatnici rnd2 on rn.djelatnik_zavrsioRn_id = rnd2.djelatnik_id
+                                        WHERE rn.rn_id = ?");
+        
+        if($query === false){
+            trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
+        }
+        
+        $query->bind_param("i", $id); 
+        
+        if($query->execute()){
+            $meta = $query->result_metadata(); 
+            while ($field = $meta->fetch_field()) 
+        { 
+            $params[] = &$row[$field->name]; 
+        } 
+
+        call_user_func_array(array($query, 'bind_result'), $params); 
+
+        while ($query->fetch()) { 
+            foreach($row as $key => $val) 
+            { 
+                $c[$key] = $val; 
+            } 
+            $result[] = $c; 
+        } 
+        
+        $query->close(); 
+        return $result;
+
+        
+        } 
+        
+        
+    }
+    
     
 }

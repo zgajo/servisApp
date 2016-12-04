@@ -78,7 +78,7 @@
                     <div id="pregledFooter" >
                         <a  id="azuriraj_status" name="submit"  class="btn btn-sm btn-info btn-flat pull-right">Izmijeni status</a> 
                    <a  style="margin-left: 5px; margin-right: 5px;" class="btn btn-sm btn-info btn-flat pull-left" href="#">Novi radni nalog</a>
-                    <a class="btn btn-sm btn-info btn-flat pull-left" href="#" >Novi RMA nalog</a>
+                    <a class="btn btn-sm btn-info btn-flat pull-left" href="rma.php?action=novi_rma&primka_id=<?php  echo $_GET['primka']?>" >Novi RMA nalog</a>
                     </div>
                     
                 </div>

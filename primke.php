@@ -199,16 +199,87 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     
                                       var primka = JSON.parse(JSON.stringify(data));
                                       var output = "";
+                                       console.log(primka);
+                                      
                                       
                                      
+                                      var centar = "<?php echo $_COOKIE['centar']?>";
+                                      var odjel = "<?php echo $_COOKIE['odjel']?>";
                                       
                                       for(var i =0; i<primka.length; ++i){
-                                          
-                                                         
+                                          if(primka[i].centar === centar || odjel === "Servis"){
+                                              
+                                              var datum = new Date(primka[i].datumZaprimanja);
+                                          var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+
+                                            var diffDays = Math.round(Math.abs((danas.getTime() - datum.getTime())/(oneDay)));
+                                        
+                                            if(diffDays<=10)  var sty = "label label-success";
+                                            if(diffDays>10 && diffDays<=17)  var sty = "label label-warning";
+                                            if(diffDays>17) var sty = "label label-danger";
+                                              
+                                                                                           
+                                              output +=   '<tr>';
+                                               if(odjel === "Servis") output += '<td  style="text-align: center;"><a class="glyphicon glyphicon-pencil" href="rn.php?action=novi_rn&primka_id='+ primka[i].primka_id +'"></a></td>';
+                                              output +=     '<td><span class="'+sty+'">Primka ' +primka[i].primka_id+ '</span></td>';
+                                              
+                                                var r = null;
+                                                var rm = null;
+                                              
+                                             if(odjel === "Servis"){
+                                                 output += '<td >';
+                                              //    DOHVAĆANJE RADNIH NALOGA
+                                             $.ajax({
+                                                 async: false,
+                                                 url:"json/rn/getRNbyPrimka.php",
+                                                 type: 'POST',
+                                                 data: {"primka":primka[i].primka_id},
+                                                 success:function(data){
+                                                                                                  
+                                                  r=data;
+                                                  
+                                              }});
+                                          //    DOHVAĆANJE RMA NALOGA
+                                             $.ajax({
+                                                 async: false,
+                                                 url:"json/rma/getRmaByPrimka.php",
+                                                 type: 'GET',
+                                                 data: {"primka":primka[i].primka_id},
+                                                 success:function(data){
+                                                                                                  
+                                                  rm=data;
+                                                  
+                                              }});
+                                              //    UKOLIKO IMA DOHVAĆENIH rn
+                                              if(r !== null && r.length>0) {
+                                                  for(var j=0;j<r.length;++j){
+                                                      output+='<a href="rn.php?radni_nalog=' +r[j].id+ '"> RN. ' +r[j].id+ '</a><br>';
+                                                  }
+                                              }
+                                              //    UKOLIKO IMA DOHVAĆENIH rma
+                                              console.log(rm);
+                                              if(rm !== null && rm.length>0) {
+                                                  for(var j=0;j<rm.length;++j){
+                                                      output+='<a href="rma.php?radni_nalog=' +rm[j].id+ '"> RMA. ' +rm[j].id+ '</a><br>';
+                                                  }
+                                              }
+                                              
+                                              output += '</td>';
+                                              }
+                                              output += '<td>'+ primka[i].naziv+'</td>';
+                                              output += '<td>'+ primka[i].s_ime+' '+ primka[i].s_prezime +'</td>';
+                                              output += '<td>'+ [datum.getDate(), datum.getMonth()+1, datum.getFullYear()].join('.') +' /  '+[(datum.getHours()<10?'0':'') + datum.getHours(), (datum.getMinutes()<10?'0':'') + datum.getMinutes()].join(':')  + '</td>';
+                                              output += '<td>'+ primka[i].status+'</td>';
+                                                if(odjel === "Servis"){
+                                                  output += '<td>'+ primka[i].centar+'</td>';
+                                              }
+                                                
+                                          }
+                                        $('#svePoslanePrimke').html(output);                 
                                       }
                                       //$('#svePoslanePrimke').html(output);
                                       
-                                      console.log(primka);
+                                     
                                       
                                 },
                                 error: function (e) {
@@ -224,6 +295,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               } );
                                 
                                 $( "#sveprimke" ).on("mouseout", "tr",function() {
+                                  $( this ).css("background-color", "white");
+                              } );
+                              $( "#svePoslanePrimke" ).on("mouseover", "tr",function() {
+                                  $( this ).css("background-color", "#efefef");
+                              } );
+                                
+                                $( "#svePoslanePrimke" ).on("mouseout", "tr",function() {
                                   $( this ).css("background-color", "white");
                               } );
                 //      KRAJ    *    HOVER NA RED SVIH PRIMKI   *   KRAJ
@@ -506,7 +584,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         // Dohvaćanje i pregled upita
                             $.ajax({
                                 type: 'GET',
-                                url: "json/primka/updatePrimkaJson.php",
+                                url: "json/primka/getById.php",
                                 data: {"id":pid},
                                 dataType: 'json',
                                 contentType: "application/json; charset=utf-8",
@@ -627,8 +705,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                           
                                             
                                         });
-                                        
-                                        $.post("json/rma/getRmaByPrimka.php", {"primka":pid}, function(e){
+                                        console.log(pid);
+                                        $.get("json/rma/getRmaByPrimka.php", {"primka":pid}, function(e){
                                            
                                             var rma = JSON.parse(JSON.stringify(e));
                                             console.log(rma);
