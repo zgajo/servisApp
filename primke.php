@@ -220,7 +220,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                               
                                                                                            
                                               output +=   '<tr>';
-                                               if(odjel === "Servis") output += '<td  style="text-align: center;"><a class="glyphicon glyphicon-pencil" href="rn.php?action=novi_rn&primka_id='+ primka[i].primka_id +'"></a></td>';
+                                               if(odjel === "Servis") output += '<td  style="text-align: center;"><a class="glyphicon glyphicon-share" href="rn.php?action=novi_rn&primka_id='+ primka[i].primka_id +'"></a></td>';
                                               output +=     '<td><span class="'+sty+'">Primka ' +primka[i].primka_id+ '</span></td>';
                                               
                                                 var r = null;

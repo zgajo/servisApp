@@ -121,8 +121,122 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
         <script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>
 
+        
+        
+         <?php if(!empty($_GET['rma'])){ ?>
         <script>
-            var odjel = "<?php echo $_COOKIE['odjel'] ?>";
+                        $(document).ready(function (){
+                            
+                            var rnid = <?php echo $_GET['rma'] ?>
+                           
+                           $.post("json/rma/getById.php", {"id":rnid},
+                           function(rn){
+                               console.log(rn);
+                               
+                               var pocetak = new Date(rn[0].danZaprimanja);
+                               var poslano = new Date(rn[0].poslanoOSu);
+                               var vraceno = new Date(rn[0].vracenoIzOSa);
+                               var zavrseno = new Date(rn[0].danZavrsetka);
+                               
+                               //   UPIS RMA NALOGA
+                               $('#pocetak').text([pocetak.getDate(), pocetak.getMonth(), pocetak.getFullYear()].join('.') + ' / ' + [((pocetak.getHours()<10) ? '0':'') + pocetak.getHours(), (pocetak.getMinutes()<10?'0':'') + pocetak.getMinutes()].join(':'));
+                               (poslano && poslano.getFullYear()!="1970") ? $('#poslano').text([poslano.getDate(), poslano.getMonth(), poslano.getFullYear()].join('.') + ' / ' + [((poslano.getHours()<10) ? '0':'') + poslano.getHours(), (poslano.getMinutes()<10?'0':'') + poslano.getMinutes()].join(':')): $('#poslano').text();
+                                $('#zapoceo').text(rn[0].zapoceoRn_ime + ' ' + rn[0].zapoceoRn_prezime);
+                                $('#inputrnOS').val(rn[0].rnOS);
+                                 $('#inputOSnaziv').val(rn[0].nazivOS);
+                               $('#inputPopravak').val(rn[0].opisPopravka);
+                               $('#inputNapomena').val(rn[0].napomena);
+                               $('#inputNaplata').val(rn[0].naplata);
+                               $('select').val(rn[0].status);
+                               $('select').prepend("<option style='background-color:#ebebeb' disabled='disabled' value='"+rn[0].status+"'>"+rn[0].status+"</option>");
+                               
+                               if(rn[0].zavrsioRn_ime !== '' && rn[0].zavrsioRn_ime !== null) {
+                                   $('#zavrad').show();
+                                   $('#zavrsio').text(rn[0].zavrsioRn_ime + ' ' + rn[0].zavrsioRn_prezime);
+                               }
+                               
+                               if(vraceno.getFullYear() != '1970' && vraceno) {
+                                   $('#vr').show();
+                                   $('#vraceno').text([vraceno.getDate(), vraceno.getMonth(), vraceno.getFullYear()].join('.') + ' / ' + [((vraceno.getHours()<10) ? '0':'') + vraceno.getHours(), (vraceno.getMinutes()<10?'0':'') + vraceno.getMinutes()].join(':'));
+                               }
+                               
+                               if(zavrseno.getFullYear() != '1970' && zavrseno) {
+                                   $('#zr').show();
+                                   $('#zavrseno').text([zavrseno.getDate(), zavrseno.getMonth(), zavrseno.getFullYear()].join('.') + ' / ' + [((zavrseno.getHours()<10) ? '0':'') + zavrseno.getHours(), (zavrseno.getMinutes()<10?'0':'') + zavrseno.getMinutes()].join(':'));
+                               }
+                               
+                               //   kraj    *   UPIS RMA NALOGA *   KRAJ
+                               
+                               
+                                //       UPIS PRIMKE
+                               $.get("json/primka/getById.php", {"id": rn[0].primka_id}, 
+                               function(primka){
+                                   console.log(primka);
+                                   
+                                    var dz = new Date(primka[0].datumZaprimanja);
+                                   var dk = new Date(primka[0].datumKupnje);
+                                   // PODACI KUPCA
+                                    
+                                    $('#ip_kupca').text(primka[0].ime + ' ' + primka[0].prezime);
+                                     if(primka[0].tvrtka) $('#tvrtka').text(primka[0].tvrtka).show();
+                                     $('#kontakt').text(primka[0].kontaktBroj);
+                                     if(primka[0].email) $('#email').after("<p style='display:inline'>"+primka[0].email+"</i>"); else{ $('#email').hide()};
+                                     $('#grad').text(primka[0].grad);
+                                     $('#adresa').text(primka[0].adresa);
+                                     
+                                     //     PODACI PRIMKE
+                                     $('#primkanaslov').text('Primka ' + primka[0].primka_id);
+                                     $('#zap').text([dz.getDate(), dz.getMonth()+1, dz.getFullYear()].join('.') +' /  '+[(dz.getHours()<10?'0':'') + dz.getHours(), (dz.getMinutes()<10?'0':'') + dz.getMinutes()].join(':'));
+                                     $('#po').text(primka[0].pot_ime + ' ' + primka[0].pot_prezime);
+                                     $('#nu').text(primka[0].naziv);
+                                     $('#serijski').text(primka[0].serijski);
+                                     $('#brand').text(primka[0].brand);
+                                     $('#tip').text(primka[0].tip);
+                                     (isNaN(dk.getDate())) ? $('#dk').text() : $('#dk').text([dk.getDate(), dk.getMonth()+1, dk.getFullYear()].join('.'));
+                                     $('#br').text(primka[0].racun);
+                                     $('#ok').text(primka[0].opisKvara);
+                                     $('#pp').text(primka[0].prilozeno_primijeceno);
+                                     $('#st').text(primka[0].p_status);
+                                     $('#primka_id').text(primka[0].primka_id);
+                               }
+                                );
+                            //   KRAJ   *    UPIS PRIMKE    *   KRAJ
+                           }
+                           );
+                           
+                           
+                            //Ažuriranje upita
+                            $('#azuriraj_status').on("click", this, function(){
+                            var status_primke = $('#st').text();
+                            var primka_id = $('#primka_id').text();
+                            var status = $('select').val();
+                            
+                           if (status === "Popravak završen u jamstvu"  ||  status === "Popravak završen van jamstva" || status === "Stranka odustala od popravka"){
+                               $.post("json/rma/zatvori.php", {"id":rnid, "status": status,"popravak": $('#inputPopravak').val(),"napomena": $('#inputNapomena').val(), "naplata" : $("#inputNaplata").val(), "rnOS": $("#inputrnOS").val(), "nazivOS": $('#inputOSnaziv').val()} );
+                               $.post("json/primka/primkaStatusUpdate.php", {"status": "Završen popravak", "id":primka_id}, function(){ window.location = "rma.php?rma="+ rnid;});
+                                   
+                           } else if(status === "Poslano u OS"){
+                               $.post("json/rma/posalji.php", {"id":rnid, "status": status,"popravak": $('#inputPopravak').val(),"napomena": $('#inputNapomena').val(), "naplata" : $("#inputNaplata").val(), "rnOS": $("#inputrnOS").val(), "nazivOS": $('#inputOSnaziv').val()} );
+                               $.post("json/primka/primkaStatusUpdate.php", {"status": status, "id":primka_id}, function(){ window.location = "rma.php?rma="+ rnid;});
+              
+                           } else{
+                               $.post("json/rma/azuriraj.php", {"id":rnid, "status": status,"popravak": $('#inputPopravak').val(),"napomena": $('#inputNapomena').val(), "naplata" : $("#inputNaplata").val(), "rnOS": $("#inputrnOS").val(), "nazivOS": $('#inputOSnaziv').val()} );
+                               $.post("json/primka/primkaStatusUpdate.php", {"status": status, "id":primka_id}, function(){ window.location = "rma.php?rma="+ rnid;});
+              
+                           }
+                           
+                            });
+                            
+                           
+                            
+                            
+                                                       
+                        });
+                        </script>
+        
+         <?php } else{ ?>
+        <script>
+         var odjel = "<?php echo $_COOKIE['odjel'] ?>";
          //    LISTANJE SVIH OTVORENIH PRIMKI
          var podaci;
          if( odjel === "Servis" || odjel === "Reklamacije") {
@@ -248,6 +362,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         
         </script>
             
+         <?php } ?>
+        
 
         <!-- Optionally, you can add Slimscroll and FastClick plugins.
              Both of these plugins are recommended to enhance the

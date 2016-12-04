@@ -1,23 +1,4 @@
-<?php
 
-
-$radni = new servisRN();
-$radni = $radni->RNjoinPrimkaOtvorenUredi($_GET['radni_nalog']);
-
-$rnPocetakRada = date("d.m.Y / H:i:s", strtotime($radni[0]['pocetakRada']));
-
-
-$datumZaprimanja = date("d.m.Y / H:i:s",  strtotime($radni[0]['datumZaprimanja']));
-
-
-
-if($radni[0]['datumKupnje'] === "0000-00-00"){
-    $kupljeno=NULL;
-}else{
-       $kupljeno = date("d.m.Y / H:i:s", strtotime($radni[0]['datumKupnje']));
-}
-
-?>
 
 
 <form class="form-horizontal" action="" method="POST" onsubmit="return confirm('Dali je sve ispravno ispunjeno?');>

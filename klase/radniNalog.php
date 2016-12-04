@@ -53,21 +53,42 @@ class rmaNalog extends RN{
         die("Neuspješno ažuriranje radnog naloga");
         }
        
-        
     }
     
-    
-    public function posalji( $rma,  $status, $did) {
-        
+     public function zatvori($rma,  $status, $opisPopravka, $napomena, $naplata, $os, $r, $djelatnik_id) {
         date_default_timezone_set('Europe/Zagreb');
-        $date = date('Y-m-d H:i:s', time());
+        $zatvori = date('Y-m-d H:i:s', time());
         
-        $query = $this->mysqli->prepare("UPDATE radniNaloziRMA SET status = ?, poslanoOSu = ?, djelatnik_zapoceoRma_id = ? WHERE rma_id = ?");
+        $query = $this->mysqli->prepare("UPDATE radniNaloziRMA SET status = ?, napomena = ?, opisPopravka = ?, naplata = ?, rnOS=?, nazivOS=?, danZavrsetka = ?, djelatnik_zavrsioRma_id = ? WHERE rma_id = ?");
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
         }
         
-        $query->bind_param('ssii',$status,$date,$did, $rma);
+        $query->bind_param('sssssssii',$status, $napomena, $opisPopravka, $naplata, $r, $os, $zatvori, $djelatnik_id, $rma);
+        
+       if($query->execute()){
+            $query->close();
+        }
+        else{
+             $query->close();
+        die("Neuspješno zatvaranje radnog naloga");
+        }
+        
+    }
+    
+    
+    
+    public function posalji( $rma,  $status, $opisPopravka, $napomena, $naplata, $os, $r, $did) {
+        
+        date_default_timezone_set('Europe/Zagreb');
+        $date = date('Y-m-d H:i:s', time());
+        
+        $query = $this->mysqli->prepare("UPDATE radniNaloziRMA SET status = ?, napomena = ?, opisPopravka = ?, naplata = ?, rnOS=?, nazivOS=?, djelatnik_zapoceoRma_id = ? WHERE rma_id = ?");
+        if($query === false){
+            trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
+        }
+        
+        $query->bind_param('ssssssii',$status, $napomena, $opisPopravka, $naplata, $r, $os,$did, $rma);
         
         if($query->execute()){
             $query->close();
@@ -128,6 +149,45 @@ class rmaNalog extends RN{
         
     }
     
+    public function getById($id){
+        $query=$this->mysqli->prepare("SELECT rma.*,  rnd1.ime as zapoceoRn_ime, rnd1.prezime as zapoceoRn_prezime,  rnd2.ime as zavrsioRn_ime, rnd2.prezime as zavrsioRn_prezime 
+                                             FROM radniNaloziRMA rma 
+                                            LEFT JOIN djelatnici rnd1 on rma.djelatnik_zapoceoRma_id = rnd1.djelatnik_id 
+                                            LEFT JOIN djelatnici rnd2 on rma.djelatnik_zavrsioRma_id = rnd2.djelatnik_id 
+                                        WHERE rma.rma_id = ?");
+        
+        if($query === false){
+            trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
+        }
+        
+        $query->bind_param("i", $id); 
+        
+        if($query->execute()){
+            $meta = $query->result_metadata(); 
+            while ($field = $meta->fetch_field()) 
+        { 
+            $params[] = &$row[$field->name]; 
+        } 
+
+        call_user_func_array(array($query, 'bind_result'), $params); 
+
+        while ($query->fetch()) { 
+            foreach($row as $key => $val) 
+            { 
+                $c[$key] = $val; 
+            } 
+            $result[] = $c; 
+        } 
+        
+        $query->close(); 
+        return $result;
+
+        
+        } 
+        
+        
+    }
+    
     public function RMAjoinPrimkaOtvorenUredi($id){
         $query=$this->mysqli->prepare("SELECT rma.*, p.*, s.*, rma.status as status_rma, 
                                             rnd1.ime as zapoceoRMA_ime, rnd1.prezime as zapoceoRMA_prezime, rnd2.ime as zavrsioRMA_ime, rnd2.prezime as zavrsioRMA_prezime, 
@@ -173,27 +233,7 @@ class rmaNalog extends RN{
         
     }
     
-    public function zatvori($rma,  $status, $opisPopravka, $napomena, $naplata, $djelatnik_id) {
-        date_default_timezone_set('Europe/Zagreb');
-        $zatvori = date('Y-m-d H:i:s', time());
-        
-        $query = $this->mysqli->prepare("UPDATE radniNaloziRMA SET status = ?, napomena = ?, opisPopravka = ?, naplata = ?, danZavrsetka = ?, djelatnik_zavrsioRma_id = ? WHERE rma_id = ?");
-        if($query === false){
-            trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
-        }
-        
-        $query->bind_param('sssssii',$status, $napomena, $opisPopravka, $naplata, $zatvori, $djelatnik_id, $rma);
-        
-       if($query->execute()){
-            $query->close();
-        }
-        else{
-             $query->close();
-        die("Neuspješno zatvaranje radnog naloga");
-        }
-        
-    }
-    
+   
 }
 
 
