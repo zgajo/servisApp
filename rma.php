@@ -207,7 +207,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                            
                             //Ažuriranje statusa rma
                             $('#azuriraj_status').on("click", this, function(){
-                            if(confirm('Jeste li sigurni da želite izmijeniti status?')){
+                            if(confirm('Jeste li sigurni da želite ažurirati?')){
                                 
                                 var status_primke = $('#st').text();
                             var primka_id = $('#primka_id').text();
@@ -218,7 +218,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                $.post("json/primka/primkaStatusUpdate.php", {"status": "Završen popravak", "id":primka_id}, function(){ window.location = "rma.php?rma="+ rnid;});
                                    
                            } else if(status === "Poslano u OS"){
+                               // PROVJERA DA LI JE VEĆ POSLANA REKLAMACIJA
+                               if($('#poslano').text()){
+                                $.post("json/rma/azuriraj.php", {"id":rnid, "status": status,"popravak": $('#inputPopravak').val(),"napomena": $('#inputNapomena').val(), "naplata" : $("#inputNaplata").val(), "rnOS": $("#inputrnOS").val(), "nazivOS": $('#inputOSnaziv').val()} );
+
+                               }else{
                                $.post("json/rma/posalji.php", {"id":rnid, "status": status,"popravak": $('#inputPopravak').val(),"napomena": $('#inputNapomena').val(), "naplata" : $("#inputNaplata").val(), "rnOS": $("#inputrnOS").val(), "nazivOS": $('#inputOSnaziv').val()} );
+
+                               }
                                $.post("json/primka/primkaStatusUpdate.php", {"status": status, "id":primka_id}, function(){ window.location = "rma.php?rma="+ rnid;});
               
                            } else{
@@ -232,9 +239,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             });
                             //  ****    KRAJ AŽURIRANJA RMA     ***
                             
-                            $('#azuriraj_rma').click(function(){
-                               $.post("json/rma/urediRma.php", {"id":rnid, "popravak": $('#inputPopravak').val(),"napomena": $('#inputNapomena').val(), "naplata" : $("#inputNaplata").val(), "rnOS": $("#inputrnOS").val(), "nazivOS": $('#inputOSnaziv').val()} )
-                            });
+                            
                            
                             
                             

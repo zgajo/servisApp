@@ -190,12 +190,8 @@
                 </div>
                 <div class="box-footer">
                     
-                    <a class="btn btn-app"  id="azuriraj_status" style="float: left">
-                    <i class="fa fa-save"></i> Izmijeni status
-                  </a>
-                    
-                    <a class="btn btn-app"  id="azuriraj_rma" style="float: right">
-                    <i class="fa fa-save"></i> Unesi promjene
+                    <a class="btn btn-app"  id="azuriraj_status" style="float: RIGHT">
+                    <i class="fa fa-save"></i> Ažuriraj
                   </a>
                 </div>
               </div>
@@ -209,62 +205,3 @@
           </div>
 </form>
 
-<?php
-                            
-                            if(!empty($_POST)){
-                                
-                                switch ($_POST['status_rma']){
-                                    case ($_POST['status_rma'] == "Popravak završen u jamstvu"  || $_POST['status_rma'] == "Popravak završen van jamstva" || $_POST['status_rma']== 'Stranka odustala od popravka'):
-                                        $r = new rmaNalog();
-                                        $r->zatvori($rma[0]['rma_id'],  $_POST['status_rma'], $_POST['popravak'], $_POST['napomena'], $_POST['naplata'], $_COOKIE['id']);
-
-                                        $primka = new primka();
-
-                                        $primka->updatePrimka("Završen popravak", $rma[0]['primka_id']);
-
-
-                                        unset($rma);
-                                        unset($primka);
-                                        unset($r);
-                                        header("refresh:0");
-                                     break;
-                                    case 'Pošalji u OS':
-                                        $r = new rmaNalog();
-                                        if($rma[0]['status_rma'] != "Poslano u OS"){
-                                            $r->posalji($rma[0]['rma_id'], "Poslano u OS", $_COOKIE['id']);
-
-                                        $primka = new primka();
-                                        $primka->updatePrimka("Poslano u OS", $rma[0]['primka_id']);
-
-                                        
-                                        }
-                                        else{
-                                            $r->update($rma[0]['rma_id'],  "Poslano u OS", $_POST['popravak'], $_POST['napomena'], $_POST['naplata'], $_POST['nazivOS'], $_POST['rnOS']);
-
-                                        $primka = new primka();                                    
-                                        $primka->updatePrimka( "Poslano u OS",  $rma[0]['primka_id']);                                       
-
-                                        }
-                                        unset($rma);
-                                        unset($primka);
-                                        unset($r);
-                                        header("refresh:0");
-                                    break;
-                                    default:
-                                        $r = new rmaNalog();
-                                        $r->update($rma[0]['rma_id'],  $_POST['status_rma'], $_POST['popravak'], $_POST['napomena'], $_POST['naplata'], $_POST['nazivOS'], $_POST['rnOS']);
-
-                                        $primka = new primka();                                    
-                                        $primka->updatePrimka( $_POST['status_rma'],  $rma[0]['primka_id']);                                       
-
-                                        unset($rma);
-                                        unset($r);
-                                        unset($primka);
-                                        header("refresh:0");
-                                        
-                                 
-                                }
-                               
-                            
-                        }
-?>
