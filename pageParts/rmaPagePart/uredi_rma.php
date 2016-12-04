@@ -190,7 +190,11 @@
                 </div>
                 <div class="box-footer">
                     
-                    <a class="btn btn-app"  id="azuriraj_status" style="float: right">
+                    <a class="btn btn-app"  id="azuriraj_status" style="float: left">
+                    <i class="fa fa-save"></i> Izmijeni status
+                  </a>
+                    
+                    <a class="btn btn-app"  id="azuriraj_rma" style="float: right">
                     <i class="fa fa-save"></i> Unesi promjene
                   </a>
                 </div>

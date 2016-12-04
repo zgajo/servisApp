@@ -34,6 +34,26 @@ class rmaNalog extends RN{
         
     }
     
+    public function uredi( $rma,   $opisPopravka, $napomena, $naplata, $os, $r) {
+        
+        
+        $query = $this->mysqli->prepare("UPDATE radniNaloziRMA SET  napomena = ?, opisPopravka = ?, naplata = ?, rnOS=?, nazivOS=? WHERE rma_id = ?");
+        if($query === false){
+            trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
+        }
+        
+        $query->bind_param('sssssi', $napomena, $opisPopravka, $naplata, $r, $os, $rma);
+        
+        if($query->execute()){
+            $query->close();
+        }
+        else{
+             $query->close();
+        die("Neuspješno ažuriranje radnog naloga");
+        }
+       
+    }
+    
     
         public function update( $rma,  $status, $opisPopravka, $napomena, $naplata, $os, $r) {
         
@@ -54,6 +74,7 @@ class rmaNalog extends RN{
         }
        
     }
+    
     
      public function zatvori($rma,  $status, $opisPopravka, $napomena, $naplata, $os, $r, $djelatnik_id) {
         date_default_timezone_set('Europe/Zagreb');
@@ -83,12 +104,12 @@ class rmaNalog extends RN{
         date_default_timezone_set('Europe/Zagreb');
         $date = date('Y-m-d H:i:s', time());
         
-        $query = $this->mysqli->prepare("UPDATE radniNaloziRMA SET status = ?, napomena = ?, opisPopravka = ?, naplata = ?, rnOS=?, nazivOS=?, djelatnik_zapoceoRma_id = ? WHERE rma_id = ?");
+        $query = $this->mysqli->prepare("UPDATE radniNaloziRMA SET status = ?, napomena = ?, opisPopravka = ?, naplata = ?, rnOS=?, nazivOS=?,  poslanoOSu=?, djelatnik_zapoceoRma_id = ? WHERE rma_id = ?");
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
         }
         
-        $query->bind_param('ssssssii',$status, $napomena, $opisPopravka, $naplata, $r, $os,$did, $rma);
+        $query->bind_param('sssssssii',$status, $napomena, $opisPopravka, $naplata, $r, $os, $date, $did, $rma);
         
         if($query->execute()){
             $query->close();

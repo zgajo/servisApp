@@ -59,7 +59,7 @@
 
                                                                       
                          <div class="form-group">
-                        <label class="col-sm-2 control-label">Statu</label>
+                        <label class="col-sm-2 control-label">Status</label>
                         <div    class="col-sm-10">
                             <select class="form-control" name='status_primke'>
                                 <option value="Poslano u CS - Rovinj">Pošalji u CS - Rovinj</option>
@@ -76,12 +76,16 @@
                 </div><!-- /.box-body -->
                 <div class="box-footer">
                     <div id="pregledFooter" >
-                        <a  id="azuriraj_status" name="submit"  class="btn btn-sm btn-info btn-flat pull-right">Izmijeni status</a> 
-                   <a  style="margin-left: 5px; margin-right: 5px;" class="btn btn-sm btn-info btn-flat pull-left" href="rn.php?action=novi_rn&primka_id=<?php  echo $_GET['primka']?>">Novi radni nalog</a>
-                    <a class="btn btn-sm btn-info btn-flat pull-left" href="rma.php?action=novi_rma&primka_id=<?php  echo $_GET['primka']?>" >Novi RMA nalog</a>
+                        <a  id="azuriraj_status"  name="submit"  class="btn btn-sm btn-info btn-flat pull-right">Izmijeni status</a> 
+                        <a id="btnNovo" style="margin-left: 5px; margin-right: 5px;" class="btn btn-sm btn-info btn-flat pull-left" >Stvori novo</a>
                     </div>
                     
+                    
                 </div>
+                <div  id="novo" style="display: none" class="box-footer">
+                         <a  style="margin-left: 5px; margin-right: 5px; background-color: #00733e" class="btn btn-sm btn-info btn-flat pull-left" href="rn.php?action=novi_rn&primka_id=<?php  echo $_GET['primka']?>">Novi radni nalog</a>
+                         <a class="btn btn-sm btn-info btn-flat pull-left" style="background-color: #8677A7" href="rma.php?action=novi_rma&primka_id=<?php  echo $_GET['primka']?>" >Novi RMA nalog</a>
+                    </div>
 
             </div><!-- /.box -->
             <!-- general form elements disabled -->

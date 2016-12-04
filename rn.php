@@ -93,7 +93,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         }
                         
                         unset($primka);
-                        echo '<script>alert("Otvoren novi nalog '.$last.'"); '
+                        echo '<script>'
                            . 'setTimeout(function(){ window.location.href="rn.php?radni_nalog='.$last.'";}, 100);'
                            . '</script>';
                       

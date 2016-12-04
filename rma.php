@@ -82,7 +82,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         
                         
                         unset($primka);
-                        echo '<script>alert("Otvoren novi RMA nalog '.$last.'"); '
+                        echo '<script> '
                            . 'setTimeout(function(){ window.location.href="rma.php?rma='.$last.'";}, 100);'
                            . '</script>';
                       
@@ -205,9 +205,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                            );
                            
                            
-                            //Ažuriranje upita
+                            //Ažuriranje statusa rma
                             $('#azuriraj_status').on("click", this, function(){
-                            var status_primke = $('#st').text();
+                            if(confirm('Jeste li sigurni da želite izmijeniti status?')){
+                                
+                                var status_primke = $('#st').text();
                             var primka_id = $('#primka_id').text();
                             var status = $('select').val();
                             
@@ -224,9 +226,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                $.post("json/primka/primkaStatusUpdate.php", {"status": status, "id":primka_id}, function(){ window.location = "rma.php?rma="+ rnid;});
               
                            }
+                            }else{}
+                            
                            
                             });
+                            //  ****    KRAJ AŽURIRANJA RMA     ***
                             
+                            $('#azuriraj_rma').click(function(){
+                               $.post("json/rma/urediRma.php", {"id":rnid, "popravak": $('#inputPopravak').val(),"napomena": $('#inputNapomena').val(), "naplata" : $("#inputNaplata").val(), "rnOS": $("#inputrnOS").val(), "nazivOS": $('#inputOSnaziv').val()} )
+                            });
                            
                             
                             

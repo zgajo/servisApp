@@ -802,6 +802,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                            
                             funPrimka();
                             
+                            $('#btnNovo').click(function(){
+                                
+                                console.log('fer');
+                                $('#novo').toggle();
+                            
+                            });
+                            
+                            
                             //    SPREMANJE IZMJENE KUPCA
                             $('#spremiKupca').click(function (e){
                                 e.preventDefault();
