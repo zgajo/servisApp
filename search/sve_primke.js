@@ -22,10 +22,9 @@
                                             if(diffDays>7 && diffDays<=14)  var sty = "label label-warning";
                                             if(diffDays>14) var sty = "label label-danger";
                                         
-                                            output +=   '<tr> \n\
-                                                        <td  style="text-align: center;"><a class="glyphicon glyphicon-pencil" href="primke.php?primka='+primka[i].primka_id+'"></a></td>';
+                                            output +=   '<tr>';
                                                                                                                    
-                                            output +=     '<td><span class="'+sty+'">Primka ' +primka[i].primka_id+ '</span></td>';
+                                            output +=     '<td><span   class="'+sty+'">Primka ' +primka[i].primka_id+ '  </span><a style="display:none; margin-left:10px" id="pencil" class="glyphicon glyphicon-pencil" href="primke.php?primka='+primka[i].primka_id+'"></a></td>';
                                            
                                             output +=     '<td>'+ primka[i].naziv +'</td>\n\
                                                                 <td>'; output+= (primka[i].tvrtka) ? "<i>"+primka[i].tvrtka +"</i>, " : "";
@@ -47,7 +46,7 @@
                   //    KRAJ    *   LISTANJE SVIH OTVORENIH PRIMKI  * KRAJ
                 
                 
-                
+                                
                 
                 //      HOVER NA RED SVIH PRIMKI
                                 $( "#sveprimke" ).on("mouseover", "tr",function() {
@@ -64,4 +63,13 @@
                                 $( "#svePoslanePrimke" ).on("mouseout", "tr",function() {
                                   $( this ).css("background-color", "white");
                               } );
+                              
+                              $('#sveprimke').on("mouseover", "tr", function(){
+                                 $(this).find('a').show();
+                              });
+                              $('#sveprimke').on("mouseout", "tr", function(){
+                                 $(this).find('a').hide();
+                              });
+                              
+                              
                 //      KRAJ    *    HOVER NA RED SVIH PRIMKI   *   KRAJ

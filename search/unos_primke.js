@@ -136,32 +136,21 @@
                            "id" : idkupca
                        });
                        
+                       var idkupca = $( '#inputid' ).text();
+                       upisKupca(idkupca);
                        
-                       
-
-                    $.post('json/kupac/dohvatiKupcaJson.php', {"id": idkupca}, function (data) {
-                       console.log(JSON.parse(JSON.stringify(data)));
-                        var osoba = JSON.parse(JSON.stringify(data));
-                        $('#inputid').text(osoba.id);
-                        (osoba.tvrtka) ? $('#inputTvrtka').val(osoba.tvrtka).prop( "disabled", true ) : $('#divTvrtka').hide();
-                        $('#inputIme').val(osoba.ime).prop( "disabled", true );
-                        $('#inputPrezime').val(osoba.prezime).prop( "disabled", true );
-                        $('#inputAdresa').val(osoba.adresa).prop( "disabled", true );
-                        $('#inputGrad').val(osoba.grad).prop( "disabled", true );
-                        $('#inputPB').val(osoba.postanskiBroj).prop( "disabled", true );
-                        $('#inputKontakt').val(osoba.kontakt).prop( "disabled", true );
-                        $('#inputEmail').val(osoba.email).prop( "disabled", true );
-                        
-                        $('#editBtn').show();
-                        $('#spremiKupca').css('display','none');
-                        
                         $("#box").show();
                         $('#submit').prop("disabled", false);
+                        
+                        $('#ponistiK').hide();
+                        $('#spremiKupca').hide();
+                        $('#editBtn').show();
+                        
         
                         //alert('Trebam namjestiti ažuriranje podataka izmjena kupca');
                         $("#search_box").val("");
                         $('#search_result').hide();
-                    });
+
                       
                   });
                   //  KRAJ * SPREMANJE IZMJENE KUPCA * KRAJ
@@ -171,6 +160,10 @@
                      upisKupca($('#inputid').text()); 
                      $("#spremiKupca").hide();
                      $("#ponistiK").hide();
+                     $('#submit').prop("disabled", false);
+                     $("#search_box").val("");
+                        $('#search_result').hide();
+                        $("#box").show();
                   });
                   
                   // UNOS PRIMKE

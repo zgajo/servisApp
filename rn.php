@@ -293,6 +293,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 $( "#sviRN" ).on("mouseout", "tr",function() {
                                   $( this ).css("background-color", "white");
                               } );
+                              
+                              $('#sviRN').on("mouseover", "tr", function(){
+                                 $(this).find('a').show();
+                              });
+                              $('#sviRN').on("mouseout", "tr", function(){
+                                 $(this).find('a').hide();
+                              });
              
          //    LISTANJE SVIH OTVORENIH PRIMKI
                   $.ajax({
@@ -341,14 +348,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 
                                                 
                                                 output += '<tr>';
-                                                   output +=  '<td  style="text-align: center;">';
-                                                    for(var j=0; j<rn.length;++j) output += '<a class="glyphicon glyphicon-pencil" href="rn.php?radni_nalog='+rn[j].id+'"></a><br>';
-                                                    output +=   '</td>';
                                                                                                                    
                                                     output +=     '<td><span class="'+sty+'">Primka ' +primka[i].primka_id+ '</span></td>';
                                                     
                                                     output += '<td>';
-                                                    for(var j=0; j<rn.length;++j) output += '<strong>RN. ' +rn[j].id+ '</strong><br>';
+                                                    for(var j=0; j<rn.length;++j) output += '<strong>RN. ' +rn[j].id+ '</strong><a style="margin-left:10px; display:none;" class="glyphicon glyphicon-pencil" href="rn.php?radni_nalog='+rn[j].id+'"></a><br>';
                                                     output += '</td>';
                                                     
                                                     output += '<td>';
@@ -389,13 +393,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 }
                             });   
             
-            $( "#sviRMA" ).on("mouseover", "tr",function() {
-                                  $( this ).css("background-color", "#efefef");
-                              } );
-                                
-                                $( "#sviRMA" ).on("mouseout", "tr",function() {
-                                  $( this ).css("background-color", "white");
-                              } );
+            
         
         </script>                
         <?php } ?>

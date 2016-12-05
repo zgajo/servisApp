@@ -15,7 +15,6 @@
                                     <table class="table no-margin">
                                         <thead>
                                             <tr>
-                                                <th>Uredi RN</th>
                                                 <th>Primka</th>
                                                 <th>Radni nalog</th>
                                                 <th>Započeo rad</th>

@@ -1,25 +1,3 @@
-<?php
-
-include_once '../checkLogin.php';
-include_once '../klase/radniNalog.php';
-include_once '../klase/primka.php';
-include_once '../klase/osoba.php';
-
-$primka=new primka();
-$primka = $primka->getById($_GET['primka']);
-
-if(empty($primka[0]['primka_id'])){ unset($primka) ; $primka=new primka(); $primka = $primka->getById($_GET['primka']); } 
-
-print_r($primka);
-$datumZaprimanja = date("d.m.Y / H:i:s", strtotime($primka[0]['datumZaprimanja']));
-
-if($primka[0]['datumKupnje'] === "0000-00-00"){
-    $kupljeno=NULL;
-}else{
-    $kupljeno = date("d.m.Y / H:i:s", strtotime($primka[0]['datumKupnje']));
-}
-
-?>
 
 <!DOCTYPE html>
 <html>
@@ -45,138 +23,217 @@ if($primka[0]['datumKupnje'] === "0000-00-00"){
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body onload="window.print();">
+  <body onload="">
     <div class="wrapper">
       <!-- Main content -->
-      <section class="invoice">
-        <!-- title row -->
-        <div class="row">
-          <div class="col-xs-12">
-            <h2 class="page-header">
-              <i class="fa fa-globe"></i> Eurotrade d.o.o.
-              <small class="pull-right">Datum zaprimanja: <?php echo $datumZaprimanja;  ?></small>
-            </h2>
-          </div><!-- /.col -->
-        </div>
-        <!-- info row -->
-        <div class="row invoice-info">
-          <div class="col-sm-4 invoice-col">
-            From
-            <address>
-              <strong>Admin, Inc.</strong><br>
-              795 Folsom Ave, Suite 600<br>
-              San Francisco, CA 94107<br>
-              Phone: (804) 123-5432<br>
-              Email: info@almasaeedstudio.com
-            </address>
-          </div><!-- /.col -->
-          <div class="col-sm-4 invoice-col">
-             <h4>Stranka:</h4>
+       <section class="invoice">
+          <!-- title row -->
+          <div class="row">
+            <div class="col-xs-12">
+              <h2 class="page-header">
+                  <img src="logo.png" style="height: 50px">
+                  
+              </h2>
+            </div><!-- /.col -->
+          </div>
+          <!-- info row -->
+          <div class="row invoice-info">
+            <div class="col-sm-4 invoice-col">
+              Sjedište
               <address>
-                <?php if(!empty($primka[0]['tvrtka'])){  ?><strong><?php echo $primka[0]['tvrtka'] ?></strong><br><?php }  ?>
-                <?php echo $primka[0]['ime']. ' '.$primka[0]['prezime']  ?><br>
-                <?php echo $primka[0]['adresa'] ?><br>
-                <?php echo $primka[0]['grad']. ', '.$primka[0]['postBroj']  ?><br>
-                <i><strong>Kontakt: </strong></i><?php echo $primka[0]['kontaktBroj'] ?><br>
-                <i><strong>Email: </strong></i><?php echo $primka[0]['email']?>
+                <strong>Eurotrade d.o.o.</strong><br>
+                Naselje Gripole spine 53/c<br>
+                Rovinj, 52210<br>
+                Kontakt: 052 803 699<br>
+                Email: servis-ro@eurotrade.hr
               </address>
-          </div><!-- /.col -->
-          <div class="col-sm-4 invoice-col">
-            <b><h4><strong>Primka br. <?php echo $primka[0]['primka_id']; ?></strong></h4></b>
-            
-            <b>Order ID:</b> 4F3S8J<br>
-            <b>Payment Due:</b> 2/22/2014<br>
-            <b>Account:</b> 968-34567
-          </div><!-- /.col -->
-        </div><!-- /.row -->
+            </div><!-- /.col -->
+            <div class="col-sm-4 invoice-col">
+                <strong>Podaci o vlasniku</strong>
+              <address>
+                  <div id="osoba"></div>
+                  <div id="tvrtka"></div>
+                  <div id="adresa"></div>
+                  <div id="grad"></div>
+                  Kontakt: <div id="kontakt" style="display: inline"></div><br>
+                  Email: <div id="email" style="display: inline"></div><br>
+              </address>
+            </div><!-- /.col -->
+            <div class="col-sm-4 invoice-col">
+                <h3 style="margin-top: 0px" id="primka"></h3>
+                <b>Zaprimio: </b><p style="display: inline" id="zap"></p><br>
+              <b>Zaprimljeno: </b><p style="display: inline"  id="dz"></p>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
 
-        <!-- Table row -->
-        <div class="row">
-          <div class="col-xs-12 table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>Qty</th>
-                  <th>Product</th>
-                  <th>Serial #</th>
-                  <th>Description</th>
-                  <th>Subtotal</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Call of Duty</td>
-                  <td>455-981-221</td>
-                  <td>El snort testosterone trophy driving gloves handsome</td>
-                  <td>$64.50</td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Need for Speed IV</td>
-                  <td>247-925-726</td>
-                  <td>Wes Anderson umami biodiesel</td>
-                  <td>$50.00</td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Monsters DVD</td>
-                  <td>735-845-642</td>
-                  <td>Terry Richardson helvetica tousled street art master</td>
-                  <td>$10.70</td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Grown Ups Blue Ray</td>
-                  <td>422-568-642</td>
-                  <td>Tousled lomo letterpress</td>
-                  <td>$25.99</td>
-                </tr>
-              </tbody>
-            </table>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-
-        <div class="row">
-          <!-- accepted payments column -->
-          <div class="col-xs-6">
-            <p class="lead">Payment Methods:</p>
-            <img src="../dist/img/credit/visa.png" alt="Visa">
-            <img src="../dist/img/credit/mastercard.png" alt="Mastercard">
-            <img src="../dist/img/credit/american-express.png" alt="American Express">
-            <img src="../dist/img/credit/paypal2.png" alt="Paypal">
-            <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-              Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
-            </p>
-          </div><!-- /.col -->
-          <div class="col-xs-6">
-            <p class="lead">Amount Due 2/22/2014</p>
-            <div class="table-responsive">
-              <table class="table">
-                <tr>
-                  <th style="width:50%">Subtotal:</th>
-                  <td>$250.30</td>
-                </tr>
-                <tr>
-                  <th>Tax (9.3%)</th>
-                  <td>$10.34</td>
-                </tr>
-                <tr>
-                  <th>Shipping:</th>
-                  <td>$5.80</td>
-                </tr>
-                <tr>
-                  <th>Total:</th>
-                  <td>$265.24</td>
-                </tr>
+          <!-- Table row -->
+          <div class="row">
+            <div class="col-xs-12 table-responsive">
+                <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Uređaj</th>
+                    <th>Serijski</th>
+                    <th>Datum prodaje</th>
+                    <th>Račun</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                      <td id="uredaj">Lenovo G510</td>
+                    <td id="serijski">C20255952665</td>
+                    <td id="dp">sdds</td>
+                    <td id="racun">13325-502-1</td>
+                  </tr>
+                </tbody>
               </table>
+                <table class="table table-striped" style="font-size: 12px">
+                <thead>
+                  <tr>
+                    
+                    <th>Opis kvara</th>
+                    <th>Priloženo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td  id="opis">El snort testosterone trophy driving gloves handsomeEl snort testosterone trophy driving gloves handsomeEl snort testosterone trophy driving gloves handsomeEl snort testosterone trophy driving gloves handsome</td>
+                    <td id="prilozeno">El snort testosterone trophy driving gloves handsomeiving gloves handsomeEl snort testosterone trophy driving gloves handsomeEl snort testosterone trophy diving gloves handsomeEl snort testosterone trophy driving gloves handsomeEl snort testosterone trophy d</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+
+          <div class="row">
+            <!-- accepted payments column -->
+            <div class="col-xs-6">
+              <p class="lead">Napomena:</p>
+              
+              <p class="text-muted well well-sm no-shadow" style="font-size: 9px;margin-top: 10px;">
+                  Eurotrade d.o.o. ne odgovara za podatke na računalu, HDD uređaju ili bilo kojem uređaju koji služi za pohranu podataka ili eventualni njihov gubitak. Kod pisača u jamstvu Eurotrade d.o.o. koristi vlastiti potrošni materijal. Kod pisača van jamstva Eurotrade d.o.o. koristi potrošni materijal koji se nalazi u pisaču te postoji mogućnost da će se zbog potrebe servisiranja taj isti potrošiti djelomično ili u cijelosti.
+
+Eurotrade d.o.o. poslije 60 dana od zatvaranja radnog naloga ne snosi odgovornost za robu ukoliko ona nije podignuta.
+
+U slučaju odustajanja od popravka naplaćuje se dijagnostika po važećem cjeniku.
+
+Sve radove, materijale i ostale troškove vezane uz radni nalog (troškovi koji nisu pokriveni ugovornom obvezom ili jamstvom) vlasnik neopozivo naručuje potpisom radnog naloga.
+              </p>
+              <strong>Potpis vlasnika</strong><br><div style="border-bottom:  1px solid black; width: 200px;height: 30px"></div>
+            </div><!-- /.col -->
+            <div class="col-xs-6" style="font-size: 10px">
+              <p class="lead">Ostali Eurotrade centri</p>
+              <div class="table-responsive">
+                <table class="table">
+                  <tr>
+                    <th style="width:50%">PULA</th>
+                    <td>
+                        Benediktinske opatije 3<br>
+                         tel. 052/211-632, fax 052/211-637
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>ZAGREB</th>
+                    <td>
+                         Gospodarska ulica 15, Donji Stupnik <br>
+                        tel. 01/6531-230, fax 01/6531-231
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>VARAŽDIN</th>
+                    <td>
+                        Miroslava Krleže 1<br>
+                        tel. 042/331-177, fax 042/331-149
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>RIJEKA</th>
+                    <td>
+                         Eugena Kovačića 2, TC Andrea<br>
+                        tel. 051/680-760, fax 051/680-763
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>RIJEKA</th>
+                    <td>
+                         Trg 128 brigade HV 4, Korzo<br>
+                         tel. 051/212-321 
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>SPLIT</th>
+                    <td>
+                         Matoševa 86, Solin<br>
+                        tel. 021/262-012, fax 021/262-015
+                    </td>
+                  </tr>
+                   <tr>
+                    <th>OSIJEK</th>
+                    <td>
+                         Vijenac Jakova Gotovca 5<br>
+                       tel. 031/210-999
+                    </td>
+                  </tr>
+                   <tr>
+                    <th>SISAK</th>
+                    <td>
+                        Ante Starčevića 13<br>
+                        tel. 044/524-498, fax 044/524-499
+                    </td>
+                 
+                </table>
+              </div>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+
+          <!-- this row will not appear when printing -->
+          <div id="t" class="row no-print">
+            <div class="col-xs-12">
+              <a href="invoice-print.php" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+              <button class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment</button>
+              <button class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> Generate PDF</button>
             </div>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </section><!-- /.content -->
+          </div>
+        </section><!-- /.content -->
     </div><!-- ./wrapper -->
 
     <!-- AdminLTE App -->
-    <script src="../dist/js/app.min.js"></script>
+    
+    
+        <script src="../plugins/jQuery/jQuery-2.1.4.min.js"></script>
+        <script>
+            var id = <?php echo $_GET['primka'] ?>    
+                $.get("../json/primka/getById.php", {"id":id}, function(primka){
+                   console.log(primka);
+                   
+                   var zaprimljeno = new Date(primka[0].datumZaprimanja);
+                   
+                   $('#dz').text([zaprimljeno.getDate(), zaprimljeno.getMonth(), zaprimljeno.getFullYear()].join('.') + ' / ' + [((zaprimljeno.getHours()<10) ? '0': '')+ zaprimljeno.getHours(), ((zaprimljeno.getMinutes()<10) ? '0': '')+ zaprimljeno.getMinutes()].join(':'));
+                   $('#zap').text(primka[0].pot_ime+ ' ' +primka[0].pot_prezime);
+                   $('#primka').text('Primka: ' +primka[0].primka_id);
+                   
+                   (primka[0].tvrtka != null && primka[0].tvrtka != '') ? $('#tvrtka').text(primka[0].tvrtka) : $('#tvrtka').text('');
+                    $('#adresa').text(primka[0].adresa);
+                    $('#grad').text(primka[0].grad);
+                    $('#kontakt').text(primka[0].kontaktBroj);
+                    $('#email').text(primka[0].email);
+                    $('#osoba').text(primka[0].ime + ' ' +primka[0].prezime);
+                    
+                    
+                    $('#uredaj').text(primka[0].naziv);
+                    $('#serijski').text(primka[0].serial);
+                    
+                    var kupljeno = new Date(primka[0].datumKupnje);
+                    console.log(kupljeno.getMinutes());
+                    (kupljeno && kupljeno.getDate() != '1970' && !isNaN(kupljeno)) ?  $('#dp').text([kupljeno.getDate(), kupljeno.getMonth(), kupljeno.getFullYear()].join('.') ):  $('#dp').text('');;
+                   
+                    $('#racun').text(primka[0].racun);
+                    $('#opis').text(primka[0].opisKvara);
+                    $('#prilozeno').text(primka[0].prilozeno_primijeceno);
+                    
+                    
+                });
+        </script>
+            
   </body>
 </html>

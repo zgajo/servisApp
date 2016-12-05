@@ -15,7 +15,6 @@
                                     <table class="table no-margin">
                                         <thead>
                                             <tr>
-                                                <th>Uredi RMA</th>
                                                 <th>Primka</th>
                                                 <th>RMA nalog</th>
                                                 <th>Radni nalog OS-a</th>

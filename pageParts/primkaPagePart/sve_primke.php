@@ -16,7 +16,6 @@
                                     <table class="table no-margin">
                                         <thead>
                                             <tr>
-                                                <th  style="text-align: center;">Uredi</th>
                                                 <th>Primka</th>
                                                 <th>Uređaj</th>
                                                 <th>Stranka</th>
