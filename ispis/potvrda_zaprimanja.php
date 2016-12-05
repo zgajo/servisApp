@@ -23,7 +23,7 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body onload="">
+  <body onload="window.print()">
     <div class="wrapper">
       <!-- Main content -->
        <section class="invoice">
@@ -80,10 +80,10 @@
                 </thead>
                 <tbody>
                   <tr>
-                      <td id="uredaj">Lenovo G510</td>
-                    <td id="serijski">C20255952665</td>
-                    <td id="dp">sdds</td>
-                    <td id="racun">13325-502-1</td>
+                      <td id="uredaj"></td>
+                    <td id="serijski"></td>
+                    <td id="dp"></td>
+                    <td id="racun"></td>
                   </tr>
                 </tbody>
               </table>
@@ -97,8 +97,8 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td  id="opis">El snort testosterone trophy driving gloves handsomeEl snort testosterone trophy driving gloves handsomeEl snort testosterone trophy driving gloves handsomeEl snort testosterone trophy driving gloves handsome</td>
-                    <td id="prilozeno">El snort testosterone trophy driving gloves handsomeiving gloves handsomeEl snort testosterone trophy driving gloves handsomeEl snort testosterone trophy diving gloves handsomeEl snort testosterone trophy driving gloves handsomeEl snort testosterone trophy d</td>
+                    <td  id="opis"></td>
+                    <td id="prilozeno"></td>
                   </tr>
                 </tbody>
               </table>
