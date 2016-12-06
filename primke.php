@@ -94,17 +94,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         require_once 'pageParts/primkaPagePart/uredi_primku.php';
                         
                     }
-                    /*
-                    Otvaranje nove primke
-                    */
-                    else if(isset($_GET['action'])){
-                        if ($_GET['action'] == "nova_primka") {
-
-                        require_once 'pageParts/primkaPagePart/nova_primka.php';
-
-                       
-                       }
-                    }
                     
                        /*
                        Prikaz svih naloga

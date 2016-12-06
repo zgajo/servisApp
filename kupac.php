@@ -103,7 +103,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </li>
                                 </ul>
 
-                                <a id="izmijeni_podatke" class="btn btn-primary btn-block"><b>Izmijeni podatke</b></a>
                             </div><!-- /.box-body -->
                         </div>
 
@@ -113,18 +112,452 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="col-md-9">
                         <div class="nav-tabs-custom">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a href="#timeline" data-toggle="tab" aria-expanded="true">Timeline</a></li>
+                                <li class="active"><a href="#dataTable" data-toggle="tab" aria-expanded="true">Timeline</a></li>
                                 <li class=""><a href="#izmjena" data-toggle="tab" aria-expanded="false">Izmjeni podatke stranke</a></li>
                             </ul>
                             <div class="tab-content">
-                                <div class="tab-pane active" id="timeline">
-                                    <!-- The timeline -->
 
+                                <div class="tab-pane active" id="dataTable">
+                                    <!-- The timeline -->
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="box" style="border-top: none">
+                                                
+                                                <div class="box-body">
+                                                    <table id="example1" class="table table-bordered table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Primka</th>
+                                                                <th>Uređaj</th>
+                                                                <th>Serijski broj</th>
+                                                                <th>Kvar</th>
+                                                                <th>Opis popravka</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Trident</td>
+                                                                <td>Internet
+                                                                    Explorer 4.0</td>
+                                                                <td>Win 95+</td>
+                                                                <td> 4</td>
+                                                                <td>X</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Trident</td>
+                                                                <td>Internet
+                                                                    Explorer 5.0</td>
+                                                                <td>Win 95+</td>
+                                                                <td>5</td>
+                                                                <td>C</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Trident</td>
+                                                                <td>Internet
+                                                                    Explorer 5.5</td>
+                                                                <td>Win 95+</td>
+                                                                <td>5.5</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Trident</td>
+                                                                <td>Internet
+                                                                    Explorer 6</td>
+                                                                <td>Win 98+</td>
+                                                                <td>6</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Trident</td>
+                                                                <td>Internet Explorer 7</td>
+                                                                <td>Win XP SP2+</td>
+                                                                <td>7</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Trident</td>
+                                                                <td>AOL browser (AOL desktop)</td>
+                                                                <td>Win XP</td>
+                                                                <td>6</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Gecko</td>
+                                                                <td>Firefox 1.0</td>
+                                                                <td>Win 98+ / OSX.2+</td>
+                                                                <td>1.7</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Gecko</td>
+                                                                <td>Firefox 1.5</td>
+                                                                <td>Win 98+ / OSX.2+</td>
+                                                                <td>1.8</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Gecko</td>
+                                                                <td>Firefox 2.0</td>
+                                                                <td>Win 98+ / OSX.2+</td>
+                                                                <td>1.8</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Gecko</td>
+                                                                <td>Firefox 3.0</td>
+                                                                <td>Win 2k+ / OSX.3+</td>
+                                                                <td>1.9</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Gecko</td>
+                                                                <td>Camino 1.0</td>
+                                                                <td>OSX.2+</td>
+                                                                <td>1.8</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Gecko</td>
+                                                                <td>Camino 1.5</td>
+                                                                <td>OSX.3+</td>
+                                                                <td>1.8</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Gecko</td>
+                                                                <td>Netscape 7.2</td>
+                                                                <td>Win 95+ / Mac OS 8.6-9.2</td>
+                                                                <td>1.7</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Gecko</td>
+                                                                <td>Netscape Browser 8</td>
+                                                                <td>Win 98SE+</td>
+                                                                <td>1.7</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Gecko</td>
+                                                                <td>Netscape Navigator 9</td>
+                                                                <td>Win 98+ / OSX.2+</td>
+                                                                <td>1.8</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Gecko</td>
+                                                                <td>Mozilla 1.0</td>
+                                                                <td>Win 95+ / OSX.1+</td>
+                                                                <td>1</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Gecko</td>
+                                                                <td>Mozilla 1.1</td>
+                                                                <td>Win 95+ / OSX.1+</td>
+                                                                <td>1.1</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Gecko</td>
+                                                                <td>Mozilla 1.2</td>
+                                                                <td>Win 95+ / OSX.1+</td>
+                                                                <td>1.2</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Gecko</td>
+                                                                <td>Mozilla 1.3</td>
+                                                                <td>Win 95+ / OSX.1+</td>
+                                                                <td>1.3</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Gecko</td>
+                                                                <td>Mozilla 1.4</td>
+                                                                <td>Win 95+ / OSX.1+</td>
+                                                                <td>1.4</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Gecko</td>
+                                                                <td>Mozilla 1.5</td>
+                                                                <td>Win 95+ / OSX.1+</td>
+                                                                <td>1.5</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Gecko</td>
+                                                                <td>Mozilla 1.6</td>
+                                                                <td>Win 95+ / OSX.1+</td>
+                                                                <td>1.6</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Gecko</td>
+                                                                <td>Mozilla 1.7</td>
+                                                                <td>Win 98+ / OSX.1+</td>
+                                                                <td>1.7</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Gecko</td>
+                                                                <td>Mozilla 1.8</td>
+                                                                <td>Win 98+ / OSX.1+</td>
+                                                                <td>1.8</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Gecko</td>
+                                                                <td>Seamonkey 1.1</td>
+                                                                <td>Win 98+ / OSX.2+</td>
+                                                                <td>1.8</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Gecko</td>
+                                                                <td>Epiphany 2.20</td>
+                                                                <td>Gnome</td>
+                                                                <td>1.8</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Webkit</td>
+                                                                <td>Safari 1.2</td>
+                                                                <td>OSX.3</td>
+                                                                <td>125.5</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Webkit</td>
+                                                                <td>Safari 1.3</td>
+                                                                <td>OSX.3</td>
+                                                                <td>312.8</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Webkit</td>
+                                                                <td>Safari 2.0</td>
+                                                                <td>OSX.4+</td>
+                                                                <td>419.3</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Webkit</td>
+                                                                <td>Safari 3.0</td>
+                                                                <td>OSX.4+</td>
+                                                                <td>522.1</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Webkit</td>
+                                                                <td>OmniWeb 5.5</td>
+                                                                <td>OSX.4+</td>
+                                                                <td>420</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Webkit</td>
+                                                                <td>iPod Touch / iPhone</td>
+                                                                <td>iPod</td>
+                                                                <td>420.1</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Webkit</td>
+                                                                <td>S60</td>
+                                                                <td>S60</td>
+                                                                <td>413</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Presto</td>
+                                                                <td>Opera 7.0</td>
+                                                                <td>Win 95+ / OSX.1+</td>
+                                                                <td>-</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Presto</td>
+                                                                <td>Opera 7.5</td>
+                                                                <td>Win 95+ / OSX.2+</td>
+                                                                <td>-</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Presto</td>
+                                                                <td>Opera 8.0</td>
+                                                                <td>Win 95+ / OSX.2+</td>
+                                                                <td>-</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Presto</td>
+                                                                <td>Opera 8.5</td>
+                                                                <td>Win 95+ / OSX.2+</td>
+                                                                <td>-</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Presto</td>
+                                                                <td>Opera 9.0</td>
+                                                                <td>Win 95+ / OSX.3+</td>
+                                                                <td>-</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Presto</td>
+                                                                <td>Opera 9.2</td>
+                                                                <td>Win 88+ / OSX.3+</td>
+                                                                <td>-</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Presto</td>
+                                                                <td>Opera 9.5</td>
+                                                                <td>Win 88+ / OSX.3+</td>
+                                                                <td>-</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Presto</td>
+                                                                <td>Opera for Wii</td>
+                                                                <td>Wii</td>
+                                                                <td>-</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Presto</td>
+                                                                <td>Nokia N800</td>
+                                                                <td>N800</td>
+                                                                <td>-</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Presto</td>
+                                                                <td>Nintendo DS browser</td>
+                                                                <td>Nintendo DS</td>
+                                                                <td>8.5</td>
+                                                                <td>C/A<sup>1</sup></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>KHTML</td>
+                                                                <td>Konqureror 3.1</td>
+                                                                <td>KDE 3.1</td>
+                                                                <td>3.1</td>
+                                                                <td>C</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>KHTML</td>
+                                                                <td>Konqureror 3.3</td>
+                                                                <td>KDE 3.3</td>
+                                                                <td>3.3</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>KHTML</td>
+                                                                <td>Konqureror 3.5</td>
+                                                                <td>KDE 3.5</td>
+                                                                <td>3.5</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Tasman</td>
+                                                                <td>Internet Explorer 4.5</td>
+                                                                <td>Mac OS 8-9</td>
+                                                                <td>-</td>
+                                                                <td>X</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Tasman</td>
+                                                                <td>Internet Explorer 5.1</td>
+                                                                <td>Mac OS 7.6-9</td>
+                                                                <td>1</td>
+                                                                <td>C</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Tasman</td>
+                                                                <td>Internet Explorer 5.2</td>
+                                                                <td>Mac OS 8-X</td>
+                                                                <td>1</td>
+                                                                <td>C</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Misc</td>
+                                                                <td>NetFront 3.1</td>
+                                                                <td>Embedded devices</td>
+                                                                <td>-</td>
+                                                                <td>C</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Misc</td>
+                                                                <td>NetFront 3.4</td>
+                                                                <td>Embedded devices</td>
+                                                                <td>-</td>
+                                                                <td>A</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Misc</td>
+                                                                <td>Dillo 0.8</td>
+                                                                <td>Embedded devices</td>
+                                                                <td>-</td>
+                                                                <td>X</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Misc</td>
+                                                                <td>Links</td>
+                                                                <td>Text only</td>
+                                                                <td>-</td>
+                                                                <td>X</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Misc</td>
+                                                                <td>Lynx</td>
+                                                                <td>Text only</td>
+                                                                <td>-</td>
+                                                                <td>X</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Misc</td>
+                                                                <td>IE Mobile</td>
+                                                                <td>Windows Mobile 6</td>
+                                                                <td>-</td>
+                                                                <td>C</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Misc</td>
+                                                                <td>PSP browser</td>
+                                                                <td>PSP</td>
+                                                                <td>-</td>
+                                                                <td>C</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Other browsers</td>
+                                                                <td>All others</td>
+                                                                <td>-</td>
+                                                                <td>-</td>
+                                                                <td>U</td>
+                                                            </tr>
+                                                        </tbody>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <th>Rendering engine</th>
+                                                                <th>Browser</th>
+                                                                <th>Platform(s)</th>
+                                                                <th>Engine version</th>
+                                                                <th>CSS grade</th>
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div><!-- /.box-body -->
+                                            </div><!-- /.box -->
+                                        </div><!-- /.col -->
+                                    </div><!-- /.row -->
                                 </div><!-- /.tab-pane -->
-                                
+
                                 <div class="tab-pane" id="izmjena">
                                     <form class="form-horizontal" action="" method="POST">
-                                    <?php include 'pageParts/primkaPagePart/uredi_kupca.php'; ?>
+                                        <?php include 'pageParts/primkaPagePart/uredi_kupca.php'; ?>
                                     </form>
                                 </div><!-- /.tab-pane -->
 
@@ -155,21 +588,44 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
         <script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>
         <script type="text/javascript" src="search/searchkupca.js"></script>
-
+        <!-- DataTables -->
+        <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+        <!-- SlimScroll -->
+        <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+        <!-- FastClick -->
+        <script src="plugins/fastclick/fastclick.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="dist/js/app.min.js"></script>
+        <!-- AdminLTE for demo purposes -->
+        <script src="dist/js/demo.js"></script>
+        <script>
+            $(function () {
+                $("#example1").DataTable();
+                $('#example2').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": false,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false
+                });
+            });
+        </script>
         <script>
 
             $(document).ready(function () {
                 var kid = <?php echo $_GET['id'] ?>;
-                
-                function podaciKupca(kid){
+
+                function podaciKupca(kid) {
                     $.get("json/kupac/dohvatiKupcaByPrimka.php", {"id": kid}, function (kupac) {
-                    var zadnji  =kupac.length - 1;
-                    (kupac[zadnji].tvrtka) ? $('#tvrtka').text(kupac[zadnji].tvrtka) : $('#tvrtka').text('');
-                    $('#ip').text(kupac[zadnji].ime + ' ' + kupac[zadnji].prezime);
-                    $('#adresa').text(kupac[zadnji].adresa);
-                    $('#kontakt').text(kupac[zadnji].kontaktBroj);
-                    $('#email').text(kupac[zadnji].email);
-                    (kupac[0].postBroj) ? $('#grad').text(kupac[zadnji].grad + ', ' + kupac[zadnji].postBroj) : $('#grad').text(kupac[zadnji].grad);
+                        var zadnji = kupac.length - 1;
+                        (kupac[zadnji].tvrtka) ? $('#tvrtka').text(kupac[zadnji].tvrtka) : $('#tvrtka').text('');
+                        $('#ip').text(kupac[zadnji].ime + ' ' + kupac[zadnji].prezime);
+                        $('#adresa').text(kupac[zadnji].adresa);
+                        $('#kontakt').text(kupac[zadnji].kontaktBroj);
+                        $('#email').text(kupac[zadnji].email);
+                        (kupac[0].postBroj) ? $('#grad').text(kupac[zadnji].grad + ', ' + kupac[zadnji].postBroj) : $('#grad').text(kupac[zadnji].grad);
 
                         $('#inputTvrtka').val(kupac[0].tvrtka);
                         $('#inputIme').val(kupac[0].ime);
@@ -179,134 +635,132 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         $('#inputPB').val(kupac[0].postBroj);
                         $('#inputKontakt').val(kupac[0].kontaktBroj);
                         $('#inputEmail').val(kupac[0].email);
-                    
-                    
-                    
-                    
-                    var output = '<ul  class="timeline timeline-inverse">';
-
-                    if (kupac) {
-                        var num = 1;
-                        for (primka of kupac){
 
 
-                            if (num === 5)
-                                num = 1;
 
-                            var bg_datum;
-                            var bg_ikona;
 
-                            switch (num) {
-                                case 1:
-                                    bg_datum = "bg-blue";
-                                    bg_ikona = "bg-green";
-                                    break;
-                                case 2:
-                                    bg_datum = "bg-red";
-                                    bg_ikona = "bg-aqua";
-                                    break;
-                                case 3:
-                                    bg_datum = "bg-green";
-                                    bg_ikona = "bg-yellow";
-                                    break;
-                                case 4:
-                                    bg_datum = "bg-purple";
-                                    bg_ikona = "bg-blue";
-                                    break;
-                                default :
-                                    break;
+                        var output = '<ul  class="timeline timeline-inverse">';
+
+                        if (kupac) {
+                            var num = 1;
+                            for (primka of kupac){
+
+
+                                if (num === 5)
+                                    num = 1;
+
+                                var bg_datum;
+                                var bg_ikona;
+
+                                switch (num) {
+                                    case 1:
+                                        bg_datum = "bg-blue";
+                                        bg_ikona = "bg-green";
+                                        break;
+                                    case 2:
+                                        bg_datum = "bg-red";
+                                        bg_ikona = "bg-aqua";
+                                        break;
+                                    case 3:
+                                        bg_datum = "bg-green";
+                                        bg_ikona = "bg-yellow";
+                                        break;
+                                    case 4:
+                                        bg_datum = "bg-purple";
+                                        bg_ikona = "bg-blue";
+                                        break;
+                                    default :
+                                        break;
+                                }
+
+
+                                var zaprimljeno = new Date(primka.datumZaprimanja);
+
+                                output += '<li class="time-label">' +
+                                        '<span class="' + bg_datum + '" id="datum">' +
+                                        '' + [zaprimljeno.getDate(), zaprimljeno.getMonth() + 1, zaprimljeno.getFullYear()].join(".") +
+                                        '</span>' +
+                                        '</li>' +
+                                        '<li>' +
+                                        '<i class="fa  fa-list-alt ' + bg_ikona + '"></i>' +
+                                        '<div class="timeline-item">' +
+                                        '<span class="time"><i class="fa fa-clock-o"></i> ' + [(zaprimljeno.getHours() < 10) ? '0' + zaprimljeno.getHours() : '' + zaprimljeno.getHours(), (zaprimljeno.getMinutes() < 10) ? '0' + zaprimljeno.getMinutes() : '' + zaprimljeno.getMinutes()].join(":") + '</span>' +
+                                        '<h3 class="timeline-header"><a href="#">Primka ' + primka.primka_id + '</a> zaprimljena</h3>';
+
+
+                                output += '<div class="timeline-body">' +
+                                        '<div style="width:45%; float:right">' +
+                                        '<b>Uređaj:</b> ' + primka.naziv + '<br> <b>Serijski broj:</b> ';
+                                output += (primka.serial) ? primka.serial + '<br>' : '<br>';
+                                output += '<b>Prijavljen kvar:</b> ' + primka.opisKvara + '';
+
+                                if (primka.rn_id) {
+                                    output += '<hr><b>Izvršeni popravak: </b>';
+                                    output += (primka.opisPopravka) ? primka.opisPopravka + '<br>' : '<br>';
+                                }
+                                output += '<h5><b>Status:</b> <a href="#"> ' + primka.status + '</a> </h5><br>';
+
+                                output += ' </div>';
+
+
+                                output += ' <div class="timeline-footer" style="clear:both">';
+                                output += '<a class="btn btn-primary btn-xs">Pregledaj više</a>' +
+                                        '<a style="margin-left:5px" class="btn btn-danger btn-xs">Isprintaj</a>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</li>';
+                                num += 1;
+
                             }
-
-
-                            var zaprimljeno = new Date(primka.datumZaprimanja);
-
-                            output += '<li class="time-label">' +
-                                    '<span class="' + bg_datum + '" id="datum">' +
-                                    '' + [zaprimljeno.getDate(), zaprimljeno.getMonth() + 1, zaprimljeno.getFullYear()].join(".") +
-                                    '</span>' +
-                                    '</li>' +
-                                    '<li>' +
-                                    '<i class="fa  fa-list-alt ' + bg_ikona + '"></i>' +
-                                    '<div class="timeline-item">' +
-                                    '<span class="time"><i class="fa fa-clock-o"></i> ' + [(zaprimljeno.getHours() < 10) ? '0' + zaprimljeno.getHours() : '' + zaprimljeno.getHours(), (zaprimljeno.getMinutes() < 10) ? '0' + zaprimljeno.getMinutes() : '' + zaprimljeno.getMinutes()].join(":") + '</span>' +
-                                    
-                        '<h3 class="timeline-header"><a href="#">Primka ' + primka.primka_id + '</a> zaprimljena</h3>';
-                        
-                        
-                            output+=  '<div class="timeline-body">' +
-                                   '<div style="width:45%; float:right">'+
-                                    '<b>Uređaj:</b> ' + primka.naziv + '<br> <b>Serijski broj:</b> ';
-                            output += (primka.serial) ? primka.serial + '<br>' : '<br>';
-                            output += '<b>Prijavljen kvar:</b> ' + primka.opisKvara + '';
-                            
-                            if (primka.rn_id) {
-                                output += '<hr><b>Izvršeni popravak: </b>';
-                                output += (primka.opisPopravka) ? primka.opisPopravka + '<br>' : '<br>';
-                            }
-                            output += '<h5><b>Status:</b> <a href="#"> ' + primka.status + '</a> </h5><br>';
-
-                            output += ' </div>';
-                                    
-
-                            output += ' <div class="timeline-footer" style="clear:both">';
-                            output += '<a class="btn btn-primary btn-xs">Pregledaj više</a>' +
-                                    '<a style="margin-left:5px" class="btn btn-danger btn-xs">Isprintaj</a>' +
-                                    '</div>' +
-                                    '</div>' +
-                                    '</div>' +
-                                    
-                                    '</li>';
-                            num += 1;
-
                         }
-                    }
-                    output += '<li><i class="fa fa-clock-o bg-gray"></i></li></ul>';
-                    $('#timeline').html(output);
+                        output += '<li><i class="fa fa-clock-o bg-gray"></i></li></ul>';
+                        $('#timeline').html(output);
+
+
+
+                    });
+                }
+                podaciKupca(kid);
+
+                //    SPREMANJE IZMJENE KUPCA
+                $('#spremiKupca').click(function (e) {
+                    e.preventDefault();
+
+                    var tvrtka = $('#inputTvrtka').val();
+                    var ime = $('#inputIme').val();
+                    var prezime = $('#inputPrezime').val();
+                    var adresa = $('#inputAdresa').val();
+                    var grad = $('#inputGrad').val();
+                    var pb = $('#inputPB').val();
+                    var kontakt = $('#inputKontakt').val();
+                    var email = $('#inputEmail').val();
+
+                    $.post('json/kupac/updateKupca.php', {
+                        "tvrtka": tvrtka,
+                        "ime": ime,
+                        "prezime": prezime,
+                        "adresa": adresa,
+                        "grad": grad,
+                        "pb": pb,
+                        "kontakt": kontakt,
+                        "email": email,
+                        "id": kid
+                    });
+                    podaciKupca(kid);
 
 
 
                 });
-                }
-                 podaciKupca(kid);
-                 
-                 //    SPREMANJE IZMJENE KUPCA
-                  $('#spremiKupca').click(function (e){
-                      e.preventDefault();
-                      
-                      var tvrtka = $('#inputTvrtka').val();
-                      var ime = $('#inputIme').val();
-                      var prezime = $('#inputPrezime').val();
-                      var adresa = $('#inputAdresa').val();
-                      var grad = $('#inputGrad').val();
-                      var pb = $('#inputPB').val();
-                      var kontakt = $('#inputKontakt').val();
-                      var email = $('#inputEmail').val();
-                       
-                       $.post('json/kupac/updateKupca.php', {
-                           "tvrtka" : tvrtka,
-                           "ime":ime,
-                           "prezime":prezime, 
-                           "adresa" : adresa, 
-                           "grad" : grad, 
-                           "pb" : pb, 
-                           "kontakt":kontakt, 
-                           "email":email,
-                           "id" : kid
-                       });
-                       podaciKupca(kid);
-                       
+                //  KRAJ * SPREMANJE IZMJENE KUPCA * KRAJ
 
-                      
-                  });
-                  //  KRAJ * SPREMANJE IZMJENE KUPCA * KRAJ
-                  
-               
-                  $('#ponistiK').on("click", this, function(){
+
+                $('#ponistiK').on("click", this, function () {
                     podaciKupca(kid);
-                  });
-                  
-                 
-                 
+                });
+
+
+
             });
 
         </script>        
