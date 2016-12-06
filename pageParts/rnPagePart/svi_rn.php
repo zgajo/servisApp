@@ -16,9 +16,10 @@
                                         <thead>
                                             <tr>
                                                 <th>Primka</th>
+                                                <th>Uređaj</th>
+                                                <th>Serijski</th>
+                                                <th>Stranka</th>
                                                 <th>Radni nalog</th>
-                                                <th>Započeo rad</th>
-                                                <th>Početak rada</th>
                                                 <th>Status radnog naloga</th>
                                                 <th>Napomena</th>
                                             </tr>

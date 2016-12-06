@@ -39,3 +39,13 @@ var left = $('#sk').position().left;
 
                 });
                 //  KRAJ * PRETRAGA ZA KUPCEM * KRAJ
+                
+                //  UPIS PODATAKA ODABRANOG KUPCA U POLJE
+                $('#search_result_kupac').on("click", 'a', function(e){
+                    e.preventDefault();
+                    
+                    var idkupca = $( this ).attr('name');
+                   window.location = "kupac.php?id=" + idkupca;
+
+                    
+                });

@@ -11,9 +11,10 @@ class primka{
         $this->mysqli = $con->getConnection();
     }
     
-    public function insertPrimka($centar, $sifra=NULL, $brand=NULL, $tip=NULL, $naziv, $serijski=NULL, $opisKvara, $prilozeno_primijeceno=NULL, $racun=NULL, $status, $datum_kupnje, $djelatnik_otvorio_id, $stranka_id){
+    public function insertPrimka($centar, $sifra=NULL, $brand=NULL, $tip=NULL, $naziv, $serijski=NULL, $opisKvara, $prilozeno_primijeceno=NULL, $racun=NULL, $status, $dk, $djelatnik_otvorio_id, $stranka_id){
         date_default_timezone_set('Europe/Zagreb');
         $zaprimljeno = date('Y-m-d H:i:s', time());
+        $datum_kupnje = date('Y-m-d', strtotime($dk));
         
         $query = $this->mysqli->prepare("INSERT INTO primka(centar, sifraUredaja, brand, tip, naziv, serial, datumZaprimanja, opisKvara, prilozeno_primijeceno, racun, status, datumKupnje, djelatnik_otvorio_id, stranka_id)"
                 . "VALUES (?, ?, ?,?,?,?,?,?,?,?,?,?,?,?) ");

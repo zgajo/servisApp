@@ -16,10 +16,12 @@
                                         <thead>
                                             <tr>
                                                 <th>Primka</th>
+                                                <th>Stranka</th>
+                                                <th>Uređaj</th>
+                                                <th>Serijski</th>
                                                 <th>RMA nalog</th>
                                                 <th>Radni nalog OS-a</th>
                                                 <th>Naziv OS-a</th>
-                                                <th>Stranka</th>
                                                 <th>Poslano u OS</th>
                                                 <th>Status</th>
                                                 <th>Napomena</th>

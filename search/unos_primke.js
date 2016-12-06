@@ -203,7 +203,7 @@
                           var idkupca = $( '#inputid' ).text();
                           
                           if(idkupca === '') {
-                              if (confirm('Jeste li sigurni da želite unijeti ubisane podatke?')) {
+                              if (confirm('Jeste li sigurni da želite unijeti upisane podatke?')) {
                                 $.ajax({
                                  type: 'POST',
                                  url: "json/primka/insertPrimka.php",

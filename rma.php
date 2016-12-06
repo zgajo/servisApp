@@ -334,6 +334,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 output += '<tr>';
 
                                 output += '<td><span class="' + sty + '">Primka ' + primka[i].primka_id + '</span></td>';
+                                
+                                output += '<td>'+ primka[i].s_ime + ' ' + primka[i].s_prezime +'</td>';
+                                output += '<td>'+ primka[i].naziv +'</td>';
+                                output += '<td>'+ primka[i].serial +'</td>';
 
                                 output += '<td>';
                                 for (var j = 0; j < rma.length; ++j)
@@ -350,15 +354,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     output += (rma[j].nazivOS) ? rma[j].nazivOS + '<br>' : "";
                                 output += '</td>';
 
-                                output += '<td>';
-                                output += (primka[i].tvrtka) ? '<i>' + primka[i].tvrtka + '</i>, ' : '';
-                                output += primka[i].s_ime + ' ' + primka[i].s_prezime;
-                                output += '</td>';
 
                                 output += '<td>';
 
                                 var poslano = new Date(rma[rma.length - 1].poslano);
-                                output += (poslano && poslano.getFullYear() != "1970") ? [poslano.getDate(), poslano.getMonth() + 1, poslano.getFullYear()].join('.') + ' /  ' + [(poslano.getHours() < 10 ? '0' : '') + poslano.getHours(), (poslano.getMinutes() < 10 ? '0' : '') + poslano.getMinutes()].join(':') : '';
+                                output += (poslano && poslano.getFullYear() != "1970") ? [poslano.getDate(), poslano.getMonth() + 1, poslano.getFullYear()].join('.') : '';
 
 
                                 output += '</td>';

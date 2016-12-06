@@ -34,7 +34,7 @@
             <!-- search form (Optional) -->
         <form action="#" method="get" class="sidebar-form">
             <div class="input-group" id="sk">
-                <input type="text" name="q" class="form-control" id="search_kupca" placeholder="Search...">
+                <input type="text" name="q" class="form-control" id="search_kupca" placeholder="Pretraži kupca...">
                 <span class="input-group-btn">
                     <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
                 </span>

@@ -23,7 +23,7 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body onload="window.print()">
+  <body>
     <div class="wrapper">
       <!-- Main content -->
        <section class="invoice">
@@ -189,7 +189,7 @@ Sve radove, materijale i ostale troškove vezane uz radni nalog (troškovi koji 
           <!-- this row will not appear when printing -->
           <div id="t" class="row no-print">
             <div class="col-xs-12">
-              <a href="invoice-print.php" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+                <a  class="btn btn-default" onclick="printaj()"><i class="fa fa-print"></i> Print</a>
               <button class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment</button>
               <button class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> Generate PDF</button>
             </div>
@@ -231,8 +231,12 @@ Sve radove, materijale i ostale troškove vezane uz radni nalog (troškovi koji 
                     $('#opis').text(primka[0].opisKvara);
                     $('#prilozeno').text(primka[0].prilozeno_primijeceno);
                     
-                    
+                    printaj();
                 });
+                
+                function printaj(){
+                    window.print();
+                }
         </script>
             
   </body>

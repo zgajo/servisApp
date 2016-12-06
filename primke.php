@@ -280,7 +280,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                      $('#zap').text([dz.getDate(), dz.getMonth()+1, dz.getFullYear()].join('.') +' /  '+[(dz.getHours()<10?'0':'') + dz.getHours(), (dz.getMinutes()<10?'0':'') + dz.getMinutes()].join(':'));
                                      $('#po').text(pp[0].pot_ime + ' ' + pp[0].pot_prezime);
                                      $('#nu').text(pp[0].naziv);
-                                     $('#serijski').text(pp[0].serijski);
+                                     $('#serijski').text(pp[0].serial);
                                      $('#brand').text(pp[0].brand);
                                      $('#tip').text(pp[0].tip);
                                      (isNaN(dk.getDate())) ? $('#dk').text() : $('#dk').text([dk.getDate(), dk.getMonth()+1, dk.getFullYear()].join('.'));
