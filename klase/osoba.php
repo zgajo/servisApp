@@ -183,12 +183,10 @@ class stranka extends osoba{
     
     public function primkaByKupac($id) {
         $query = $this->mysqli->prepare("SELECT s.*, "
-                . "p.primka_id, p.naziv, p.datumZaprimanja, p.datumZatvaranja, p.opisKvara,p.status, p.serial,  "
-                . "rn.rn_id, rn.opisPopravka, rn.danZavrsetka "
+                . "p.primka_id, p.naziv, p.datumZaprimanja, p.datumZatvaranja, p.opisKvara,p.status, p.serial  "
                 . "FROM stranka s "
                 . "LEFT JOIN primka p ON s.stranka_id = p.stranka_id "
-                . "LEFT JOIN radninaloziservisa rn ON p.primka_id = rn.primka_id "
-                . "WHERE s.stranka_id = ?  ORDER BY p.datumZaprimanja DESC");
+                . "WHERE s.stranka_id = ?  ORDER BY p.primka_id DESC");
         
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);

@@ -138,10 +138,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                        <th>Rendering engine</th>
-                        <th>Browser</th>
-                        <th>Platform(s)</th>
-                        <th>Engine version</th>
+                        <th>Primke</th>
+                        <th>Uređaj</th>
+                        <th>Serijski</th>
+                        <th>Opis kvara</th>
                         <th>CSS grade</th>
                       </tr>
                     </thead>
@@ -202,8 +202,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         "dataSrc": ""
                     },
                     "columns": [
-                        {"data": "tvrtka"}, 
-                        {"data": "primka_id"}
+                         
+                        {"data": "primka_id","render": function(data,type,row,meta) { // render event defines the markup of the cell text 
+                            var a = '<a style="margin-right:10px" href="pregled.php?primka='+row.primka_id +'"><i class="fa  fa-file-text-o"></i></a>\n\
+                             ' + row.primka_id +''; // row object contains the row data
+                            return a;
+                        }},
+                        {"data": "naziv"},
+                        {"data": "serial"},
+                        {"data": "opisKvara"},
+                        {"data": "opisKvara"}
                     ]
 
 

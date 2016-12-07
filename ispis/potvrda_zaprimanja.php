@@ -26,175 +26,169 @@
   <body>
     <div class="wrapper">
       <!-- Main content -->
-       <section class="invoice">
-          <!-- title row -->
-          <div class="row">
-            <div class="col-xs-12">
-              <h2 class="page-header">
-                  <img src="logo.png" style="height: 50px">
-                  
-              </h2>
-            </div><!-- /.col -->
-          </div>
-          <!-- info row -->
-          <div class="row invoice-info">
-            <div class="col-sm-4 invoice-col">
-              Sjedište
-              <address>
-                <strong>Eurotrade d.o.o.</strong><br>
-                Naselje Gripole spine 53/c<br>
-                Rovinj, 52210<br>
-                Kontakt: 052 803 699<br>
-                Email: servis-ro@eurotrade.hr
-              </address>
-            </div><!-- /.col -->
-            <div class="col-sm-4 invoice-col">
-                <strong>Podaci o vlasniku</strong>
-              <address>
-                  <div id="osoba"></div>
-                  <div id="tvrtka"></div>
-                  <div id="adresa"></div>
-                  <div id="grad"></div>
-                  Kontakt: <div id="kontakt" style="display: inline"></div><br>
-                  Email: <div id="email" style="display: inline"></div><br>
-              </address>
-            </div><!-- /.col -->
-            <div class="col-sm-4 invoice-col">
-                <h3 style="margin-top: 0px" id="primka"></h3>
-                <b>Zaprimio: </b><p style="display: inline" id="zap"></p><br>
-              <b>Zaprimljeno: </b><p style="display: inline"  id="dz"></p>
-            </div><!-- /.col -->
-          </div><!-- /.row -->
+      
+      <section class="invoice">
+                        <!-- title row -->
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h2>
+                                    <img src="logo.png" style="height: 50px; display: inline; float: left">
 
-          <!-- Table row -->
-          <div class="row">
-            <div class="col-xs-12 table-responsive">
-                <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th>Uređaj</th>
-                    <th>Serijski</th>
-                    <th>Datum prodaje</th>
-                    <th>Račun</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                      <td id="uredaj"></td>
-                    <td id="serijski"></td>
-                    <td id="dp"></td>
-                    <td id="racun"></td>
-                  </tr>
-                </tbody>
-              </table>
-                <table class="table table-striped" style="font-size: 12px">
-                <thead>
-                  <tr>
-                    
-                    <th>Opis kvara</th>
-                    <th>Priloženo</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td  id="opis"></td>
-                    <td id="prilozeno"></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div><!-- /.col -->
-          </div><!-- /.row -->
+                                </h2>
 
-          <div class="row">
-            <!-- accepted payments column -->
-            <div class="col-xs-6">
-              <p class="lead">Napomena:</p>
-              
-              <p class="text-muted well well-sm no-shadow" style="font-size: 9px;margin-top: 10px;">
-                  Eurotrade d.o.o. ne odgovara za podatke na računalu, HDD uređaju ili bilo kojem uređaju koji služi za pohranu podataka ili eventualni njihov gubitak. Kod pisača u jamstvu Eurotrade d.o.o. koristi vlastiti potrošni materijal. Kod pisača van jamstva Eurotrade d.o.o. koristi potrošni materijal koji se nalazi u pisaču te postoji mogućnost da će se zbog potrebe servisiranja taj isti potrošiti djelomično ili u cijelosti.
+                                <div style="display: inline; float: right; font-size: 10px">
+                                    <span style="float: left; margin-right: 8px">
+                                        Naselje Gripole spine 53/c<br>
+                                        Rovinj, 52210<br></span>
+                                    <span style="float: right; margin-left: 8px; ">
 
-Eurotrade d.o.o. poslije 60 dana od zatvaranja radnog naloga ne snosi odgovornost za robu ukoliko ona nije podignuta.
 
-U slučaju odustajanja od popravka naplaćuje se dijagnostika po važećem cjeniku.
+                                        Kontakt: 052 803 699<br>
+                                        Email: servis-ro@eurotrade.hr
+                                    </span>
+                                </div><!-- /.col -->
 
-Sve radove, materijale i ostale troškove vezane uz radni nalog (troškovi koji nisu pokriveni ugovornom obvezom ili jamstvom) vlasnik neopozivo naručuje potpisom radnog naloga.
-              </p>
-              <strong>Potpis vlasnika</strong><br><div style="border-bottom:  1px solid black; width: 200px;height: 30px"></div>
-            </div><!-- /.col -->
-            <div class="col-xs-6" style="font-size: 10px">
-              <p class="lead">Ostali Eurotrade centri</p>
-              <div class="table-responsive">
-                <table class="table">
-                  <tr>
-                    <th style="width:50%">PULA</th>
-                    <td>
-                        Benediktinske opatije 3<br>
-                         tel. 052/211-632, fax 052/211-637
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>ZAGREB</th>
-                    <td>
-                         Gospodarska ulica 15, Donji Stupnik <br>
-                        tel. 01/6531-230, fax 01/6531-231
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>VARAŽDIN</th>
-                    <td>
-                        Miroslava Krleže 1<br>
-                        tel. 042/331-177, fax 042/331-149
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>RIJEKA</th>
-                    <td>
-                         Eugena Kovačića 2, TC Andrea<br>
-                        tel. 051/680-760, fax 051/680-763
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>RIJEKA</th>
-                    <td>
-                         Trg 128 brigade HV 4, Korzo<br>
-                         tel. 051/212-321 
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>SPLIT</th>
-                    <td>
-                         Matoševa 86, Solin<br>
-                        tel. 021/262-012, fax 021/262-015
-                    </td>
-                  </tr>
-                   <tr>
-                    <th>OSIJEK</th>
-                    <td>
-                         Vijenac Jakova Gotovca 5<br>
-                       tel. 031/210-999
-                    </td>
-                  </tr>
-                   <tr>
-                    <th>SISAK</th>
-                    <td>
-                        Ante Starčevića 13<br>
-                        tel. 044/524-498, fax 044/524-499
-                    </td>
-                 
-                </table>
-              </div>
-            </div><!-- /.col -->
-          </div><!-- /.row -->
+                            </div><!-- /.col -->
+                            <div style="clear: both"> <h2 class="page-header"></div>
+                        </div>
+                        <!-- info row -->
+                        <div class="row invoice-info" >
+                           
+                            <div class="col-sm-4 invoice-col"  style="font-size: 12px">
+                                <strong>Podaci o vlasniku</strong>
+                                <address>
+                                    <div id="osoba"></div>
+                                    <div id="tvrtka"></div>
+                                    <div id="adresa"></div>
+                                    <div id="grad"></div>
+                                    Kontakt: <div id="kontakt" style="display: inline"></div><br>
+                                    Email: <div id="email" style="display: inline"></div><br>
+                                </address>
+                            </div><!-- /.col -->
+                            <div class="col-sm-4 invoice-col" style="font-size: 12px">
+                                <strong>Podaci o uređaju</strong><br>
+                                <i>Uređaj: </i><p style="display: inline" id="uredaj"></p><br>
+                                <i>Serijski: </i><p style="display: inline" id="serijski"></p><br>
+                                <i>Datum prodaje: </i><p style="display: inline"  id="dp"></p><br>
+                                <i>Račun: </i><p style="display: inline" id="racun"></p><br>
+                            </div><!-- /.col -->
+                            <div class="col-sm-4 invoice-col" style="float: right; font-size: 12px">
+                                <h4 style="margin-top: 0px" id="primka"></h4>
+                                <b>Zaprimio: </b><p style="display: inline" id="zap"></p><br>
+                                <b>Zaprimljeno: </b><p style="display: inline"  id="dz"></p><br>
+                            </div><!-- /.col -->
+                        </div><!-- /.row -->
 
-          <!-- this row will not appear when printing -->
-          <div id="t" class="row no-print">
-            <div class="col-xs-12">
-                <a  class="btn btn-default" onclick="printaj()"><i class="fa fa-print"></i> Print</a>
-              <button class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment</button>
-              <button class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> Generate PDF</button>
-            </div>
-          </div>
-        </section><!-- /.content -->
+                        <!-- Table row -->
+                        <div class="row" style="clear: both">
+                            <div class="col-xs-12 table-responsive">
+                                
+                                <table class="table table-striped" style="font-size: 12px">
+                                    <thead>
+                                        <tr>
+
+                                            <th>Opis kvara</th>
+                                            <th>Priloženo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td  id="opis" style="width: 60%"></td>
+                                            <td id="prilozeno" style="width: 30%"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                
+                            </div><!-- /.col -->
+                        </div><!-- /.row -->
+
+                        <div class="row">
+                            <!-- accepted payments column -->
+                            <div class="col-xs-6">
+                                <p class="lead" style="font-size: 12px"><b>Napomena:</b></p>
+
+                                <p class="text-muted well well-sm no-shadow" style="font-size: 9px;margin-top: 10px;">
+                                    Eurotrade d.o.o. ne odgovara za podatke na računalu, HDD uređaju ili bilo kojem uređaju koji služi za pohranu podataka ili eventualni njihov gubitak. Kod pisača u jamstvu Eurotrade d.o.o. koristi vlastiti potrošni materijal. Kod pisača van jamstva Eurotrade d.o.o. koristi potrošni materijal koji se nalazi u pisaču te postoji mogućnost da će se zbog potrebe servisiranja taj isti potrošiti djelomično ili u cijelosti.
+
+                                    Eurotrade d.o.o. poslije 60 dana od zatvaranja radnog naloga ne snosi odgovornost za robu ukoliko ona nije podignuta.
+
+                                    U slučaju odustajanja od popravka naplaćuje se dijagnostika po važećem cjeniku.
+
+                                    Sve radove, materijale i ostale troškove vezane uz radni nalog (troškovi koji nisu pokriveni ugovornom obvezom ili jamstvom) vlasnik neopozivo naručuje potpisom radnog naloga.
+                                </p>
+                                <strong>Potpis vlasnika</strong><br><div style="border-bottom:  1px solid black; width: 200px;height: 30px"></div><br>
+                            </div><!-- /.col -->
+                            <div class="col-xs-6" style="font-size: 9px">
+                                <p class="lead" style="font-size: 12px"><b>Ostali Eurotrade centri</b></p>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tr>
+                                            <th style="width:50%">PULA</th>
+                                            <td>
+                                                Benediktinske opatije 3<br>
+                                                tel. 052/211-632, fax 052/211-637
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>ZAGREB</th>
+                                            <td>
+                                                Gospodarska ulica 15, Donji Stupnik <br>
+                                                tel. 01/6531-230, fax 01/6531-231
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>VARAŽDIN</th>
+                                            <td>
+                                                Miroslava Krleže 1<br>
+                                                tel. 042/331-177, fax 042/331-149
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>RIJEKA</th>
+                                            <td>
+                                                Eugena Kovačića 2, TC Andrea<br>
+                                                tel. 051/680-760, fax 051/680-763<br>                                            
+                                                Trg 128 brigade HV 4, Korzo<br>
+                                                tel. 051/212-321 
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>SPLIT</th>
+                                            <td>
+                                                Matoševa 86, Solin<br>
+                                                tel. 021/262-012, fax 021/262-015
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>OSIJEK</th>
+                                            <td>
+                                                Vijenac Jakova Gotovca 5<br>
+                                                tel. 031/210-999
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>SISAK</th>
+                                            <td>
+                                                Ante Starčevića 13<br>
+                                                tel. 044/524-498, fax 044/524-499
+                                            </td>
+
+                                    </table>
+                                </div>
+                            </div><!-- /.col -->
+                        </div><!-- /.row -->
+
+                        <!-- this row will not appear when printing -->
+                        <div id="t" class="row no-print">
+                            <div class="col-xs-12">
+                                <a  class="btn btn-default" onclick="printaj()"><i class="fa fa-print"></i> Print</a>
+                                <button class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment</button>
+                                <button class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> Generate PDF</button>
+                            </div>
+                        </div>
+                    </section><!-- /.content -->
+
+      
     </div><!-- ./wrapper -->
 
     <!-- AdminLTE App -->

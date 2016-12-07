@@ -355,7 +355,7 @@ class servisRN extends RN{
     public function RNbyPrimka($id) {
        
         
-        $query=$this->mysqli->prepare("SELECT rn.rn_id, rn.status, rn.pocetakRada, rn.danZavrsetka, rn.opisPopravka, rn.naplata, rn.napomena, d1.ime, d1.prezime, d2.ime, d2.prezime "
+        $query=$this->mysqli->prepare("SELECT rn.rn_id, rn.status, rn.pocetakRada, rn.danZavrsetka, rn.opisPopravka, rn.naplata, rn.napomena, rn.promijenjeno, d1.ime, d1.prezime, d2.ime, d2.prezime "
                 . "FROM radniNaloziServisa rn "
                 . "LEFT JOIN djelatnici d1 ON rn.djelatnik_zapoceoRn_id = d1.djelatnik_id "
                 . "LEFT JOIN djelatnici d2 ON rn.djelatnik_zavrsioRn_id = d2.djelatnik_id "
@@ -368,7 +368,7 @@ class servisRN extends RN{
         $query->bind_param("i", $id); 
         
         if($query->execute()){
-            $query->bind_result($this->id, $status, $pocetak, $dz, $op, $naplata, $napomena, $d1ime, $d1prezime,$d2ime, $d2prezime );
+            $query->bind_result($this->id, $status, $pocetak, $dz, $op, $naplata, $napomena, $promijenjeno, $d1ime, $d1prezime,$d2ime, $d2prezime );
             while($row = $query->fetch()){
                 $rn[] = array(
                     "id" => $this->id,
@@ -378,6 +378,7 @@ class servisRN extends RN{
                     "opis" => $op,
                     "naplata" => $naplata,
                     "napomena" => $napomena,
+                    "promijenjeno" => $promijenjeno,
                     "d1ime" => $d1ime,
                     "d1prezime" => $d1prezime,
                     "d2ime" => $d2ime,

@@ -85,10 +85,10 @@
                                     <br>
                                     <br>
 
-                                    <div id="box"  class="form-group" id="divTvrtka">
+                                    <div id="box"  class="form-group" style="    padding-left: 15px;">
                                         <!-- Prije mi je  id="box" bio na ovom spanu i bez diva -->
                                         <span style="float: left">
-                                            Pretraži u bazi : <input type="text" id="search_box">
+                                            <span>Pretraži u bazi :</span> <input type="text" id="search_box" style="    margin-left: 10px;">
                                             <span id="search_button" >Očisti</span>
                                         </span>
                                         <div id="search_result">

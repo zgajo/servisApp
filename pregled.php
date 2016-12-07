@@ -31,6 +31,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
               apply the skin class to the body tag so the changes take effect.
         -->
         <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+        
+        <link href="search/search.css" rel="stylesheet">
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -80,7 +82,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <!-- info row -->
                         <div class="row invoice-info" >
                            
-                            <div class="col-sm-4 invoice-col"  style="font-size: 13px">
+                            <div class="col-sm-4 invoice-col"  style="font-size: 12px">
                                 <strong>Podaci o vlasniku</strong>
                                 <address>
                                     <div id="osoba"></div>
@@ -91,19 +93,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     Email: <div id="email" style="display: inline"></div><br>
                                 </address>
                             </div><!-- /.col -->
-                            <div class="col-sm-4 invoice-col" style="float: right; font-size: 13px">
+                            <div class="col-sm-4 invoice-col" style="font-size: 12px">
                                 <strong>Podaci o uređaju</strong><br>
-                                <b>Uređaj: </b><p style="display: inline" id="uredaj"></p><br>
-                                <b>Serijski: </b><p style="display: inline" id="serijski"></p><br>
-                                <b>Datum prodaje: </b><p style="display: inline"  id="dp"></p><br>
-                                <b>Račun: </b><p style="display: inline" id="racun"></p><br>
+                                <i>Uređaj: </i><p style="display: inline" id="uredaj"></p><br>
+                                <i>Serijski: </i><p style="display: inline" id="serijski"></p><br>
+                                <i>Datum prodaje: </i><p style="display: inline"  id="dp"></p><br>
+                                <i>Račun: </i><p style="display: inline" id="racun"></p><br>
                             </div><!-- /.col -->
-                            <div class="col-sm-4 invoice-col" style="float: right; font-size: 13px">
+                            <div class="col-sm-4 invoice-col" style="float: right; font-size: 12px">
                                 <h4 style="margin-top: 0px" id="primka"></h4>
                                 <b>Zaprimio: </b><p style="display: inline" id="zap"></p><br>
                                 <b>Zaprimljeno: </b><p style="display: inline"  id="dz"></p><br>
-                                <b>Završio radni nalog: </b><p style="display: inline"  id="dz"></p><br>
-                                <b>Popravio ovlašteni servis: </b><p style="display: inline"  id="dz"></p><br>
+                                <b id="zav">Datum završetka: </b>
+                                <b   id="zav_ser">Završio serviser: </b>
                             </div><!-- /.col -->
                         </div><!-- /.row -->
 
@@ -148,13 +150,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <tr>
 
                                             <th>Opis popravka</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td  id="popravak"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                 <table class="table table-striped" style="font-size: 12px">
+                                    <thead>
+                                        <tr>
+
                                             <th>Promijenjeni dijelovi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td  id="popravak" style="width: 60%">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</td>
-                                            <td id="promijenjeno" style="width: 30%">"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."</td>
+                                            <td id="promijenjeno"></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -175,9 +188,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                     Sve radove, materijale i ostale troškove vezane uz radni nalog (troškovi koji nisu pokriveni ugovornom obvezom ili jamstvom) vlasnik neopozivo naručuje potpisom radnog naloga.
                                 </p>
-                                <strong>Potpis vlasnika</strong><br><div style="border-bottom:  1px solid black; width: 200px;height: 30px"></div>
+                                <strong>Potpis vlasnika</strong><br><div style="border-bottom:  1px solid black; width: 200px;height: 30px"></div><br>
+                                <strong>Naplatiti: </strong><br><div id="naplata"></div>
                             </div><!-- /.col -->
-                            <div class="col-xs-6" style="font-size: 10px">
+                            <div class="col-xs-6" style="font-size: 9px">
                                 <p class="lead" style="font-size: 12px"><b>Ostali Eurotrade centri</b></p>
                                 <div class="table-responsive">
                                     <table class="table">
@@ -267,17 +281,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="plugins/select2/select2.full.min.js"></script>
         <!-- InputMask -->
 
+        <script type="text/javascript" src="search/searchkupca.js"></script>
 
        <script>
             var id = <?php echo $_GET['primka'] ?>    
                 $.get("json/primka/getById.php", {"id":id}, function(primka){
-                   console.log(primka);
                    
                    var zaprimljeno = new Date(primka[0].datumZaprimanja);
                    
-                   $('#dz').text([zaprimljeno.getDate(), zaprimljeno.getMonth(), zaprimljeno.getFullYear()].join('.') + ' / ' + [((zaprimljeno.getHours()<10) ? '0': '')+ zaprimljeno.getHours(), ((zaprimljeno.getMinutes()<10) ? '0': '')+ zaprimljeno.getMinutes()].join(':'));
+                   $('#dz').text([zaprimljeno.getDate(), zaprimljeno.getMonth(), zaprimljeno.getFullYear()].join('.') );
                    $('#zap').text(primka[0].pot_ime+ ' ' +primka[0].pot_prezime);
-                   $('#primka').text('Primka: ' +primka[0].primka_id);
+                   $('#primka').text('Primka br. ' +primka[0].primka_id);
                    
                    (primka[0].tvrtka != null && primka[0].tvrtka != '') ? $('#tvrtka').text(primka[0].tvrtka) : $('#tvrtka').text('');
                     $('#adresa').text(primka[0].adresa);
@@ -291,17 +305,70 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     $('#serijski').text(primka[0].serial);
                     
                     var kupljeno = new Date(primka[0].datumKupnje);
-                    console.log(kupljeno.getMinutes());
+                    
                     (kupljeno && kupljeno.getDate() != '1970' && !isNaN(kupljeno)) ?  $('#dp').text([kupljeno.getDate(), kupljeno.getMonth(), kupljeno.getFullYear()].join('.') ):  $('#dp').text('');;
                    
                     $('#racun').text(primka[0].racun);
                     $('#opis').text(primka[0].opisKvara);
                     $('#prilozeno').text(primka[0].prilozeno_primijeceno);
                     
+                    $.post("json/rn/getRNbyPrimka.php", {"primka":id}, function(rn){
+                        
+                        //  UKOLIKO POSTOJI RN POVEZAN SA PRIMKOM
+                        if(rn){
+                            
+                        var rnvelicina= rn.length-1;
+                        var rn_zav = new Date(rn[rnvelicina].zavrsetak);
+                            
+                        (rn_zav && rn_zav.getFullYear() !='1970') ? $('#zav').after([rn_zav.getDate(), rn_zav.getMonth()+1, rn_zav.getFullYear()].join('.')  + '<br>' ):$('#zav').after('<br>');
+                        (rn[rnvelicina].d2ime) ? $('#zav_ser').after(rn[rnvelicina].d2ime+' '+rn[rnvelicina].d2prezime + '<br>') : $('#zav_ser').after('<br>');    
+                            
+                        var opis_popravka = '<b>OPASKA SERVISA:</b> ';
+                        var prom = '';   
+                        var naplata = '';
+                        var odjel = "<?php echo $_COOKIE['odjel'] ?>";    
+                            console.log(rn);
+                            
+                            //      DOHVAĆANJE SA RADNIH NALOGA
+                        for(rn of rn){
+                            var pocetak_servisa = new Date(rn.pocetak);
+                            opis_popravka += '<span><span  class="no-print"><br ><b>Radni nalog:</b> '+rn.id+'. <a style=" cursor: pointer; cursor: hand; " class="no-print">Prikazuje se pri ispisu</a><br><b>Početak servisiranja uređaja:</b> '+ [pocetak_servisa.getDate(), pocetak_servisa.getMonth()+1, pocetak_servisa.getFullYear()].join('.') + '. </span>';
+                       
+                            if(rn.opis !== null) opis_popravka += '<br>'+  rn.opis+ '. ';
+                              var zavrsen_servis = new Date(rn.zavrsetak); 
+                            if(zavrsen_servis && zavrsen_servis.getFullYear()!='1970') opis_popravka += '<span  class="no-print"><br><b>Završetak servisiranja:</b> '+ [zavrsen_servis.getDate(), zavrsen_servis.getMonth()+1, zavrsen_servis.getFullYear()].join('.') + '. </span><br>';
+                            if(rn.napomena !== null && rn.napomena !== '' && odjel === 'Servis') opis_popravka += '<span   class="no-print"><b>Napomena: </b>'+  rn.napomena+ '. <br></span></span>';
+                             prom += rn.promijenjeno+ '<br>';
+                             
+                              naplata += ' + ' + rn.naplata + '<br>';
+                        }
+                        $('#popravak').html(opis_popravka);
+                            $('#promijenjeno').html(prom);
+                            $('#naplata').html(naplata);
+                        }// UKOLIKO NE POSTOJI RN POVEZAN SA PRIMKOM
+                        else{
+                            $('#zav_ser').after('<br>');
+                            $('#zav').after('<br>');
+                        }
+                      
+                        
+                    });
                     
                     
                    
                 });
+                
+                $('#popravak').on("click", 'a',function(){
+                if($(this).text() === 'Skriveno je pri ispisu') {
+                    $(this).parent().parent().removeClass('no-print');
+                    $(this).text('Prikazuje se pri ispisu');
+                }else{
+                     $(this).parent().parent().addClass('no-print');
+                    $(this).text('Skriveno je pri ispisu');
+                }
+               
+                });
+                
                 
                 function printaj(){
                     window.print();
