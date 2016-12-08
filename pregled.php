@@ -104,32 +104,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <h4 style="margin-top: 0px" id="primka"></h4>
                                 <b>Zaprimio: </b><p style="display: inline" id="zap"></p><br>
                                 <b>Zaprimljeno: </b><p style="display: inline"  id="dz"></p><br>
-                                <b id="zav">Datum završetka: </b>
-                                <b   id="zav_ser">Završio serviser: </b>
+                                <b id="zav" >Datum završetka: </b><br>
+                                <b  id="zav_ser">Završio serviser: </b>
+                                 <b  id="os">Ovlašteni servis: </b>
+                                  <b  id="os_rn">RN ovlaštenog servisa: </b>
                             </div><!-- /.col -->
                         </div><!-- /.row -->
 
                         <!-- Table row -->
                         <div class="row" style="clear: both">
                             <div class="col-xs-12 table-responsive">
-                                <!--<table class="table table-striped"  style="font-size: 12px">
-                                    <thead>
-                                        <tr>
-                                            <th>Uređaj</th>
-                                            <th>Serijski</th>
-                                            <th>Datum prodaje</th>
-                                            <th>Račun</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td id="uredaj"></td>
-                                            <td id="serijski"></td>
-                                            <td id="dp"></td>
-                                            <td id="racun"></td>
-                                        </tr>
-                                    </tbody>
-                                </table>-->
                                 <table class="table table-striped" style="font-size: 12px">
                                     <thead>
                                         <tr>
@@ -284,7 +268,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script type="text/javascript" src="search/searchkupca.js"></script>
 
        <script>
-            var id = <?php echo $_GET['primka'] ?>    
+            var id = <?php echo $_GET['primka'] ?>  
+            var opis_popravka ='';
                 $.get("json/primka/getById.php", {"id":id}, function(primka){
                    
                    var zaprimljeno = new Date(primka[0].datumZaprimanja);
@@ -312,6 +297,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     $('#opis').text(primka[0].opisKvara);
                     $('#prilozeno').text(primka[0].prilozeno_primijeceno);
                     
+                    //  DOHVATI RADNI NALOG POVEZAN SA PRIMKOM
                     $.post("json/rn/getRNbyPrimka.php", {"primka":id}, function(rn){
                         
                         //  UKOLIKO POSTOJI RN POVEZAN SA PRIMKOM
@@ -320,45 +306,79 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         var rnvelicina= rn.length-1;
                         var rn_zav = new Date(rn[rnvelicina].zavrsetak);
                             
-                        (rn_zav && rn_zav.getFullYear() !='1970') ? $('#zav').after([rn_zav.getDate(), rn_zav.getMonth()+1, rn_zav.getFullYear()].join('.')  + '<br>' ):$('#zav').after('<br>');
-                        (rn[rnvelicina].d2ime) ? $('#zav_ser').after(rn[rnvelicina].d2ime+' '+rn[rnvelicina].d2prezime + '<br>') : $('#zav_ser').after('<br>');    
+                        (rn_zav && rn_zav.getFullYear() !='1970') ? $('#zav').after([rn_zav.getDate(), rn_zav.getMonth()+1, rn_zav.getFullYear()].join('.')  + '' ):$('#zav').after('');
+                        (rn[rnvelicina].d2ime) ? $('#zav_ser').after(rn[rnvelicina].d2ime+' '+rn[rnvelicina].d2prezime + '') : $('#zav_ser').after('');    
                             
-                        var opis_popravka = '<b>OPASKA SERVISA:</b> ';
+                        opis_popravka += '<b>OPASKA SERVISA:</b> ';
                         var prom = '';   
                         var naplata = '';
                         var odjel = "<?php echo $_COOKIE['odjel'] ?>";    
                             console.log(rn);
                             
-                            //      DOHVAĆANJE SA RADNIH NALOGA
+                            //      Upis radnih naloga u opasku servisa
                         for(rn of rn){
                             var pocetak_servisa = new Date(rn.pocetak);
-                            opis_popravka += '<span><span  class="no-print"><br ><b>Radni nalog:</b> '+rn.id+'. <a style=" cursor: pointer; cursor: hand; " class="no-print">Prikazuje se pri ispisu</a><br><b>Početak servisiranja uređaja:</b> '+ [pocetak_servisa.getDate(), pocetak_servisa.getMonth()+1, pocetak_servisa.getFullYear()].join('.') + '. </span>';
-                       
+                            // PArent span
+                            opis_popravka += '<span>';
+                            
+                            opis_popravka += '<span class="no-print">';
+                            opis_popravka += '<br><b>Radni nalog:</b> '+rn.id+'. <a style=" cursor: pointer; cursor: hand; " >Prikazuje se pri ispisu</a><br>';
+                            opis_popravka += '<b>Početak servisiranja uređaja:</b> '+ [pocetak_servisa.getDate(), pocetak_servisa.getMonth()+1, pocetak_servisa.getFullYear()].join('.') + '. ';
+                            opis_popravka += '</span>';
+                            
                             if(rn.opis !== null) opis_popravka += '<br>'+  rn.opis+ '. ';
-                              var zavrsen_servis = new Date(rn.zavrsetak); 
-                            if(zavrsen_servis && zavrsen_servis.getFullYear()!='1970') opis_popravka += '<span  class="no-print"><br><b>Završetak servisiranja:</b> '+ [zavrsen_servis.getDate(), zavrsen_servis.getMonth()+1, zavrsen_servis.getFullYear()].join('.') + '. </span><br>';
-                            if(rn.napomena !== null && rn.napomena !== '' && odjel === 'Servis') opis_popravka += '<span   class="no-print"><b>Napomena: </b>'+  rn.napomena+ '. <br></span></span>';
-                             prom += rn.promijenjeno+ '<br>';
+                            var zavrsen_servis = new Date(rn.zavrsetak); 
+                            
+                             if(zavrsen_servis && zavrsen_servis.getFullYear()!='1970') {
+                                opis_popravka +=  '<span  class="no-print">';
+                                opis_popravka +=  '<br><b>Završetak servisiranja:</b> '+ [zavrsen_servis.getDate(), zavrsen_servis.getMonth()+1, zavrsen_servis.getFullYear()].join('.') + '. ';
+                                opis_popravka +=  '</span><br>';
+                             }
                              
-                              naplata += ' + ' + rn.naplata + '<br>';
+                             if(rn.napomena !== null && rn.napomena !== '' && odjel === 'Servis'){
+                                 opis_popravka += '<span   class="no-print">';
+                                 opis_popravka += '<br><b>Napomena: </b>'+  rn.napomena+ '. <br>';
+                                 opis_popravka += '</span>';
+                             }
+                            
+                            
+                            opis_popravka += '</span>';
+                            
+                             prom += (rn.promijenjeno) ? rn.promijenjeno+ '<br>':'';
+                             
+                             
+                             naplata += (rn.naplata!=='' && rn.naplata != null) ? ' + ' + rn.naplata + '<br>':'';
                         }
-                        $('#popravak').html(opis_popravka);
+                        //  DOHVAĆANJE RMA NALOGA I UPISIVANJE
+                        
+                        
+                        
+                        
+                            $('#popravak').html(opis_popravka);
                             $('#promijenjeno').html(prom);
                             $('#naplata').html(naplata);
                         }// UKOLIKO NE POSTOJI RN POVEZAN SA PRIMKOM
-                        else{
-                            $('#zav_ser').after('<br>');
-                            $('#zav').after('<br>');
-                        }
+                        
                       
                         
                     });
                     
-                    
+                    // DOHVATI RMA NALOG POVEZAN SA PRIMKOM
+                  $.get("json/rma/getRmaByPrimka.php", {"primka" : id}, function(rma){
+                        console.log(rma);
+                                        opis_popravka += '<br><b>OPASKA OVLAŠTENOG SERVISA:</b> ';
+                                        
+                                        
+                                        $('#popravak').html(opis_popravka);
+                                        
+                                        });
+                                        
+                                        
                    
                 });
                 
                 $('#popravak').on("click", 'a',function(){
+                console.log($(this).text());
                 if($(this).text() === 'Skriveno je pri ispisu') {
                     $(this).parent().parent().removeClass('no-print');
                     $(this).text('Prikazuje se pri ispisu');
