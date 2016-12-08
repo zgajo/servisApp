@@ -68,9 +68,11 @@
                           
                             
                             <div class="col-sm-4 invoice-col" style="float: right; font-size: 12px">
+                                <h5 style="margin-top: 0px"><b>Potvrda o zaprimanju na servis</b></h5>
                                 <h4 style="margin-top: 0px" id="primka"></h4>
                                 <b>Zaprimio: </b><p style="display: inline" id="zap"></p><br>
-                                <b>Zaprimljeno: </b><p style="display: inline"  id="dz"></p><br>
+                                <b>Zaprimljeno: </b><p style="display: inline"  id="dz"></p>
+                                
                             </div><!-- /.col -->
                         </div><!-- /.row -->
 
@@ -196,8 +198,6 @@
                         <div id="t" class="row no-print">
                             <div class="col-xs-12">
                                 <a  class="btn btn-default" onclick="printaj()"><i class="fa fa-print"></i> Print</a>
-                                <button class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment</button>
-                                <button class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> Generate PDF</button>
                             </div>
                         </div>
                     </section><!-- /.content -->
