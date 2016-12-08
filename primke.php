@@ -25,6 +25,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <!-- Ionicons -->
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
         <!-- Theme style -->
         <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
         <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
@@ -121,6 +123,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="dist/js/app.min.js"></script>
         <!-- Select2 -->
         <script src="plugins/select2/select2.full.min.js"></script>
+        
+    <!-- DataTables -->
+    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
         <!-- InputMask -->
         <script src="plugins/input-mask/jquery.inputmask.js"></script>
         <script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
@@ -134,51 +140,45 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="search/sve_primke.js" type="text/javascript"></script>
         <script>
             //    LISTANJE SVIH  POSLANIH PRIMKI
-                  $.ajax({
-                                type: 'POST',
-                                url: "json/primka/svePoslanePrimke.php",
-                                dataType: 'json',
-                                contentType: "application/json; charset=utf-8",
-                                success: function (data) {
-                                    var danas = new Date();
-                                    
-                                      var primka = JSON.parse(JSON.stringify(data));
-                                      var output = "";
-                                       console.log(primka);
-                                      
-                                      
-                                     
-                                      var centar = "<?php echo $_COOKIE['centar']?>";
-                                      var odjel = "<?php echo $_COOKIE['odjel']?>";
-                                      
-                                      for(var i =0; i<primka.length; ++i){
-                                          if(primka[i].centar === centar || odjel === "Servis"){
-                                              
-                                              var datum = new Date(primka[i].datumZaprimanja);
-                                          var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+            var centar = "<?php echo $_COOKIE['centar']?>";
+            var odjel = "<?php echo $_COOKIE['odjel']?>";
+            
+            if(odjel === "Servis") {$('#svePoslanePrimke').DataTable({
+    "ajax": {
+        "url": "json/primka/svePoslanePrimke.php",
+        "dataSrc": ""
+    },
+    "columns": [
+        {data: "primka_id", "render": function (data, type, row, meta) {
+                  var output = "";
+                  if(odjel === "Servis")output+= '<a class="glyphicon glyphicon-share" href="rn.php?action=novi_rn&primka_id='+ row.primka_id +'"></a>';
+                  return output;
+              }},
+        {"data": "primka_id", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
+                var output = "";
+                var danas = new Date();
+                var datum = new Date(row.datumZaprimanja);
+                var oneDay = 24 * 60 * 60 * 1000;
+                var diffDays = Math.round(Math.abs((danas.getTime() - datum.getTime()) / (oneDay)));
 
-                                            var diffDays = Math.round(Math.abs((danas.getTime() - datum.getTime())/(oneDay)));
-                                        
-                                            if(diffDays<=10)  var sty = "label label-success";
+                if(diffDays<=10)  var sty = "label label-success";
                                             if(diffDays>10 && diffDays<=17)  var sty = "label label-warning";
                                             if(diffDays>17) var sty = "label label-danger";
-                                              
-                                                                                           
-                                              output +=   '<tr>';
-                                               if(odjel === "Servis") output += '<td  style="text-align: center;"><a class="glyphicon glyphicon-share" href="rn.php?action=novi_rn&primka_id='+ primka[i].primka_id +'"></a></td>';
-                                              output +=     '<td><span class="'+sty+'">Primka ' +primka[i].primka_id+ '</span></td>';
-                                              
-                                                var r = null;
+                   output+=          '<a class="' + sty + '">' + row.primka_id + '</a>'; // row object contains the row data
+                return output;
+            }},
+        {"data": "primka_id", "render": function (data, type, row, meta) {
+                var r = null;
                                                 var rm = null;
                                               
-                                             if(odjel === "Servis"){
-                                                 output += '<td >';
+                                             
+                                                var output = '';
                                               //    DOHVAĆANJE RADNIH NALOGA
                                              $.ajax({
                                                  async: false,
                                                  url:"json/rn/getRNbyPrimka.php",
                                                  type: 'POST',
-                                                 data: {"primka":primka[i].primka_id},
+                                                 data: {"primka":row.primka_id},
                                                  success:function(data){
                                                                                                   
                                                   r=data;
@@ -189,7 +189,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                  async: false,
                                                  url:"json/rma/getRmaByPrimka.php",
                                                  type: 'GET',
-                                                 data: {"primka":primka[i].primka_id},
+                                                 data: {"primka":row.primka_id},
                                                  success:function(data){
                                                                                                   
                                                   rm=data;
@@ -205,32 +205,72 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                               console.log(rm);
                                               if(rm !== null && rm.length>0) {
                                                   for(var j=0;j<rm.length;++j){
-                                                      output+='<a href="rma.php?radni_nalog=' +rm[j].id+ '"> RMA. ' +rm[j].id+ '</a><br>';
+                                                      output+='<a href="rma.php?rma=' +rm[j].id+ '"> RMA. ' +rm[j].id+ '</a><br>';
                                                   }
                                               }
                                               
-                                              output += '</td>';
-                                              }
-                                              output += '<td>'+ primka[i].naziv+'</td>';
-                                              output += '<td>'+ primka[i].s_ime+' '+ primka[i].s_prezime +'</td>';
-                                              output += '<td>'+ [datum.getDate(), datum.getMonth()+1, datum.getFullYear()].join('.') +' /  '+[(datum.getHours()<10?'0':'') + datum.getHours(), (datum.getMinutes()<10?'0':'') + datum.getMinutes()].join(':')  + '</td>';
-                                              output += '<td>'+ primka[i].status+'</td>';
-                                                if(odjel === "Servis"){
-                                                  output += '<td>'+ primka[i].centar+'</td>';
-                                              }
-                                                
-                                          }
-                                        $('#svePoslanePrimke').html(output);                 
-                                      }
-                                      //$('#svePoslanePrimke').html(output);
-                                      
-                                     
-                                      
-                                },
-                                error: function (e) {
-                                    alert(e.message);
-                                }
-                            });
+                                              return output;
+                                              
+        }},
+        {"data": "naziv"},
+        {"data": "serial"},
+        {"data": "s_ime", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
+                var osoba = row.s_ime + ' ' + row.s_prezime;
+                return osoba;
+            }},
+            {"data": "datumZaprimanja", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
+                var d = new Date(row.datumZaprimanja);
+                var dat = (d && d.getFullYear()!='1970') ? [d.getDate(), d.getMonth()+1, d.getFullYear()].join('.') : ' '; 
+                return dat;
+            }},
+        {"data": "status"},
+        {"data": "centar"}
+          
+        
+    ]
+
+
+           
+});}
+            else {
+            $('#svePoslanePrimke').DataTable({
+    "ajax": {
+        "url": "json/primka/svePoslanePrimke.php",
+        "dataSrc": ""
+    },
+    "columns": [
+        {"data": "primka_id", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
+                var output = "";
+                var danas = new Date();
+                var datum = new Date(row.datumZaprimanja);
+                var oneDay = 24 * 60 * 60 * 1000;
+                var diffDays = Math.round(Math.abs((danas.getTime() - datum.getTime()) / (oneDay)));
+
+                if(diffDays<=10)  var sty = "label label-success";
+                                            if(diffDays>10 && diffDays<=17)  var sty = "label label-warning";
+                                            if(diffDays>17) var sty = "label label-danger";
+                   output+=          '<a class="' + sty + '">' + row.primka_id + '</a>'; // row object contains the row data
+                return output;
+            }},
+        {"data": "naziv"},
+        {"data": "serial"},
+        {"data": "s_ime", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
+                var osoba = row.s_ime + ' ' + row.s_prezime;
+                return osoba;
+            }},
+            {"data": "datumZaprimanja"},
+        {"data": "status"}
+          
+        
+    ]
+
+
+           
+});
+            }
+
+
+                 
                   //    KRAJ    *   LISTANJE SVIH POSLANIH PRIMKI  * KRAJ
                           </script>
         <?php } else{ ?>

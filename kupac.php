@@ -139,10 +139,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <thead>
                       <tr>
                         <th>Primke</th>
+                        <th>Zaprimljeno</th>
                         <th>Uređaj</th>
                         <th>Serijski</th>
                         <th>Opis kvara</th>
-                        <th>CSS grade</th>
                       </tr>
                     </thead>
                   </table>
@@ -204,13 +204,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     "columns": [
                          
                         {"data": "primka_id","render": function(data,type,row,meta) { // render event defines the markup of the cell text 
-                            var a = '<a style="margin-right:10px" href="pregled.php?primka='+row.primka_id +'"><i class="fa  fa-file-text-o"></i></a>\n\
+                            var a = '<a style="margin-right:10px" href="pregled.php?primka='+row.primka_id +'"><i style="display:none" class="fa  fa-file-text-o"></i></a>\n\
                              ' + row.primka_id +''; // row object contains the row data
+                            return a;
+                        }},
+                            {"data": "datumZaprimanja","render": function(data,type,row,meta) { // render event defines the markup of the cell text 
+                           var zaprimljeno = new Date(row.datumZaprimanja);
+                           var a = '';
+                           a+= (zaprimljeno && zaprimljeno.getFullYear() != '1970') ? [zaprimljeno.getDate(), zaprimljeno.getMonth()+1, zaprimljeno.getFullYear()].join('.') : '';
                             return a;
                         }},
                         {"data": "naziv"},
                         {"data": "serial"},
-                        {"data": "opisKvara"},
                         {"data": "opisKvara"}
                     ]
 
@@ -219,6 +224,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 function podaciKupca(kid) {
                     $.get("json/kupac/primkaByKupac.php", {"id": kid}, function (kupac) {
+                        console.log(kupac);
                         var zadnji = kupac.length - 1;
                         (kupac[zadnji].tvrtka) ? $('#tvrtka').text(kupac[zadnji].tvrtka) : $('#tvrtka').text('');
                         $('#ip').text(kupac[zadnji].ime + ' ' + kupac[zadnji].prezime);
@@ -276,6 +282,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 $('#ponistiK').on("click", this, function () {
                     podaciKupca(kid);
                 });
+                
+                $( "#example1" ).on("mouseover", "tr",function() {
+                    $( this ).find('i').show();
+                } );
+                                
+                $( "#example1" ).on("mouseout", "tr",function() {
+                    $( this ).find('i').hide();
+                } );
 
 
 

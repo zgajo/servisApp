@@ -65,13 +65,8 @@
                                     Email: <div id="email" style="display: inline"></div><br>
                                 </address>
                             </div><!-- /.col -->
-                            <div class="col-sm-4 invoice-col" style="font-size: 12px">
-                                <strong>Podaci o uređaju</strong><br>
-                                <i>Uređaj: </i><p style="display: inline" id="uredaj"></p><br>
-                                <i>Serijski: </i><p style="display: inline" id="serijski"></p><br>
-                                <i>Datum prodaje: </i><p style="display: inline"  id="dp"></p><br>
-                                <i>Račun: </i><p style="display: inline" id="racun"></p><br>
-                            </div><!-- /.col -->
+                          
+                            
                             <div class="col-sm-4 invoice-col" style="float: right; font-size: 12px">
                                 <h4 style="margin-top: 0px" id="primka"></h4>
                                 <b>Zaprimio: </b><p style="display: inline" id="zap"></p><br>
@@ -82,6 +77,25 @@
                         <!-- Table row -->
                         <div class="row" style="clear: both">
                             <div class="col-xs-12 table-responsive">
+                                <table class="table table-striped" style="font-size: 12px">
+                                    <thead>
+                                        <tr>
+
+                                            <th>Uređaj</th>
+                                            <th>Serijski</th>
+                                            <th>Datum prodaje</th>
+                                            <th>Račun</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td  id="uredaj"></td>
+                                            <td id="serijski"></td>
+                                            <td  id="dp"></td>
+                                            <td id="racun" ></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                                 
                                 <table class="table table-striped" style="font-size: 12px">
                                     <thead>
@@ -219,7 +233,7 @@
                     
                     var kupljeno = new Date(primka[0].datumKupnje);
                     console.log(kupljeno.getMinutes());
-                    (kupljeno && kupljeno.getDate() != '1970' && !isNaN(kupljeno)) ?  $('#dp').text([kupljeno.getDate(), kupljeno.getMonth(), kupljeno.getFullYear()].join('.') ):  $('#dp').text('');;
+                    (kupljeno && kupljeno.getFullYear() != '1970' && !isNaN(kupljeno)) ?  $('#dp').text([kupljeno.getDate(), kupljeno.getMonth(), kupljeno.getFullYear()].join('.') ):  $('#dp').text('');;
                    
                     $('#racun').text(primka[0].racun);
                     $('#opis').text(primka[0].opisKvara);

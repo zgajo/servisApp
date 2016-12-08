@@ -1,9 +1,3 @@
-<?php
-include_once 'checkLogin.php';
-include_once 'klase/radniNalog.php';
-include_once 'klase/primka.php';
-include_once 'klase/osoba.php';
-?>
 
 
 <!DOCTYPE html>
@@ -15,7 +9,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Primke</title>
+        <title>Pregled primke</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.5 -->
@@ -55,7 +49,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <section class="content">
 
 
-                    <section class="invoice">
+                    <section class="invoice" >
                         <!-- title row -->
                         <div class="row">
                             <div class="col-xs-12">
@@ -93,6 +87,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     Email: <div id="email" style="display: inline"></div><br>
                                 </address>
                             </div><!-- /.col -->
+                            
                             <div class="col-sm-4 invoice-col" style="font-size: 12px">
                                 <strong>Podaci o uređaju</strong><br>
                                 <i>Uređaj: </i><p style="display: inline" id="uredaj"></p><br>
@@ -100,14 +95,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <i>Datum prodaje: </i><p style="display: inline"  id="dp"></p><br>
                                 <i>Račun: </i><p style="display: inline" id="racun"></p><br>
                             </div><!-- /.col -->
+                            
                             <div class="col-sm-4 invoice-col" style="float: right; font-size: 12px">
                                 <h4 style="margin-top: 0px" id="primka"></h4>
                                 <b>Zaprimio: </b><p style="display: inline" id="zap"></p><br>
                                 <b>Zaprimljeno: </b><p style="display: inline"  id="dz"></p><br>
-                                <b id="zav" >Datum završetka: </b><br>
-                                <b  id="zav_ser">Završio serviser: </b>
-                                 <b  id="os">Ovlašteni servis: </b>
-                                  <b  id="os_rn">RN ovlaštenog servisa: </b>
+                                <span  id="saround"><b id="zav">Datum završetka: </b><br>
+                                    <b  id="zav_ser">Završio serviser: </b><br></span>
+                                <span id="osaround"><b  id="os">Ovlašteni servis: </b><br>
+                                <b  id="os_rn">RN ovlaštenog servisa: </b><br>
+                                <b  id="os_v">Vraćeno iz ovlaštenog servisa: </b></span>
                             </div><!-- /.col -->
                         </div><!-- /.row -->
 
@@ -172,68 +169,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                     Sve radove, materijale i ostale troškove vezane uz radni nalog (troškovi koji nisu pokriveni ugovornom obvezom ili jamstvom) vlasnik neopozivo naručuje potpisom radnog naloga.
                                 </p>
-                                <strong>Potpis vlasnika</strong><br><div style="border-bottom:  1px solid black; width: 200px;height: 30px"></div><br>
-                                <strong>Naplatiti: </strong><br><div id="naplata"></div>
+                                <strong style="font-size: 13px">Potpis vlasnika</strong><br><div style="border-bottom:  1px solid black; width: 200px;height: 30px"></div><br>
                             </div><!-- /.col -->
-                            <div class="col-xs-6" style="font-size: 9px">
-                                <p class="lead" style="font-size: 12px"><b>Ostali Eurotrade centri</b></p>
+                            <div class="col-xs-6" style="font-size: 12px">
+                                <p class="lead" style="font-size: 12px">Šifre za naplatiti</p>
                                 <div class="table-responsive">
-                                    <table class="table">
-                                        <tr>
-                                            <th style="width:50%">PULA</th>
-                                            <td>
-                                                Benediktinske opatije 3<br>
-                                                tel. 052/211-632, fax 052/211-637
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>ZAGREB</th>
-                                            <td>
-                                                Gospodarska ulica 15, Donji Stupnik <br>
-                                                tel. 01/6531-230, fax 01/6531-231
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>VARAŽDIN</th>
-                                            <td>
-                                                Miroslava Krleže 1<br>
-                                                tel. 042/331-177, fax 042/331-149
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>RIJEKA</th>
-                                            <td>
-                                                Eugena Kovačića 2, TC Andrea<br>
-                                                tel. 051/680-760, fax 051/680-763<br>                                            
-                                                Trg 128 brigade HV 4, Korzo<br>
-                                                tel. 051/212-321 
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>SPLIT</th>
-                                            <td>
-                                                Matoševa 86, Solin<br>
-                                                tel. 021/262-012, fax 021/262-015
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>OSIJEK</th>
-                                            <td>
-                                                Vijenac Jakova Gotovca 5<br>
-                                                tel. 031/210-999
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>SISAK</th>
-                                            <td>
-                                                Ante Starčevića 13<br>
-                                                tel. 044/524-498, fax 044/524-499
-                                            </td>
-
-                                    </table>
+                                  <table class="table">
+                                    <tbody>
+                                      <tr>
+                                      <th style="width:50%"  style="font-size: 10px">Naplatiti:</th>
+                                      <td id="naplata"></td>
+                                    </tr>
+                                  </tbody></table>
                                 </div>
-                            </div><!-- /.col -->
+                              </div>
                         </div><!-- /.row -->
+                        
 
                         <!-- this row will not appear when printing -->
                         <div id="t" class="row no-print">
@@ -243,8 +194,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <button class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> Generate PDF</button>
                             </div>
                         </div>
+                        
                     </section><!-- /.content -->
-
                 </section><!-- /.content -->
             </div><!-- /.content-wrapper -->
 
@@ -270,6 +221,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
        <script>
             var id = <?php echo $_GET['primka'] ?>  
             var opis_popravka ='';
+            var prom = '';   
+            var naplata = '';
+            var odjel = "<?php echo $_COOKIE['odjel'] ?>"; 
+            
                 $.get("json/primka/getById.php", {"id":id}, function(primka){
                    
                    var zaprimljeno = new Date(primka[0].datumZaprimanja);
@@ -297,6 +252,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     $('#opis').text(primka[0].opisKvara);
                     $('#prilozeno').text(primka[0].prilozeno_primijeceno);
                     
+                    
+                    
                     //  DOHVATI RADNI NALOG POVEZAN SA PRIMKOM
                     $.post("json/rn/getRNbyPrimka.php", {"primka":id}, function(rn){
                         
@@ -309,11 +266,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         (rn_zav && rn_zav.getFullYear() !='1970') ? $('#zav').after([rn_zav.getDate(), rn_zav.getMonth()+1, rn_zav.getFullYear()].join('.')  + '' ):$('#zav').after('');
                         (rn[rnvelicina].d2ime) ? $('#zav_ser').after(rn[rnvelicina].d2ime+' '+rn[rnvelicina].d2prezime + '') : $('#zav_ser').after('');    
                             
-                        opis_popravka += '<b>OPASKA SERVISA:</b> ';
-                        var prom = '';   
-                        var naplata = '';
-                        var odjel = "<?php echo $_COOKIE['odjel'] ?>";    
-                            console.log(rn);
+                        opis_popravka += '<b>OPASKA SERVISA:</b> <br>';
+                        
+                           
                             
                             //      Upis radnih naloga u opasku servisa
                         for(rn of rn){
@@ -321,12 +276,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             // PArent span
                             opis_popravka += '<span>';
                             
-                            opis_popravka += '<span class="no-print">';
-                            opis_popravka += '<br><b>Radni nalog:</b> '+rn.id+'. <a style=" cursor: pointer; cursor: hand; " >Prikazuje se pri ispisu</a><br>';
+                            opis_popravka += '<span class="no-print"><br>';
+                            opis_popravka += '<b>Radni nalog:</b> '+rn.id+'. <a style=" cursor: pointer; cursor: hand; " >Prikazuje se pri ispisu</a><br>';
                             opis_popravka += '<b>Početak servisiranja uređaja:</b> '+ [pocetak_servisa.getDate(), pocetak_servisa.getMonth()+1, pocetak_servisa.getFullYear()].join('.') + '. ';
                             opis_popravka += '</span>';
                             
-                            if(rn.opis !== null) opis_popravka += '<br>'+  rn.opis+ '. ';
+                            if(rn.opis !== null) opis_popravka += '<br class="no-print">'+  rn.opis+ '. ';
                             var zavrsen_servis = new Date(rn.zavrsetak); 
                             
                              if(zavrsen_servis && zavrsen_servis.getFullYear()!='1970') {
@@ -337,12 +292,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                              
                              if(rn.napomena !== null && rn.napomena !== '' && odjel === 'Servis'){
                                  opis_popravka += '<span   class="no-print">';
-                                 opis_popravka += '<br><b>Napomena: </b>'+  rn.napomena+ '. <br>';
+                                 opis_popravka += '<b>Napomena: </b>'+  rn.napomena+ '. <br class="no-print">';
                                  opis_popravka += '</span>';
                              }
                             
                             
-                            opis_popravka += '</span>';
+                            opis_popravka += '<br  class="no-print"></span>';
                             
                              prom += (rn.promijenjeno) ? rn.promijenjeno+ '<br>':'';
                              
@@ -358,22 +313,90 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             $('#promijenjeno').html(prom);
                             $('#naplata').html(naplata);
                         }// UKOLIKO NE POSTOJI RN POVEZAN SA PRIMKOM
-                        
+                        else{
+                                        $('#saround').hide();
+                                        }
                       
                         
                     });
                     
                     // DOHVATI RMA NALOG POVEZAN SA PRIMKOM
                   $.get("json/rma/getRmaByPrimka.php", {"primka" : id}, function(rma){
-                        console.log(rma);
-                                        opis_popravka += '<br><b>OPASKA OVLAŠTENOG SERVISA:</b> ';
+                        
                                         
+                                        console.log(rma);
                                         
-                                        $('#popravak').html(opis_popravka);
+                                           
+                                        
+                                        if(rma){
+                                            
+                                        opis_popravka += '<b>OPASKA OVLAŠTENOG SERVISA:</b><br> ';
+                                            
+                                        var vraceno = new Date(rma[rma.length-1].zavrseno);
+                                        if(vraceno && vraceno.getFullYear() != '1970') $('#os_v').after([vraceno.getDate(), vraceno.getMonth()+1, vraceno.getFullYear()].join('.'));
+                                        
+                                        $('#os').after(rma[rma.length-1].nazivOS);
+                                        $('#os_rn').after(rma[rma.length-1].rnOs);
+                                        
+                                        for (rma of rma){
+                                            
+                                            var pripremljeno = new Date(rma.pripremljeno);
+                                            var poslano = new Date(rma.poslano);
+                                            var vraceno = new Date(rma.vraceno);
+                                            
+                                            opis_popravka += '<span>';
+                                            
+                                            opis_popravka += '<span class="no-print"><br>';
+                                            opis_popravka += '<b>RMA nalog:</b> '+rma.id+'. <a style=" cursor: pointer; cursor: hand; " >Prikazuje se pri ispisu</a><br>';
+                                            opis_popravka += '<b>Pripremljeno za slanje:</b> ';
+                                            opis_popravka += (pripremljeno && pripremljeno.getFullYear() != '1970') ? [pripremljeno.getDate(), pripremljeno.getMonth()+1, pripremljeno.getFullYear()].join('.') + '. ' : '';
+                                            opis_popravka += '</span>';
+                                            
+                                            opis_popravka += '<span class="no-print"><br>';
+                                            opis_popravka += '<b>Poslano:</b> ';
+                                            opis_popravka += (poslano && poslano.getFullYear() != '1970') ? [poslano.getDate(), poslano.getMonth()+1, poslano.getFullYear()].join('.') + '. ' : '';
+                                            opis_popravka += '</span>';
+                                            
+                                            opis_popravka += '<span class="no-print"><br>';
+                                            opis_popravka += '<b>Ovlašteni servis:</b> '+ rma.nazivOS;
+                                            opis_popravka += '</span>';
+                                            
+                                            opis_popravka += '<span class="no-print"><br>';
+                                            opis_popravka += '<b>Radni nalog ovlaštenog servisa:</b> '+ rma.rnOs;
+                                            opis_popravka += '</span>';
+                                            
+                                             if(rma.opis !== null && rma.opis != '') opis_popravka += '<br class="no-print">'+  rma.opis+ '. ';
+                                             
+                                             if(rma.napomena !== null && rma.napomena !== '' && odjel === 'Servis'){
+                                                    opis_popravka += '<span   class="no-print"><br>';
+                                                    opis_popravka += '<b>Napomena: </b>'+  rma.napomena+ '. ';
+                                                    opis_popravka += '</span>';
+                                                }
+                                                
+                                            opis_popravka += '<span class="no-print"><br>';
+                                            opis_popravka += '<b>Vraćeno iz ovlaštenog servisa: </b>';
+                                            opis_popravka += (vraceno && vraceno.getFullYear() != '1970' && !isNaN(vraceno)) ? [vraceno.getDate(), vraceno.getMonth()+1, vraceno.getFullYear()].join('.') + '. ' : '';
+                                            opis_popravka += '<br></span>';
+                                            
+                                            
+                                             
+                                            opis_popravka += '<br></span>';
+                                            
+                                            prom += (rma.promijenjeno) ? rma.promijenjeno+ '<br>':'';
+                                            naplata += (rma.naplata!=='' && rma.naplata != null) ? ' + ' + rma.naplata + '<br>':'';
+                                        } 
+                                             $('#popravak').html(opis_popravka);
+                                             $('#promijenjeno').html(prom);
+                                             $('#naplata').html(naplata);
+                                        }
+                                        
+                                        else{
+                                        $('#osaround').hide();
+                                        }
                                         
                                         });
                                         
-                                        
+                                       
                    
                 });
                 

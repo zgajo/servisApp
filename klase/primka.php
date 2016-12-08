@@ -93,7 +93,8 @@ class primka{
                                         WHERE p.status != 'Kupac preuzeo' AND 
                                        ( p.status = 'Poslano u CS - Rovinj'  
                                         OR p.status = 'Poslano u CS - Rovinj / Započelo servisiranje'  
-                                        OR p.status = 'Poslano u CS - Rovinj / Čeka dio') 
+                                        OR p.status = 'Poslano u CS - Rovinj / Čeka dio') AND 
+                                        (p.centar = '".$_COOKIE['centar']."' OR '".$_COOKIE['odjel']."' = 'Servis')  
                                         ORDER BY p.primka_id ASC");
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);

@@ -12,25 +12,21 @@
                 <div class="box box-info" style="border-top: none">
 
                     <div class="box-body">
-                        <div class="table-responsive">
-                            <table class="table no-margin">
-                                <thead>
-                                    <tr>
-                                        <th>Primka</th>
-                                        <th>Uređaj</th>
-                                        <th>Stranka</th>
-                                        <th>Status primke</th>
-                                        <th>Datum zaprimanja</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="sveprimke">
-                                    <!--
-                                    AJAX - Sve primke
-                                    -->
-                                </tbody>
-                            </table>
-                        </div><!-- /.table-responsive -->
+                        <table id="sve_primke" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Primka</th>
+                                    <th>Datum zaprimanja</th>
+                                    <th>Uređaj</th>
+                                    <th>Serijski</th>
+                                    <th>Stranka</th>
+                                    <th>Status primke</th>
+                                    
+                                </tr>
+                            </thead>
+                        </table>
                     </div><!-- /.box-body -->
+
                     <div style="clear: both">
 
                     </div><!-- /.box-footer -->
@@ -40,34 +36,33 @@
             </div><!-- /.tab-pane -->
             <div class="tab-pane" id="tab_2">
                 <!-- TABLE: Sve otvorene primke -->
-                <div class="box box-info"  style="border-top: none">
+                <div class="box box-info" style="border-top: none">
 
                     <div class="box-body">
-                        <div class="table-responsive">
-                            <table class="table no-margin">
-                                <thead>
-                                    <tr>
-                                        <?php if ($_COOKIE['odjel'] == "Servis") { ?><th style="text-align: center">Započni servis</th><?php } ?>
+                        <table id="svePoslanePrimke" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <?php if ($_COOKIE['odjel'] == "Servis") { ?><th style="text-align: center">Započni servis</th><?php } ?>
                                         <th>Primka</th>
                                         <?php if ($_COOKIE['odjel'] == "Servis") { ?><th>Radni nalog</th><?php } ?>
                                         <th>Uređaj</th>
+                                        <th>Serijski</th>
                                         <th>Stranka</th>
                                         <th>Datum zaprimanja</th>
                                         <th>Status primke</th>
                                         <?php if ($_COOKIE['odjel'] == "Servis") { ?><th>Poslano iz</th><?php } ?>
-
-                                    </tr>
-                                </thead>
-                                <tbody id="svePoslanePrimke">
-
-                                </tbody>
-                            </table>
-                        </div><!-- /.table-responsive -->
+                                    
+                                </tr>
+                            </thead>
+                        </table>
                     </div><!-- /.box-body -->
-                    <div  class="box-footer clearfix">
+
+                    <div style="clear: both">
 
                     </div><!-- /.box-footer -->
                 </div><!-- /.box -->
+                
+              
             </div><!-- /.tab-pane -->
             <div class="tab-pane" id="tab_3">
 

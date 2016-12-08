@@ -1,75 +1,66 @@
 //    LISTANJE SVIH OTVORENIH PRIMKI
-                  $.ajax({
-                                type: 'POST',
-                                url: "json/primka/sveOtvorenePrimke.php",
-                                dataType: 'json',
-                                contentType: "application/json; charset=utf-8",
-                                success: function (data) {
-                                    var danas = new Date();
-                                    
-                                      var primka = JSON.parse(JSON.stringify(data));
-                                      var output = "";
-                                      
-                                     
-                                      
-                                      for(var i =0; i<primka.length; ++i){
-                                          var datum = new Date(primka[i].datumZaprimanja);
-                                          var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
 
-                                            var diffDays = Math.round(Math.abs((danas.getTime() - datum.getTime())/(oneDay)));
-                                        
-                                            if(diffDays<=7)  var sty = "label label-success";
-                                            if(diffDays>7 && diffDays<=14)  var sty = "label label-warning";
-                                            if(diffDays>14) var sty = "label label-danger";
-                                        
-                                            output +=   '<tr>';
-                                                                                                                   
-                                            output +=     '<td><span   class="'+sty+'">Primka ' +primka[i].primka_id+ '  </span><a style="display:none; margin-left:10px" id="pencil" class="glyphicon glyphicon-pencil" href="primke.php?primka='+primka[i].primka_id+'"></a></td>';
-                                           
-                                            output +=     '<td>'+ primka[i].naziv +'</td>\n\
-                                                                <td>'; output+= (primka[i].tvrtka) ? "<i>"+primka[i].tvrtka +"</i>, " : "";
-                                                                    output += primka[i].s_ime + ' ' + primka[i].s_prezime+'</td>\n\
-                                                                <td>'+ primka[i].status +'</td>\n\
-                                                                <td>'+ [datum.getDate(), datum.getMonth()+1, datum.getFullYear()].join('.') +' /  '+[(datum.getHours()<10?'0':'') + datum.getHours(), (datum.getMinutes()<10?'0':'') + datum.getMinutes()].join(':')  + '<td>\n\
-                                                            </tr>';
-                                                         
-                                      }
-                                      $('#sveprimke').html(output);
-                                      
-                                      console.log(JSON.parse(JSON.stringify(data)));
-                                      
-                                },
-                                error: function (e) {
-                                    alert(e.message);
-                                }
-                            });
-                  //    KRAJ    *   LISTANJE SVIH OTVORENIH PRIMKI  * KRAJ
-                
-                
-                                
-                
-                //      HOVER NA RED SVIH PRIMKI
-                                $( "#sveprimke" ).on("mouseover", "tr",function() {
-                                  $( this ).css("background-color", "#efefef");
-                              } );
-                                
-                                $( "#sveprimke" ).on("mouseout", "tr",function() {
-                                  $( this ).css("background-color", "white");
-                              } );
-                              $( "#svePoslanePrimke" ).on("mouseover", "tr",function() {
-                                  $( this ).css("background-color", "#efefef");
-                              } );
-                                
-                                $( "#svePoslanePrimke" ).on("mouseout", "tr",function() {
-                                  $( this ).css("background-color", "white");
-                              } );
-                              
-                              $('#sveprimke').on("mouseover", "tr", function(){
-                                 $(this).find('a').show();
-                              });
-                              $('#sveprimke').on("mouseout", "tr", function(){
-                                 $(this).find('a').hide();
-                              });
-                              
-                              
-                //      KRAJ    *    HOVER NA RED SVIH PRIMKI   *   KRAJ
+$('#sve_primke').DataTable({
+    "ajax": {
+        "url": "json/primka/sveOtvorenePrimke.php",
+        "dataSrc": ""
+    },
+    "columns": [
+        {"data": "primka_id", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
+                var danas = new Date();
+                var datum = new Date(row.datumZaprimanja);
+                var oneDay = 24 * 60 * 60 * 1000;
+                var diffDays = Math.round(Math.abs((danas.getTime() - datum.getTime()) / (oneDay)));
+
+                if (diffDays <= 7)
+                    var sty = "label label-success";
+                if (diffDays > 7 && diffDays <= 14)
+                    var sty = "label label-warning";
+                if (diffDays > 14)
+                    var sty = "label label-danger";
+
+                var a = '<a style="margin-right:10px" href="pregled.php?primka=' + row.primka_id + '"><i style="display:none; " class="fa  fa-file-text-o"></i></a>';
+                a += '<a style="margin-right:10px" href="primke.php?primka=' + row.primka_id + '"><i style="display:none; " class="glyphicon glyphicon-pencil"></i></a>\n\
+                             <a class="' + sty + '">' + row.primka_id + '</a>'; // row object contains the row data
+                return a;
+            }},
+        {"data": "datumZaprimanja", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
+                var zaprimljeno = new Date(row.datumZaprimanja);
+
+                var a = '';
+                a += (zaprimljeno && zaprimljeno.getFullYear() != '1970') ? [zaprimljeno.getDate(), zaprimljeno.getMonth() + 1, zaprimljeno.getFullYear()].join('.') : '';
+                return a;
+            }},
+        {"data": "naziv"},
+        {"data": "serial"},
+        {"data": "s_ime", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
+                var osoba = row.s_ime + ' ' + row.s_prezime;
+                return osoba;
+            }},
+        {"data": "status"}
+    ]
+
+
+});
+
+$("#sve_primke").on("mouseover", "tr", function () {
+    $(this).find('i').show();
+});
+
+$("#sve_primke").on("mouseout", "tr", function () {
+    $(this).find('i').hide();
+});
+
+
+//    KRAJ    *   LISTANJE SVIH OTVORENIH PRIMKI  * KRAJ
+
+//    LISTANJE SVIH  POSLANIH PRIMKI
+
+
+
+//   KRAJ    *       LISTANJE SVIH  POSLANIH PRIMKI     *   KRAJ
+
+
+
+
+//      KRAJ    *    HOVER NA RED SVIH PRIMKI   *   KRAJ
