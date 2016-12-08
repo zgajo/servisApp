@@ -1,4 +1,6 @@
-
+<?php
+include_once 'checkLogin.php';
+?>
 
 <!DOCTYPE html>
 <!--
@@ -217,7 +219,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- InputMask -->
 
         <script type="text/javascript" src="search/searchkupca.js"></script>
-
+<script type="text/javascript" src="search/searchprimka.js"></script>
        <script>
             var id = <?php echo $_GET['primka'] ?>  
             var opis_popravka ='';
@@ -256,7 +258,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     
                     //  DOHVATI RADNI NALOG POVEZAN SA PRIMKOM
                     $.post("json/rn/getRNbyPrimka.php", {"primka":id}, function(rn){
-                        
+                        console.log(rn);
                         //  UKOLIKO POSTOJI RN POVEZAN SA PRIMKOM
                         if(rn){
                             
@@ -293,6 +295,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                              if(rn.napomena !== null && rn.napomena !== '' && odjel === 'Servis'){
                                  opis_popravka += '<span   class="no-print">';
                                  opis_popravka += '<b>Napomena: </b>'+  rn.napomena+ '. <br class="no-print">';
+                                 opis_popravka += '</span>';
+                             }
+                             
+                             if(rn.ispisano !== null && rn.ispisano !== '' && odjel === 'Servis'){
+                                 opis_popravka += '<span   class="no-print">';
+                                 opis_popravka += '<b>Ispisano stranica: </b>'+  rn.ispisano+ '. <br class="no-print">';
                                  opis_popravka += '</span>';
                              }
                             
@@ -358,11 +366,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             opis_popravka += '</span>';
                                             
                                             opis_popravka += '<span class="no-print"><br>';
-                                            opis_popravka += '<b>Ovlašteni servis:</b> '+ rma.nazivOS;
+                                            opis_popravka += '<b>Ovlašteni servis:</b> ';opis_popravka += (rma.nazivOS)?rma.nazivOS:'';
                                             opis_popravka += '</span>';
                                             
                                             opis_popravka += '<span class="no-print"><br>';
-                                            opis_popravka += '<b>Radni nalog ovlaštenog servisa:</b> '+ rma.rnOs;
+                                            opis_popravka += '<b>Radni nalog ovlaštenog servisa:</b> ';opis_popravka += (rma.rnOs)?rma.rnOs:''; 
                                             opis_popravka += '</span>';
                                             
                                              if(rma.opis !== null && rma.opis != '') opis_popravka += '<br class="no-print">'+  rma.opis+ '. ';

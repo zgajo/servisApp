@@ -1,4 +1,6 @@
-
+<?php
+include_once 'checkLogin.php';
+?>
 
 <!DOCTYPE html>
 <!--
@@ -185,7 +187,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="dist/js/demo.js"></script>
-       
+       <script type="text/javascript" src="search/searchprimka.js"></script>
         <script type="text/javascript" src="search/searchkupca.js"></script>
         <!-- DataTables -->
 

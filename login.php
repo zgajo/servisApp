@@ -1,4 +1,6 @@
 <?php
+
+
 include_once 'klase/osoba.php';
 
 // PROVJERA DALI JE POZVAN U adress baru logout

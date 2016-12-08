@@ -1,8 +1,5 @@
 <?php
-include_once './checkLogin.php';
-include_once './klase/radniNalog.php';
-include_once './klase/primka.php';
-include_once './klase/osoba.php';
+include_once 'checkLogin.php';
 if($_COOKIE['odjel'] == "Servis"){
 ?>
 
@@ -139,7 +136,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
         <script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>
         <script type="text/javascript" src="search/searchkupca.js"></script>
-        
+    <script type="text/javascript" src="search/searchprimka.js"></script>    
         
         <?php if(!empty($_GET['radni_nalog'])){ ?>
         <script>
@@ -147,7 +144,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             
                             var rnid = <?php echo $_GET['radni_nalog'] ?>
                            
-                           $.post("json/rn/getById.php", {"id":rnid},
+                           function upis(rnid){
+                               $.post("json/rn/getById.php", {"id":rnid},
                            function(rn){
                                console.log(rn);
                                var pocetak = new Date(rn[0].pocetakRada);
@@ -158,6 +156,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                $('#inputPopravak').val(rn[0].opisPopravka);
                                $('#inputNapomena').val(rn[0].napomena);
                                $('#inputNaplata').val(rn[0].naplata);
+                               $('#inputPromijenjeno').val(rn[0].promijenjeno);
+                               $('#inputBI').val(rn[0].broj_ispisa);
                                $('select').val(rn[0].status);
                                $('select').prepend("<option style='background-color:#ebebeb' disabled='disabled' value='"+rn[0].status+"'>"+rn[0].status+"</option>");
                                if(zavrseno && zavrseno.getFullYear()!="1970") {
@@ -204,7 +204,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                
                            }
                            );
-                           
+                           }
+                           upis(rnid);
                            
                             //Ažuriranje upita
                             $('#azuriraj_status').on("click", this, function(){
@@ -221,10 +222,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             "status": status, 
                                             "popravak": $('#inputPopravak').val(), 
                                             "napomena": $('#inputNapomena').val(),
-                                            "naplata" : $("inputNaplata").val()},
-                                        function(){
-                                            alert("Ažuriran radni nalog " + rnid);
-                                            
+                                            "naplata" : $("inputNaplata").val(),
+                                            "ispisano" : $('#inputBI').val(),
+                                            "promijenjeno" : $('#inputPromijenjeno').val()
                                         }
                                         );
                                         
@@ -232,14 +232,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         if(status_primke === "Poslano u CS - Rovinj" || status_primke === "Poslano u CS - Rovinj / Započelo servisiranje"  || status_primke === "Poslano u CS - Rovinj / Čeka dio") { 
                                             $.post("json/primka/primkaStatusUpdate.php", {"status": "Završen popravak - poslano u centar", "id":primka_id}, function(){
                                                 
-                                                window.location = "rn.php?radni_nalog="+ rnid;
+                                                upis(rnid);
+                                                alert("Ažuriran radni nalog " + rnid);
 
                                             });
                                         }else{
                                              
                                            $.post("json/primka/primkaStatusUpdate.php", {"status": "Završen popravak", "id":primka_id}, function(){
                                                 
-                                                window.location = "rn.php?radni_nalog="+ rnid;
+                                                upis(rnid);
+                                                alert("Ažuriran radni nalog " + rnid);
 
                                             });
                                         }
@@ -254,10 +256,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             "status": status, 
                                             "popravak": $('#inputPopravak').val(), 
                                             "napomena": $('#inputNapomena').val(),
-                                            "naplata" : $("inputNaplata").val()},
-                                        function(){
-                                            alert("Ažuriran radni nalog " + rnid);
-                                            
+                                            "naplata" : $("inputNaplata").val(),
+                                            "ispisano" : $('#inputBI').val(),
+                                            "promijenjeno" : $('#inputPromijenjeno').val()
                                         }
                                         );
                                 
@@ -265,14 +266,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         if(status_primke === "Poslano u CS - Rovinj" || status_primke === "Poslano u CS - Rovinj / Započelo servisiranje"  || status_primke === "Poslano u CS - Rovinj / Čeka dio") { 
                                             $.post("json/primka/primkaStatusUpdate.php", {"status": "Poslano u CS - Rovinj / Čeka dio", "id":primka_id}, function(){
                                                 
-                                                window.location = "rn.php?radni_nalog="+ rnid;
+                                                upis(rnid);
+                                                alert("Ažuriran radni nalog " + rnid);
 
                                             });
                                         }else{
-                                             console.log("2");
                                            $.post("json/primka/primkaStatusUpdate.php", {"status": "Čeka dio", "id":primka_id}, function(){
                                                 
-                                                window.location = "rn.php?radni_nalog="+ rnid;
+                                                upis(rnid);
+                                                alert("Ažuriran radni nalog " + rnid);
 
                                             });
                                         }

@@ -296,15 +296,15 @@ class servisRN extends RN{
      * Unos Napomene
      * 
      */
-    public function update( $rnID,  $status, $opisPopravka, $napomena, $naplata) {
+    public function update( $rnID,  $status, $opisPopravka, $napomena, $naplata, $ispisano, $promijenjeno) {
         
         
-        $query = $this->mysqli->prepare("UPDATE radniNaloziServisa SET status = ?, napomena = ?, opisPopravka = ?, naplata = ? WHERE rn_id = ?");
+        $query = $this->mysqli->prepare("UPDATE radniNaloziServisa SET status = ?, napomena = ?, opisPopravka = ?, naplata = ?, broj_ispisa = ?, promijenjeno=? WHERE rn_id = ?");
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
         }
         
-        $query->bind_param('ssssi',$status, $napomena, $opisPopravka, $naplata, $rnID);
+        $query->bind_param('ssssssi',$status, $napomena, $opisPopravka, $naplata, $ispisano, $promijenjeno, $rnID);
         
         if($query->execute()){
             $query->close();
@@ -329,16 +329,16 @@ class servisRN extends RN{
      * Zatvaranje radnog naloga
      * 
      */
-    public function zatvoriRN( $rnID,  $status, $opisPopravka, $napomena, $naplata, $djelatnik_id) {
+    public function zatvoriRN( $rnID,  $status, $opisPopravka, $napomena, $naplata, $ispisano, $promijenjeno, $djelatnik_id) {
         date_default_timezone_set('Europe/Zagreb');
         $zatvori = date('Y-m-d H:i:s', time());
         
-        $query = $this->mysqli->prepare("UPDATE radniNaloziServisa SET status = ?, napomena = ?, opisPopravka = ?, naplata = ?, danZavrsetka = ?, djelatnik_zavrsioRn_id = ? WHERE rn_id = ?");
+        $query = $this->mysqli->prepare("UPDATE radniNaloziServisa SET status = ?, napomena = ?, opisPopravka = ?, naplata = ?, danZavrsetka = ?, djelatnik_zavrsioRn_id = ?, broj_ispisa = ?, promijenjeno=? WHERE rn_id = ?");
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
         }
         
-        $query->bind_param('sssssii',$status, $napomena, $opisPopravka, $naplata, $zatvori, $djelatnik_id, $rnID);
+        $query->bind_param('sssssissi',$status, $napomena, $opisPopravka, $naplata, $zatvori, $djelatnik_id, $ispisano, $promijenjeno, $rnID);
         
        if($query->execute()){
             $query->close();
@@ -355,7 +355,7 @@ class servisRN extends RN{
     public function RNbyPrimka($id) {
        
         
-        $query=$this->mysqli->prepare("SELECT rn.rn_id, rn.status, rn.pocetakRada, rn.danZavrsetka, rn.opisPopravka, rn.naplata, rn.napomena, rn.promijenjeno, d1.ime, d1.prezime, d2.ime, d2.prezime "
+        $query=$this->mysqli->prepare("SELECT rn.rn_id, rn.status, rn.pocetakRada, rn.danZavrsetka, rn.opisPopravka, rn.naplata, rn.napomena, rn.promijenjeno, rn.broj_ispisa, d1.ime, d1.prezime, d2.ime, d2.prezime "
                 . "FROM radniNaloziServisa rn "
                 . "LEFT JOIN djelatnici d1 ON rn.djelatnik_zapoceoRn_id = d1.djelatnik_id "
                 . "LEFT JOIN djelatnici d2 ON rn.djelatnik_zavrsioRn_id = d2.djelatnik_id "
@@ -368,7 +368,7 @@ class servisRN extends RN{
         $query->bind_param("i", $id); 
         
         if($query->execute()){
-            $query->bind_result($this->id, $status, $pocetak, $dz, $op, $naplata, $napomena, $promijenjeno, $d1ime, $d1prezime,$d2ime, $d2prezime );
+            $query->bind_result($this->id, $status, $pocetak, $dz, $op, $naplata, $napomena, $promijenjeno, $ispisano, $d1ime, $d1prezime,$d2ime, $d2prezime );
             while($row = $query->fetch()){
                 $rn[] = array(
                     "id" => $this->id,
@@ -379,6 +379,7 @@ class servisRN extends RN{
                     "naplata" => $naplata,
                     "napomena" => $napomena,
                     "promijenjeno" => $promijenjeno,
+                    "ispisano" => $ispisano,
                     "d1ime" => $d1ime,
                     "d1prezime" => $d1prezime,
                     "d2ime" => $d2ime,

@@ -63,6 +63,26 @@
     overflow: visible;
 }
 
+#search_result_primka{
+    padding: 5px;
+    box-shadow: 0 0 5px rgba(150, 150, 150, 150);
+    background: #fff;
+    color: #333;
+    position: absolute;
+    display: none;
+    z-index: 100;
+}
+
+#search_result_primka ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+#search_result_primka ul li{
+   
+    overflow: visible;
+}
+
 
 .a:hover{
     background: #4aaee7;

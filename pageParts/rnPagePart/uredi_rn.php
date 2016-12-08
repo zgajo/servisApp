@@ -105,11 +105,20 @@
                         </div>
                     </div>
                     
+                    
+                     
                      <!-- textarea -->
                     <div class="form-group" >
-                        <label for="inputNapomena" class="col-sm-2 control-label">Napomena</label>
+                        <label for="inputPromijenjeno" class="col-sm-2 control-label">Promijenjeno</label>
                         <div class="col-sm-10">
-                            <textarea id="inputNapomena" class="form-control" rows="3" placeholder="Napomene" name="napomena" ></textarea>
+                            <textarea id="inputPromijenjeno" class="form-control" rows="3" placeholder="Promijenjeni dio ili novi uređaj" name="promijenjeno" ></textarea>
+                        </div>
+                    </div>
+                     
+                     <div class="form-group" >
+                        <label for="inputBI" class="col-sm-2 control-label">Broj ispisa</label>
+                        <div class="col-sm-3">
+                            <input class="form-control" id="inputBI" placeholder="Ispisano" type="text" name="broj_ispisa" >
                         </div>
                     </div>
                     
@@ -117,6 +126,14 @@
                         <label for="inputNaplata" class="col-sm-2 control-label">Naplata</label>
                         <div class="col-sm-10">
                             <input class="form-control" id="inputNaplata" placeholder="Upisati šifru ..." type="text" name="naplata" >
+                        </div>
+                    </div>
+                     
+                      <!-- textarea -->
+                    <div class="form-group" >
+                        <label for="inputNapomena" class="col-sm-2 control-label">Napomena</label>
+                        <div class="col-sm-10">
+                            <textarea id="inputNapomena" class="form-control" rows="3" placeholder="Napomene" name="napomena" ></textarea>
                         </div>
                     </div>
                      

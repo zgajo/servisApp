@@ -1,0 +1,48 @@
+var left = $('#sp').position().left;
+                var top = $('#sp').position().top;
+                var width = $('#sp').width();
+
+
+                $('#search_result_primka').css('top', top + 27).css('width', width+100 ).css('z-index', 4);
+
+                //  PRETRAGA ZA KUPCEM
+                $('#search_primka').keyup(function () {
+                    var value = $(this).val();
+
+                    if (value != '') {
+                        $('#search_result_primka').show();
+                        console.log(value);
+                        //Ispis kupaca
+                        $.post('search/pretrazi_primku.php', {value: value}, function (primka) {
+                            
+                            
+                            //Prikaz pronađenih podataka
+                            var output ='<ul >';
+                            for(var i=0; i < primka.length; ++i){
+                                output += '<li><a style="color:#001F3F" class="a" id="k" name="'+ primka[i].primka + '">Primka '+ primka[i].primka + ', ';
+                                if(primka[i].tvrtka) output += primka[i].tvrtka+', '; 
+                                output += primka[i].ime+' ' + primka[i].prezime +'</a></li>'
+                            } 
+                            
+                            output +='</ul>';   //kraj ispis liste
+                            
+                            $('#search_result_primka').html(output);
+                            
+                        });
+                        
+                    } else {
+                        $('#search_result_primka').hide();
+                    }
+
+                });
+                //  KRAJ * PRETRAGA ZA KUPCEM * KRAJ
+                
+                //  UPIS PODATAKA ODABRANOG KUPCA U POLJE
+                $('#search_result_primka').on("click", 'a', function(e){
+                    e.preventDefault();
+                    
+                    var idprimka = $( this ).attr('name');
+                   window.location = "pregled.php?primka=" + idprimka;
+
+                    
+                });
