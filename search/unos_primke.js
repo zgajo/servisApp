@@ -34,7 +34,7 @@
                             
                             $('#search_result').html(output);
                             
-                        });
+                        }).fail(function(){ $('#search_result').text('Nema rezultata')});
                         
                     } else {
                         $('#search_result').hide();
@@ -49,7 +49,7 @@
                        console.log(JSON.parse(JSON.stringify(data)));
                         var osoba = JSON.parse(JSON.stringify(data));
                         $('#inputid').text(osoba.id);
-                        (osoba.tvrtka) ? $('#inputTvrtka').val(osoba.tvrtka).prop( "disabled", true ) : $('#divTvrtka').hide();
+                        if(osoba.tvrtka) { $('#inputTvrtka').val(osoba.tvrtka).prop( "disabled", true ) } else{ $('#inputTvrtka').val(null);$('#divTvrtka').hide();}
                         $('#inputIme').val(osoba.ime).prop( "disabled", true );
                         $('#inputPrezime').val(osoba.prezime).prop( "disabled", true );
                         $('#inputAdresa').val(osoba.adresa).prop( "disabled", true );
@@ -69,7 +69,7 @@
                 $('#editPonistiBtn').click(function(){
                     $('#inputid').text(null);
                        $('#inputTvrtka').val(null).prop( "disabled", false );
-                       $('#inputTvrtka').show()
+                       $('#divTvrtka').show();
                         $('#inputIme').val(null).prop( "disabled", false );
                         $('#inputPrezime').val(null).prop( "disabled", false );
                         $('#inputAdresa').val(null).prop( "disabled", false );
@@ -77,6 +77,9 @@
                         $('#inputPB').val(null).prop( "disabled", false );
                         $('#inputKontakt').val(null).prop( "disabled", false );
                         $('#inputEmail').val(null).prop( "disabled", false );
+                        
+                        console.log('klik');
+                        
                         $('#ponistiK').hide();
                         $('#spremiKupca').hide();
                         $('#editBtn').hide();
@@ -122,6 +125,7 @@
                         $('#ponistiK').show();
                         $('#spremiKupca').show();
                         $('#editBtn').hide();
+                         $('#editPonistiBtn').hide();
                         
                   });
                   //  KRAJ * OMOGUĆAVANJE IZMJENE KUPCA * KRAJ
