@@ -279,7 +279,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             opis_popravka += '<span>';
                             
                             opis_popravka += '<span class="no-print"><br>';
-                            opis_popravka += '<b>Radni nalog:</b> '+rn.id+'. <a style=" cursor: pointer; cursor: hand; " >Prikazuje se pri ispisu</a><br>';
+                            opis_popravka += '<b>Radni nalog:</b> '+rn.id+'. ';
+                            opis_popravka +=  '<input style="display:inline;margin-left:15px" type="checkbox" value="Prikazuje se pri ispisu" name="" checked="">'+
+                                              '<span class="text">Prikaži prilikom printanja</span><br>';
                             opis_popravka += '<b>Početak servisiranja uređaja:</b> '+ [pocetak_servisa.getDate(), pocetak_servisa.getMonth()+1, pocetak_servisa.getFullYear()].join('.') + '. ';
                             opis_popravka += '</span>';
                             
@@ -339,7 +341,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         if(rma){
                                             
                                         opis_popravka += '<b>OPASKA OVLAŠTENOG SERVISA:</b><br> ';
-                                            
+                                        
+                                        
                                         var vraceno = new Date(rma[rma.length-1].zavrseno);
                                         if(vraceno && vraceno.getFullYear() != '1970') $('#os_v').after([vraceno.getDate(), vraceno.getMonth()+1, vraceno.getFullYear()].join('.'));
                                         
@@ -348,6 +351,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         
                                         for (rma of rma){
                                             
+                                              
                                             var pripremljeno = new Date(rma.pripremljeno);
                                             var poslano = new Date(rma.poslano);
                                             var vraceno = new Date(rma.vraceno);
@@ -355,7 +359,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             opis_popravka += '<span>';
                                             
                                             opis_popravka += '<span class="no-print"><br>';
-                                            opis_popravka += '<b>RMA nalog:</b> '+rma.id+'. <a style=" cursor: pointer; cursor: hand; " >Prikazuje se pri ispisu</a><br>';
+                                            opis_popravka += '<b>RMA nalog:</b> '+rma.id+'. ';
+                                          opis_popravka +=  '<input style="display:inline;margin-left:15px" type="checkbox" value="Prikazuje se pri ispisu" name="" checked="">'+
+                                                            '<span class="text">Prikaži prilikom printanja</span><br>';
                                             opis_popravka += '<b>Pripremljeno za slanje:</b> ';
                                             opis_popravka += (pripremljeno && pripremljeno.getFullYear() != '1970') ? [pripremljeno.getDate(), pripremljeno.getMonth()+1, pripremljeno.getFullYear()].join('.') + '. ' : '';
                                             opis_popravka += '</span>';
@@ -408,14 +414,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                    
                 });
                 
-                $('#popravak').on("click", 'a',function(){
-                console.log($(this).text());
-                if($(this).text() === 'Skriveno je pri ispisu') {
+                $('#popravak').on("click", 'input',function(){
+                
+                if($(this).is(":checked")) {
                     $(this).parent().parent().removeClass('no-print');
-                    $(this).text('Prikazuje se pri ispisu');
                 }else{
                      $(this).parent().parent().addClass('no-print');
-                    $(this).text('Skriveno je pri ispisu');
                 }
                
                 });

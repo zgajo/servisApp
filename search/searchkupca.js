@@ -10,8 +10,10 @@ var left = $('#sk').position().left;
                     var value = $(this).val();
 
                     if (value != '') {
+                         $('#searchk').hide();
+                        $('#cancelk').show();
                         $('#search_result_kupac').show();
-                        console.log(value);
+
                         //Ispis kupaca
                         $.post('search/pretrazi_kupca.php', {value: value}, function (data) {
                             
@@ -31,14 +33,24 @@ var left = $('#sk').position().left;
                             
                             $('#search_result_kupac').html(output);
                             
-                        });
+                        }).fail(function(){$('#search_result_kupac').html('Nema rezultata');});
                         
                     } else {
+                        $('#searchk').show();
+                        $('#cancelk').hide();
                         $('#search_result_kupac').hide();
                     }
 
                 });
                 //  KRAJ * PRETRAGA ZA KUPCEM * KRAJ
+                
+                 $('#ikonek').on("click", this, function(e){
+                     $('#search_kupca').val(null);
+                     $('#cancelk').hide();
+                    $('#searchk').show();
+                    $('#search_result_kupac').hide();
+                });
+                
                 
                 //  UPIS PODATAKA ODABRANOG KUPCA U POLJE
                 $('#search_result_kupac').on("click", 'a', function(e){

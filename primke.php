@@ -1,8 +1,5 @@
 <?php
 include_once 'checkLogin.php';
-include_once 'klase/radniNalog.php';
-include_once 'klase/primka.php';
-include_once 'klase/osoba.php';
 
 ?>
 
@@ -96,7 +93,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         require_once 'pageParts/primkaPagePart/uredi_primku.php';
                         
                     }
-                    
+                    else if(isset($_GET['pregled_serijski'])){
+                        require_once './pageParts/primkaPagePart/pregled_serijski.php';
+                    }
                        /*
                        Prikaz svih naloga
                        */
@@ -131,10 +130,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="plugins/input-mask/jquery.inputmask.js"></script>
         <script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
         <script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>
+        
+        <!-- Pretrage u sidebaru -->
         <script type="text/javascript" src="search/searchkupca.js"></script>
         <script type="text/javascript" src="search/searchprimka.js"></script>
+        <script type="text/javascript" src="search/searchserijski.js"></script>
         
-        <?php if (!isset($_GET['primka'])){ ?>
+        
+        <?php if (!isset($_GET['primka']) && !isset($_GET['pregled_serijski']) ){ ?>
         
         <script src="search/unos_primke.js" type="text/javascript"></script>
         
@@ -203,8 +206,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                   }
                                               }
                                               //    UKOLIKO IMA DOHVAĆENIH rma
-                                              console.log(rm);
-                                              if(rm !== null && rm.length>0) {
+
+                                                if(rm !== null && rm.length>0) {
                                                   for(var j=0;j<rm.length;++j){
                                                       output+='<a href="rma.php?rma=' +rm[j].id+ '"> RMA. ' +rm[j].id+ '</a><br>';
                                                   }
@@ -274,6 +277,33 @@ scratch. This page gets rid of all links and provides the needed markup only.
                  
                   //    KRAJ    *   LISTANJE SVIH POSLANIH PRIMKI  * KRAJ
                           </script>
+         <?php } else if(isset($_GET['pregled_serijski'])){ ?>                  
+        <script>
+            
+        var serijski = "<?php echo $_GET['pregled_serijski'] ?>";   
+        console.log(serijski);
+        $('#serijski_primke').DataTable({
+        "ajax": {
+        "url": "json/primka/getBySerijski.php?serijski="+serijski,
+        "dataSrc": ""
+        },
+        "columns": [
+            {"data": "primka", "render" : function(data, type, row, meta){
+                    var a = '<a style="margin-right:20px" href="pregled.php?primka=' + row.primka + '"><i style="" class="fa  fa-file-text-o"></i></a><p style="display:inline">'+row.primka+'</p>';
+                    return a;
+            }},
+            {"data": "status", "render": function (data, type, row, meta) {
+                    var dz = new Date(row.zaprimljeno);
+                    return [dz.getDate(), dz.getMonth()+1, dz.getFullYear()].join('.');
+            }},
+            {"data": "uredaj"},
+            {"data": "status", "render": function (data, type, row, meta) {
+                    return row.ime + ' ' +row.prezime;
+            }},
+            {"data": "status"}
+        ]
+        });
+        </script>               
         <?php } else{ ?>
         <script>
                         $(document).ready(function (){
@@ -319,7 +349,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                      $('#pp').text(pp[0].prilozeno_primijeceno);
                                      
                                      var st = pp[0].p_status;
-                                     console.log(st);
+                                    
                                      
                                      // POSTAVLJANJE ZA SELECTED
                                         var o = new Option(st, st);
@@ -416,11 +446,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         $.get("json/rma/getRmaByPrimka.php", {"primka":pid}, function(e){
                                            
                                             var rma = JSON.parse(JSON.stringify(e));
-                                            console.log(rma);
+                                            
                                             var output = '';
                                             
                                             output += $('#urn').html();
-                                            console.log(rma);
+                                            
                                             if(rma !== null && rma.length>0){
                                             for(var i=0; i<rma.length; ++i){
                                                 
@@ -474,7 +504,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                $('#uredi_primku').hide();
                                         
                                        
-                                      console.log(pp);
+                                     
                                       
                                 },
                                 error: function (e) {
@@ -511,7 +541,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             
                             $('#btnNovo').click(function(){
                                 
-                                console.log('fer');
+                                
                                 $('#novo').toggle();
                             
                             });

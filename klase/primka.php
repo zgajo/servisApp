@@ -151,6 +151,41 @@ class primka{
         
     }
     
+        public function getBySerijski($serijski){
+        $query=$this->mysqli->prepare("SELECT  p.primka_id, p.datumZaprimanja, p.naziv, s.ime, s.prezime, p.status "
+                . "FROM primka p LEFT JOIN stranka s ON s.stranka_id = p.stranka_id "
+                . "WHERE p.serial = ? ");
+        
+        if($query === false){
+            trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
+        }
+        
+        $query->bind_param("s", $serijski); 
+        
+        if($query->execute()){
+                
+            $query->bind_result($id, $dz, $n, $i, $p, $s);
+        
+            while($row = $query->fetch()){
+                $primka[] = array(
+                    "primka" => $id,
+                    "zaprimljeno" => $dz,
+                        "uredaj" => $n,
+                    "ime" => $i,
+                    "prezime" => $p,
+                    "status" => $s
+                );
+            }
+        
+        $query->close(); 
+        return $primka;
+
+        
+        } 
+        
+        
+    }
+    
     public function getByIdRN($id){
         $query=$this->mysqli->prepare("SELECT p.primka_id as id, p.*, p.status as p_status, rn.status as status_rn, rn.*, s.*, 
                                             rndo.ime as zapoceoRn_ime, rndo.prezime as zapoceoRn_prezime, 

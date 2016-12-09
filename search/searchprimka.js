@@ -10,8 +10,10 @@ var left = $('#sp').position().left;
                     var value = $(this).val();
 
                     if (value != '') {
+                         $('#searchp').hide();
+                        $('#cancelp').show();
                         $('#search_result_primka').show();
-                        console.log(value);
+
                         //Ispis kupaca
                         $.post('search/pretrazi_primku.php', {value: value}, function (primka) {
                             
@@ -28,14 +30,25 @@ var left = $('#sp').position().left;
                             
                             $('#search_result_primka').html(output);
                             
-                        });
+                        }).fail(function(){$('#search_result_primka').html('Nema rezultata');});
                         
                     } else {
+                        $('#searchp').show();
+                        $('#cancelp').hide();
                         $('#search_result_primka').hide();
                     }
 
                 });
                 //  KRAJ * PRETRAGA ZA KUPCEM * KRAJ
+                
+                 $('#ikonep').on("click", this, function(e){
+                     $('#search_primka').val(null);
+                     $('#cancelp').hide();
+                    $('#searchp').show();
+                    $('#search_result_primka').hide();
+                });
+                
+                
                 
                 //  UPIS PODATAKA ODABRANOG KUPCA U POLJE
                 $('#search_result_primka').on("click", 'a', function(e){
