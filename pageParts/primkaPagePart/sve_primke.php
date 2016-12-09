@@ -162,6 +162,10 @@
                                     <a class="btn btn-app" id="editBtn" style="display: none;  float: right">
                                         <i class="fa fa-edit"></i> Izmijeni
                                     </a>
+                                    
+                                    <a class="btn btn-app" id="editPonistiBtn" style="display: none;  float: right">
+                                        <i class="fa fa-undo"></i> Poništi
+                                    </a>
 
                                     <a class="btn btn-app"  id="spremiKupca" style="display: none;  float: right">
                                         <i class="fa fa-save"></i> Spremi promjene

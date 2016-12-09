@@ -1,5 +1,7 @@
 <?php
 include_once 'checkLogin.php';
+require_once './klase/primka.php';
+require_once './klase/radniNalog.php';
 if($_COOKIE['odjel'] == "Servis"){
 ?>
 

@@ -59,13 +59,29 @@
                         $('#inputEmail').val(osoba.email).prop( "disabled", true );
                         
                         $('#editBtn').show();
+                        $('#editPonistiBtn').show();
         
                         $("#search_box").val("");
                         $('#search_result').hide();
                     });
                 }
                
-                
+                $('#editPonistiBtn').click(function(){
+                    $('#inputid').text(null);
+                       $('#inputTvrtka').val(null).prop( "disabled", false );
+                       $('#inputTvrtka').show()
+                        $('#inputIme').val(null).prop( "disabled", false );
+                        $('#inputPrezime').val(null).prop( "disabled", false );
+                        $('#inputAdresa').val(null).prop( "disabled", false );
+                        $('#inputGrad').val(null).prop( "disabled", false );
+                        $('#inputPB').val(null).prop( "disabled", false );
+                        $('#inputKontakt').val(null).prop( "disabled", false );
+                        $('#inputEmail').val(null).prop( "disabled", false );
+                        $('#ponistiK').hide();
+                        $('#spremiKupca').hide();
+                        $('#editBtn').hide();
+                        $(this).hide();
+                });
                 
                 
                 //  UPIS PODATAKA ODABRANOG KUPCA U POLJE

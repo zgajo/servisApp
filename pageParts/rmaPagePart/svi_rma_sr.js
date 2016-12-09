@@ -1,6 +1,6 @@
 $.ajax({
                     type: 'POST',
-                    url: "json/primka/sveOtvorenePrimke.php",
+                    url: "json/primka/svePrimkeRNServis.php",
                     dataType: 'json',
                     contentType: "application/json; charset=utf-8",
                     success: function (data) {
