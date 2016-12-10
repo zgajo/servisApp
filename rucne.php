@@ -39,7 +39,7 @@
                 <!-- info row -->
                 <div  style="margin-left: auto; margin-right: auto; text-align: center">
                     <div>Ručna izdatnica br. </div>
-                    <input style="border: none; text-align: center" value="broj">
+                    <input id="rb" style="border: none; text-align: center" value="broj">
                 </div>
 
                 <div class="row">
@@ -128,7 +128,9 @@
                     window.print();
                 }
                 
+                var sad = new Date();
                 
+                $('#rb').val([sad.getDate(), sad.getMonth()+1].join('') + '/' + [((sad.getHours()<10)?'0':'') + sad.getHours(), ((sad.getMinutes()<10)?'0':'') + sad.getMinutes()].join(''));
                 
                 
                 
