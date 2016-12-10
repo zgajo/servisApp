@@ -60,6 +60,9 @@
                     </div>
 
                 </div>
+                <a id="rucna" class="btn btn-app"  style=" float: left;">
+                        <i class="fa fa-send"></i> Stvori ručnu izdatnicu
+                    </a>
 
                 <div class="box-body" style="clear: both">
 

@@ -139,7 +139,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>
         <script type="text/javascript" src="search/searchkupca.js"></script>
     <script type="text/javascript" src="search/searchprimka.js"></script>    
-        
+        <script>
+$('#rucna').click(function(){
+    var primka = $('#primka_id').text();
+    window.open("rucne.php?primka="+primka, "_blank");
+});
+</script>
         <?php if(!empty($_GET['radni_nalog'])){ ?>
         <script>
                         $(document).ready(function (){

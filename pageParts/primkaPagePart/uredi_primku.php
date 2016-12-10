@@ -83,9 +83,19 @@
                     
                 </div>
                 <div  id="novo" style="display: none" class="box-footer">
-                         <a  style="margin-left: 5px; margin-right: 5px; background-color: #00733e" class="btn btn-sm btn-info btn-flat pull-left" href="rn.php?action=novi_rn&primka_id=<?php  echo $_GET['primka']?>">Novi radni nalog</a>
-                         <a class="btn btn-sm btn-info btn-flat pull-left" style="background-color: #8677A7" href="rma.php?action=novi_rma&primka_id=<?php  echo $_GET['primka']?>" >Novi RMA nalog</a>
-                    </div>
+                           
+                   <a class="btn btn-app"  href="rn.php?action=novi_rn&primka_id=<?php  echo $_GET['primka']?>" style=" float: left; ">
+                        <i class="glyphicon glyphicon-share"></i> Novi radni nalog
+                    </a>  
+                         
+                   <a class="btn btn-app"  href="rma.php?action=novi_rma&primka_id=<?php  echo $_GET['primka']?>" style=" float: left; ">
+                        <i class="glyphicon glyphicon-random"></i> Novi RMA nalog
+                    </a>      
+                         
+                    <a class="btn btn-app"  href="rucne.php?primka=<?php echo $_GET['primka'] ?>" style=" float: left;">
+                        <i class="fa fa-send"></i> Stvori ručnu izdatnicu
+                    </a>
+                </div>
 
             </div><!-- /.box -->
             <!-- general form elements disabled -->
