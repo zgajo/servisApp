@@ -193,17 +193,12 @@ console.log(<?php echo $_GET['rma'] ?>);
                                             // PODACI KUPCA
 
                                             $('#ip_kupca').text(primka[0].ime + ' ' + primka[0].prezime);
-                                            if (primka[0].tvrtka)
-                                                $('#tvrtka').text(primka[0].tvrtka).show();
-                                            $('#kontakt').text(primka[0].kontaktBroj);
-                                            if (primka[0].email)
-                                                $('#email').after("<p style='display:inline'>" + primka[0].email + "</i>");
-                                            else {
-                                                $('#email').hide()
-                                            }
-                                            ;
-                                            $('#grad').text(primka[0].grad);
-                                            $('#adresa').text(primka[0].adresa);
+                                     $('#tvrtka').text(primka[0].tvrtka).show();
+                                     $('#kontakt').text(primka[0].kontaktBroj);
+                                     $('#email').after('');
+                                     if(primka[0].email) $('#email').text(primka[0].email); else{ $('#email').hide()};
+                                     $('#grad').text(primka[0].grad);
+                                     $('#adresa').text(primka[0].adresa);
                                             
                                             $('#inputid').text(primka[0].stranka_id);
                                         $('#inputTvrtka').val(primka[0].tvrtka);

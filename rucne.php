@@ -18,6 +18,8 @@ include_once 'checkLogin.php';
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         <!-- Theme style -->
         <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+        
+        
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -42,69 +44,59 @@ include_once 'checkLogin.php';
                 </div>
                 <!-- info row -->
                 <div  style="margin-left: auto; margin-right: auto; text-align: center">
-                    <div>Ručna izdatnica br. </div>
-                    <input id="rb" style="border: none; text-align: center" value="broj">
+                    <div style="font-size: 20px">Ručna izdatnica br. </div>
+                    <input id="rb" style="border: none; text-align: center; font-size: 20px" value="broj">
                 </div>
 
-                <div class="row">
-                    <div class="col-xs-12" style="float:left; margin-top: 50px;">
-                        <p class="lead"><b style=" font-size: 30px">ŠALJE:</b></p>
-                        <div class="table-responsive">
-                            <table class="table" style="font-size: 20px">
-                                <tr>
-                                    <th style="width:50%">Centar:</th>
-                                    <td id="sc"></td>
-                                </tr>
-                                <tr>
-                                    <th>Adresa</th>
-                                    <td id="sa"></td>
-                                </tr>
-                                <tr>
-                                    <th>Grad</th>
-                                    <td id="sg"></td>
-                                </tr>
-                                <tr>
-                                    <th>Kontakt</th>
-                                    <td id="sb"></td>
-                                </tr>
-                                <tr>
-                                    <th>Uređaj</th>
-                                    <td id="su"></td>
-                                </tr>
-                            </table>
-                        </div>
+                
+                <div class="row" style=" width: 95%; margin-top: 50px; margin-left: 2px; margin-right: 2px ">
+                    <p style="margin-bottom: 2px"  class="lead"><b style=" font-size: 14px">ŠALJE:</b></p>
+                    <div class="col-xs-12" style="float:left;  border: 1px solid black; font-size: 14px ">
+                        <b>Centar: <p id="sc" style="display: inline"></p></b><br><br>
+                        <b>Adresa: <p id="sa" style="display: inline"></p></b><br>
+                        <b>Grad: <p id="sg" style="display: inline"></p></b><br>
+                        <b>Kontakt: <p id="sb" style="display: inline"></p></b><br>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
 
 
-                <div class="row">
-                    <div class="col-xs-12" style="margin-top: 100px; font-size: 35px">
-                        <p class="lead"><b style=" font-size: 30px">PRIMA:</b></p>
-                        <div class="table-responsive">
-                            <table class="table" style="font-size: 20px">
-                                <tr>
-                                    <th style="width:50%">Tvrtka:</th>
-                                    <td><input id="pt" style="width: 100%;border: none"></td>
-                                </tr>
-                                <tr>
-                                    <th>Adresa</th>
-                                    <td><input id="pa"   style="width: 100%;border: none"></td>
-                                </tr>
-                                <tr>
-                                    <th>Grad</th>
-                                    <td><input id="pg"   style="width: 100%;border: none"></td>
-                                </tr>
-                                <tr>
-                                    <th>Kontakt</th>
-                                    <td><input id="pb"   style="width: 100%;border: none"></td>
-                                </tr>
-                            </table>
-                        </div>
+                <div class="row" style=" width: 95%;  margin-top: 50px;  margin-left: 2px; margin-right: 2px "> 
+                    <p style="margin-bottom: 2px"  class="lead"><b style=" font-size: 20px">PRIMA:</b></p>
+                    <div class="col-xs-12" style="border: 1px solid black; font-size: 18px ">
+                        <b style="font-size: 20px">Tvrtka: <input id="pt" style="display: inline; border: none; font-size: 20px; width: 80%; margin-left: 5px"></input></b><br><br>
+                        <b>Adresa: <input id="pa" style="display: inline; border: none;  width: 80%; margin-left: 5px"></input></b><br>
+                        <b>Grad: <input id="pg" style="display: inline; border: none;  width: 80%; margin-left: 5px"></input></b><br>
+                        <b>Kontakt: <input id="pb" style="display: inline;  border: none; width: 80%; margin-left: 5px"></input></b><br>
+                        
                     </div><!-- /.col -->
                 </div><!-- /.row -->
+                
+                <div class="row" style="width: 95%;  margin-top: 40px; margin-left: 2px; margin-right: 2px  ">
+                    <table style="width: 100%;border: 1px solid black; ">
+                        <thead >
+                        <th style="border: 1px solid black; text-align: center">Uređaj</th>
+                        <th style="border: 1px solid black; text-align: center">Serijski</th>
+                        <th style="border: 1px solid black; text-align: center">Primka</th>
+                        </thead>
+                        <tbody >
+                        <tr>
+                            <td style="border: 1px solid black; font-size: 12px"><p  id="su"></p></td>
+                            <td style="border: 1px solid black; font-size: 12px"><p id="ss"></p></td>
+                            <td style="border: 1px solid black; font-size: 12px"><p id="p"></p></td>
+                        </tbody>
+                        
+                    </table>
+
+                </div>
+                
+                <div class="row" style= " width: 95%; margin-top: 40px;  margin-left: 2px; margin-right: 2px  ">
+                    Napomena:
+                    <textarea rows="5" style="width: 100%; border: 1px solid black"></textarea>
+
+                </div>
 
 
-                <div class="col-xs-12" style="margin-top: 40px">
+                <div class="col-xs-12" style="margin-top: 40px; width: 95%; ">
                     <div style="float: left">
                         <b>Zatražio: </b><p id="z"></p>
                         <b>Zaprimio skladištar: </b><p></p>
@@ -152,6 +144,11 @@ include_once 'checkLogin.php';
                     var s_adresa;
                     var s_grad;
                     var s_kontakt;
+                    
+                    
+                    $('#su').text(pr[0].naziv);
+                    $('#ss').text(pr[0].serial);
+                    $('#p').text(pr[0].primka_id);
                    
                     
                     $('#sc').text('Eurotrade '+ centar);
@@ -207,7 +204,6 @@ include_once 'checkLogin.php';
                     $('#sa').text(s_adresa);
                     $('#sb').text(s_kontakt);
                     $('#sg').text(s_grad);
-                    (pr[0].serial) ? $('#su').text(pr[0].naziv + ', sn: ' +pr[0].serial) : $('#su').text(pr[0].naziv);
                     
                     //  ako je primka poslana u rovinj
                     if(pr[0].p_status === "Poslano u CS - Rovinj"){
