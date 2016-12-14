@@ -26,6 +26,7 @@
             <li class="<?php echo ($_SERVER['PHP_SELF'] == "/servisApp/primke.php" ? "active" : ""); ?>"><a href="./primke.php"><i class="glyphicon glyphicon-list-alt"></i> <span>Primke</span></a></li>
             <?php if ($_COOKIE['odjel'] == "Servis") { ?><li class="<?php echo ($_SERVER['PHP_SELF'] == "/servisApp/rn.php" ? "active" : "") ?>"><a href="./rn.php"><i class="glyphicon glyphicon-share"></i> <span>Radni nalozi</span></a></li><?php } ?>
             <li class="<?php echo ($_SERVER['PHP_SELF'] == "/servisApp/rma.php" ? "active" : ""); ?>"><a href="rma.php"><i class="glyphicon glyphicon-random"></i> <span>RMA nalozi</span></a></li>
+            <?php if ($_COOKIE['odjel'] == "Servis") { ?><li class="<?php echo ($_SERVER['PHP_SELF'] == "/servisApp/narudzbe.php" ? "active" : "") ?>"><a href="./narudzbe.php"><i class="fa fa-reorder"></i> <span>Narudžbe</span></a></li><?php } ?>
 
         </ul><!-- /.sidebar-menu -->
         <ul class="sidebar-menu">
