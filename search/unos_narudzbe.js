@@ -186,11 +186,11 @@
                         $("#box").show();
                   });
                   
-                  // UNOS PRIMKE
+                  // UNOS NARUDŽBE
                    
-                   $('#submit').click(function (e){
+                   $('#insertNarudzba').click(function (e){
                       e.preventDefault();
-                      console.log('klik');
+                      var idkupca = $('#inputid').text();
                       //kupac
                       var tvrtka = $('#inputTvrtka').val();
                       var ime = $('#inputIme').val();
@@ -215,24 +215,22 @@
                     
                       //    
                       else{
-                          var idkupca = $( '#inputid' ).text();
+                          var idkupca = $('#inputid').text();
                           
                           if(idkupca === '') {
                               if (confirm('Jeste li sigurni da želite unijeti upisane podatke?')) {
                                 $.ajax({
                                  type: 'POST',
-                                 url: "json/narudzba/insertNarudzba.php",
-                                 data: {"pr":pro, "dob":dob, "vpc":vpc, "skl":skl, "primka":p, "pn":pn, "stranka_id": idkupca,
+                                 url: "json/narudzbe/insert.php",
+                                 data: {"dio":pro, "dob":dob, "vpc":vpc, "skl":skl, "p":p, "pn":pn, "stranka_id": idkupca,
                                  "tvrtka" : tvrtka, "ime":ime, "prezime":prezime, "adresa" : adresa, "grad":grad, "post_broj": pb, "kontakt_broj":kontakt, "email" : email},
                                  success: function (data) {
-                                            alert('Molim Vas, omogućite prikaz skočnih prozora');
+                                            window.location.href = "narudzbe.php";
                                 
-                                         
-                                        
                                     },
                                     
                                     error: function (e) {
-                                    alert(e.message);
+                                    alert('kvar pri upisu di je novi kupac');
                                         }
                                     });
                                 } else {
@@ -244,18 +242,12 @@
                               if (confirm('Jeste li sigurni da želite unijeti upisane podatke?')) {
                               $.ajax({
                                  type: 'POST',
-                                 url: "json/narudzba/insertNarudzba.php",
-                                 data: {"pr":pro, "dob":dob, "vpc":vpc, "skl":skl, "primka":p, "pn":pn, "stranka_id": idkupca},
+                                 url: "json/narudzbe/insert.php",
+                                 data: {"dio":pro, "dob":dob, "vpc":vpc, "skl":skl, "p":p, "pn":pn, "stranka_id": idkupca},
                                  success: function (nar) {
                                      
-                                        if (win) {
-                                            //Browser has allowed it to be opened
-                                            win.focus();
-                                        } else {
-                                            //Browser has blocked it
-                                            alert('Molim Vas, omogućite prikaz skočnih prozora');
-                                        }
-                                         window.location.href = "primke.php";
+                                        
+                                         window.location.href = "narudzbe.php";
                                         
                                     },
                                     

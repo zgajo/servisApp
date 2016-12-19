@@ -95,12 +95,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <!-- Custom Tabs -->
                         <div class="nav-tabs-custom">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Sve otvorene narudžbe</a></li>
-                                <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Nova narudžba po primci</a></li>
-                                <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false">Nova narudžba</a></li>
+                                <li class="<?php if(!$_GET['primka'] && !$_GET['stranka']) echo  "active" ?>"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Sve otvorene narudžbe</a></li>
+                                <li class="<?php if($_GET['primka'] && $_GET['stranka']) echo "active" ?>"><a href="#tab_3" data-toggle="tab" aria-expanded="false">Nova narudžba</a></li>
                             </ul>
                             <div class="tab-content">
-                                <div class="tab-pane active" id="tab_1">
+                                <div class="tab-pane <?php if(!$_GET['primka'] && !$_GET['stranka']) echo  "active" ?>" id="tab_1">
                                     <!-- TABLE: Sve otvorene primke -->
                                     <div class="box box-info" style="border-top: none">
 
@@ -129,85 +128,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </div><!-- /.tab-pane -->
 
 
-                                <div class="tab-pane" id="tab_2">
-                                    <form id="unosNarudzbe" class="form-horizontal">
-                                        <div class="row">
+                                
 
-                                            <div class="col-md-6">
-                                                <!-- Dio za primku -->
-                                                <div class="box box-info">
-                                                    <div class="box-header with-border">
-                                                        <h3 class="box-title">Otvaranje nove narudžbe</h3>
-                                                    </div><!-- /.box-header -->
-                                                    <!-- form start -->
-
-                                                    <div class="box-body">
-                                                        <div class="form-group">
-                                                            <label class="col-sm-2 control-label">Primka</label>
-                                                            <div class="col-sm-10">
-                                                                <p class="form-control">1</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label class="col-sm-2 control-label">Stranka</label>
-                                                            <div class="col-sm-10">
-                                                                <p class="form-control">1</p>
-                                                            </div>
-                                                        </div>
-
-
-                                                        <div class="form-group">
-                                                            <label for="inputProizvod" class="col-sm-2 control-label">Proizvod</label>
-                                                            <div class="col-sm-10">
-                                                                <input class="form-control" id="inputProizvod" placeholder="Dio koji se naručuje" type="number" name="proizvod">
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <label for="inputDobavljac" class="col-sm-2 control-label">Dobavljač</label>
-                                                            <div class="col-sm-10">
-                                                                <input class="form-control" id="inputDobavljac" placeholder="Zelcos, Epson ..." type="text" name="dobavljac">
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <label for="inputVPC" class="col-sm-2 control-label">CIjena (VPC)</label>
-                                                            <div class="col-sm-10">
-                                                                <input class="form-control" id="inputVPC" placeholder="Cijena koja je javljena kupcu ..." type="text" name="cijenaVPC">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="inputSkladiste" class="col-sm-2 control-label"  id="required">Skladište</label>
-                                                            <div class="col-sm-10">
-                                                                <input class="form-control" id="inputSkladiste" placeholder="Skladište na koje se treba poslati proizvod ..." type="text" name="skladiste" required="">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="inputPrimka" class="col-sm-2 control-label">Primka</label>
-                                                            <div class="col-sm-10">
-                                                                <input class="form-control" id="inputPrimka" placeholder="Serijski broj ..." type="text" name="primka">
-                                                            </div>
-                                                        </div>
-
-
-
-                                                    </div><!-- /.box-body -->
-                                                    <div class="box-footer">
-                                                        <button type="submit" id="submitprimka" name="submit" class="btn btn-info pull-right">Unesi podatke</button>
-                                                    </div>
-
-                                                </div><!-- /.box -->
-                                                <!-- general form elements disabled -->
-
-                                            </div>
-
-                                        </div> 
-
-                                    </form>
-                                </div>
-
-
-                                <div class="tab-pane" id="tab_3">
+                                <div class=" tab-pane <?php if($_GET['primka'] && $_GET['stranka']) echo "active" ?>" id="tab_3">
 
                                     <form id="unosNarudzbe" class="form-horizontal" action="" method="POST" >
                                         <div class="row">
@@ -336,13 +259,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         <div class="form-group">
                                                             <label for="inputProizvod" class="col-sm-2 control-label" id="required">Proizvod</label>
                                                             <div class="col-sm-10">
-                                                                <input class="form-control" id="inputProizvod" placeholder="Dio koji se naručuje" type="number" name="proizvod">
+                                                                <input class="form-control" id="inputProizvod" placeholder="Dio koji se naručuje" type="text" name="proizvod">
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="inputPN" class="col-sm-2 control-label">Part no.</label>
                                                             <div class="col-sm-10">
-                                                                <input class="form-control" id="inputPN" placeholder="Product number dijela koji se naručuje" type="number" name="pn">
+                                                                <input class="form-control" id="inputPN" placeholder="Product number dijela koji se naručuje" type="text" name="pn">
                                                             </div>
                                                         </div>
 
@@ -376,7 +299,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                                     </div><!-- /.box-body -->
                                                     <div class="box-footer">
-                                                        <button  id="submit" name="submit" class="btn btn-info pull-right">Unesi podatke</button>
+                                                        <button  id="insertNarudzba" name="submit" class="btn btn-info pull-right">Unesi podatke</button>
                                                     </div>
 
                                                 </div><!-- /.box -->
@@ -430,8 +353,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script type="text/javascript" src="search/searchkupca.js"></script>
         <script type="text/javascript" src="search/searchprimka.js"></script>
         <script type="text/javascript" src="search/searchserijski.js"></script>
-
         <script src="search/unos_narudzbe.js" type="text/javascript"></script>
+        <?php if($_GET['stranka'] && $_GET['primka']){ ?>
+        <script>
+        
+           upisKupca(<?php echo $_GET['stranka'] ?>);
+           $('#inputPrimka').val(<?php echo $_GET['primka'] ?>);
+           
+        </script>
+        <?php } ?>
+
+        
 
         <!-- Optionally, you can add Slimscroll and FastClick plugins.
              Both of these plugins are recommended to enhance the

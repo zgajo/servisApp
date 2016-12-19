@@ -272,8 +272,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         "kontakt": kontakt,
                         "email": email,
                         "id": kid
-                    });
-                    podaciKupca(kid);
+                    }, function(){podaciKupca(kid);});
+                    
 
 
 

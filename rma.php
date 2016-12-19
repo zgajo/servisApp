@@ -218,7 +218,7 @@ console.log(<?php echo $_GET['rma'] ?>);
                                             $('#serijski').text(primka[0].serijski);
                                             $('#brand').text(primka[0].brand);
                                             $('#tip').text(primka[0].tip);
-                                            (isNaN(dk.getDate())) ? $('#dk').text() : $('#dk').text([dk.getDate(), dk.getMonth() + 1, dk.getFullYear()].join('.'));
+                                            (dk.getFullYear() !== '1970' && dk) ? $('#dk').text() : $('#dk').text([dk.getDate(), dk.getMonth() + 1, dk.getFullYear()].join('.'));
                                             $('#br').text(primka[0].racun);
                                             $('#ok').text(primka[0].opisKvara);
                                             $('#pp').text(primka[0].prilozeno_primijeceno);
@@ -232,7 +232,7 @@ console.log(<?php echo $_GET['rma'] ?>);
                                 $('#inputTip').val(primka[0].tip);
                                 $('#inputSerijski').val(primka[0].serijski);
                                 var dk = new Date(primka[0].datumKupnje);
-                                if (!isNaN(dk.getDate()))
+                                if (dk.getFullYear() != '1970' && dk)
                                     $('#inputDK').val([dk.getDate(), dk.getMonth() + 1, dk.getFullYear()].join('.'));
                                 $('#inputRacun').val(primka[0].racun);
                                 $('#inputPP').val(primka[0].prilozeno_primijeceno);

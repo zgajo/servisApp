@@ -366,7 +366,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 $('#serijski').text(pp[0].serial);
                                 $('#brand').text(pp[0].brand);
                                 $('#tip').text(pp[0].tip);
-                                (isNaN(dk.getDate())) ? $('#dk').text() : $('#dk').text([dk.getDate(), dk.getMonth() + 1, dk.getFullYear()].join('.'));
+                                (dk.getFullYear()!='1970' && dk) ? $('#dk').text([dk.getDate(), dk.getMonth() + 1, dk.getFullYear()].join('.')) :  $('#dk').text() ;
                                 $('#br').text(pp[0].racun);
                                 $('#ok').text(pp[0].opisKvara);
                                 $('#pp').text(pp[0].prilozeno_primijeceno);
@@ -398,7 +398,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 $('#inputBrand').val(pp[0].brand);
                                 $('#inputTip').val(pp[0].tip);
                                 $('#inputSerijski').val(pp[0].serijski);
-                                if (!isNaN(dk.getDate()))
+                                if (dk.getFullYear()!='1970' && dk)
                                     $('#inputDK').val([dk.getDate(), dk.getMonth() + 1, dk.getFullYear()].join('.'));
                                 $('#inputRacun').val(pp[0].racun);
                                 $('#inputPP').val(pp[0].prilozeno_primijeceno);
@@ -615,6 +615,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                     });
                     //  KRAJ * SPREMANJE IZMJENE KUPCA * KRAJ
+                    
+                    
+                    $('#narudzba').click(function(){
+                    var pr= <?php echo $_GET['primka'] ?>;
+                    window.location = "narudzbe.php?primka="+pr+"&stranka="+$('#inputid').text();
+                    })
 
 
 

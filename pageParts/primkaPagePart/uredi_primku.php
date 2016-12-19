@@ -90,11 +90,17 @@
                          
                    <a class="btn btn-app"  href="rma.php?action=novi_rma&primka_id=<?php  echo $_GET['primka']?>" style=" float: left; ">
                         <i class="glyphicon glyphicon-random"></i> Novi RMA nalog
-                    </a>      
+                    </a>    
+                    
+                    <a class="btn btn-app"  id="narudzba" style=" float: left;">
+                        <i class="fa fa-reorder"></i> Stvori novu narudžbu
+                    </a>
                          
                     <a class="btn btn-app"  href="rucne.php?primka=<?php echo $_GET['primka'] ?>" style=" float: left;">
                         <i class="fa fa-send"></i> Stvori ručnu izdatnicu
                     </a>
+                    
+                    
                 </div>
 
             </div><!-- /.box -->
