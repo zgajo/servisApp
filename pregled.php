@@ -246,7 +246,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     
                     var kupljeno = new Date(primka[0].datumKupnje);
                     
-                    (kupljeno && kupljeno.getDate() != '1970' && !isNaN(kupljeno)) ?  $('#dp').text([kupljeno.getDate(), kupljeno.getMonth(), kupljeno.getFullYear()].join('.') ):  $('#dp').text('');;
+                    (kupljeno && kupljeno.getFullYear() != '1970' && !isNaN(kupljeno)) ?  $('#dp').text([kupljeno.getDate(), kupljeno.getMonth(), kupljeno.getFullYear()].join('.') ):  $('#dp').text('');;
                    
                     $('#racun').text(primka[0].racun);
                     $('#opis').text(primka[0].opisKvara);

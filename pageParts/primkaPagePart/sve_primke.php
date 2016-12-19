@@ -24,6 +24,7 @@
                                     
                                 </tr>
                             </thead>
+                            <tbody style="text-align: center"></tbody>
                         </table>
                     </div><!-- /.box-body -->
 
@@ -54,6 +55,7 @@
                                     
                                 </tr>
                             </thead>
+                            <tbody style="text-align: center"></tbody>
                         </table>
                     </div><!-- /.box-body -->
 

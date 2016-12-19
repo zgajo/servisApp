@@ -82,7 +82,10 @@
                                                     output += '</td>';
                                                     
                                                     output += '<td>';
-                                                    for(var j=0; j<rn.length;++j) output += rn[j].status + '<br>';
+                                                    for(var j=0; j<rn.length;++j) {
+                                                        if(rn[j].status === null) output +=  '<br>';
+                                                        else output += rn[j].status + '<br>';
+                                                    };
                                                     output += '</td>';
                                                     
                                                     

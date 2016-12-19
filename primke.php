@@ -106,7 +106,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div><!-- /.content-wrapper -->
 
             <!-- Main Footer -->
-<?php require_once('pageParts/footer.php') ?>
+            <?php require_once('pageParts/footer.php') ?>
 
         </div><!-- ./wrapper -->
 
@@ -135,7 +135,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script type="text/javascript" src="search/searchserijski.js"></script>
 
 
-<?php if (!isset($_GET['primka']) && !isset($_GET['pregled_serijski'])) { ?>
+        <?php if (!isset($_GET['primka']) && !isset($_GET['pregled_serijski'])) { ?>
 
             <script src="search/unos_primke.js" type="text/javascript"></script>
 
@@ -145,145 +145,156 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 var centar = "<?php echo $_COOKIE['centar'] ?>";
                 var odjel = "<?php echo $_COOKIE['odjel'] ?>";
 
-                if (odjel === "Servis") {
-                    $('#svePoslanePrimke').DataTable({
-                        "ajax": {
-                            "url": "json/primka/svePoslanePrimke.php",
-                            "dataSrc": ""
-                        },
-                        "columns": [
-                            {data: "primka_id", "render": function (data, type, row, meta) {
-                                    var output = "";
-                                    if (odjel === "Servis")
-                                        output += '<a class="glyphicon glyphicon-share" href="rn.php?action=novi_rn&primka_id=' + row.primka_id + '"></a>';
-                                    return output;
-                                }},
-                            {"data": "primka_id", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
-                                    var output = "";
-                                    var danas = new Date();
-                                    var datum = new Date(row.datumZaprimanja);
-                                    var oneDay = 24 * 60 * 60 * 1000;
-                                    var diffDays = Math.round(Math.abs((danas.getTime() - datum.getTime()) / (oneDay)));
 
-                                    if (diffDays <= 10)
-                                        var sty = "label label-success";
-                                    if (diffDays > 10 && diffDays <= 17)
-                                        var sty = "label label-warning";
-                                    if (diffDays > 17)
-                                        var sty = "label label-danger";
-                                    output += '<a class="' + sty + '">' + row.primka_id + '</a>'; // row object contains the row data
-                                    return output;
-                                }},
-                            {"data": "primka_id", "render": function (data, type, row, meta) {
-                                    var r = null;
-                                    var rm = null;
+                $.ajax({
+                    url: "json/primka/svePoslanePrimke.php",
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: "application/json; charset=utf-8",
+                    success: function () {
+                        if (odjel === "Servis") {
+                            $('#svePoslanePrimke').DataTable({
+                                "ajax": {
+                                    "url": "json/primka/svePoslanePrimke.php",
+                                    "dataSrc": ""
+                                },
+                                "columns": [
+                                    {data: "primka_id", "render": function (data, type, row, meta) {
+                                            var output = "";
+                                            if (odjel === "Servis")
+                                                output += '<a class="glyphicon glyphicon-share" href="rn.php?action=novi_rn&primka_id=' + row.primka_id + '"></a>';
+                                            return output;
+                                        }},
+                                    {"data": "primka_id", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
+                                            var output = "";
+                                            var danas = new Date();
+                                            var datum = new Date(row.datumZaprimanja);
+                                            var oneDay = 24 * 60 * 60 * 1000;
+                                            var diffDays = Math.round(Math.abs((danas.getTime() - datum.getTime()) / (oneDay)));
 
-
-                                    var output = '';
-                                    //    DOHVAĆANJE RADNIH NALOGA
-                                    $.ajax({
-                                        async: false,
-                                        url: "json/rn/getRNbyPrimka.php",
-                                        type: 'POST',
-                                        data: {"primka": row.primka_id},
-                                        success: function (data) {
-
-                                            r = data;
-
-                                        }});
-                                    //    DOHVAĆANJE RMA NALOGA
-                                    $.ajax({
-                                        async: false,
-                                        url: "json/rma/getRmaByPrimka.php",
-                                        type: 'GET',
-                                        data: {"primka": row.primka_id},
-                                        success: function (data) {
-
-                                            rm = data;
-
-                                        }});
-                                    //    UKOLIKO IMA DOHVAĆENIH rn
-                                    if (r !== null && r.length > 0) {
-                                        for (var j = 0; j < r.length; ++j) {
-                                            output += '<a href="rn.php?radni_nalog=' + r[j].id + '"> RN. ' + r[j].id + '</a><br>';
-                                        }
-                                    }
-                                    //    UKOLIKO IMA DOHVAĆENIH rma
-
-                                    if (rm !== null && rm.length > 0) {
-                                        for (var j = 0; j < rm.length; ++j) {
-                                            output += '<a href="rma.php?rma=' + rm[j].id + '"> RMA. ' + rm[j].id + '</a><br>';
-                                        }
-                                    }
-
-                                    return output;
-
-                                }},
-                            {"data": "naziv"},
-                            {"data": "serial"},
-                            {"data": "s_ime", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
-                                    var osoba = row.s_ime + ' ' + row.s_prezime;
-                                    return osoba;
-                                }},
-                            {"data": "datumZaprimanja", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
-                                    var d = new Date(row.datumZaprimanja);
-                                    var dat = (d && d.getFullYear() != '1970') ? [d.getDate(), d.getMonth() + 1, d.getFullYear()].join('.') : ' ';
-                                    return dat;
-                                }},
-                            {"data": "status"},
-                            {"data": "centar"}
+                                            if (diffDays <= 10)
+                                                var sty = "label label-success";
+                                            if (diffDays > 10 && diffDays <= 17)
+                                                var sty = "label label-warning";
+                                            if (diffDays > 17)
+                                                var sty = "label label-danger";
+                                            output += '<a class="' + sty + '">' + row.primka_id + '</a>'; // row object contains the row data
+                                            return output;
+                                        }},
+                                    {"data": "primka_id", "render": function (data, type, row, meta) {
+                                            var r = null;
+                                            var rm = null;
 
 
-                        ]
+                                            var output = '';
+                                            //    DOHVAĆANJE RADNIH NALOGA
+                                            $.ajax({
+                                                async: false,
+                                                url: "json/rn/getRNbyPrimka.php",
+                                                type: 'POST',
+                                                data: {"primka": row.primka_id},
+                                                success: function (data) {
+
+                                                    r = data;
+
+                                                }});
+                                            //    DOHVAĆANJE RMA NALOGA
+                                            $.ajax({
+                                                async: false,
+                                                url: "json/rma/getRmaByPrimka.php",
+                                                type: 'GET',
+                                                data: {"primka": row.primka_id},
+                                                success: function (data) {
+
+                                                    rm = data;
+
+                                                }});
+                                            //    UKOLIKO IMA DOHVAĆENIH rn
+                                            if (r !== null && r.length > 0) {
+                                                for (var j = 0; j < r.length; ++j) {
+                                                    output += '<a href="rn.php?radni_nalog=' + r[j].id + '"> RN. ' + r[j].id + '</a><br>';
+                                                }
+                                            }
+                                            //    UKOLIKO IMA DOHVAĆENIH rma
+
+                                            if (rm !== null && rm.length > 0) {
+                                                for (var j = 0; j < rm.length; ++j) {
+                                                    output += '<a href="rma.php?rma=' + rm[j].id + '"> RMA. ' + rm[j].id + '</a><br>';
+                                                }
+                                            }
+
+                                            return output;
+
+                                        }},
+                                    {"data": "naziv"},
+                                    {"data": "serial"},
+                                    {"data": "s_ime", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
+                                            var osoba = row.s_ime + ' ' + row.s_prezime;
+                                            return osoba;
+                                        }},
+                                    {"data": "datumZaprimanja", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
+                                            var d = new Date(row.datumZaprimanja);
+                                            var dat = (d && d.getFullYear() != '1970') ? [d.getDate(), d.getMonth() + 1, d.getFullYear()].join('.') : ' ';
+                                            return dat;
+                                        }},
+                                    {"data": "status"},
+                                    {"data": "centar"}
 
 
-
-                    });
-                } else {
-                    $('#svePoslanePrimke').DataTable({
-                        "ajax": {
-                            "url": "json/primka/svePoslanePrimke.php",
-                            "dataSrc": ""
-                        },
-                        "columns": [
-                            {"data": "primka_id", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
-                                    var output = "";
-                                    var danas = new Date();
-                                    var datum = new Date(row.datumZaprimanja);
-                                    var oneDay = 24 * 60 * 60 * 1000;
-                                    var diffDays = Math.round(Math.abs((danas.getTime() - datum.getTime()) / (oneDay)));
-
-                                    if (diffDays <= 10)
-                                        var sty = "label label-success";
-                                    if (diffDays > 10 && diffDays <= 17)
-                                        var sty = "label label-warning";
-                                    if (diffDays > 17)
-                                        var sty = "label label-danger";
-                                    output += '<a class="' + sty + '">' + row.primka_id + '</a>'; // row object contains the row data
-                                    return output;
-                                }},
-                            {"data": "naziv"},
-                            {"data": "serial"},
-                            {"data": "s_ime", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
-                                    var osoba = row.s_ime + ' ' + row.s_prezime;
-                                    return osoba;
-                                }},
-                            {"data": "datumZaprimanja"},
-                            {"data": "status"}
-
-
-                        ]
+                                ]
 
 
 
-                    });
-                }
+                            });
+                        } else {
+                            $('#svePoslanePrimke').DataTable({
+                                "ajax": {
+                                    "url": "json/primka/svePoslanePrimke.php",
+                                    "dataSrc": ""
+                                },
+                                "columns": [
+                                    {"data": "primka_id", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
+                                            var output = "";
+                                            var danas = new Date();
+                                            var datum = new Date(row.datumZaprimanja);
+                                            var oneDay = 24 * 60 * 60 * 1000;
+                                            var diffDays = Math.round(Math.abs((danas.getTime() - datum.getTime()) / (oneDay)));
 
+                                            if (diffDays <= 10)
+                                                var sty = "label label-success";
+                                            if (diffDays > 10 && diffDays <= 17)
+                                                var sty = "label label-warning";
+                                            if (diffDays > 17)
+                                                var sty = "label label-danger";
+                                            output += '<a class="' + sty + '">' + row.primka_id + '</a>'; // row object contains the row data
+                                            return output;
+                                        }},
+                                    {"data": "naziv"},
+                                    {"data": "serial"},
+                                    {"data": "s_ime", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
+                                            var osoba = row.s_ime + ' ' + row.s_prezime;
+                                            return osoba;
+                                        }},
+                                    {"data": "datumZaprimanja"},
+                                    {"data": "status"}
+
+
+                                ]
+
+
+
+                            });
+                        }
+
+                    },
+                    error: function (rn) {
+                    }
+                })
 
 
                 //    KRAJ    *   LISTANJE SVIH POSLANIH PRIMKI  * KRAJ
             </script>
-<?php } else if (isset($_GET['pregled_serijski'])) { ?>                  
+        <?php } else if (isset($_GET['pregled_serijski'])) { ?>                  
             <script>
 
                 var serijski = "<?php echo $_GET['pregled_serijski'] ?>";
@@ -310,7 +321,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     ]
                 });
             </script>               
-<?php } else { ?>
+        <?php } else { ?>
             <script>
                 $(document).ready(function () {
 
@@ -679,7 +690,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 });
             </script>
-<?php } ?>
+        <?php } ?>
         <!-- date-range-picker -->
         <script>
             $(function () {
