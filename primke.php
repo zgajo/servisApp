@@ -346,15 +346,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 // PODACI KUPCA
 
                                 $('#ip_kupca').text(pp[0].ime + ' ' + pp[0].prezime);
-                                if (pp[0].tvrtka)
-                                    $('#tvrtka').text(pp[0].tvrtka).show();
+                                $('#tvrtka').text(pp[0].tvrtka).show();
                                 $('#kontakt').text(pp[0].kontaktBroj);
-                                if (pp[0].email)
-                                    $('#email').after("<p style='display:inline'>" + pp[0].email + "</i>");
-                                else {
-                                    $('#email').hide()
-                                }
-                                ;
+                                $('#email').after('');
+                                if(pp[0].email) $('#email').text(pp[0].email); else{ $('#email').hide()};
                                 $('#grad').text(pp[0].grad);
                                 $('#adresa').text(pp[0].adresa);
 
@@ -593,19 +588,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 "kontakt": kontakt,
                                 "email": email,
                                 "id": idkupca
-                            });
-
-                            $('#ip_kupca').text(ime + ' ' + prezime);
-                            $('#tvrtka').text(tvrtka);
-                            $('#kontakt').text(kontakt);
-                            if (email)
-                                $('#email').after("<p style='display:inline'>" + email + "</i>");
-                            else {
-                                $('#email').hide()
-                            }
-                            ;
-                            $('#grad').text(grad);
-                            $('#adresa').text(adresa);
+                            }, function(data){funPrimka()});
+                            
 
                             $('#upr').show();
                             $('#uredi_kupca').hide();

@@ -64,7 +64,7 @@ include_once 'checkLogin.php';
                     <p style="margin-bottom: 2px"  class="lead"><b style=" font-size: 20px">PRIMA:</b></p>
                     <div class="col-xs-12" style="border: 1px solid black; font-size: 18px ">
                         <b style="font-size: 20px">Tvrtka: <input id="pt" style="display: inline; border: none; font-size: 20px; width: 80%; margin-left: 5px"></input></b><br><br>
-                        <b>Adresa: <input id="pa" style="display: inline; border: none;  width: 80%; margin-left: 5px"></input></b><br>
+                        <b>Adresa: <input id="pa"  style="display: inline; border: none;  width: 80%; margin-left: 5px"></input></b><br>
                         <b>Grad: <input id="pg" style="display: inline; border: none;  width: 80%; margin-left: 5px"></input></b><br>
                         <b>Kontakt: <input id="pb" style="display: inline;  border: none; width: 80%; margin-left: 5px"></input></b><br>
                         

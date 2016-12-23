@@ -273,7 +273,7 @@
 
                                 </div><!-- /.box-body -->
                                 <div class="box-footer">
-                                    <button type="submit" id="submit" name="submit" class="btn btn-info pull-right">Unesi podatke</button>
+                                    <input id="submit" name="submit" class="btn btn-info pull-right" value="Unesi podatke" />
                                 </div>
 
                             </div><!-- /.box -->

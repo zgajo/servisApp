@@ -1,7 +1,5 @@
 <?php
 include_once 'checkLogin.php';
-require_once './klase/primka.php';
-require_once './klase/radniNalog.php';
 ?>
 
 
@@ -114,6 +112,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         <th>Stranka</th>
                                                         <th>Primka</th>
                                                         <th>Skladište</th>
+                                                        <th>Uređivanje</th>
                                                     </tr>
                                                 </thead>
                                             </table>
