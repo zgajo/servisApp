@@ -144,7 +144,10 @@
                       var email = $('#inputEmail').val();
                        var idkupca = $( '#inputid' ).text();
                        
-                       $.post('json/kupac/updateKupca.php', {
+                       $.ajax({
+                           type: 'POST',
+                           url:'json/kupac/updateKupca.php', 
+                           data: {
                            "tvrtka" : tvrtka,
                            "ime":ime,
                            "prezime":prezime, 
@@ -154,10 +157,13 @@
                            "kontakt":kontakt, 
                            "email":email,
                            "id" : idkupca
-                       });
+                       },
+                            success: function(){
+
+                                upisKupca(idkupca);
+                            }});
                        
-                       var idkupca = $( '#inputid' ).text();
-                       upisKupca(idkupca);
+                      
                        
                         $("#box").show();
                         $('#submit').prop("disabled", false);
