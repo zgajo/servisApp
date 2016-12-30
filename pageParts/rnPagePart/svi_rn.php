@@ -12,7 +12,7 @@
                             </div><!-- /.box-header -->
                             <div class="box-body">
                                 <div class="table-responsive">
-                                    <table   class="table no-margin">
+                                    <table  id="sviRN"  class="table no-margin">
                                         <thead>
                                             <tr>
                                                 <th>Primka</th>
@@ -24,7 +24,7 @@
                                                 <th>Napomena</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="sviRN"></tbody>
+                                        <tbody></tbody>
                                     </table>
                                 </div><!-- /.table-responsive -->
                             </div><!-- /.box-body -->

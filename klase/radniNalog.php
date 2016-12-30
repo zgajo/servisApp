@@ -355,11 +355,13 @@ class servisRN extends RN{
     public function RNbyPrimka($id) {
        
         
-        $query=$this->mysqli->prepare("SELECT rn.rn_id, rn.status, rn.pocetakRada, rn.danZavrsetka, rn.opisPopravka, rn.naplata, rn.napomena, rn.promijenjeno, rn.broj_ispisa, d1.ime, d1.prezime, d2.ime, d2.prezime "
+        $query=$this->mysqli->prepare("SELECT rn.rn_id, p.primka_id, p.naziv, p.serial, p.datumZaprimanja, s.ime as s_ime, s.prezime as s_prezime, rn.status, rn.pocetakRada, rn.danZavrsetka, rn.opisPopravka, rn.naplata, rn.napomena, rn.promijenjeno, rn.broj_ispisa, d1.ime, d1.prezime, d2.ime, d2.prezime "
                 . "FROM radniNaloziServisa rn "
+                . "LEFT JOIN primka p ON p.primka_id = rn.primka_id "
+                . "LEFT JOIN stranka s ON p.stranka_id = s.stranka_id "
                 . "LEFT JOIN djelatnici d1 ON rn.djelatnik_zapoceoRn_id = d1.djelatnik_id "
                 . "LEFT JOIN djelatnici d2 ON rn.djelatnik_zavrsioRn_id = d2.djelatnik_id "
-                . "WHERE primka_id=? ORDER BY rn.rn_id");
+                . "WHERE rn.primka_id=? ORDER BY rn.primka_id");
         
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
@@ -368,10 +370,16 @@ class servisRN extends RN{
         $query->bind_param("i", $id); 
         
         if($query->execute()){
-            $query->bind_result($this->id, $status, $pocetak, $dz, $op, $naplata, $napomena, $promijenjeno, $ispisano, $d1ime, $d1prezime,$d2ime, $d2prezime );
+            $query->bind_result($this->id, $pid, $pn, $ps, $datZa, $si, $sp, $status, $pocetak, $dz, $op, $naplata, $napomena, $promijenjeno, $ispisano, $d1ime, $d1prezime,$d2ime, $d2prezime );
             while($row = $query->fetch()){
                 $rn[] = array(
                     "id" => $this->id,
+                    "naziv" => $pn,
+                    "datumZaprimanja" => $datZa,
+                    "serijski" => $ps,
+                    "s_ime" => $si,
+                    "s_prezime" => $sp,
+                    "primka" => $pid,
                     "status" => $status,
                     "pocetak" => $pocetak,
                     "zavrsetak" => $dz,

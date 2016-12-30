@@ -1,3 +1,7 @@
+
+
+
+
 $.ajax({
                     type: 'POST',
                     url: "json/primka/sveOtvorenePrimke.php",

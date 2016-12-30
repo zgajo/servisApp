@@ -1,16 +1,12 @@
- $( "#sviRN" ).on("mouseover", "tr",function() {
-                                  $( this ).css("background-color", "#efefef");
-                              } );
-                                
-                                $( "#sviRN" ).on("mouseout", "tr",function() {
-                                  $( this ).css("background-color", "white");
-                              } );
+
+            
+         
                               
                               $('#sviRN').on("mouseover", "tr", function(){
-                                 $(this).find('a').show();
+                                 $(this).find('i').show();
                               });
                               $('#sviRN').on("mouseout", "tr", function(){
-                                 $(this).find('a').hide();
+                                 $(this).find('i').hide();
                               });
              
          //    LISTANJE SVIH OTVORENIH PRIMKI
@@ -23,7 +19,6 @@
                                     var output = "";
                                       var primka = JSON.parse(JSON.stringify(data));
                                       var danas = new Date();
-                                      console.log(primka);
                                       
                                       for(var i =0; i<primka.length; ++i){
                                           var datum = new Date(primka[i].datumZaprimanja);
@@ -44,9 +39,16 @@
                                                  url:"json/rn/getRNbyPrimka.php",
                                                  type: 'POST',
                                                  data: {"primka":pid},
-                                                 success:function(data){
-                                                    console.log(data);
-                                                rn= data;
+                                                 success:function(rn){
+                                                    
+                                                    if (rn){
+                                                        console.log(rn);
+                                                        
+                                                            Tabla.rows.add(rn).draw();
+                                                        
+                                                    }
+                                                    
+                                                    
                                                 
                                                 },
                                                 error: function(){
@@ -54,53 +56,10 @@
                                                 }
                                             });
                                            
-                                            if(rn !== null && rn.length>0){
-                                                
-                                                
-                                                
-                                                
-                                                output += '<tr>';
-                                                                                                                   
-                                                    output +=     '<td><span class="'+sty+'">Primka ' +primka[i].primka_id+ '</span></td>';
-                                                    
-                                                    
-                                                    output += '<td>';
-                                                       output += primka[i].naziv;
-                                                    output += '</td>';
-                                                    
-                                                    output += '<td>';
-                                                       output += primka[i].serial;
-                                                    output += '</td>';
-                                                    
-                                                    output += '<td>';
-                                                    output += primka[i].s_ime + ' ' + primka[i].s_prezime;
-                                                    output += '</td>';
-                                                    
-                                                    
-                                                    output += '<td>';
-                                                    for(var j=0; j<rn.length;++j) output += '<strong>RN. ' +rn[j].id+ '</strong><a style="margin-left:10px; display:none;" class="glyphicon glyphicon-pencil" href="rn.php?radni_nalog='+rn[j].id+'"></a><br>';
-                                                    output += '</td>';
-                                                    
-                                                    output += '<td>';
-                                                    for(var j=0; j<rn.length;++j) {
-                                                        if(rn[j].status === null) output +=  '<br>';
-                                                        else output += rn[j].status + '<br>';
-                                                    };
-                                                    output += '</td>';
-                                                    
-                                                    
-                                                    output += '<td>';
-                                                    for(var j=0; j<rn.length;++j) output += (rn[j].napomena) ? rn[j].napomena + '<br>' : '';
-                                                    output += '</td>';
-                                                    
-                                                output += '</tr>';
-                                                
-                                            }
                                             
                                                          
                                       }
                                       
-                                      $('#sviRN').html(output);
                                       
                                       
                                       
@@ -110,4 +69,37 @@
                                     alert(e.message);
                                 }
                             });   
+                            
+                            var Tabla = $('#sviRN').DataTable({
+                                                "columns": [
+                                                            {"data": "primka", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
+                                                                    var danas = new Date();
+                                                                    var datum = new Date(row.datumZaprimanja);
+                                                                    var oneDay = 24 * 60 * 60 * 1000;
+                                                                    var diffDays = Math.round(Math.abs((danas.getTime() - datum.getTime()) / (oneDay)));
+
+                                                                    if (diffDays <= 7)
+                                                                        var sty = "label label-success";
+                                                                    if (diffDays > 7 && diffDays <= 14)
+                                                                        var sty = "label label-warning";
+                                                                    if (diffDays > 14)
+                                                                        var sty = "label label-danger";
+
+                                                                    var a = '<a class="' + sty + '">' + row.primka + '</a>'; // row object contains the row data
+                                                                    return a;
+                                                                }},
+                                                            {"data": "naziv"},
+                                                            {"data": "serijski"},
+                                                            {"data": "s_ime", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
+                                                                var osoba = row.s_ime + ' ' + row.s_prezime;
+                                                                return osoba;
+                                                            }},
+                                                            {"data": "id" ,"render": function(data, type, row, meta){
+                                                            var  output = '<strong>RN. ' +row.id+ '</strong><a style="margin-left:10px;" href="rn.php?radni_nalog='+row.id+'"><i style=" display:none;" class="glyphicon glyphicon-pencil"></i></a><br>';
+                                                            return output;
+                                                            }},
+                                                            {"data": "status"},
+                                                            {"data": "napomena"}
+                                                        ], "bDestroy": true
+                                            });
             
