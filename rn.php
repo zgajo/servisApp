@@ -165,8 +165,7 @@ $('#rucna').click(function(){
                                $('#inputPromijenjeno').val(rn[0].promijenjeno);
                                $('#inputBI').val(rn[0].broj_ispisa);
                                $('#status_rn').val(rn[0].status);
-                               $('#status_rn').prepend("<option style='background-color:#ebebeb' disabled='disabled' value='"+rn[0].status+"'>"+rn[0].status+"</option>");
-                               if(zavrseno && zavrseno.getFullYear()!="1970") {
+                              if(zavrseno && zavrseno.getFullYear()!="1970") {
                                    $('#zavrseno').text([zavrseno.getDate(), zavrseno.getMonth()+1, zavrseno.getFullYear()].join('.') + ' / ' + [((zavrseno.getHours()<10) ? '0':'') + zavrseno.getHours(), (zavrseno.getMinutes()<10?'0':'') + zavrseno.getMinutes()].join(':'));
                                    $('#zr').show();
                                }
@@ -276,7 +275,20 @@ $('#rucna').click(function(){
                                             $.post("json/primka/primkaStatusUpdate.php", {"status": "Završen popravak - poslano u centar", "id":primka_id}, function(){
                                                 
                                                 upisrn(rnid);
-                                                alert("Ažuriran radni nalog " + rnid);
+                                                upisprik(rnid);
+                                                
+                                                var ruc = window.open('rucne.php?primka='+primka_id, '_blank');
+                                                var pre = window.open('pregled.php?primka='+primka_id, '_blank');
+                                                    if (ruc) {
+                                                        //Browser has allowed it to be opened
+                                                        ruc.focus();
+                                                        pre.focus();
+                                                    } else {
+                                                        //Browser has blocked it
+                                                        alert('Molim Vas, omogućite prikaz skočnih prozora');
+                                                    }
+                                                    
+                                                alert("Zatvoren je radni nalog " + rnid);
 
                                             });
                                         }else{
@@ -284,7 +296,16 @@ $('#rucna').click(function(){
                                            $.post("json/primka/primkaStatusUpdate.php", {"status": "Završen popravak", "id":primka_id}, function(){
                                                 
                                                 upisrn(rnid);
-                                                alert("Ažuriran radni nalog " + rnid);
+                                                upisprik(rnid);
+                                                var pre = window.open('pregled.php?primka='+primka_id, '_blank');
+                                                    if (pre) {
+                                                        //Browser has allowed it to be opened
+                                                        pre.focus();
+                                                    } else {
+                                                        //Browser has blocked it
+                                                        alert('Molim Vas, omogućite prikaz skočnih prozora');
+                                                    }
+                                                alert("Zatvoren je radni nalog " + rnid);
 
                                             });
                                         }

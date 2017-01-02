@@ -262,6 +262,15 @@ console.log(<?php echo $_GET['rma'] ?>);
                                 $.post("json/rma/zatvori.php", {"id": rnid, "status": status, "popravak": $('#inputPopravak').val(), "napomena": $('#inputNapomena').val(), "naplata": $("#inputNaplata").val(), "rnOS": $("#inputrnOS").val(), "nazivOS": $('#inputOSnaziv').val()});
                                 $.post("json/primka/primkaStatusUpdate.php", {"status": "Završen popravak", "id": primka_id}, function () {
                                     window.location = "rma.php?rma=" + rnid;
+                                    
+                                                var pre = window.open('pregled.php?primka='+primka_id, '_blank');
+                                                    if (pre) {
+                                                        //Browser has allowed it to be opened
+                                                        pre.focus();
+                                                    } else {
+                                                        //Browser has blocked it
+                                                        alert('Molim Vas, omogućite prikaz skočnih prozora');
+                                                    }
                                 });
 
                             } else if (status === "Poslano u OS") {

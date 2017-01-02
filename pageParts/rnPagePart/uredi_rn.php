@@ -164,12 +164,12 @@
                             <div class="col-sm-10">
                                 <select class="form-control" id="status_rn" name='status_rn'>
 
+                                    <option>Servisiranje</option>
                                     <option>Čeka dio</option>
+                                    <option>Poslano u vanjski servis</option>
                                     <option>Popravak završen u jamstvu</option>
                                     <option>Popravak završen van jamstva</option>
                                     <option>Stranka odustala od popravka</option>
-
-
 
                                 </select>
                             </div>
