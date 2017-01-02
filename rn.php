@@ -157,17 +157,17 @@ $('#rucna').click(function(){
                                var pocetak = new Date(rn[0].pocetakRada);
                                var zavrseno = new Date(rn[0].danZavrsetka);
                                //   UPIS RADNOG NALOGA
-                               $('#pocetak').text([pocetak.getDate(), pocetak.getMonth(), pocetak.getFullYear()].join('.') + ' / ' + [((pocetak.getHours()<10) ? '0':'') + pocetak.getHours(), (pocetak.getMinutes()<10?'0':'') + pocetak.getMinutes()].join(':'));
+                               $('#pocetak').text([pocetak.getDate(), pocetak.getMonth()+1, pocetak.getFullYear()].join('.') + ' / ' + [((pocetak.getHours()<10) ? '0':'') + pocetak.getHours(), (pocetak.getMinutes()<10?'0':'') + pocetak.getMinutes()].join(':'));
                                $('#zapoceo').text(rn[0].zapoceoRn_ime + ' ' + rn[0].zapoceoRn_prezime);
                                $('#inputPopravak').val(rn[0].opisPopravka);
                                $('#inputNapomena').val(rn[0].napomena);
                                $('#inputNaplata').val(rn[0].naplata);
                                $('#inputPromijenjeno').val(rn[0].promijenjeno);
                                $('#inputBI').val(rn[0].broj_ispisa);
-                               $('select').val(rn[0].status);
-                               $('select').prepend("<option style='background-color:#ebebeb' disabled='disabled' value='"+rn[0].status+"'>"+rn[0].status+"</option>");
+                               $('#status_rn').val(rn[0].status);
+                               $('#status_rn').prepend("<option style='background-color:#ebebeb' disabled='disabled' value='"+rn[0].status+"'>"+rn[0].status+"</option>");
                                if(zavrseno && zavrseno.getFullYear()!="1970") {
-                                   $('#zavrseno').text([zavrseno.getDate(), zavrseno.getMonth(), zavrseno.getFullYear()].join('.') + ' / ' + [((zavrseno.getHours()<10) ? '0':'') + zavrseno.getHours(), (zavrseno.getMinutes()<10?'0':'') + zavrseno.getMinutes()].join(':'));
+                                   $('#zavrseno').text([zavrseno.getDate(), zavrseno.getMonth()+1, zavrseno.getFullYear()].join('.') + ' / ' + [((zavrseno.getHours()<10) ? '0':'') + zavrseno.getHours(), (zavrseno.getMinutes()<10?'0':'') + zavrseno.getMinutes()].join(':'));
                                    $('#zr').show();
                                }
                                if(rn[0].zavrsioRn_ime !== '' && rn[0].zavrsioRn_ime !== null) {
@@ -350,7 +350,7 @@ $('#rucna').click(function(){
                     $('#ponistiUK').click(function () {
                         upisprik(rnid);
                         $('#upr').show();
-                        $('#uredi_kupca').hide();
+                        $('#uredi_primku').hide();
                         $('#urn').show();
                     });
                     
@@ -412,10 +412,11 @@ $('#rucna').click(function(){
                                 "ok": opis, "pp": prilozeno, "r": racun, "dk": dat_k, "id": pid
                             });
 
-                           upisprik(rnid);
+                         upisprik(rnid);  
                         $('#upr').show();
-                        $('#uredi_kupca').hide();
+                        $('#uredi_primku').hide();
                         $('#urn').show();
+                        
                         }
 
 

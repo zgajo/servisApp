@@ -212,7 +212,17 @@
                                     <div class="form-group">
                                         <label for="inputTip" class="col-sm-2 control-label">Tip</label>
                                         <div class="col-sm-10">
-                                            <input class="form-control" id="inputTip" placeholder="Printer, laptop, računalo ..." type="text" name="tip">
+                                            <select class="form-control" id="inputTip" type="text" name="tip">
+                                                <option>STOLNA RAČUNALA</option>
+                                                <option>PRIJENOSNICI</option>
+                                                <option>KOMPONENTE</option>
+                                                <option>MONITORI</option>
+                                                <option>PISAČI</option>
+                                                <option>RAČUNALNA PERIFERIJA</option>
+                                                <option>MOBITELI</option>
+                                                <option>TABLET</option>
+                                                <option>OSTALO</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group">

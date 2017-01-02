@@ -326,6 +326,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 $(document).ready(function () {
 
                     var pid = <?php echo $_GET['primka'] ?>
+                    
+                    funPrimka();
 
                     function funPrimka() {
                         // Dohvaćanje i pregled upita
@@ -373,8 +375,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 var o = new Option(st, st);
                                 /// jquerify the DOM object 'o' so we can use the html method
                                 $(o).html(st);
-                                $("select").append(o);
-                                $('select option[value="' + st + '"]').attr("selected", true);
+                                $("#status_primke").append(o);
+                                $('#status_primke option[value="' + st + '"]').attr("selected", true);
 
                                 $('#inputTvrtka').val(pp[0].tvrtka);
                                 $('#inputIme').val(pp[0].ime);
@@ -551,7 +553,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     });
 
 
-                    funPrimka();
+                    
 
                     $('#btnNovo').click(function () {
 
@@ -614,7 +616,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         var naziv = $('#inputNaziv').val();
                         var sifra = $('#inputSifra').val();
                         var brand = $('#inputBrand').val();
-                        var tip = $('#inputTip').val();
+                        var tip = $('#inputTip  option:selected').text();
                         var serijski = $('#inputSerijski').val();
                         var dat_k = $('#inputDK').val();
                         var racun = $('#inputRacun').val();
@@ -659,7 +661,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     });
 
                     $('#ponistiK').click(function () {
+                        $('#status_primke option:last-child').remove();
+                        
                         funPrimka();
+                         
 
                     });
 
@@ -670,9 +675,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     });
 
                     $('#ponistiUK').click(function () {
+                        
+                        $('#status_primke option:last-child').remove();
                         funPrimka();
-
-
+                        
+                        
                     });
 
                     //  KRAJ    *   OMOGUĆAVANJE UREĐIVANJE KUPCA / PRIMKE   *   KRAJ

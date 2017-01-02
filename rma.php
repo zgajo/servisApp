@@ -148,16 +148,16 @@ console.log(<?php echo $_GET['rma'] ?>);
                                 var zavrseno = new Date(rn[0].danZavrsetka);
 
                                 //   UPIS RMA NALOGA
-                                $('#pocetak').text([pocetak.getDate(), pocetak.getMonth(), pocetak.getFullYear()].join('.') + ' / ' + [((pocetak.getHours() < 10) ? '0' : '') + pocetak.getHours(), (pocetak.getMinutes() < 10 ? '0' : '') + pocetak.getMinutes()].join(':'));
-                                (poslano && poslano.getFullYear() != "1970") ? $('#poslano').text([poslano.getDate(), poslano.getMonth(), poslano.getFullYear()].join('.') + ' / ' + [((poslano.getHours() < 10) ? '0' : '') + poslano.getHours(), (poslano.getMinutes() < 10 ? '0' : '') + poslano.getMinutes()].join(':')) : $('#poslano').text();
+                                $('#pocetak').text([pocetak.getDate(), pocetak.getMonth()+1, pocetak.getFullYear()].join('.') + ' / ' + [((pocetak.getHours() < 10) ? '0' : '') + pocetak.getHours(), (pocetak.getMinutes() < 10 ? '0' : '') + pocetak.getMinutes()].join(':'));
+                                (poslano && poslano.getFullYear() != "1970") ? $('#poslano').text([poslano.getDate(), poslano.getMonth()+1, poslano.getFullYear()].join('.') + ' / ' + [((poslano.getHours() < 10) ? '0' : '') + poslano.getHours(), (poslano.getMinutes() < 10 ? '0' : '') + poslano.getMinutes()].join(':')) : $('#poslano').text();
                                 $('#zapoceo').text(rn[0].zapoceoRn_ime + ' ' + rn[0].zapoceoRn_prezime);
                                 $('#inputrnOS').val(rn[0].rnOS);
                                 $('#inputOSnaziv').val(rn[0].nazivOS);
                                 $('#inputPopravak').val(rn[0].opisPopravka);
                                 $('#inputNapomena').val(rn[0].napomena);
                                 $('#inputNaplata').val(rn[0].naplata);
-                                $('select').val(rn[0].status);
-                                $('select').prepend("<option style='background-color:#ebebeb' disabled='disabled' value='" + rn[0].status + "'>" + rn[0].status + "</option>");
+                                $('#status_rma').val(rn[0].status);
+                                $('#status_rma').prepend("<option style='background-color:#ebebeb' disabled='disabled' value='" + rn[0].status + "'>" + rn[0].status + "</option>");
 
                                 if (rn[0].zavrsioRn_ime !== '' && rn[0].zavrsioRn_ime !== null) {
                                     $('#zavrad').show();
@@ -166,12 +166,12 @@ console.log(<?php echo $_GET['rma'] ?>);
 
                                 if (vraceno.getFullYear() != '1970' && vraceno) {
                                     $('#vr').show();
-                                    $('#vraceno').text([vraceno.getDate(), vraceno.getMonth(), vraceno.getFullYear()].join('.') + ' / ' + [((vraceno.getHours() < 10) ? '0' : '') + vraceno.getHours(), (vraceno.getMinutes() < 10 ? '0' : '') + vraceno.getMinutes()].join(':'));
+                                    $('#vraceno').text([vraceno.getDate(), vraceno.getMonth()+1, vraceno.getFullYear()].join('.') + ' / ' + [((vraceno.getHours() < 10) ? '0' : '') + vraceno.getHours(), (vraceno.getMinutes() < 10 ? '0' : '') + vraceno.getMinutes()].join(':'));
                                 }
 
                                 if (zavrseno.getFullYear() != '1970' && zavrseno) {
                                     $('#zr').show();
-                                    $('#zavrseno').text([zavrseno.getDate(), zavrseno.getMonth(), zavrseno.getFullYear()].join('.') + ' / ' + [((zavrseno.getHours() < 10) ? '0' : '') + zavrseno.getHours(), (zavrseno.getMinutes() < 10 ? '0' : '') + zavrseno.getMinutes()].join(':'));
+                                    $('#zavrseno').text([zavrseno.getDate(), zavrseno.getMonth()+1, zavrseno.getFullYear()].join('.') + ' / ' + [((zavrseno.getHours() < 10) ? '0' : '') + zavrseno.getHours(), (zavrseno.getMinutes() < 10 ? '0' : '') + zavrseno.getMinutes()].join(':'));
                                 }
 
                                 //   kraj    *   UPIS RMA NALOGA *   KRAJ
@@ -315,7 +315,7 @@ console.log(<?php echo $_GET['rma'] ?>);
                     $('#ponistiUK').click(function () {
                         upisprik(rnid);
                         $('#upr').show();
-                        $('#uredi_kupca').hide();
+                        $('#uredi_primku').hide();
                         $('#urn').show();
                     });
                     
@@ -379,7 +379,7 @@ console.log(<?php echo $_GET['rma'] ?>);
 
                            upisprik(rnid);
                         $('#upr').show();
-                        $('#uredi_kupca').hide();
+                        $('#uredi_primku').hide();
                         $('#urn').show();
                         }
 

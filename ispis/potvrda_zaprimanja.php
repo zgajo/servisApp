@@ -216,7 +216,7 @@
                    
                    var zaprimljeno = new Date(primka[0].datumZaprimanja);
                    
-                   $('#dz').text([zaprimljeno.getDate(), zaprimljeno.getMonth(), zaprimljeno.getFullYear()].join('.') + ' / ' + [((zaprimljeno.getHours()<10) ? '0': '')+ zaprimljeno.getHours(), ((zaprimljeno.getMinutes()<10) ? '0': '')+ zaprimljeno.getMinutes()].join(':'));
+                   $('#dz').text([zaprimljeno.getDate(), zaprimljeno.getMonth()+1, zaprimljeno.getFullYear()].join('.') + ' / ' + [((zaprimljeno.getHours()<10) ? '0': '')+ zaprimljeno.getHours(), ((zaprimljeno.getMinutes()<10) ? '0': '')+ zaprimljeno.getMinutes()].join(':'));
                    $('#zap').text(primka[0].pot_ime+ ' ' +primka[0].pot_prezime);
                    $('#primka').text('Primka: ' +primka[0].primka_id);
                    
@@ -233,7 +233,7 @@
                     
                     var kupljeno = new Date(primka[0].datumKupnje);
                     console.log(kupljeno.getMinutes());
-                    (kupljeno && kupljeno.getFullYear() != '1970' && !isNaN(kupljeno)) ?  $('#dp').text([kupljeno.getDate(), kupljeno.getMonth(), kupljeno.getFullYear()].join('.') ):  $('#dp').text('');;
+                    (kupljeno && kupljeno.getFullYear() != '1970' && !isNaN(kupljeno)) ?  $('#dp').text([kupljeno.getDate(), kupljeno.getMonth()+1, kupljeno.getFullYear()].join('.') ):  $('#dp').text('');;
                    
                     $('#racun').text(primka[0].racun);
                     $('#opis').text(primka[0].opisKvara);

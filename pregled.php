@@ -229,7 +229,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                    
                    var zaprimljeno = new Date(primka[0].datumZaprimanja);
                    
-                   $('#dz').text([zaprimljeno.getDate(), zaprimljeno.getMonth(), zaprimljeno.getFullYear()].join('.') );
+                   $('#dz').text([zaprimljeno.getDate(), zaprimljeno.getMonth()+1, zaprimljeno.getFullYear()].join('.') );
                    $('#zap').text(primka[0].pot_ime+ ' ' +primka[0].pot_prezime);
                    $('#primka').text('Primka br. ' +primka[0].primka_id);
                    
@@ -246,7 +246,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     
                     var kupljeno = new Date(primka[0].datumKupnje);
                     
-                    (kupljeno && kupljeno.getFullYear() != '1970' && !isNaN(kupljeno)) ?  $('#dp').text([kupljeno.getDate(), kupljeno.getMonth(), kupljeno.getFullYear()].join('.') ):  $('#dp').text('');;
+                    (kupljeno && kupljeno.getFullYear() != '1970' && !isNaN(kupljeno)) ?  $('#dp').text([kupljeno.getDate(), kupljeno.getMonth()+1, kupljeno.getFullYear()].join('.') ):  $('#dp').text('');;
                    
                     $('#racun').text(primka[0].racun);
                     $('#opis').text(primka[0].opisKvara);
