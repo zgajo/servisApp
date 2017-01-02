@@ -187,6 +187,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               </div>
                         </div><!-- /.row -->
                         
+                        
+                        
+                        
 
                         <!-- this row will not appear when printing -->
                         <div id="t" class="row no-print">
@@ -196,7 +199,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </div>
                         
                     </section><!-- /.content -->
+                    
+                     
+                   <?php require 'upload.php'; ?>
+                    <div style="clear:both"></div>
                 </section><!-- /.content -->
+               
             </div><!-- /.content-wrapper -->
 
             <!-- Main Footer --><div class="no-print">
