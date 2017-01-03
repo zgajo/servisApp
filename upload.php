@@ -105,20 +105,51 @@ if (!empty($_FILES['files']['name'][0])) {
             $failed[$position] = "[{$file_name}] ekstenzija '{$file_ext}' nije dozvoljena.";
         }
     }
-
-
-    if (!empty($uploaded)) {
-        echo '<p>' . print_r($uploaded) . '</p>';
+    
+    if(!empty($uploaded) && !empty($failed)){
+        $upl = '<p id="uploaded" style="display:none">';
+        foreach($uploaded as $upload){
+            $upl .= $upload . '<br>';
+        }
+        $upl .= '</p>';
+        echo $upl;
         
+        $echo = '<p id="failed" style="display:none">';
+        foreach($failed as $fail){
+            $echo .= $fail . '  <br>';
+        }
+        $echo .= '</p>';
+        echo $echo;
     }
 
-    if (!empty($failed)) {
-        echo '<p>' . print_r($failed) . '</p>';
+    elseif(!empty($uploaded)) {
+        $echo = '<p id="uploaded" style="display:none">';
+        foreach($uploaded as $upload){
+            $echo .= $upload . '<br>';
+        }
+        $echo .= '</p>';
+        echo $echo;
+    }
+
+    elseif (!empty($failed)) {
+        $echo = '<p id="failed" style="display:none">';
+        foreach($failed as $fail){
+            $echo .= $fail . '  <br>';
+        }
+        $echo .= '</p>';
+        echo $echo;
     }
    ?>
-<script type="text/javascript">
+<script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script  type="text/javascript" >
     var primka = <?php echo $_GET['primka'] ?>;
-    window.location = 'pregled.php?primka='+primka;
+    
+    var failed = $('#failed').text();
+    var uploaded = $('#uploaded').text();
+    
+    alert("Uspješno preneseno: \n"+uploaded+"\n\nNeuspješno preneseno: \n"+failed);
+    window.location="pregled.php?primka="+primka;
+    
 </script>
 <?php
    
