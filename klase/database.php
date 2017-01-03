@@ -6,6 +6,7 @@ class database {
 
     function __construct() {
         $this->mysqli = new mysqli("localhost", "root", "", "u273306295_euro");
+        //$this->mysqli = new mysqli("mysql.hostinger.hr", "u273306295_euro", "Casino12", "u273306295_euro");
         
         if (mysqli_connect_errno()) {
             die('DOGODILA SE GREŠKA: ' . mysqli_connect_error());

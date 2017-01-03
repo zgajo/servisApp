@@ -2,7 +2,8 @@
 
 
 <?php
-if ($handle = opendir('upload/'. $_GET['primka'] . '/' )) {
+if(file_exists('upload/'. $_GET['primka'] . '/')){
+   if ($handle = opendir('upload/'. $_GET['primka'] . '/' )) {
     $files = array();
     while (false !== ($file = readdir($handle))) {
         if (($file != ".") && ($file != "..")) {
@@ -26,7 +27,9 @@ if ($handle = opendir('upload/'. $_GET['primka'] . '/' )) {
     }
 
     closedir($handle);
+} 
 }
+
 ?>
 
 <div class="col-md-6" style="clear: both">
