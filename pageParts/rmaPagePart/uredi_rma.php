@@ -174,7 +174,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Ažuriraj</label>
                         <div class="col-sm-10">
-                            <select class="form-control" name='status_rma'>
+                            <select class="form-control" id="status_rma" name='status_rma'>
                                 
                                 <option>Pripremljeno za slanje OS-u</option>
                                 <option >Čeka dio</option>

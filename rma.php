@@ -157,7 +157,6 @@ console.log(<?php echo $_GET['rma'] ?>);
                                 $('#inputNapomena').val(rn[0].napomena);
                                 $('#inputNaplata').val(rn[0].naplata);
                                 $('#status_rma').val(rn[0].status);
-                                $('#status_rma').prepend("<option style='background-color:#ebebeb' disabled='disabled' value='" + rn[0].status + "'>" + rn[0].status + "</option>");
 
                                 if (rn[0].zavrsioRn_ime !== '' && rn[0].zavrsioRn_ime !== null) {
                                     $('#zavrad').show();
