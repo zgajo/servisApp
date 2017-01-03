@@ -93,11 +93,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <!-- Custom Tabs -->
                         <div class="nav-tabs-custom">
                             <ul class="nav nav-tabs">
-                                <li class="<?php if(!$_GET['primka'] && !$_GET['stranka']) echo  "active" ?>"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Sve otvorene narudžbe</a></li>
+                                <li class="<?php if(!$_GET['primka'] && !$_GET['stranka']  && !$_GET['narudzba']) echo  "active" ?>"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Sve otvorene narudžbe</a></li>
+                                <li class="<?php if(!$_GET['primka'] && !$_GET['stranka'] && $_GET['narudzba']) echo  "active" ?>"><a href="#tab_2" data-toggle="tab" aria-expanded="true">Uredi narudžbu</a></li>
                                 <li class="<?php if($_GET['primka'] && $_GET['stranka']) echo "active" ?>"><a href="#tab_3" data-toggle="tab" aria-expanded="false">Nova narudžba</a></li>
                             </ul>
                             <div class="tab-content">
-                                <div class="tab-pane <?php if(!$_GET['primka'] && !$_GET['stranka']) echo  "active" ?>" id="tab_1">
+                                <div class="tab-pane <?php if(!$_GET['primka'] && !$_GET['stranka'] && !$_GET['narudzba']) echo  "active" ?>" id="tab_1">
                                     <!-- TABLE: Sve otvorene primke -->
                                     <div class="box box-info" style="border-top: none">
 
@@ -125,8 +126,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
                                 </div><!-- /.tab-pane -->
-
-
+                                
+                                <div class="tab-pane <?php if(!$_GET['primka'] && !$_GET['stranka'] && $_GET['narudzba']) echo  "active" ?>" id="tab_2">
+                                    <?php include_once './pageParts/narudzbe/uredi_narudzbu.php'; ?>
+                                </div><!-- /.tab-pane -->
                                 
 
                                 <div class=" tab-pane <?php if($_GET['primka'] && $_GET['stranka']) echo "active" ?>" id="tab_3">
