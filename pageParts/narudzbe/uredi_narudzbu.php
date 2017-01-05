@@ -49,6 +49,8 @@
                             <input class="form-control" id="urediPrimka" placeholder="Broj primke (ukoliko je povezano)" type="text" name="primka">
                         </div>
                     </div>
+                    
+                    
 
 
 
@@ -66,5 +68,31 @@
 
 <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <script>
-console.log(<?php echo $_GET['narudzba'] ?>);
+
+
+$(document).ready(function(){
+    var id = <?php echo $_GET['narudzba'] ?>;
+    
+    
+    function upisi(id){
+     $.post("json/narudzbe/getById.php", {"id": id}, function(n){
+        
+        $("#urediProizvod").val(n[0].dio);
+        $('#urediPN').val(n[0].pn);
+        $('#urediDobavljac').val(n[0].dobavljac);
+        $('#urediVPC').val(n[0].vpc);
+        $('#urediSkladiste').val(n[0].skl);
+        $('#urediPrimka').val(n[0].primka_id);
+    });
+       
+    }
+    
+    upisi(id);
+    
+    $("#urediNarudzba").click(function(){
+      $.post("json/narudzbe/update.php", {"dio":$("#urediProizvod").val() ,'dob':$('#urediDobavljac').val() , 'pn':$('#urediPN').val() , 'vpc': $('#urediVPC').val(), 'skl':$('#urediSkladiste').val() ,  'p': $('#urediPrimka').val(), 'id': id},
+      upisi(id)); 
+    });
+    
+});
 </script>

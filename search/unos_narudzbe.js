@@ -274,7 +274,13 @@ $('#insertNarudzba').click(function (e) {
 
 
 //    ISPIS SVIH NARUDŽBI
-$('#sve_narudzbe').DataTable({
+$.ajax({
+    url: "json/narudzbe/sve_otvoreno.php",
+    type: 'POST',
+    dataType: 'json',
+    contentType: "application/json; charset=utf-8",
+    success: function () {
+        $('#sve_narudzbe').DataTable({
 "ajax": {
 "url": "json/narudzbe/sve_otvoreno.php",
         "dataSrc": ""
@@ -292,11 +298,33 @@ $('#sve_narudzbe').DataTable({
         {"data": "primka_id"},
         {"data": "skl"},
         {"data":"narudzbe_id", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
-                        var a = ' <a style="margin-right:10px" href="narudzbe.php?narudzba=' + row.narudzbe_id + '"><i style=" " class="fa  fa-edit "></i></a>';
-                        a += '<i style="cursor: pointer; cursor: hand; color:green " class="fa  fa-check"></i>';
+                        var a = ' <a style="margin-right:15px" href="narudzbe.php?narudzba=' + row.narudzbe_id + '"><i style=" " class="fa  fa-edit "></i></a>';
+                        a += '<i style="cursor: pointer; cursor: hand; color:green;margin-right:15px " id="zavrsi" name="'+ row.narudzbe_id +'" class="fa fa-check"></i>';
+                        a += '<i style="cursor: pointer; cursor: hand; color:red " id="brisi" name="'+ row.narudzbe_id +'" class="fa fa-remove "></i>';
                         return a;
                     }}
         ]
         });
+    }
+})
 
-                  
+
+$("#sve_narudzbe").on("click", "#zavrsi", function(){
+   var narudzba = $(this).attr("name"); 
+   if(confirm("Želite li ZATVORITI narudžbu pod brojem "+narudzba+"?")){
+    $.post("json/narudzbe/zatvori.php", {"id": narudzba}, function(){
+           window.location="narudzbe.php";
+       });
+   }
+   
+});        
+
+$("#sve_narudzbe").on("click", "#brisi", function(){
+   var narudzba = $(this).attr("name"); 
+   if(confirm("Želite li IZBRISATI narudžbu pod brojem "+narudzba+"?")){
+       $.post("json/narudzbe/brisi.php", {"id": narudzba}, function(){
+           window.location="narudzbe.php";
+       });
+   }
+   
+}); 

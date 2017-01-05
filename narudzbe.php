@@ -94,7 +94,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <div class="nav-tabs-custom">
                             <ul class="nav nav-tabs">
                                 <li class="<?php if(!$_GET['primka'] && !$_GET['stranka']  && !$_GET['narudzba']) echo  "active" ?>"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Sve otvorene narudžbe</a></li>
+                                <?php if(isset($_GET['narudzba'])) { ?>
                                 <li class="<?php if(!$_GET['primka'] && !$_GET['stranka'] && $_GET['narudzba']) echo  "active" ?>"><a href="#tab_2" data-toggle="tab" aria-expanded="true">Uredi narudžbu</a></li>
+                                <?php } ?>
                                 <li class="<?php if($_GET['primka'] && $_GET['stranka']) echo "active" ?>"><a href="#tab_3" data-toggle="tab" aria-expanded="false">Nova narudžba</a></li>
                             </ul>
                             <div class="tab-content">
@@ -104,18 +106,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                         <div class="box-body">
                                             <table id="sve_narudzbe" class="table table-bordered table-striped">
-                                                <thead>
+                                                <thead >
                                                     <tr>
-                                                        <th>Proizvod</th>
-                                                        <th>Part no.</th>
-                                                        <th>Dobavljač</th>
-                                                        <th>Cijena (VPC)</th>
-                                                        <th>Stranka</th>
-                                                        <th>Primka</th>
-                                                        <th>Skladište</th>
-                                                        <th>Uređivanje</th>
+                                                        <th style="text-align: center">Proizvod</th>
+                                                        <th style="text-align: center">Part no.</th>
+                                                        <th style="text-align: center">Dobavljač</th>
+                                                        <th style="text-align: center">Cijena (VPC)</th>
+                                                        <th style="text-align: center">Stranka</th>
+                                                        <th style="text-align: center">Primka</th>
+                                                        <th style="text-align: center">Skladište</th>
+                                                        <th  style="text-align: center">Uređivanje</th>
                                                     </tr>
                                                 </thead>
+                                                <tbody style="text-align: center">
+                                                    
+                                                </tbody>
                                             </table>
                                         </div><!-- /.box-body -->
 
@@ -126,11 +131,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
                                 </div><!-- /.tab-pane -->
-                                
+                                 <?php if(isset($_GET['narudzba'])) { ?>
                                 <div class="tab-pane <?php if(!$_GET['primka'] && !$_GET['stranka'] && $_GET['narudzba']) echo  "active" ?>" id="tab_2">
                                     <?php include_once './pageParts/narudzbe/uredi_narudzbu.php'; ?>
                                 </div><!-- /.tab-pane -->
-                                
+                                <?php } ?>
 
                                 <div class=" tab-pane <?php if($_GET['primka'] && $_GET['stranka']) echo "active" ?>" id="tab_3">
 
