@@ -271,7 +271,7 @@ $('#rucna').click(function(){
                                         );
                                         
                                         //  AŽURIRANJE STATUSA PRIMKE
-                                        if(status_primke === "Poslano u CS - Rovinj" || status_primke === "Poslano u CS - Rovinj / Započelo servisiranje"  || status_primke === "Poslano u CS - Rovinj / Čeka dio") { 
+                                        if(status_primke === "Poslano u CS - Rovinj" || status_primke === "Poslano u CS - Rovinj / Započelo servisiranje"  || status_primke === "Poslano u CS - Rovinj / Čeka dio" || status_primke === "Poslano u CS - Rovinj / Poslano u vanjski servis"   || status_primke === "Poslano u CS - Rovinj / Servisiranje") { 
                                             $.post("json/primka/primkaStatusUpdate.php", {"status": "Završen popravak - poslano u centar", "id":primka_id}, function(){
                                                 
                                                 upisrn(rnid);
@@ -327,17 +327,19 @@ $('#rucna').click(function(){
                                         );
                                 
                                     //  AŽURIRANJE STATUSA PRIMKE
-                                        if(status_primke === "Poslano u CS - Rovinj" || status_primke === "Poslano u CS - Rovinj / Započelo servisiranje"  || status_primke === "Poslano u CS - Rovinj / Čeka dio") { 
-                                            $.post("json/primka/primkaStatusUpdate.php", {"status": "Poslano u CS - Rovinj / Čeka dio", "id":primka_id}, function(){
+                                        if(status_primke === "Poslano u CS - Rovinj" || status_primke === "Poslano u CS - Rovinj / Započelo servisiranje"  || status_primke === "Poslano u CS - Rovinj / Čeka dio" || status_primke === "Poslano u CS - Rovinj / Poslano u vanjski servis"  || status_primke === "Poslano u CS - Rovinj / Servisiranje") { 
+                                            $.post("json/primka/primkaStatusUpdate.php", {"status": "Poslano u CS - Rovinj / "+status, "id":primka_id}, function(){
                                                 
                                                 upisrn(rnid);
+                                                upisprik(rnid)
                                                 alert("Ažuriran radni nalog " + rnid);
 
                                             });
                                         }else{
-                                           $.post("json/primka/primkaStatusUpdate.php", {"status": "Čeka dio", "id":primka_id}, function(){
+                                           $.post("json/primka/primkaStatusUpdate.php", {"status": status, "id":primka_id}, function(){
                                                 
                                                 upisrn(rnid);
+                                                upisprik(rnid)
                                                 alert("Ažuriran radni nalog " + rnid);
 
                                             });

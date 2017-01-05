@@ -288,20 +288,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             opis_popravka += '<b>Radni nalog:</b> '+rn.id+'. ';
                             opis_popravka +=  '<input style="display:inline;margin-left:15px" type="checkbox" value="Prikazuje se pri ispisu" name="" checked="">'+
                                               '<span class="text">Prikaži prilikom printanja</span><br>';
+                            opis_popravka += '</span>';
+                            
+                            if(rn.opis !== null) opis_popravka += '<br class="no-print">'+  rn.opis+ '. <br>';
+                            
+                            opis_popravka += '<span class="no-print"><br>';
                             opis_popravka += '<b>Početak servisiranja uređaja:</b> '+ [pocetak_servisa.getDate(), pocetak_servisa.getMonth()+1, pocetak_servisa.getFullYear()].join('.') + '. ';
                             opis_popravka += '</span>';
                             
-                            if(rn.opis !== null) opis_popravka += '<br class="no-print">'+  rn.opis+ '. ';
                             var zavrsen_servis = new Date(rn.zavrsetak); 
                             
                              if(zavrsen_servis && zavrsen_servis.getFullYear()!='1970') {
                                 opis_popravka +=  '<span  class="no-print">';
+
                                 opis_popravka +=  '<br><b>Završetak servisiranja:</b> '+ [zavrsen_servis.getDate(), zavrsen_servis.getMonth()+1, zavrsen_servis.getFullYear()].join('.') + '. ';
-                                opis_popravka +=  '</span><br>';
+                                opis_popravka +=  '</span>';
                              }
                              
                              if(rn.napomena !== null && rn.napomena !== '' && odjel === 'Servis'){
-                                 opis_popravka += '<span   class="no-print">';
+                                 opis_popravka += '<span   class="no-print"><br>';
                                  opis_popravka += '<b>Napomena: </b>'+  rn.napomena+ '. <br class="no-print">';
                                  opis_popravka += '</span>';
                              }

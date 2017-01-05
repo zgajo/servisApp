@@ -275,7 +275,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             var osoba = row.s_ime + ' ' + row.s_prezime;
                                             return osoba;
                                         }},
-                                    {"data": "datumZaprimanja"},
+                                    {"data": "datumZaprimanja", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
+                                            var d = new Date(row.datumZaprimanja);
+                                            var dat = (d && d.getFullYear() != '1970') ? [d.getDate(), d.getMonth() + 1, d.getFullYear()].join('.') : ' ';
+                                            return dat;
+                                        }},
                                     {"data": "status"}
 
 

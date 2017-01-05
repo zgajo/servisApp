@@ -32,7 +32,7 @@ if(file_exists('upload/'. $_GET['primka'] . '/')){
 
 ?>
 
-<div class="col-md-6" style="clear: both">
+<div class="col-md-6 no-print" style="clear: both">
        
 
     <div class="box">

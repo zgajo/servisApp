@@ -42,6 +42,8 @@ class primka{
                                         AND p.status != 'Poslano u CS - Rovinj'  
                                         AND p.status != 'Poslano u CS - Rovinj / Započelo servisiranje'  
                                         AND p.status != 'Poslano u CS - Rovinj / Čeka dio' 
+                                        AND p.status != 'Poslano u CS - Rovinj / Poslano u vanjski servis' 
+                                        AND p.status != 'Poslano u CS - Rovinj / Servisiranje'
                                         and p.centar LIKE '".$_COOKIE['centar']."'
                                         ORDER BY p.primka_id ASC");
         if($query === false){
@@ -93,7 +95,9 @@ class primka{
                                         WHERE p.status != 'Kupac preuzeo' AND 
                                        ( p.status = 'Poslano u CS - Rovinj'  
                                         OR p.status = 'Poslano u CS - Rovinj / Započelo servisiranje'  
-                                        OR p.status = 'Poslano u CS - Rovinj / Čeka dio') AND 
+                                        OR p.status = 'Poslano u CS - Rovinj / Čeka dio' 
+                                        OR p.status = 'Poslano u CS - Rovinj / Poslano u vanjski servis' 
+                                        OR p.status = 'Poslano u CS - Rovinj / Servisiranje') AND 
                                         (p.centar = '".$_COOKIE['centar']."' OR '".$_COOKIE['odjel']."' = 'Servis')  
                                         ORDER BY p.primka_id ASC");
         if($query === false){
