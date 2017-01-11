@@ -135,7 +135,7 @@ $('#rucna').click(function(){
 <?php if (!empty($_GET['rma'])) { ?>
             <script>
                 $(document).ready(function () {
-console.log(<?php echo $_GET['rma'] ?>);
+                    
                     var rnid = <?php echo $_GET['rma'] ?>;
 
                     function upisrn(rnid){

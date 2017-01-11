@@ -170,6 +170,7 @@
                                     <option>Popravak završen u jamstvu</option>
                                     <option>Popravak završen van jamstva</option>
                                     <option>Stranka odustala od popravka</option>
+                                    <option>Uređaj zamijenjen novim</option>
 
                                 </select>
                             </div>

@@ -33,9 +33,9 @@
             <li class="header">PRETRAGA</li> 
         </ul>
         <!-- search form (Optional) -->
-        <form class="sidebar-form">
+        <form class="sidebar-form" autocomplete="off"> 
             <div class="input-group" id="sk">
-                <input type="text" name="q" class="form-control" id="search_kupca" placeholder="Pretraži kupca...">
+                <input type="text" name="q" class="form-control" id="search_kupca" placeholder="Pretraži kupca..." autocomplete="off">
                 <span  id="ikonek"  class="input-group-btn">
                     <span type="submit" name="search" id="search-btn" class="btn btn-flat"><i id="searchk" class="fa fa-search"></i><i id="cancelk" style="display: none" class="fa fa-remove"></i></span>
                 </span>
@@ -45,9 +45,9 @@
             </div>
         </form>
 
-        <form class="sidebar-form">
+        <form class="sidebar-form" autocomplete="off">
             <div class="input-group" id="sp">
-                <input type="text" name="q" class="form-control" id="search_primka" placeholder="Pretraži po primci...">
+                <input type="text" name="q" class="form-control" id="search_primka" placeholder="Pretraži po primci..." autocomplete="off">
                 <span  id="ikonep"  class="input-group-btn">
                     <span type="submit" name="search" id="search-btn" class="btn btn-flat"><i id="searchp" class="fa fa-search"></i><i id="cancelp" style="display: none" class="fa fa-remove"></i></span>
                 </span>
@@ -57,9 +57,9 @@
             </div>
         </form>
         
-         <form class="sidebar-form">
+         <form class="sidebar-form" autocomplete="off">
             <div class="input-group" id="ss">
-                <input type="text" name="q" class="form-control" id="search_serijski" placeholder="Pretraži po serijskom...">
+                <input type="text" name="q" class="form-control" id="search_serijski" placeholder="Pretraži po serijskom..." autocomplete="off">
                 <span id="ikones" class="input-group-btn">
                     <span type="submit" name="search" id="search-btn" class="btn btn-flat"><i id="searchs" class="fa fa-search"></i><i id="cancels" style="display: none" class="fa fa-remove"></i></span>
                 </span>

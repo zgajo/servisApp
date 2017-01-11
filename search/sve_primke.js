@@ -26,7 +26,7 @@ $.ajax({
                             var sty = "label label-danger";
 
                         var a = '<a style="margin-right:10px" href="pregled.php?primka=' + row.primka_id + '"><i style="display:none; " class="fa  fa-file-text-o"></i></a>';
-                        a += '<a style="margin-right:10px" href="primke.php?primka=' + row.primka_id + '"><i style="display:none; " class="glyphicon glyphicon-pencil"></i></a>\n\
+                        a += '<a href="primke.php?primka=' + row.primka_id + '"><i style="display:none; margin-right:10px"   class="glyphicon glyphicon-pencil"></i></a>\n\
                              <a class="' + sty + '">' + row.primka_id + '</a>'; // row object contains the row data
                         return a;
                     }},
