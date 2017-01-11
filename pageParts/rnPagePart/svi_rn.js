@@ -85,7 +85,7 @@
                                                                     if (diffDays > 14)
                                                                         var sty = "label label-danger";
 
-                                                                    var a = '<a class="' + sty + '">' + row.primka + '</a>'; // row object contains the row data
+                                                                    var a = '<a class="' + sty + '">Primka ' + row.primka + '</a>'; // row object contains the row data
                                                                     return a;
                                                                 }},
                                                             {"data": "naziv"},

@@ -11,8 +11,7 @@
                                 </div>
                             </div><!-- /.box-header -->
                             <div class="box-body">
-                                <div class="table-responsive">
-                                    <table class="table no-margin">
+                                    <table  class="table table-bordered table-striped"  id="sviRMA" >
                                         <thead>
                                             <tr>
                                                 <th>Primka</th>
@@ -27,9 +26,8 @@
                                                 <th>Napomena</th>
                                             </tr>
                                         </thead>
-                                        <tbody  id="sviRMA" ></tbody>
+                                        <tbody></tbody>
                                     </table>
-                                </div><!-- /.table-responsive -->
                             </div><!-- /.box-body -->
                             <div  class="box-footer clearfix">
                                 

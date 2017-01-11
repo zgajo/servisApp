@@ -25,7 +25,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Ionicons -->
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         <!-- Theme style -->
+        <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
         <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+        
         <link href="search/search.css" rel="stylesheet">
 
         <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
@@ -118,6 +120,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="dist/js/app.min.js"></script>
         <!-- Select2 -->
         <script src="plugins/select2/select2.full.min.js"></script>
+         <!-- DataTables -->
+    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
         <!-- InputMask -->
         <script src="plugins/input-mask/jquery.inputmask.js"></script>
         <script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
@@ -413,25 +418,7 @@ $('#rucna').click(function(){
     <?php }else { ?>
              <script type="text/javascript" src="pageParts/rmaPagePart/svi_rma.js"></script>
     <?php } ?>
-            <script>
-               
-                $('#sviRMA').on("mouseover", "tr", function () {
-                    $(this).find('a').show();
-                });
-                $('#sviRMA').on("mouseout", "tr", function () {
-                    $(this).find('a').hide();
-                });
-
-
-                $("#sviRMA").on("mouseover", "tr", function () {
-                    $(this).css("background-color", "#efefef");
-                });
-
-                $("#sviRMA").on("mouseout", "tr", function () {
-                    $(this).css("background-color", "white");
-                });
-
-            </script>
+           
 
 <?php } ?>
 

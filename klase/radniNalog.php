@@ -120,13 +120,15 @@ class rmaNalog extends RN{
     
     public function RMAbyPrimka($p) {
         
-        $query=$this->mysqli->prepare("SELECT rma.rma_id, rma.status,  rma.napomena, rma.poslanoOSu, rma.rnOS, "
+        $query=$this->mysqli->prepare("SELECT s.ime as s_ime, s.prezime as s_prezime, rma.rma_id, p.primka_id, p.serial as serijski, p.naziv as dio, p.datumZaprimanja, rma.status,  rma.napomena, rma.poslanoOSu, rma.rnOS, "
                 . "rma.nazivOS, rma.naplata, rma.danZaprimanja,  rma.opisPopravka, rma.danZavrsetka, "
                 . "do.ime as doi, do.prezime as dop, dz.ime as dzi, dz.prezime as dzp "
                 . "FROM radniNaloziRMA rma "
+                . "LEFT JOIN primka p ON rma.primka_id = p.primka_id "
+                . "LEFT JOIN stranka s ON p.stranka_id = s.stranka_id "
                 . "LEFT JOIN djelatnici do ON rma.djelatnik_zapoceoRma_id = do.djelatnik_id "
                 . "LEFT JOIN djelatnici dz ON rma.djelatnik_zavrsioRma_id = dz.djelatnik_id "
-                . "WHERE primka_id=? ORDER BY rma.rma_id");
+                . "WHERE rma.primka_id=? ORDER BY rma.rma_id");
         
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
@@ -136,10 +138,16 @@ class rmaNalog extends RN{
         
         if($query->execute()){
             
-            $query->bind_result($this->id, $status,  $napomena, $poslano, $r, $os, $naplata, $prip, $opis, $zavrseno, $oime, $oprezime, $zime, $zprezime);
+            $query->bind_result( $si, $sp,$this->id, $pr, $ser, $dio, $datumZaprimanja, $status,  $napomena, $poslano, $r, $os, $naplata, $prip, $opis, $zavrseno, $oime, $oprezime, $zime, $zprezime);
             while($row = $query->fetch()){
                 $rma[] = array(
+                    "s_ime" => $si,
+                    "s_prezime" => $sp,
                     "id" => $this->id,
+                    "pid" => $pr,
+                    "serijski" => $ser,
+                    "naziv" => $dio,
+                    "datumZaprimanja" => $datumZaprimanja,
                     "status" => $status,
                     "napomena" => $napomena,
                     "poslano" => $poslano,
