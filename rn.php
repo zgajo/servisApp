@@ -224,6 +224,12 @@ $('#rucna').click(function(){
                                      $('#st').text(primka[0].p_status);
                                      $('#primka_id').text(primka[0].primka_id);
                                      
+                                     if(primka[0].p_status == 'Kupac preuzeo') {
+                                                $('#status_rn').prop('disabled', true);
+                                                $('#azuriraj_status').hide();
+                                                $('#rucna').hide();
+                                            }
+                                     
                                      $('#inputPK').val(primka[0].opisKvara);
                                 $('#inputNaziv').val(primka[0].naziv);
                                 $('#inputSifra').val(primka[0].sifraUredaja);

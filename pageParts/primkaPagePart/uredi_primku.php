@@ -62,7 +62,7 @@
                         <label class="col-sm-2 control-label">Status</label>
                         <div    class="col-sm-10">
                             <select class="form-control" id="status_primke" name='status_primke'>
-                                <option value="Poslano u CS - Rovinj">Pošalji u CS - Rovinj</option>
+                                <?php if($_COOKIE['centar'] != "Rovinj"){ ?><option value="Poslano u CS - Rovinj">Pošalji u CS - Rovinj</option><?php } ?>
                                 <option value="Čeka preuzimanje stranke">Čeka preuzimanje stranke</option>
                                 <option value="Kupac preuzeo">Kupac preuzeo</option>
                             </select>

@@ -227,6 +227,11 @@ $('#rucna').click(function(){
                                             $('#ok').text(primka[0].opisKvara);
                                             $('#pp').text(primka[0].prilozeno_primijeceno);
                                             $('#st').text(primka[0].p_status);
+                                            if(primka[0].p_status == 'Kupac preuzeo') {
+                                                $('#status_rma').prop('disabled', true);
+                                                $('#azuriraj_status').hide();
+                                                $('#rucna').hide();
+                                            }
                                             $('#primka_id').text(primka[0].primka_id);
                                             
                                             $('#inputPK').val(primka[0].opisKvara);

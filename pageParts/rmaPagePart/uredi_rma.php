@@ -184,7 +184,7 @@
                                 <option>Popravak završen van jamstva</option>
                                 <option>Stranka odustala od popravka</option>
                                 <option>Uređaj zamijenjen novim</option>
-                                
+                                <option>Odobren povrat novca</option>
                             </select>
                         </div>
                     </div>
