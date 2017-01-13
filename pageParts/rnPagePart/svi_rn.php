@@ -2,14 +2,7 @@
  <!-- TABLE: Svi otvoreni radni nalozi -->
                         
                         <!-- TABLE: Sve otvorene primke -->
-                        <div class="box box-info">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">RADNI NALOZI</h3>
-                                <div class="box-tools pull-right">
-                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                </div>
-                            </div><!-- /.box-header -->
+                        <div class="box box-info"  style="border-top: none">
                             <div class="box-body">
                                     <table  id="sviRN"  class="table table-bordered table-striped">
                                         <thead>

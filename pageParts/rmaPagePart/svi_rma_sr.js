@@ -86,7 +86,7 @@
                                                                     if (diffDays > 14)
                                                                         var sty = "label label-danger";
 
-                                                                    var a = '<a class="' + sty + '">Primka ' + row.pid + '</a>'; // row object contains the row data
+                                                                    var a = '<a style="cursor:default;" class="' + sty + '">' + row.pid + '</a>'; // row object contains the row data
                                                                     return a;
                                                                 }},
                                                             {"data": "s_ime", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
@@ -97,18 +97,20 @@
                                                             {"data": "serijski"},
                                                             
                                                             {"data": "id" ,"render": function(data, type, row, meta){
-                                                            var  output = '<strong>RMA. ' +row.id+ '</strong><a style="margin-left:10px;" href="rma.php?rma='+row.id+'"><i style=" display:none;" class="glyphicon glyphicon-pencil"></i></a><br>';
+                                                            var  output = '<strong>RMA. ' +row.id+ '</strong><a  style="margin-left:10px;" href="rma.php?rma='+row.id+'"><i id="uredi_rma" style=" display:none;" class="glyphicon glyphicon-pencil"></i></a><br>';
                                                             return output;
                                                             }},
                                                             {"data": "rnOs"},
                                                             {"data": "nazivOS"},
                                                             {"data": "poslano","render": function(data, type, row, meta){
                                                             var poslano = new Date(row.poslano);   
-                                                            var output = [poslano.getDate(), poslano.getMonth()+1, poslano.getFullYear()].join('.');
+                                                            var output = (poslano && poslano.getFullYear()!="1970") ? [poslano.getDate(), poslano.getMonth()+1, poslano.getFullYear()].join('.') : '';
                                                             return output;
                                                             }},
                                                             {"data": "status"},
                                                             {"data": "napomena"}
                                                         ], "bDestroy": true
                                             });
-            
+             $('#sviRMA').on("mouseover", "#uredi_rma",function(){
+                $(this).attr("title", "Uredi rma nalog");
+            })

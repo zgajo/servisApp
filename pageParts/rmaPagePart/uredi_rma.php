@@ -15,7 +15,7 @@
                     <!-- PODACI STRANKE -->
                     <div id="stranka" class="col-sm-4 invoice-col">
 
-                        <h4 style="display: inline-block">Stranka:</h4><i id="uk" style="display: inline; margin-left: 2em" class="fa fa-fw fa-edit"></i>
+                        <h4 style="display: inline-block">Stranka:</h4><i id="uk" style="display: inline; cursor: pointer; cursor: hand; margin-left: 2em" class="fa fa-fw fa-edit"></i>
                         <address>
                             <strong id="tvrtka"></strong>
                             <p id="ip_kupca"></p>
@@ -30,7 +30,7 @@
 
                     <!-- PODACI PRIMKE -->
                     <div  id="primka" class="col-sm-4 invoice-col">
-                        <h4 style="display: inline-block">Primka:</h4><i id="up" style="display: inline; margin-left: 2em" class="fa fa-fw fa-edit"></i>
+                        <h4 style="display: inline-block">Primka:</h4><i id="up" style="display: inline; cursor: pointer; cursor: hand; margin-left: 2em" class="fa fa-fw fa-edit"></i>
                         <address>
                             <i><strong>Zaprimljeno: </strong></i><p  id="zap" style="display: inline"></p>  <br>
                             <i><strong>Primku otvorio: </strong></i><p  id="po" style="display: inline"></p>  <br>

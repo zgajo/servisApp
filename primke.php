@@ -42,6 +42,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
             #upr{
                 float: left; width: 50%;margin-left: 2%;
             }
+            
+            .hover{
+                background-color: lightblue;
+            }
 
             #urn{
                 float: right; width: 45%; margin-right: 2%;
@@ -162,7 +166,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     {data: "primka_id", "render": function (data, type, row, meta) {
                                             var output = "";
                                             if (odjel === "Servis")
-                                                output += '<a class="glyphicon glyphicon-share" href="rn.php?action=novi_rn&primka_id=' + row.primka_id + '"></a>';
+                                                output += '<a id="novi_rn" class="glyphicon glyphicon-share" href="rn.php?action=novi_rn&primka_id=' + row.primka_id + '"></a>';
                                             return output;
                                         }},
                                     {"data": "primka_id", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
@@ -212,14 +216,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             //    UKOLIKO IMA DOHVAĆENIH rn
                                             if (r !== null && r.length > 0) {
                                                 for (var j = 0; j < r.length; ++j) {
-                                                    output += '<a href="rn.php?radni_nalog=' + r[j].id + '"> RN. ' + r[j].id + '</a><br>';
+                                                    output += '<a id="uredi_rn" href="rn.php?radni_nalog=' + r[j].id + '"> RN. ' + r[j].id + '</a><br>';
                                                 }
                                             }
                                             //    UKOLIKO IMA DOHVAĆENIH rma
 
                                             if (rm !== null && rm.length > 0) {
                                                 for (var j = 0; j < rm.length; ++j) {
-                                                    output += '<a href="rma.php?rma=' + rm[j].id + '"> RMA. ' + rm[j].id + '</a><br>';
+                                                    output += '<a id="uredi_rma" href="rma.php?rma=' + rm[j].id + '"> RMA. ' + rm[j].id + '</a><br>';
                                                 }
                                             }
 
@@ -294,6 +298,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     error: function (rn) {
                     }
                 })
+                $('#svePoslanePrimke').on("mouseover", "#novi_rn", function(){
+                   $(this).attr('title', 'Započni servisiranje'); 
+                });
+                $('#svePoslanePrimke').on("mouseover", "#uredi_rn", function(){
+                   $(this).attr('title', 'Uredi radni nalog'); 
+                });
+                $('#svePoslanePrimke').on("mouseover", "#uredi_rma", function(){
+                   $(this).attr('title', 'Uredi RMA nalog'); 
+                });
 
 
                 //    KRAJ    *   LISTANJE SVIH POSLANIH PRIMKI  * KRAJ
@@ -327,6 +340,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </script>               
         <?php } else { ?>
             <script>
+                $("#uk").attr('title', 'Otvori formu za izmjenu podataka kupca');
+$("#up").attr('title', 'Otvori formu za izmjenu podataka primke');
                 $(document).ready(function () {
 
                     var pid = <?php echo $_GET['primka'] ?>
@@ -546,7 +561,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 "status": status, "id": pid
                             },
                             success: function (e) {
-                                alert('Izmijenjen status: ' + status);
+                                if(status == 'Poslano u CS - Rovinj'){
+                                    var ruc = window.open('rucne.php?primka='+pid, '_blank');
+                                if (ruc) {
+                                                        //Browser has allowed it to be opened
+                                                        ruc.focus();
+                                                    } else {
+                                                        //Browser has blocked it
+                                                        alert('Molim Vas, omogućite prikaz skočnih prozora');
+                                                    }
+                                                }
                                 window.location = "primke.php?primka=" + pid;
                             },
                             error: function (e) {

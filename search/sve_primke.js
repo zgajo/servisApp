@@ -1,5 +1,5 @@
 //    LISTANJE SVIH OTVORENIH PRIMKI
-
+ 
 $.ajax({
     url: "json/primka/sveOtvorenePrimke.php",
     type: 'POST',
@@ -25,9 +25,8 @@ $.ajax({
                         if (diffDays > 14)
                             var sty = "label label-danger";
 
-                        var a = '<a style="margin-right:10px" href="pregled.php?primka=' + row.primka_id + '"><i style="display:none; " class="fa  fa-file-text-o"></i></a>';
-                        a += '<a href="primke.php?primka=' + row.primka_id + '"><i style="display:none; margin-right:10px"   class="glyphicon glyphicon-pencil"></i></a>\n\
-                             <a class="' + sty + '">' + row.primka_id + '</a>'; // row object contains the row data
+                        var a = '<a  class="' + sty + '" style="cursor:default">' + row.primka_id + '</a>'; // row object contains the row data
+                        
                         return a;
                     }},
                 {"data": "datumZaprimanja", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
@@ -53,14 +52,78 @@ $.ajax({
     }
 })
 
+$("#sve_primke").on("mouseover", "#uredi_p", function () {
+    
+    $(this).attr('title', 'Otvori formu za uređivanje primke');
+})
+$("#sve_primke").on("mouseover", "#pregledaj_p", function () {
+    $(this).attr('title', 'Pregled / ispis primke');
+})
+$("#sve_primke").on("mouseover", "#novi_rn", function () {
+    $(this).attr('title', 'Stvori novi radni nalog');
+})
 
-$("#sve_primke").on("mouseover", "tr", function () {
-    $(this).find('i').show();
+$("#sve_primke").on("mouseover", "#novi_rma", function () {
+    $(this).attr('title', 'Stvori novi RMA nalog');
+})
+
+$("#sve_primke").on("mouseover", "#narudzba", function () {
+    $(this).attr('title', 'Stvori novu narudžbu');
+})
+
+$("#sve_primke").on("click", "#narudzba", function () {
+    var stranka = $("#str").attr('name');
+    var pr= $(this).attr("name");
+    window.location = "narudzbe.php?primka="+pr+"&stranka="+stranka;
+});
+
+
+
+$("#sve_primke").on("mouseover", "tbody tr", function () {
+    $(this).attr('title', 'Kliknite za više opcija');
+    $(this).css('background-color', '#B5C0EE');
+    $(this).find('#opcije').show();
+    
 });
 
 $("#sve_primke").on("mouseout", "tr", function () {
-    $(this).find('i').hide();
+    $(this).removeAttr( 'style' );
+    $(this).find('#opcije').hide();
 });
+
+function z(){
+    $("#sve_primke tbody tr").nextAll("td").remove();
+}
+
+$("#sve_primke").on("click", "tbody tr", function () {
+    
+    if($(this).next().is('td')){ $(this).next().remove()}
+    
+    else   {
+        z();
+        $(this).after('<td colspan=6 style="border:1px solid #F4F4F4; background-color: #ffa" ><div style="margin-top:10px;">'+
+                           
+                   '<a   class="btn btn-app"  href="rn.php?action=novi_rn&primka_id=" style=" float: left; ">'+
+                    '<i class="glyphicon glyphicon-share"></i> Novi radni nalog'+
+                    '</a>  '+
+                         
+                   '<a class="btn btn-app"  href="rma.php?action=novi_rma&primka_id=" style=" float: left; ">'+
+                        '<i class="glyphicon glyphicon-random"></i> Novi RMA nalog'+
+                    '</a>  '  +
+                    
+                    '<a  class="btn btn-app"  id="narudzba" style=" float: left;">'+
+                       ' <i class="fa fa-reorder"></i> Nova narudžba'+
+                    '</a>'+
+                         
+                    '<a class="btn btn-app"  href="rucne.php?primka=" style=" float: left;">'+
+                   '     <i class="fa fa-send"></i> Stvori ručnu izdatnicu'+
+                   ' </a>'+
+                    
+                    
+                '</div></td>')}
+});
+
+   
 
 
 //    KRAJ    *   LISTANJE SVIH OTVORENIH PRIMKI  * KRAJ

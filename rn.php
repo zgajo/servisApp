@@ -15,7 +15,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Servis RN</title>
+        <title>Radni nalozi</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.5 -->
@@ -147,6 +147,11 @@ $('#rucna').click(function(){
 </script>
         <?php if(!empty($_GET['radni_nalog'])){ ?>
         <script>
+            
+            //Poruka pri hoveru na gumb izmjene
+
+$("#uk").attr('title', 'Otvori formu za izmjenu podataka kupca');
+$("#up").attr('title', 'Otvori formu za izmjenu podataka primke');
                         $(document).ready(function (){
                             
                             var rnid = <?php echo $_GET['radni_nalog'] ?>;
@@ -278,7 +283,7 @@ $('#rucna').click(function(){
                                         
                                         //  AŽURIRANJE STATUSA PRIMKE
                                         if(status_primke === "Poslano u CS - Rovinj" || status_primke === "Poslano u CS - Rovinj / Započelo servisiranje"  || status_primke === "Poslano u CS - Rovinj / Čeka dio" || status_primke === "Poslano u CS - Rovinj / Poslano u vanjski servis"   || status_primke === "Poslano u CS - Rovinj / Servisiranje") { 
-                                            $.post("json/primka/primkaStatusUpdate.php", {"status": "Završen popravak - poslano u centar", "id":primka_id}, function(){
+                                            $.post("json/primka/primkaStatusUpdate.php", {"status": status + " - vraćeno u centar", "id":primka_id}, function(){
                                                 
                                                 upisrn(rnid);
                                                 upisprik(rnid);
@@ -294,12 +299,11 @@ $('#rucna').click(function(){
                                                         alert('Molim Vas, omogućite prikaz skočnih prozora');
                                                     }
                                                     
-                                                alert("Zatvoren je radni nalog " + rnid);
 
                                             });
                                         }else{
                                              
-                                           $.post("json/primka/primkaStatusUpdate.php", {"status": "Završen popravak", "id":primka_id}, function(){
+                                           $.post("json/primka/primkaStatusUpdate.php", {"status": status, "id":primka_id}, function(){
                                                 
                                                 upisrn(rnid);
                                                 upisprik(rnid);
@@ -311,7 +315,6 @@ $('#rucna').click(function(){
                                                         //Browser has blocked it
                                                         alert('Molim Vas, omogućite prikaz skočnih prozora');
                                                     }
-                                                alert("Zatvoren je radni nalog " + rnid);
 
                                             });
                                         }

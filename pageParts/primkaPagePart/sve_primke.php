@@ -2,9 +2,9 @@
     <!-- Custom Tabs -->
     <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Sve otvorene primke</a></li>
-            <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Primke poslane u Centralni Servis - Rovinj</a></li>
-            <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false">Nova primka</a></li>
+            <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true"><strong>Sve otvorene primke</strong></a></li>
+            <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false"><strong>Primke poslane u Centralni Servis - Rovinj</strong></a></li>
+            <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false"><strong>Nova primka</strong></a></li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="tab_1">
@@ -12,7 +12,7 @@
                 <div class="box box-info" style="border-top: none">
 
                     <div class="box-body">
-                        <table id="sve_primke" class="table table-bordered table-striped">
+                        <table id="sve_primke" class="table table-bordered table-striped" style="width: 100%">
                             <thead>
                                 <tr>
                                     <th>Primka</th>
@@ -21,7 +21,6 @@
                                     <th>Serijski</th>
                                     <th>Stranka</th>
                                     <th>Status primke</th>
-                                    
                                 </tr>
                             </thead>
                             <tbody style="text-align: center"></tbody>

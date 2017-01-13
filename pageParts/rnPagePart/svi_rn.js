@@ -41,8 +41,8 @@
                                                  data: {"primka":pid},
                                                  success:function(rn){
                                                     
-                                                    if (rn){
                                                         console.log(rn);
+                                                    if (rn){
                                                         
                                                             Tabla.rows.add(rn).draw();
                                                         
@@ -59,9 +59,6 @@
                                             
                                                          
                                       }
-                                      
-                                      
-                                      
                                       
                                       
                                 },
@@ -85,7 +82,7 @@
                                                                     if (diffDays > 14)
                                                                         var sty = "label label-danger";
 
-                                                                    var a = '<a class="' + sty + '">Primka ' + row.primka + '</a>'; // row object contains the row data
+                                                                    var a = '<a style="cursor: default;" class="' + sty + '">' + row.primka + '</a>'; // row object contains the row data
                                                                     return a;
                                                                 }},
                                                             {"data": "naziv"},
@@ -95,7 +92,7 @@
                                                                 return osoba;
                                                             }},
                                                             {"data": "id" ,"render": function(data, type, row, meta){
-                                                            var  output = '<strong>RN. ' +row.id+ '</strong><a style="margin-left:10px;" href="rn.php?radni_nalog='+row.id+'"><i style=" display:none;" class="glyphicon glyphicon-pencil"></i></a><br>';
+                                                            var  output = '<strong>RN. ' +row.id+ '</strong><a style="margin-left:10px;" href="rn.php?radni_nalog='+row.id+'"><i id="uredi_rn" style=" display:none;" class="glyphicon glyphicon-pencil"></i></a><br>';
                                                             return output;
                                                             }},
                                                             {"data": "status"},
@@ -103,3 +100,6 @@
                                                         ], "bDestroy": true
                                             });
             
+            $('#sviRN').on("mouseover", "#uredi_rn",function(){
+                $(this).attr("title", "Uredi radni nalog");
+            })

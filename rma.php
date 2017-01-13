@@ -139,6 +139,8 @@ $('#rucna').click(function(){
 
 <?php if (!empty($_GET['rma'])) { ?>
             <script>
+                $("#uk").attr('title', 'Otvori formu za izmjenu podataka kupca');
+$("#up").attr('title', 'Otvori formu za izmjenu podataka primke');
                 $(document).ready(function () {
                     
                     var rnid = <?php echo $_GET['rma'] ?>;
