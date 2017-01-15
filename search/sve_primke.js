@@ -81,7 +81,7 @@ $("#sve_primke").on("click", "#narudzba", function () {
 
 $("#sve_primke").on("mouseover", "tbody tr", function () {
     $(this).attr('title', 'Kliknite za više opcija');
-    $(this).css('background-color', '#B5C0EE');
+    $(this).css('border', '2px solid black');
     $(this).find('#opcije').show();
     
 });
@@ -101,22 +101,22 @@ $("#sve_primke").on("click", "tbody tr", function () {
     
     else   {
         z();
-        $(this).after('<td colspan=6 style="border:1px solid #F4F4F4; background-color: #ffa" ><div style="margin-top:10px;">'+
+        $(this).after('<td colspan=6 style="border:1px solid #F4F4F4; background-color: #A6CBE0" ><div style="margin-top:10px;">'+
                            
-                   '<a   class="btn btn-app"  href="rn.php?action=novi_rn&primka_id=" style=" float: left; ">'+
-                    '<i class="glyphicon glyphicon-share"></i> Novi radni nalog'+
+                   '<a   class="btn btn-app"  href="rn.php?action=novi_rn&primka_id=" style=" float: left;   height:initial ">'+
+                    '<i class="glyphicon glyphicon-share" style="font-size:small; display:inline;" ></i> Novi radni nalog'+
                     '</a>  '+
                          
-                   '<a class="btn btn-app"  href="rma.php?action=novi_rma&primka_id=" style=" float: left; ">'+
-                        '<i class="glyphicon glyphicon-random"></i> Novi RMA nalog'+
+                   '<a class="btn btn-app"  href="rma.php?action=novi_rma&primka_id=" style=" float: left; height:initial ">'+
+                        '<i class="glyphicon glyphicon-random" style="font-size:small; display:inline;"></i> Novi RMA nalog'+
                     '</a>  '  +
                     
-                    '<a  class="btn btn-app"  id="narudzba" style=" float: left;">'+
-                       ' <i class="fa fa-reorder"></i> Nova narudžba'+
+                    '<a  class="btn btn-app"  id="narudzba" style=" float: left; height:initial">'+
+                       ' <i class="fa fa-reorder" style="font-size:small; display:inline;"></i> Nova narudžba'+
                     '</a>'+
                          
-                    '<a class="btn btn-app"  href="rucne.php?primka=" style=" float: left;">'+
-                   '     <i class="fa fa-send"></i> Stvori ručnu izdatnicu'+
+                    '<a class="btn btn-app"  href="rucne.php?primka=" style=" float: left; height:initial">'+
+                   '     <i class="fa fa-send" style="font-size:small; display:inline;"></i> Stvori ručnu izdatnicu'+
                    ' </a>'+
                     
                     
