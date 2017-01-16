@@ -31,25 +31,18 @@ include_once 'checkLogin.php';
     <body>
         <div class="wrapper">
             <!-- Main content -->
-            <section class="invoice">
+            <section class="invoice" style="margin-left: 30px; margin-right: 30px">
                 <!-- title row -->
-                <div class="row">
-                    <div class="col-xs-12">
-                        <h2>
-                            <img src="ispis/logo.png" style="height: 50px; display: inline;">
-
-                        </h2>
-
-                    </div><!-- /.col -->
-                </div>
+                <div class="no-print" style="font-size: 20px; background-color: #d80200; color: white; width: 250px "><input id="op" type="checkbox" style="margin-left: 5px" > Dodati: Oprez - lomljivo</div>
+                
                 <!-- info row -->
-                <div  style="margin-left: auto; margin-right: auto; text-align: center">
+                <strong><div  style="margin-left: auto; margin-right: auto; text-align: center; ">
                     <div style="font-size: 20px">Ručna izdatnica br. </div>
                     <input id="rb" style="border: none; text-align: center; font-size: 20px" value="broj">
-                </div>
+                </div></strong>
 
                 
-                <div class="row" style=" width: 95%; margin-top: 50px; margin-left: 2px; margin-right: 2px ">
+                 <div class="row" style=" width: 95%; margin-top: 50px; margin-left: 2px; margin-right: 2px ">
                     <p style="margin-bottom: 2px"  class="lead"><b style=" font-size: 14px">ŠALJE:</b></p>
                     <div class="col-xs-12" style="float:left;  border: 1px solid black; font-size: 14px ">
                         <b>Centar: <p id="sc" style="display: inline"></p></b><br><br>
@@ -58,31 +51,34 @@ include_once 'checkLogin.php';
                         <b>Kontakt: <p id="sb" style="display: inline"></p></b><br>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
+                
+                
 
 
                 <div class="row" style=" width: 95%;  margin-top: 50px;  margin-left: 2px; margin-right: 2px "> 
-                    <p style="margin-bottom: 2px"  class="lead"><b style=" font-size: 20px">PRIMA:</b></p>
-                    <div class="col-xs-12" style="border: 1px solid black; font-size: 18px ">
-                        <b style="font-size: 20px">Tvrtka: <input id="pt" style="display: inline; border: none; font-size: 20px; width: 80%; margin-left: 5px"></input></b><br><br>
-                        <b>Adresa: <input id="pa"  style="display: inline; border: none;  width: 80%; margin-left: 5px"></input></b><br>
-                        <b>Grad: <input id="pg" style="display: inline; border: none;  width: 80%; margin-left: 5px"></input></b><br>
-                        <b>Kontakt: <input id="pb" style="display: inline;  border: none; width: 80%; margin-left: 5px"></input></b><br>
+                    <p style="margin-bottom: 2px"  class="lead"><b style=" font-size: 17px">PRIMA:</b></p>
+                    <div class="col-xs-12" style="border: 1px solid black; font-size: 16px ">
+                        <b style="font-size: 17px"><p style="display: inline; float: left">Tvrtka: </p><input id="pt" style="display: inline; border: none; font-size: 17px; width: 90%; margin-left: 5px; float: right"></input></b><br><br>
+                        <b><strong style="display: inline; float: left">Adresa: </strong><input id="pa"  style="display: inline; border: none;  width: 90%; margin-left: 5px; float: right"></input></b><br>
+                        <b><strong style="display: inline; float: left">Grad: </strong><input id="pg" style="display: inline; border: none;  width: 90%; margin-left: 5px;float: right"></input></b><br>
+                        <b><strong style="display: inline; float: left">Kontakt: </strong><input id="pb" style="display: inline;  border: none; width: 90%; margin-left: 5px;float: right"></input></b><br>
                         
                     </div><!-- /.col -->
                 </div><!-- /.row -->
+               
                 
-                <div class="row" style="width: 95%;  margin-top: 40px; margin-left: 2px; margin-right: 2px  ">
+                <div class="row" style="width: 95%;  margin-top: 40px; margin-left: 2px; margin-right: 2px; text-align: center  ">
                     <table style="width: 100%;border: 1px solid black; ">
-                        <thead >
+                        <thead style="text-align: center" >
                         <th style="border: 1px solid black; text-align: center">Uređaj</th>
                         <th style="border: 1px solid black; text-align: center">Serijski</th>
                         <th style="border: 1px solid black; text-align: center">Primka</th>
                         </thead>
                         <tbody >
                         <tr>
-                            <td style="border: 1px solid black; font-size: 12px"><p  id="su"></p></td>
-                            <td style="border: 1px solid black; font-size: 12px"><p id="ss"></p></td>
-                            <td style="border: 1px solid black; font-size: 12px"><p id="p"></p></td>
+                            <td style="border: 1px solid black; font-size: 14px"><p  id="su"></p></td>
+                            <td style="border: 1px solid black; font-size: 14px"><p id="ss"></p></td>
+                            <td style="border: 1px solid black; font-size: 14px"><p id="p"></p></td>
                         </tbody>
                         
                     </table>
@@ -91,10 +87,17 @@ include_once 'checkLogin.php';
                 
                 <div class="row" style= " width: 95%; margin-top: 40px;  margin-left: 2px; margin-right: 2px  ">
                     Napomena:
-                    <textarea rows="5" style="width: 100%; border: 1px solid black"></textarea>
+                    <textarea rows="2" style="width: 100%; border: 1px solid black"></textarea>
 
                 </div>
-
+                
+                
+                <div id="oprez" style="display: none">
+                   <div style="font-size: 50px; text-align: center">
+                    <u> OPREZ LOMLJIVO!</u>
+                </div>
+                <div style="font-size: 32px; text-align: center "><strong>GORNJA STRANA PRILIKOM TRANSPORTA!!!<strong></div> 
+                </div>
 
                 <div class="col-xs-12" style="margin-top: 40px; width: 95%; ">
                     <div style="float: left">
@@ -127,6 +130,13 @@ include_once 'checkLogin.php';
                 function printaj(){
                     window.print();
                 }
+                
+                $("#op").on("click", this, function(){
+                    if($("#op").is(":checked")) $("#oprez").show();
+                else $("#oprez").hide();
+                })
+                
+                
                 var primka = '';
                 <?php if(isset($_GET['primka'])) { ?>
                      primka = <?php  echo $_GET['primka']?>;

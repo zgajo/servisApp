@@ -127,14 +127,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="plugins/input-mask/jquery.inputmask.js"></script>
         <script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
         <script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>
+        <!-- Pretrage u sidebaru -->
         <script type="text/javascript" src="search/searchkupca.js"></script>
-<script type="text/javascript" src="search/searchprimka.js"></script>
-<script>
-$('#rucna').click(function(){
-    var primka = $('#primka_id').text();
-    window.open("rucne.php?primka="+primka, "_blank");
-});
-</script>
+        <script type="text/javascript" src="search/searchprimka.js"></script>
+        <script type="text/javascript" src="search/searchserijski.js"></script>
+
 
 
 <?php if (!empty($_GET['rma'])) { ?>

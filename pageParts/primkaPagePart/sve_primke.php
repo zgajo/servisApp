@@ -207,6 +207,13 @@
                                             <input class="form-control" id="inputBrand" placeholder="Toshiba, Lenovo, Epson ..." type="text" name="brand">
                                         </div>
                                     </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="inputNaziv" class="col-sm-2 control-label"  id="required">Model</label>
+                                        <div class="col-sm-10">
+                                            <input class="form-control" id="inputNaziv" placeholder="L310, C660, itd ..." type="text" name="naziv" required="">
+                                        </div>
+                                    </div>
 
                                     <div class="form-group">
                                         <label for="inputTip" class="col-sm-2 control-label">Tip</label>
@@ -224,12 +231,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="inputNaziv" class="col-sm-2 control-label"  id="required">Naziv</label>
-                                        <div class="col-sm-10">
-                                            <input class="form-control" id="inputNaziv" placeholder="PC Računalo Feniks, Lenovo G50-70 ..." type="text" name="naziv" required="">
-                                        </div>
-                                    </div>
+                                    
                                     <div class="form-group">
                                         <label for="inputSerijski" class="col-sm-2 control-label">Serijski broj</label>
                                         <div class="col-sm-10">

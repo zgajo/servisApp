@@ -277,7 +277,7 @@ class servisRN extends RN{
         $this->primka_id = $primka_id;
         $this->djelatnik_otvorio_id  = $djelatnik_otvorio_id;
                 
-        $query = $this->mysqli->prepare("INSERT INTO radniNaloziServisa(pocetakRada, primka_id, djelatnik_zapoceoRn_id) VALUES (?,?,?)");
+        $query = $this->mysqli->prepare("INSERT INTO radniNaloziServisa(pocetakRada, primka_id, djelatnik_zapoceoRn_id, status) VALUES (?,?,?,'Servisiranje')");
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
         }

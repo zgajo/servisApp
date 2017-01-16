@@ -29,6 +29,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
         
         <link href="search/search.css" rel="stylesheet">
+        
+        <!-- jQuery 2.1.4 -->
+        <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+        <!-- Bootstrap 3.3.5 -->
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="dist/js/app.min.js"></script>
+        <!-- Select2 -->
+        <script src="plugins/select2/select2.full.min.js"></script>
+        <!-- InputMask -->
+
+       
+        
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -38,19 +51,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </head>
 
     <body class="hold-transition skin-blue sidebar-mini"  >
-        <div class="wrapper">
-
-            <?php include 'pageParts/header.php'; ?>
-            <?php include 'pageParts/sidebar.php'; ?>
-
-            <!-- Content Wrapper. Contains page content -->
-            <div class="content-wrapper">
-                <!-- Content Header (Page header) -->
-
-                <!-- Main content -->
-                <section class="content" onload="printaj()">
-
-
+       
                     <section class="invoice" >
                         <!-- title row -->
                         <div class="row">
@@ -200,35 +201,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         
                     </section><!-- /.content -->
                     
-                     
-                   <?php require 'upload.php'; ?>
-                    <div style="clear:both"></div>
-                </section><!-- /.content -->
-               
-            </div><!-- /.content-wrapper -->
-
-            <!-- Main Footer --><div class="no-print">
-                <?php require_once('pageParts/footer.php') ?>
-            </div>
-        </div><!-- ./wrapper -->
-
         <!-- REQUIRED JS SCRIPTS -->
-
-        <!-- jQuery 2.1.4 -->
-        <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
-        <!-- Bootstrap 3.3.5 -->
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <!-- AdminLTE App -->
-        <script src="dist/js/app.min.js"></script>
-        <!-- Select2 -->
-        <script src="plugins/select2/select2.full.min.js"></script>
-        <!-- InputMask -->
-
-        <!-- Pretrage u sidebaru -->
-        <script type="text/javascript" src="search/searchkupca.js"></script>
-        <script type="text/javascript" src="search/searchprimka.js"></script>
-        <script type="text/javascript" src="search/searchserijski.js"></script>
-        <script>
+ <script>
             var id = <?php echo $_GET['primka'] ?>  
             var opis_popravka ='';
             var prom = '';   
@@ -263,10 +237,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     $('#prilozeno').text(primka[0].prilozeno_primijeceno);
                     
                     
-                    
+                    var rpro;
+                    var rmpro;
                     //  DOHVATI RADNI NALOG POVEZAN SA PRIMKOM
-                    $.post("json/rn/getRNbyPrimka.php", {"primka":id}, function(rn){
-                        console.log(rn);
+                    $.ajax({
+                        async: false,
+                        type: 'POST',
+                        url: "json/rn/getRNbyPrimka.php",
+                        data: {"primka":id},
+                        dataType: 'json',
+                        success: function (rn) {
+                         
                         //  UKOLIKO POSTOJI RN POVEZAN SA PRIMKOM
                         if(rn){
                             
@@ -340,11 +321,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         $('#saround').hide();
                                         }
                       
-                        
+                       rpro=1;
+                    }
                     });
                     
+                    
                     // DOHVATI RMA NALOG POVEZAN SA PRIMKOM
-                  $.get("json/rma/getRmaByPrimka.php", {"primka" : id}, function(rma){
+                    $.ajax({
+                        async: false,
+                        type: 'GET',
+                        url: "json/rma/getRmaByPrimka.php",
+                        data: {"primka":id},
+                        dataType: 'json',
+                        success: function(rma){
                         
                                         
                                         console.log(rma);
@@ -420,10 +409,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         else{
                                         $('#osaround').hide();
                                         }
-                                        
-                                        });
-                                        
-                                       
+                                        rmpro=1;
+                                        }
+                                        });                
+                    if(rpro == 1&& rmpro==1) printaj();               
                    
                 });
                 
@@ -440,8 +429,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 
                 function printaj(){
                     window.print();
+                    window.close();
                 }
         </script>
-
     </body>
 </html>

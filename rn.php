@@ -137,8 +137,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="plugins/input-mask/jquery.inputmask.js"></script>
         <script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
         <script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>
+        <!-- Pretrage u sidebaru -->
         <script type="text/javascript" src="search/searchkupca.js"></script>
-    <script type="text/javascript" src="search/searchprimka.js"></script>    
+        <script type="text/javascript" src="search/searchprimka.js"></script>
+        <script type="text/javascript" src="search/searchserijski.js"></script>
         <script>
 $('#rucna').click(function(){
     var primka = $('#primka_id').text();
@@ -459,9 +461,11 @@ $("#up").attr('title', 'Otvori formu za izmjenu podataka primke');
                                                        
                         });
                         </script>
+                        
         <?php } else{ ?>
                         <script type="text/javascript" src="pageParts/rnPagePart/svi_rn.js"></script>                
         <?php } ?>
+                        
         <!-- Optionally, you can add Slimscroll and FastClick plugins.
              Both of these plugins are recommended to enhance the
              user experience. Slimscroll is required when using the

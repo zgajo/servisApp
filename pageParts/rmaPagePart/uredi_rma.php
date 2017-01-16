@@ -61,9 +61,13 @@
 
                 </div>
                 
-                <a  id="rucna" class="btn btn-app"   style=" float: left;">
-                        <i class="fa fa-send"></i> Stvori ručnu izdatnicu
-                    </a>
+                <a class="btn btn-app" id="rucne"  style=" float: left; height:initial;">
+                       <i class="fa fa-send" style="font-size:small; display:inline;"></i> Ručna izdatnica
+                   </a>
+                
+                <a class="btn btn-app" id="narudzba"  style=" float: left; height:initial;">
+                       <i class="fa fa-reorder" style="font-size:small; display:inline;"></i> Narudžba
+                   </a>
 
                 <div class="box-body" style="clear: both">
 
@@ -343,3 +347,28 @@
           </div>
 </form>
 
+
+ <!-- jQuery 2.1.4 -->
+        <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+        <script>
+           
+        $("#narudzba").on("mouseover", this, function () {
+                $(this).attr('title', 'Stvori novu narudžbu');
+            })
+            
+            $("#rucne").on("mouseover", this, function () {
+                $(this).attr('title', 'Stvori novu ručnu izdatnicu');
+            })
+            
+            $("#narudzba").click(function (e) {
+                 var primka_id = $('#primka_id').text();
+           var stranka = $('#inputid').text();
+                window.open("narudzbe.php?primka="+primka_id+"&stranka="+stranka,"_blank");
+            }) 
+            
+            $("#rucne").click(function (e) {
+                 var primka = $('#primka_id').text();
+          
+                window.open("rucne.php?primka="+primka,"_blank");
+            }) 
+        </script>
