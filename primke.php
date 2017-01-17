@@ -390,8 +390,8 @@ $("#up").attr('title', 'Otvori formu za izmjenu podataka primke');
                                 $('#br').text(pp[0].racun);
                                 $('#ok').text(pp[0].opisKvara);
                                 $('#pp').text(pp[0].prilozeno_primijeceno);
-
-                                var st = pp[0].p_status;
+                                
+                                 var st = pp[0].p_status;
 
 
                                 // POSTAVLJANJE ZA SELECTED
@@ -400,7 +400,7 @@ $("#up").attr('title', 'Otvori formu za izmjenu podataka primke');
                                 $(o).html(st);
                                 $("#status_primke").append(o);
                                 $('#status_primke option[value="' + st + '"]').attr("selected", true);
-
+                                    
                                 $('#inputTvrtka').val(pp[0].tvrtka);
                                 $('#inputIme').val(pp[0].ime);
                                 $('#inputPrezime').val(pp[0].prezime);
@@ -463,7 +463,7 @@ $("#up").attr('title', 'Otvori formu za izmjenu podataka primke');
                                                     '<i><strong>Rad započeo: </strong></i></strong>' + rn[i].d1ime + ' ' + rn[i].d1prezime + '<br>' +
                                                     '<i><strong>Opis popravka: </strong></i></strong><hr>';
                                             output += (rn[i].opis) ? rn[i].opis : "";
-                                            output += "<i><strong>Status radnog naloga: </strong></i>" +rn[i].status;
+                                            output += "<i><strong>Status radnog naloga: </strong></i>"; output += (rn[i].status) ?rn[i].status:'' ;
                                             output += '<hr>' +
                                                     '<i><strong>Naplatiti: </strong></i></strong>';
                                             output += (rn[i].naplata) ? rn[i].naplata : "";
@@ -559,7 +559,7 @@ $("#up").attr('title', 'Otvori formu za izmjenu podataka primke');
                     $('#azuriraj_status').on("click", this, function () {
 
                         var status = $('select').val();
-
+                        if(confirm('Ažurirati status u: "'+status+'"?'))    
                         $.ajax({
                             async: false,
                             url: "json/primka/primkaStatusUpdate.php",

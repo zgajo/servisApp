@@ -146,31 +146,31 @@ $("#sve_primke").on("click", "tbody tr", function () {
         z();
         $(this).after('<td colspan=6 style="border:1px solid #F4F4F4; background-color:#e6ffe6 ; padding-right:15px" ><div style="margin-top:10px;">'+
                 
-                    '<a   class="btn btn-app" id="uredi" name="'+ $(this).find('#primka_id').attr('name') +'" style=" float: left;   height:initial ">'+
+                    '<a   class="btn btn-app" id="uredi" name="'+ $(this).find('#primka_id').attr('name') +'" style=" float: left;   height:initial; background-color:ivory ">'+
                     '<i class="glyphicon glyphicon-edit" style="font-size:small; display:inline;" ></i> Uredi'+
                     '</a>  '+
                     
-                    '<a   class="btn btn-app" id="pregledaj_p" name="'+ $(this).find('#primka_id').attr('name') +'" style=" float: left;   height:initial ">'+
+                    '<a   class="btn btn-app" id="pregledaj_p" name="'+ $(this).find('#primka_id').attr('name') +'" style=" float: left;   height:initial; background-color:ivory  ">'+
                     '<i class="glyphicon glyphicon-list-alt" style="font-size:small; display:inline;" ></i> Pregledaj'+
                     '</a>  '+
                     
-                    '<a   class="btn btn-app" id="ispisi" name="'+ $(this).find('#primka_id').attr('name') +'" style=" float: left;   height:initial ">'+
+                    '<a   class="btn btn-app" id="ispisi" name="'+ $(this).find('#primka_id').attr('name') +'" style=" float: left;   height:initial; background-color:ivory  ">'+
                     '<i class="glyphicon glyphicon-print" style="font-size:small; display:inline;" ></i> Ispis'+
                     '</a>  '+
                            
-                   '<a   class="btn btn-app" id="novi_rn" name="'+ $(this).find('#primka_id').attr('name') +'"  style=" float: right;   height:initial ">'+
+                   '<a   class="btn btn-app" id="novi_rn" name="'+ $(this).find('#primka_id').attr('name') +'"  style=" float: right;   height:initial; background-color:ivory  ">'+
                     '<i class="glyphicon glyphicon-share" style="font-size:small; display:inline;" ></i> Radni nalog'+
                     '</a>  '+
                          
-                   '<a class="btn btn-app" id="novi_rma" name="'+ $(this).find('#primka_id').attr('name') +'" style=" float: right; height:initial ">'+
+                   '<a class="btn btn-app" id="novi_rma" name="'+ $(this).find('#primka_id').attr('name') +'" style=" float: right; height:initial; background-color:ivory  ">'+
                         '<i class="glyphicon glyphicon-random" style="font-size:small; display:inline;"></i> RMA nalog'+
                     '</a>  '  +
                     
-                    '<a  class="btn btn-app"  id="narudzba" name="'+ $(this).find('#primka_id').attr('name') +'" style=" float: right; height:initial">'+
+                    '<a  class="btn btn-app"  id="narudzba" name="'+ $(this).find('#primka_id').attr('name') +'" style=" float: right; height:initial; background-color:ivory ">'+
                        ' <i id="str_id" name="'+ $(this).find('#stranka_id').attr('name')+'" class="fa fa-reorder" style="font-size:small; display:inline;"></i> Narudžba'+
                     '</a>'+
                          
-                    '<a class="btn btn-app" id="rucne" name="'+ $(this).find('#primka_id').attr('name') +'" style=" float: right; height:initial;">'+
+                    '<a class="btn btn-app" id="rucne" name="'+ $(this).find('#primka_id').attr('name') +'" style=" float: right; height:initial; background-color:ivory ">'+
                    '     <i class="fa fa-send" style="font-size:small; display:inline;"></i> Ručna izdatnica'+
                    ' </a>'+
                     

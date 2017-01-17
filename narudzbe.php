@@ -108,6 +108,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             <table id="sve_narudzbe" class="table table-bordered table-striped">
                                                 <thead >
                                                     <tr>
+                                                        <th style="text-align: center">Datum narudžbe</th>
                                                         <th style="text-align: center">Proizvod</th>
                                                         <th style="text-align: center">Part no.</th>
                                                         <th style="text-align: center">Dobavljač</th>

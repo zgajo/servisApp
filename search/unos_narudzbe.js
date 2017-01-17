@@ -279,13 +279,19 @@ $.ajax({
     type: 'POST',
     dataType: 'json',
     contentType: "application/json; charset=utf-8",
-    success: function () {
+    success: function (nar) {
+        console.log(nar);
         $('#sve_narudzbe').DataTable({
 "ajax": {
 "url": "json/narudzbe/sve_otvoreno.php",
         "dataSrc": ""
 },
         "columns": [
+            {"data":"naruceno", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
+                        var naruceno = new Date(row.naruceno);
+                        var output = (naruceno && !isNaN(naruceno) && naruceno.getFullYear() != '1970') ? [naruceno.getDate(), naruceno.getMonth()+1, naruceno.getFullYear()].join('.') : '';
+                        return output;
+                    }},
         {"data":"dio"},
         {"data":"pn"},
         {"data":"dobavljac"},

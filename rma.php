@@ -338,6 +338,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 
 
                             } // KRAJ SLANJA U OS 
+                            
                             else {
                                 $.post("json/rma/azuriraj.php", {"id": rnid, "status": status, "popravak": $('#inputPopravak').val(), "napomena": $('#inputNapomena').val(), "naplata": $("#inputNaplata").val(), "rnOS": $("#inputrnOS").val(), "nazivOS": $('#inputOSnaziv').val()});
                                 

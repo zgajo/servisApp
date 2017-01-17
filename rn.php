@@ -269,7 +269,7 @@ $('#rucna').click(function(){
                             var primka_id = $('#primka_id').text();
                             var status = $('select').val();
                             var trazi = status_primke.substring(0,12);
-                            
+                            if(confirm('Ažurirati radni nalog?')) { 
                             //  UKOLIKO SE ZATVARA RADNI NALOG
                             if(status === "Popravak završen u jamstvu"  || status === "Popravak završen van jamstva" || status === 'Stranka odustala od popravka'  || status === 'Uređaj zamijenjen novim'){
                                
@@ -343,16 +343,14 @@ $('#rucna').click(function(){
                                             $.post("json/primka/primkaStatusUpdate.php", {"status": "Poslano u CS - Rovinj / "+status, "id":primka_id}, function(){
                                                 
                                                 upisrn(rnid);
-                                                upisprik(rnid)
-                                                alert("Ažuriran radni nalog " + rnid);
+                                                upisprik(rnid);
 
                                             });
                                         }else{
                                            $.post("json/primka/primkaStatusUpdate.php", {"status": status, "id":primka_id}, function(){
                                                 
                                                 upisrn(rnid);
-                                                upisprik(rnid)
-                                                alert("Ažuriran radni nalog " + rnid);
+                                                upisprik(rnid);
 
                                             });
                                         }
@@ -360,6 +358,7 @@ $('#rucna').click(function(){
                                 
                                 }
                              //  KRAJ    *   AŽURIRAJ STATUSE    *   KRAJ
+                         }
                             });
                             
                     $('#uk').click(function () {

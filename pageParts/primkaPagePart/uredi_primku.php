@@ -64,6 +64,7 @@
                             <select class="form-control" id="status_primke" name='status_primke'>
                                 <?php if($_COOKIE['centar'] != "Rovinj"){ ?><option value="Poslano u CS - Rovinj">Pošalji u CS - Rovinj</option><?php } ?>
                                 <option value="Čeka preuzimanje stranke">Čeka preuzimanje stranke</option>
+                                <option value="Ekološki zbrinuto">Ekološki zbrinuto</option>
                                 <option value="Kupac preuzeo">Kupac preuzeo</option>
                             </select>
                         </div>
