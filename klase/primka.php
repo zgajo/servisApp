@@ -38,12 +38,9 @@ class primka{
     public function svePrimke() {
         $query = $this->mysqli->query("SELECT p.*, s.stranka_id, s.ime as s_ime, s.prezime as s_prezime, s.tvrtka FROM primka p 
                                         LEFT JOIN stranka s ON  p.stranka_id = s.stranka_id
-                                        WHERE p.status != 'Kupac preuzeo' 
-                                        AND p.status != 'Poslano u CS - Rovinj'  
-                                        AND p.status != 'Poslano u CS - Rovinj / Započelo servisiranje'  
-                                        AND p.status != 'Poslano u CS - Rovinj / Čeka dio' 
-                                        AND p.status != 'Poslano u CS - Rovinj / Poslano u vanjski servis' 
-                                        AND p.status != 'Poslano u CS - Rovinj / Servisiranje'
+                                        WHERE p.status != 'Kupac preuzeo' AND p.status != 'Ekološki zbrinuto' 
+                                        AND p.status NOT LIKE  'Poslano u CS%'  
+                                        
                                         and p.centar LIKE '".$_COOKIE['centar']."'
                                         ORDER BY p.primka_id ASC");
         if($query === false){
@@ -91,12 +88,8 @@ class primka{
        public function svePoslanePrimke() {
         $query = $this->mysqli->query("SELECT p.*, s.ime as s_ime, s.prezime as s_prezime, s.tvrtka FROM primka p 
                                         LEFT JOIN stranka s ON  p.stranka_id = s.stranka_id
-                                        WHERE p.status != 'Kupac preuzeo' AND 
-                                       ( p.status = 'Poslano u CS - Rovinj'  
-                                        OR p.status = 'Poslano u CS - Rovinj / Započelo servisiranje'  
-                                        OR p.status = 'Poslano u CS - Rovinj / Čeka dio' 
-                                        OR p.status = 'Poslano u CS - Rovinj / Poslano u vanjski servis' 
-                                        OR p.status = 'Poslano u CS - Rovinj / Servisiranje') AND 
+                                        WHERE p.status != 'Kupac preuzeo' AND   p.status != 'Ekološki zbrinuto' AND 
+                                       ( p.status LIKE 'Poslano u CS - Rovinj%') AND 
                                         (p.centar = '".$_COOKIE['centar']."' OR '".$_COOKIE['odjel']."' = 'Servis')  
                                         ORDER BY p.primka_id ASC");
         if($query === false){

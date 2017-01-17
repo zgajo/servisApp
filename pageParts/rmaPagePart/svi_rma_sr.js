@@ -104,7 +104,7 @@
                                                             {"data": "nazivOS"},
                                                             {"data": "poslano","render": function(data, type, row, meta){
                                                             var poslano = new Date(row.poslano);   
-                                                            var output = (poslano && poslano.getFullYear()!="1970") ? [poslano.getDate(), poslano.getMonth()+1, poslano.getFullYear()].join('.') : '';
+                                                            var output = (poslano && poslano.getFullYear()!="1970" && !isNaN(poslano)) ? [poslano.getDate(), poslano.getMonth()+1, poslano.getFullYear()].join('.') : '';
                                                             return output;
                                                             }},
                                                             {"data": "status"},

@@ -80,8 +80,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         
                         $primka = new primka();
                         $primka = $primka->getById($_GET['primka_id']);
-                        
-                        if($primka[0]["p_status"] == "Poslano u CS - Rovinj" || $primka[0]["p_status"] == "Poslano u CS - Rovinj / Čeka dio" || $primka[0]["p_status"] == "Poslano u CS - Rovinj / Započelo servisiranje"){
+                        $trazi = substr($primka[0]["p_status"], 0, 12);
+                        if($trazi == "Poslano u CS"){
                            
                             unset($primka);
                             $primka = new primka();
@@ -152,8 +152,8 @@ $('#rucna').click(function(){
             
             //Poruka pri hoveru na gumb izmjene
 
-$("#uk").attr('title', 'Otvori formu za izmjenu podataka kupca');
-$("#up").attr('title', 'Otvori formu za izmjenu podataka primke');
+            $("#uk").attr('title', 'Otvori formu za izmjenu podataka kupca');
+            $("#up").attr('title', 'Otvori formu za izmjenu podataka primke');
                         $(document).ready(function (){
                             
                             var rnid = <?php echo $_GET['radni_nalog'] ?>;
@@ -268,9 +268,10 @@ $("#up").attr('title', 'Otvori formu za izmjenu podataka primke');
                             var status_primke = $('#st').text();
                             var primka_id = $('#primka_id').text();
                             var status = $('select').val();
+                            var trazi = status_primke.substring(0,12);
                             
                             //  UKOLIKO SE ZATVARA RADNI NALOG
-                            if(status === "Popravak završen u jamstvu"  || status === "Popravak završen van jamstva" || status === 'Stranka odustala od popravka'){
+                            if(status === "Popravak završen u jamstvu"  || status === "Popravak završen van jamstva" || status === 'Stranka odustala od popravka'  || status === 'Uređaj zamijenjen novim'){
                                
                                     $.post("json/rn/zatvori.php", 
                                             {"id":rnid, 
@@ -283,8 +284,8 @@ $("#up").attr('title', 'Otvori formu za izmjenu podataka primke');
                                         }
                                         );
                                         
-                                        //  AŽURIRANJE STATUSA PRIMKE
-                                        if(status_primke === "Poslano u CS - Rovinj" || status_primke === "Poslano u CS - Rovinj / Započelo servisiranje"  || status_primke === "Poslano u CS - Rovinj / Čeka dio" || status_primke === "Poslano u CS - Rovinj / Poslano u vanjski servis"   || status_primke === "Poslano u CS - Rovinj / Servisiranje") { 
+                                        //  AŽURIRANJE STATUSA PRIMKE ako je servis završen
+                                        if(trazi === "Poslano u CS") { 
                                             $.post("json/primka/primkaStatusUpdate.php", {"status": status + " - vraćeno u centar", "id":primka_id}, function(){
                                                 
                                                 upisrn(rnid);
@@ -338,7 +339,7 @@ $("#up").attr('title', 'Otvori formu za izmjenu podataka primke');
                                         );
                                 
                                     //  AŽURIRANJE STATUSA PRIMKE
-                                        if(status_primke === "Poslano u CS - Rovinj" || status_primke === "Poslano u CS - Rovinj / Započelo servisiranje"  || status_primke === "Poslano u CS - Rovinj / Čeka dio" || status_primke === "Poslano u CS - Rovinj / Poslano u vanjski servis"  || status_primke === "Poslano u CS - Rovinj / Servisiranje") { 
+                                        if(trazi === "Poslano u CS") { 
                                             $.post("json/primka/primkaStatusUpdate.php", {"status": "Poslano u CS - Rovinj / "+status, "id":primka_id}, function(){
                                                 
                                                 upisrn(rnid);

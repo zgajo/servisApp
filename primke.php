@@ -166,7 +166,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     {data: "primka_id", "render": function (data, type, row, meta) {
                                             var output = "";
                                             if (odjel === "Servis")
-                                                output += '<a id="novi_rn" class="glyphicon glyphicon-share" href="rn.php?action=novi_rn&primka_id=' + row.primka_id + '"></a>';
+                                                output += '<a target="_blank" id="novi_rn" style="margin-right:15px" class="glyphicon glyphicon-share" href="rn.php?action=novi_rn&primka_id=' + row.primka_id + '"></a>';
+                                             output += '<a target="_blank" id="novi_rma" class="glyphicon glyphicon-random" href="rma.php?action=novi_rma&poslano=Da&primka_id=' + row.primka_id + '"></a>';
                                             return output;
                                         }},
                                     {"data": "primka_id", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
@@ -216,14 +217,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             //    UKOLIKO IMA DOHVAĆENIH rn
                                             if (r !== null && r.length > 0) {
                                                 for (var j = 0; j < r.length; ++j) {
-                                                    output += '<a id="uredi_rn" href="rn.php?radni_nalog=' + r[j].id + '"> RN. ' + r[j].id + '</a><br>';
+                                                    output += '<a target="_blank" id="uredi_rn" href="rn.php?radni_nalog=' + r[j].id + '"> RN. ' + r[j].id + '</a><br>';
                                                 }
                                             }
                                             //    UKOLIKO IMA DOHVAĆENIH rma
 
                                             if (rm !== null && rm.length > 0) {
                                                 for (var j = 0; j < rm.length; ++j) {
-                                                    output += '<a id="uredi_rma" href="rma.php?rma=' + rm[j].id + '"> RMA. ' + rm[j].id + '</a><br>';
+                                                    output += '<a target="_blank" id="uredi_rma" href="rma.php?rma=' + rm[j].id + '"> RMA. ' + rm[j].id + '</a><br>';
                                                 }
                                             }
 
@@ -300,6 +301,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 })
                 $('#svePoslanePrimke').on("mouseover", "#novi_rn", function(){
                    $(this).attr('title', 'Započni servisiranje'); 
+                });
+                 $('#svePoslanePrimke').on("mouseover", "#novi_rma", function(){
+                   $(this).attr('title', 'Stvori novi RMA nalog'); 
                 });
                 $('#svePoslanePrimke').on("mouseover", "#uredi_rn", function(){
                    $(this).attr('title', 'Uredi radni nalog'); 
@@ -457,9 +461,10 @@ $("#up").attr('title', 'Otvori formu za izmjenu podataka primke');
                                                     '<address>' +
                                                     '<i><strong>Početak rada: </strong></i>' + [rnp.getDate(), rnp.getMonth() + 1, rnp.getFullYear()].join('.') + ' /  ' + [(rnp.getHours() < 10 ? '0' : '') + rnp.getHours(), (rnp.getMinutes() < 10 ? '0' : '') + rnp.getMinutes()].join(':') + '<br>' +
                                                     '<i><strong>Rad započeo: </strong></i></strong>' + rn[i].d1ime + ' ' + rn[i].d1prezime + '<br>' +
-                                                    '<i><strong>Opis popravka: </strong></i></strong><br>';
+                                                    '<i><strong>Opis popravka: </strong></i></strong><hr>';
                                             output += (rn[i].opis) ? rn[i].opis : "";
-                                            output += '<br>' +
+                                            output += "<i><strong>Status radnog naloga: </strong></i>" +rn[i].status;
+                                            output += '<hr>' +
                                                     '<i><strong>Naplatiti: </strong></i></strong>';
                                             output += (rn[i].naplata) ? rn[i].naplata : "";
                                             output += '<br>' +
@@ -507,10 +512,12 @@ $("#up").attr('title', 'Otvori formu za izmjenu podataka primke');
                                                     '<address>' +
                                                     '<i><strong>Pripremljeno za slanje: </strong></i>' + [rnp.getDate(), rnp.getMonth() + 1, rnp.getFullYear()].join('.') + ' /  ' + [(rnp.getHours() < 10 ? '0' : '') + rnp.getHours(), (rnp.getMinutes() < 10 ? '0' : '') + rnp.getMinutes()].join(':') + '<br>' +
                                                     '<i><strong>Poslano u ovlašteni servis: </strong></i>   </strong>';
-                                            output += (rnpos && rnpos.getFullYear() != "1970") ? [rnpos.getDate(), rnpos.getMonth() + 1, rnpos.getFullYear()].join('.') + ' /  ' + [(rnpos.getHours() < 10 ? '0' : '') + rnpos.getHours(), (rnpos.getMinutes() < 10 ? '0' : '') + rnpos.getMinutes()].join(':') : "";
+                                            output += (rnpos && rnpos.getFullYear() != "1970" && !isNaN(rnpos)) ? [rnpos.getDate(), rnpos.getMonth() + 1, rnpos.getFullYear()].join('.') + ' /  ' + [(rnpos.getHours() < 10 ? '0' : '') + rnpos.getHours(), (rnpos.getMinutes() < 10 ? '0' : '') + rnpos.getMinutes()].join(':') : "";
                                             output += '<br>' +
                                                     '<i><strong>Uređaj poslao:  </strong></i>   </strong>' + rma[i].doime + ' ' + rma[i].doprezime + '<hr>' +
-                                                    '<i><strong>Ovlašteni servis: </strong></i> </strong>' + rma[i].nazivOS + '<br>' +
+                                                    '<i><strong>Ovlašteni servis: </strong></i> </strong>'; 
+                                            output +=  (rma[i].nazivOS) ? rma[i].nazivOS  : '';
+                                            output += '<br>' +
                                                     '<i><strong>Radni nalog ovlaštenog servisa: </strong></i>  </strong>' + rma[i].rnOs + '<br>' +
                                                     '<i><strong>Opis popravka: </strong></i>   </strong> ' + rma[i].opis + '<br>                ' +
                                                     '<i><strong>Status reklamacije: </strong></i>   </strong>' + rma[i].status + '<hr>' +

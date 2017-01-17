@@ -181,7 +181,7 @@
                             <select class="form-control" id="status_rma" name='status_rma'>
                                 
                                 <option>Pripremljeno za slanje OS-u</option>
-                                <option >Čeka dio</option>
+                                <option >Čeka dio u OS-u</option>
                                 <option value="Poslano u OS">Pošalji u OS</option>
                                 <option>Vraćeno is OS-a</option>
                                 <option>Popravak završen u jamstvu</option>

@@ -82,7 +82,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
                             $primka = new primka();
-                            $primka->azurirajStatus("Pripremljeno za slanje OS-u", $_GET['primka_id']);
+                            if(!empty($_GET['poslano']) && $_GET['poslano'] == "Da") $primka->azurirajStatus("Poslano u CS - Rovinj / Pripremljeno za slanje OS-u", $_GET['primka_id']);
+                            else $primka->azurirajStatus("Pripremljeno za slanje OS-u", $_GET['primka_id']);
 
 
 
@@ -137,7 +138,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <?php if (!empty($_GET['rma'])) { ?>
             <script>
                 $("#uk").attr('title', 'Otvori formu za izmjenu podataka kupca');
-$("#up").attr('title', 'Otvori formu za izmjenu podataka primke');
+                $("#up").attr('title', 'Otvori formu za izmjenu podataka primke');
                 $(document).ready(function () {
                     
                     var rnid = <?php echo $_GET['rma'] ?>;
@@ -153,7 +154,7 @@ $("#up").attr('title', 'Otvori formu za izmjenu podataka primke');
 
                                 //   UPIS RMA NALOGA
                                 $('#pocetak').text([pocetak.getDate(), pocetak.getMonth()+1, pocetak.getFullYear()].join('.') + ' / ' + [((pocetak.getHours() < 10) ? '0' : '') + pocetak.getHours(), (pocetak.getMinutes() < 10 ? '0' : '') + pocetak.getMinutes()].join(':'));
-                                (poslano && poslano.getFullYear() != "1970") ? $('#poslano').text([poslano.getDate(), poslano.getMonth()+1, poslano.getFullYear()].join('.') + ' / ' + [((poslano.getHours() < 10) ? '0' : '') + poslano.getHours(), (poslano.getMinutes() < 10 ? '0' : '') + poslano.getMinutes()].join(':')) : $('#poslano').text();
+                                (poslano && poslano.getFullYear() != "1970" && !isNaN(poslano)) ? $('#poslano').text([poslano.getDate(), poslano.getMonth()+1, poslano.getFullYear()].join('.') + ' / ' + [((poslano.getHours() < 10) ? '0' : '') + poslano.getHours(), (poslano.getMinutes() < 10 ? '0' : '') + poslano.getMinutes()].join(':')) : $('#poslano').text();
                                 $('#zapoceo').text(rn[0].zapoceoRn_ime + ' ' + rn[0].zapoceoRn_prezime);
                                 $('#inputrnOS').val(rn[0].rnOS);
                                 $('#inputOSnaziv').val(rn[0].nazivOS);
@@ -265,12 +266,35 @@ $("#up").attr('title', 'Otvori formu za izmjenu podataka primke');
                             var status_primke = $('#st').text();
                             var primka_id = $('#primka_id').text();
                             var status = $('select').val();
-
-                            if (status === "Popravak završen u jamstvu" || status === "Popravak završen van jamstva" || status === "Stranka odustala od popravka") {
+                            var trazi = status_primke.substring(0,12);
+                            // ZATVARANJE NALOGA
+                            if (status === "Popravak završen u jamstvu" || status === "Popravak završen van jamstva" || status === "Stranka odustala od popravka" || status === "Uređaj zamijenjen novim" || status === "Odobren povrat novca") {
                                 $.post("json/rma/zatvori.php", {"id": rnid, "status": status, "popravak": $('#inputPopravak').val(), "napomena": $('#inputNapomena').val(), "naplata": $("#inputNaplata").val(), "rnOS": $("#inputrnOS").val(), "nazivOS": $('#inputOSnaziv').val()});
-                                $.post("json/primka/primkaStatusUpdate.php", {"status": "Završen popravak", "id": primka_id}, function () {
+                              //AKO JE NALOG POSLAN IZ CENTRA , VRATI U CENTAR 
+                            if(trazi === "Poslano u CS") { 
+                                $.post("json/primka/primkaStatusUpdate.php", {"status": status+ " - vraćeno u centar", "id": primka_id}, function () {
                                     window.location = "rma.php?rma=" + rnid;
                                     
+                                                upisrn(rnid);
+                                                upisprik(rnid);
+                                                
+                                                var ruc = window.open('rucne.php?primka='+primka_id, '_blank');
+                                                var pre = window.open('pregled.php?primka='+primka_id, '_blank');
+                                                    if (ruc) {
+                                                        //Browser has allowed it to be opened
+                                                        ruc.focus();
+                                                        pre.focus();
+                                                    } else {
+                                                        //Browser has blocked it
+                                                        alert('Molim Vas, omogućite prikaz skočnih prozora');
+                                                    }
+                                });
+                            }else{
+                                            
+                                           $.post("json/primka/primkaStatusUpdate.php", {"status": status, "id":primka_id}, function(){
+                                                
+                                                upisrn(rnid);
+                                                upisprik(rnid);
                                                 var pre = window.open('pregled.php?primka='+primka_id, '_blank');
                                                     if (pre) {
                                                         //Browser has allowed it to be opened
@@ -279,9 +303,17 @@ $("#up").attr('title', 'Otvori formu za izmjenu podataka primke');
                                                         //Browser has blocked it
                                                         alert('Molim Vas, omogućite prikaz skočnih prozora');
                                                     }
-                                });
 
-                            } else if (status === "Poslano u OS") {
+                                            });
+                                        }
+
+                            } 
+            // KRAJ ZATVARANJA NALOGA    
+            
+            //AŽURIRANJE NALOGA
+            else{   
+                // SLANJE U OS
+                    if (status === "Poslano u OS") {
                                 // PROVJERA DA LI JE VEĆ POSLANA REKLAMACIJA
                                 if ($('#poslano').text()) {
                                     $.post("json/rma/azuriraj.php", {"id": rnid, "status": status, "popravak": $('#inputPopravak').val(), "napomena": $('#inputNapomena').val(), "naplata": $("#inputNaplata").val(), "rnOS": $("#inputrnOS").val(), "nazivOS": $('#inputOSnaziv').val()});
@@ -290,18 +322,43 @@ $("#up").attr('title', 'Otvori formu za izmjenu podataka primke');
                                     $.post("json/rma/posalji.php", {"id": rnid, "status": status, "popravak": $('#inputPopravak').val(), "napomena": $('#inputNapomena').val(), "naplata": $("#inputNaplata").val(), "rnOS": $("#inputrnOS").val(), "nazivOS": $('#inputOSnaziv').val()});
 
                                 }
-                                $.post("json/primka/primkaStatusUpdate.php", {"status": status, "id": primka_id}, function () {
+                                // kraj PROVJERA DA LI JE VEĆ POSLANA REKLAMACIJA
+                                //PROVJERA DA LI JE PRIMKA POSLANA U ROVINJ IZ DR CENTRA
+                                if(trazi === "Poslano u CS"){
+                                    $.post("json/primka/primkaStatusUpdate.php", {"status": "Poslano u CS - Rovinj / "+status, "id": primka_id}, function () {
                                     window.location = "rma.php?rma=" + rnid;
                                 });
+                                }
+                                // KRAJ PROVJERA DA LI JE PRIMKA POSLANA U ROVINJ IZ DR CENTRA
+                                else{
+                                    $.post("json/primka/primkaStatusUpdate.php", {"status": status, "id": primka_id}, function () {
+                                    window.location = "rma.php?rma=" + rnid;
+                                });
+                                }
+                                
 
-                            } else {
+                            } // KRAJ SLANJA U OS 
+                            else {
                                 $.post("json/rma/azuriraj.php", {"id": rnid, "status": status, "popravak": $('#inputPopravak').val(), "napomena": $('#inputNapomena').val(), "naplata": $("#inputNaplata").val(), "rnOS": $("#inputrnOS").val(), "nazivOS": $('#inputOSnaziv').val()});
-                                $.post("json/primka/primkaStatusUpdate.php", {"status": status, "id": primka_id}, function () {
+                                
+                                //PROVJERA DA LI JE PRIMKA POSLANA U ROVINJ IZ DR CENTRA
+                                if(trazi === "Poslano u CS"){
+                                    $.post("json/primka/primkaStatusUpdate.php", {"status": "Poslano u CS - Rovinj / "+status, "id": primka_id}, function () {
                                     window.location = "rma.php?rma=" + rnid;
                                 });
+                                }
+                                // KRAJ PROVJERA DA LI JE PRIMKA POSLANA U ROVINJ IZ DR CENTRA
+                                else{
+                                    $.post("json/primka/primkaStatusUpdate.php", {"status": status, "id": primka_id}, function () {
+                                    window.location = "rma.php?rma=" + rnid;
+                                });
+                                }
 
                             }
-                        } else {
+            }// KRAJ AŽURIRANJA NALOGA
+                        
+                        } //kraj confirm-a
+                        else {
                         }
 
 
