@@ -20,7 +20,8 @@ class djelatnik extends osoba{
     }
     
     public function chkLogin($user, $pass) {
-
+        $pass = hash("sha256", $pass);
+        
         $query = $this->mysqli->prepare("SELECT djelatnik_id, ime, prezime, odjel, p_centar FROM djelatnici WHERE username = ? AND lozinka = ?");
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
@@ -36,10 +37,10 @@ class djelatnik extends osoba{
                 $query->fetch();
 
                 $expire = time() + 60 * 60 * 999999;
-                setcookie("user", "$this->ime $this->prezime", time()+86400, '/', '', '', TRUE);
-                setcookie("id", $this->id, time()+86400, '/', '', '', TRUE);
-                setcookie("odjel", $this->odjel, time()+86400, '/', '', '', TRUE);
-                setcookie("centar", $this->p_centar, time()+86400, '/', '', '', TRUE);
+                setcookie("user", "$this->ime $this->prezime", time()+3600, '/', '', '', TRUE);
+                setcookie("id", $this->id, time()+3600, '/', '', '', TRUE);
+                setcookie("odjel", $this->odjel, time()+3600, '/', '', '', TRUE);
+                setcookie("centar", $this->p_centar, time()+3600, '/', '', '', TRUE);
 
                 $query->close();
                 header('Location: ./primke.php');
