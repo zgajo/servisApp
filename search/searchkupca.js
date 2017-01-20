@@ -6,8 +6,9 @@ var left = $('#sk').position().left;
                 $('#search_result_kupac').css('top', top + 27).css('width', width+100 ).css('z-index', 4);
 
                 //  PRETRAGA ZA KUPCEM
-                $('#search_kupca').keyup(function () {
+                $('#search_kupca').keyup(function (e) {
                     var value = $(this).val();
+                     
 
                     if (value != '') {
                          $('#searchk').hide();
@@ -33,7 +34,10 @@ var left = $('#sk').position().left;
                             
                             $('#search_result_kupac').html(output);
                             
+                            
                         }).fail(function(){$('#search_result_kupac').html('Nema rezultata');});
+                        
+                       
                         
                     } else {
                         $('#searchk').show();
@@ -61,3 +65,4 @@ var left = $('#sk').position().left;
 
                     
                 });
+                

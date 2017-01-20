@@ -156,7 +156,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     dataType: 'json',
                     contentType: "application/json; charset=utf-8",
                     success: function () {
-                        if (odjel === "Servis") {
+                        if (odjel === "Servis" || odjel === "Reklamacije" ) {
                             $('#svePoslanePrimke').DataTable({
                                 "ajax": {
                                     "url": "json/primka/svePoslanePrimke.php",
@@ -165,7 +165,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 "columns": [
                                     {data: "primka_id", "render": function (data, type, row, meta) {
                                             var output = "";
-                                            if (odjel === "Servis")
+                                            if (odjel === "Servis" || odjel === "Reklamacije")
                                                 output += '<a target="_blank" id="novi_rn" style="margin-right:15px" class="glyphicon glyphicon-share" href="rn.php?action=novi_rn&primka_id=' + row.primka_id + '"></a>';
                                              output += '<a target="_blank" id="novi_rma" class="glyphicon glyphicon-random" href="rma.php?action=novi_rma&poslano=Da&primka_id=' + row.primka_id + '"></a>';
                                             return output;
@@ -345,7 +345,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <?php } else { ?>
             <script>
                 $("#uk").attr('title', 'Otvori formu za izmjenu podataka kupca');
-$("#up").attr('title', 'Otvori formu za izmjenu podataka primke');
+                $("#up").attr('title', 'Otvori formu za izmjenu podataka primke');
                 $(document).ready(function () {
 
                     var pid = <?php echo $_GET['primka'] ?>
@@ -393,13 +393,22 @@ $("#up").attr('title', 'Otvori formu za izmjenu podataka primke');
                                 
                                  var st = pp[0].p_status;
 
-
+                                if(st.substring(0,12) !="Poslano u CS"){
                                 // POSTAVLJANJE ZA SELECTED
                                 var o = new Option(st, st);
                                 /// jquerify the DOM object 'o' so we can use the html method
                                 $(o).html(st);
                                 $("#status_primke").append(o);
                                 $('#status_primke option[value="' + st + '"]').attr("selected", true);
+                            }
+                            else{
+                                var o = new Option(st, st);
+                                /// jquerify the DOM object 'o' so we can use the html method
+                                $(o).html(st);
+                                $("#status_primke").append(o);
+                                $('#status_primke option[value="' + st + '"]').attr("selected", true);
+                               $("#status_primke").prop("disabled", true); 
+                            }
                                     
                                 $('#inputTvrtka').val(pp[0].tvrtka);
                                 $('#inputIme').val(pp[0].ime);
@@ -461,9 +470,9 @@ $("#up").attr('title', 'Otvori formu za izmjenu podataka primke');
                                                     '<address>' +
                                                     '<i><strong>Početak rada: </strong></i>' + [rnp.getDate(), rnp.getMonth() + 1, rnp.getFullYear()].join('.') + ' /  ' + [(rnp.getHours() < 10 ? '0' : '') + rnp.getHours(), (rnp.getMinutes() < 10 ? '0' : '') + rnp.getMinutes()].join(':') + '<br>' +
                                                     '<i><strong>Rad započeo: </strong></i></strong>' + rn[i].d1ime + ' ' + rn[i].d1prezime + '<br>' +
-                                                    '<i><strong>Opis popravka: </strong></i></strong><hr>';
+                                                    '<i><strong>Opis popravka: </strong></i></strong>';
                                             output += (rn[i].opis) ? rn[i].opis : "";
-                                            output += "<i><strong>Status radnog naloga: </strong></i>"; output += (rn[i].status) ?rn[i].status:'' ;
+                                            output += "<hr><i><strong>Status radnog naloga: </strong></i>"; output += (rn[i].status) ?rn[i].status:'' ;
                                             output += '<hr>' +
                                                     '<i><strong>Naplatiti: </strong></i></strong>';
                                             output += (rn[i].naplata) ? rn[i].naplata : "";

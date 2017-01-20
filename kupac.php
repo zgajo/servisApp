@@ -147,6 +147,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <th>Opis kvara</th>
                       </tr>
                     </thead>
+                    <tbody></tbody>
                   </table>
                 </div><!-- /.box-body -->
                                 </div><!-- /.tab-pane -->
@@ -209,7 +210,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     "columns": [
                          
                         {"data": "primka_id","render": function(data,type,row,meta) { // render event defines the markup of the cell text 
-                            var a = '<a style="margin-right:10px" href="pregled.php?primka='+row.primka_id +'"><i style="display:none" class="fa  fa-file-text-o"></i></a>\n\
+                            var a = '<a name="'+row.primka_id+'" style="margin-right:10px" href="pregled.php?primka='+row.primka_id +'"><i style="display:none" class="fa  fa-file-text-o"></i></a>\n\
                              ' + row.primka_id +''; // row object contains the row data
                             return a;
                         }},
@@ -295,8 +296,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 $( "#example1" ).on("mouseout", "tr",function() {
                     $( this ).find('i').hide();
                 } );
-
-
+                
+                $('#example1').on("click", "tbody tr td:first-child", function(){
+                    window.open("pregled.php?primka="+$(this).find("a").attr("name"));
+                })
 
             });
 

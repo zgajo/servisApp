@@ -42,15 +42,15 @@
                         <table id="svePoslanePrimke" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <?php if ($_COOKIE['odjel'] == "Servis") { ?><th style="text-align: center">Započni servis</th><?php } ?>
+                                    <?php if ($_COOKIE['odjel'] == "Servis" || $_COOKIE['odjel'] == "Reklamacije" ) { ?><th style="text-align: center">Započni servis</th><?php } ?>
                                         <th>Primka</th>
-                                        <?php if ($_COOKIE['odjel'] == "Servis") { ?><th>Radni nalog</th><?php } ?>
+                                        <?php if ($_COOKIE['odjel'] == "Servis" || $_COOKIE['odjel'] == "Reklamacije") { ?><th>Radni nalog</th><?php } ?>
                                         <th>Uređaj</th>
                                         <th>Serijski</th>
                                         <th>Stranka</th>
                                         <th>Datum zaprimanja</th>
                                         <th>Status primke</th>
-                                        <?php if ($_COOKIE['odjel'] == "Servis") { ?><th>Poslano iz</th><?php } ?>
+                                        <?php if ($_COOKIE['odjel'] == "Servis" || $_COOKIE['odjel'] == "Reklamacije") { ?><th>Poslano iz</th><?php } ?>
                                     
                                 </tr>
                             </thead>

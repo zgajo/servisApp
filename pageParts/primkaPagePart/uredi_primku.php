@@ -75,14 +75,15 @@
 
 
                 </div><!-- /.box-body -->
+                
                 <div class="box-footer">
                     <div id="pregledFooter" >
                         <a  id="azuriraj_status"  name="submit"  class="btn btn-sm btn-info btn-flat pull-right">Izmijeni status</a> 
-                        <a id="btnNovo" style="margin-left: 5px; margin-right: 5px;" class="btn btn-sm btn-info btn-flat pull-left" >Stvori novo</a>
+                       <!-- <a id="btnNovo" style="margin-left: 5px; margin-right: 5px;" class="btn btn-sm btn-info btn-flat pull-left" >Stvori novo</a>-->
                     </div>
                     
                     
-                </div>
+                </div><!--
                 <div  id="novo" style="display: none" class="box-footer">
                            
                    <a class="btn btn-app"  href="rn.php?action=novi_rn&primka_id=<?php  echo $_GET['primka']?>" style=" float: left; ">
@@ -103,7 +104,7 @@
                     
                     
                 </div>
-
+-->
             </div><!-- /.box -->
             <!-- general form elements disabled -->
 

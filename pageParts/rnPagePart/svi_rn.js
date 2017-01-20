@@ -1,5 +1,4 @@
-
-            
+           
          
                               
                               $('#sviRN').on("mouseover", "tr", function(){
@@ -8,6 +7,7 @@
                               $('#sviRN').on("mouseout", "tr", function(){
                                  $(this).find('i').hide();
                               });
+                              
              
          //    LISTANJE SVIH OTVORENIH PRIMKI
                   $.ajax({
@@ -82,7 +82,7 @@
                                                                     if (diffDays > 14)
                                                                         var sty = "label label-danger";
 
-                                                                    var a = '<a style="cursor: default;" class="' + sty + '">' + row.primka + '</a>'; // row object contains the row data
+                                                                    var a = '<a name="'+row.id+'" style="cursor: default;" class="' + sty + '">' + row.primka + '</a>'; // row object contains the row data
                                                                     return a;
                                                                 }},
                                                             {"data": "naziv"},
@@ -102,4 +102,8 @@
             
             $('#sviRN').on("mouseover", "#uredi_rn",function(){
                 $(this).attr("title", "Uredi radni nalog");
+            })
+            
+            $('#sviRN').on("click", " tbody tr td:first-child", function(){
+                window.open("rn.php?radni_nalog="+$(this).find('a').attr("name"), "_blank");
             })
