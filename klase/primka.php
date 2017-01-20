@@ -36,7 +36,7 @@ class primka{
     
     
     public function svePrimke() {
-        $query = $this->mysqli->query("SELECT p.*, s.stranka_id, s.ime as s_ime, s.prezime as s_prezime, s.tvrtka FROM primka p 
+        $query = $this->mysqli->prepare("SELECT p.*, s.stranka_id, s.ime as s_ime, s.prezime as s_prezime, s.tvrtka FROM primka p 
                                         LEFT JOIN stranka s ON  p.stranka_id = s.stranka_id
                                         WHERE p.status != 'Kupac preuzeo' AND p.status != 'Ekološki zbrinuto' 
                                         AND p.status NOT LIKE  'Poslano u CS%'  
@@ -46,11 +46,28 @@ class primka{
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
         }
-        while($row = $query->fetch_object()){
-            $result[]  = $row;
-        }
+        if($query->execute()){
+            $meta = $query->result_metadata(); 
+            while ($field = $meta->fetch_field()) 
+        { 
+            $params[] = &$row[$field->name]; 
+        } 
+
+        call_user_func_array(array($query, 'bind_result'), $params); 
+
+        while ($query->fetch()) { 
+            foreach($row as $key => $val) 
+            { 
+                $c[$key] = $val; 
+            } 
+            $result[] = $c; 
+        } 
         
+        $query->close(); 
         return $result;
+
+        
+        } 
     }
     
     public function svePrimkeRNServis() {
@@ -66,8 +83,8 @@ class primka{
         }
         
         return $result;
-    }
-    
+    } 
+    /*   Mislim da ovo više ničemu ne služi
     public function svePrimkeRN() {
         $query = $this->mysqli->query("SELECT p.*, s.ime as s_ime, s.prezime as s_prezime, s.tvrtka FROM primka p 
                                         LEFT JOIN stranka s ON  p.stranka_id = s.stranka_id
@@ -83,10 +100,10 @@ class primka{
         
         return $result;
     }
-    
+    */
     
        public function svePoslanePrimke() {
-        $query = $this->mysqli->query("SELECT p.*, s.ime as s_ime, s.prezime as s_prezime, s.tvrtka FROM primka p 
+        $query = $this->mysqli->prepare("SELECT p.*, s.ime as s_ime, s.prezime as s_prezime, s.tvrtka FROM primka p 
                                         LEFT JOIN stranka s ON  p.stranka_id = s.stranka_id
                                         WHERE p.status != 'Kupac preuzeo' AND   p.status != 'Ekološki zbrinuto' AND 
                                        ( p.status LIKE 'Poslano u CS - Rovinj%') AND 
@@ -95,11 +112,28 @@ class primka{
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
         }
-        while($row = $query->fetch_object()){
-            $result[]  = $row;
-        }
+        if($query->execute()){
+            $meta = $query->result_metadata(); 
+            while ($field = $meta->fetch_field()) 
+        { 
+            $params[] = &$row[$field->name]; 
+        } 
+
+        call_user_func_array(array($query, 'bind_result'), $params); 
+
+        while ($query->fetch()) { 
+            foreach($row as $key => $val) 
+            { 
+                $c[$key] = $val; 
+            } 
+            $result[] = $c; 
+        } 
         
+        $query->close(); 
         return $result;
+
+        
+        } 
     }
     
     

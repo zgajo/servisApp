@@ -194,7 +194,7 @@
                   
                   // UNOS PRIMKE
                    
-                   $('#submit').click(function (e){
+                   $('#submit').on("click",function (e){
                       e.preventDefault();
                       
                       //kupac
@@ -231,23 +231,17 @@
                           if(idkupca === '') {
                               if (confirm('Jeste li sigurni da želite unijeti upisane podatke?')) {
                                 $.ajax({
+                                    async: false,
                                  type: 'POST',
                                  url: "json/primka/insertPrimka.php",
                                  data: {"sifra":sifra,"brand":brand, "tip":tip, "naziv":naziv, "serijski": serijski, "opis":opis, "prilozeno":prilozeno, "racun":racun, "dk": dat_k, "stranka_id": idkupca,
                                  "tvrtka" : tvrtka, "ime":ime, "prezime":prezime, "adresa" : adresa, "grad":grad, "post_broj": pb, "kontakt_broj":kontakt, "email" : email},
                                  success: function (data) {
                                      var primkaID = JSON.parse(JSON.stringify(data));
-                                     window.location.href = "primke.php";
-                                        var win = window.open('ispis/potvrda_zaprimanja.php?primka='+primkaID, '_blank');
-                                        if (win) {
-                                            //Browser has allowed it to be opened
-                                            win.focus();
-                                        } else {
-                                            //Browser has blocked it
-                                            alert('Molim Vas, omogućite prikaz skočnih prozora');
-                                        }
-                                         
                                         
+                                        window.open('ispis/potvrda_zaprimanja.php?primka='+primkaID, '_blank',   "location=1,status=1,scrollbars=1, resizable=1, directories=1, toolbar=1, titlebar=1, width=800, height=800");
+                                        
+                                       window.location.href = "primke.php";
                                     },
                                     
                                     error: function (e) {
@@ -262,21 +256,16 @@
                           else{ 
                               if (confirm('Jeste li sigurni da želite unijeti upisane podatke?')) {
                               $.ajax({
+                                  async: false,
                                  type: 'POST',
                                  url: "json/primka/insertPrimka.php",
                                  data: {"sifra":sifra,"brand":brand, "tip":tip, "naziv":naziv, "serijski": serijski, "opis":opis, "prilozeno":prilozeno, "racun":racun, "dk": dat_k, "stranka_id": idkupca },
                                  success: function (data) {
                                      var primkaID = JSON.parse(JSON.stringify(data));
-                                     window.location.href = "primke.php";
-                                        var win = window.open('ispis/potvrda_zaprimanja.php?primka='+primkaID, '_blank');
-                                        if (win) {
-                                            //Browser has allowed it to be opened
-                                            win.focus();
-                                        } else {
-                                            //Browser has blocked it
-                                            alert('Molim Vas, omogućite prikaz skočnih prozora');
-                                        }
-                                         window.location.href = "primke.php";
+                                     
+                                        window.open('ispis/potvrda_zaprimanja.php?primka='+primkaID, '_blank',   "location=1,status=1,scrollbars=1, resizable=1, directories=1, toolbar=1, titlebar=1, width=800, height=800");
+                                        
+                                       window.location.href = "primke.php";
                                         
                                     },
                                     

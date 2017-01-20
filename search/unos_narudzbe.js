@@ -281,7 +281,8 @@ $.ajax({
     contentType: "application/json; charset=utf-8",
     success: function (nar) {
         console.log(nar);
-        $('#sve_narudzbe').DataTable({
+        if(nar){
+                  $('#sve_narudzbe').DataTable({
 "ajax": {
 "url": "json/narudzbe/sve_otvoreno.php",
         "dataSrc": ""
@@ -311,6 +312,8 @@ $.ajax({
                     }}
         ]
         });
+  
+        }
     }
 })
 

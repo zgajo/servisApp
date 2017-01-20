@@ -155,7 +155,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     type: 'POST',
                     dataType: 'json',
                     contentType: "application/json; charset=utf-8",
-                    success: function () {
+                    success: function (spp) {
+                        if(spp){
                         if (odjel === "Servis" || odjel === "Reklamacije" ) {
                             $('#svePoslanePrimke').DataTable({
                                 "ajax": {
@@ -294,6 +295,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                             });
                         }
+                    }
 
                     },
                     error: function (rn) {

@@ -5,7 +5,8 @@ $.ajax({
     type: 'POST',
     dataType: 'json',
     contentType: "application/json; charset=utf-8",
-    success: function () {
+    success: function (prim) {
+        if(prim){
         $('#sve_primke').DataTable({
             "ajax": {
                 "url": "json/primka/sveOtvorenePrimke.php",
@@ -49,6 +50,7 @@ $.ajax({
 
 
         });
+    }
     },
     error: function (rn) {
     }

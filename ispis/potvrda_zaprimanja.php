@@ -244,6 +244,7 @@
                 
                 function printaj(){
                     window.print();
+                    setTimeout(function(){window.close();}, 1);
                 }
         </script>
             
