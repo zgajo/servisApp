@@ -143,7 +143,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <script src="search/unos_primke.js" type="text/javascript"></script>
 
-            <script src="search/sve_primke.js" type="text/javascript"></script>
             <script>
                 //    LISTANJE SVIH  POSLANIH PRIMKI
                 var centar = "<?php echo $_COOKIE['centar'] ?>";
