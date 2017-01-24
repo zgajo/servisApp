@@ -1,5 +1,5 @@
 <?php
-include_once 'checkLogin.php';
+include_once './checkLogin.php';
 ?>
 
 <!DOCTYPE html>
@@ -210,7 +210,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     "columns": [
                          
                         {"data": "primka_id","render": function(data,type,row,meta) { // render event defines the markup of the cell text 
-                            var a = '<a name="'+row.primka_id+'" style="margin-right:10px" href="pregled.php?primka='+row.primka_id +'"><i style="display:none" class="fa  fa-file-text-o"></i></a>\n\
+                            var a = '<a name="'+row.primka_id+'" style="margin-right:10px" href="#"><i name="pregled" style="display:none" class="fa  fa-file-text-o"></i></a>\n\
                              ' + row.primka_id +''; // row object contains the row data
                             return a;
                         }},
@@ -298,7 +298,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 } );
                 
                 $('#example1').on("click", "tbody tr td:first-child", function(){
-                    window.open("pregled.php?primka="+$(this).find("a").attr("name"));
+                    window.open("pregled.php?primka="+$(this).find("a").attr("name"), "blank");
+                })
+                
+                $('#example1').on("mouseover", " tbody tr td:first", function(){
+                    $(this).attr("title", "Pregled primke");
+
                 })
 
             });

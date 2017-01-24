@@ -85,16 +85,17 @@
                                                                     var a = '<a name="'+row.id+'" style="cursor: default;" class="' + sty + '">' + row.primka + '</a>'; // row object contains the row data
                                                                     return a;
                                                                 }},
+                                                            {"data": "id" ,"render": function(data, type, row, meta){
+                                                            var  output = '<strong>RN. ' +row.id+ '</strong><a name="'+row.id+'"  style="margin-left:10px;" href="rn.php?radni_nalog='+row.id+'"><i id="uredi_rn" style=" display:none;" class="glyphicon glyphicon-pencil"></i></a><br>';
+                                                            return output;
+                                                            }},
                                                             {"data": "naziv"},
                                                             {"data": "serijski"},
                                                             {"data": "s_ime", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
                                                                 var osoba = row.s_ime + ' ' + row.s_prezime;
                                                                 return osoba;
                                                             }},
-                                                            {"data": "id" ,"render": function(data, type, row, meta){
-                                                            var  output = '<strong>RN. ' +row.id+ '</strong><a style="margin-left:10px;" href="rn.php?radni_nalog='+row.id+'"><i id="uredi_rn" style=" display:none;" class="glyphicon glyphicon-pencil"></i></a><br>';
-                                                            return output;
-                                                            }},
+                                                            
                                                             {"data": "status"},
                                                             {"data": "napomena"}
                                                         ], "bDestroy": true
@@ -104,6 +105,15 @@
                 $(this).attr("title", "Uredi radni nalog");
             })
             
+            $('#sviRN').on("mouseover", " tbody tr td:first-child",function(){
+                $(this).attr("title", "Uredi radni nalog");
+            })
+            $('#sviRN').on("mouseover", " tbody tr td:nth-child(2)",function(){
+                $(this).attr("title", "Uredi radni nalog");
+            })
             $('#sviRN').on("click", " tbody tr td:first-child", function(){
+                window.open("rn.php?radni_nalog="+$(this).find('a').attr("name"), "_blank");
+            })
+            $('#sviRN').on("click", " tbody tr td:nth-child(2)", function(){
                 window.open("rn.php?radni_nalog="+$(this).find('a').attr("name"), "_blank");
             })

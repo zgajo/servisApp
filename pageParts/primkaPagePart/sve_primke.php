@@ -309,18 +309,31 @@
 
  <!-- jQuery 2.1.4 -->
         <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+        
+        <!-- DataTables -->
+        <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
 <script>
 
 //    LISTANJE SVIH OTVORENIH PRIMKI
  
 $.ajax({
+    async: false,
     url: "json/primka/sveOtvorenePrimke.php",
     type: 'POST',
     dataType: 'json',
     contentType: "application/json; charset=utf-8",
     success: function (prim) {
+        console.log(prim)
         if(prim){
-        $('#sve_primke').DataTable({
+       tabla.rows.add(prim).draw();
+    }
+    },
+    error: function (rn) {
+    }
+})
+
+var tabla =  $('#sve_primke').DataTable({
             "ajax": {
                 "url": "json/primka/sveOtvorenePrimke.php",
                 "dataSrc": ""
@@ -363,11 +376,6 @@ $.ajax({
 
 
         });
-    }
-    },
-    error: function (rn) {
-    }
-})
 
 $("#sve_primke").on("mouseover", "#uredi", function () {
     
@@ -377,7 +385,7 @@ $("#sve_primke").on("mouseover", "#pregledaj_p", function () {
     $(this).attr('title', 'Pregled / ispis primke');
 })
 $("#sve_primke").on("mouseover", "#ispisi", function () {
-    $(this).attr('title', 'Ispis potvrde primke');
+    $(this).attr('title', 'Ispis primke');
 })
 $("#sve_primke").on("mouseover", "#novi_rn", function () {
     $(this).attr('title', 'Stvori novi radni nalog');
@@ -404,13 +412,13 @@ $("#sve_primke").on("click", "#narudzba", function () {
 
 $("#sve_primke").on("click", "#novi_rma", function () {
     var pr= $(this).attr("name");
-    if(confirm('Stvoriti novi RMA nalog?')) window.location = "rma.php?action=novi_rma&primka_id="+pr;
+    if(confirm('Stvoriti novi RMA nalog?'))  window.open("rma.php?action=novi_rma&primka_id="+pr, "_blank");
     
 });
 
 $("#sve_primke").on("click", "#novi_rn", function () {
     var pr= $(this).attr("name");
-    if(confirm('Stvoriti novi servisni nalog?')) window.location = "rn.php?action=novi_rn&primka_id="+pr;
+    if(confirm('Stvoriti novi servisni nalog?'))  window.open("rn.php?action=novi_rn&primka_id="+pr, "_blank");
     
 });
 

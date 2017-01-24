@@ -114,7 +114,19 @@
                                             });
                                             
                                             
-                          $('#sviRMA').on("mouseover", "#uredi_rma",function(){
+            $('#sviRMA').on("mouseover", "#uredi_rma",function(){
                 $(this).attr("title", "Uredi rma nalog");
             })
             
+            $('#sviRMA').on("mouseover", " tbody tr td:first-child",function(){
+                $(this).attr("title", "Uredi radni nalog");
+            })
+            $('#sviRMA').on("mouseover", " tbody tr td:nth-child(2)",function(){
+                $(this).attr("title", "Uredi radni nalog");
+            })
+            $('#sviRMA').on("click", " tbody tr td:first-child", function(){
+                window.open("rn.php?radni_nalog="+$(this).find('a').attr("name"), "_blank");
+            })
+            $('#sviRMA').on("click", " tbody tr td:nth-child(2)", function(){
+                window.open("rn.php?rma="+$(this).find('a').attr("name"), "_blank");
+            })

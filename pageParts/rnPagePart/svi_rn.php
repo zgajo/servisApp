@@ -8,10 +8,10 @@
                                         <thead>
                                             <tr>
                                                 <th>Primka</th>
+                                                <th>RN</th>
                                                 <th>Uređaj</th>
                                                 <th>Serijski</th>
                                                 <th>Stranka</th>
-                                                <th>Radni nalog</th>
                                                 <th>Status radnog naloga</th>
                                                 <th>Napomena</th>
                                             </tr>

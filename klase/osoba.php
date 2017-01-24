@@ -36,7 +36,7 @@ class djelatnik extends osoba{
                 $query->bind_result($this->id, $this->ime, $this->prezime, $this->odjel ,$this->p_centar );
                 $query->fetch();
 
-                $expire = time() + 60 * 60 * 999999;
+                $expire = time() + 60 * 60;
                 setcookie("user", "$this->ime $this->prezime", time()+3600, '/', '', '', TRUE);
                 setcookie("id", $this->id, time()+3600, '/', '', '', TRUE);
                 setcookie("odjel", $this->odjel, time()+3600, '/', '', '', TRUE);

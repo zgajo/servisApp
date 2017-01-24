@@ -8,10 +8,10 @@
                                         <thead>
                                             <tr>
                                                 <th>Primka</th>
-                                                <th>Stranka</th>
+                                                <th>RMA nalog</th>
                                                 <th>Uređaj</th>
                                                 <th>Serijski</th>
-                                                <th>RMA nalog</th>
+                                                <th>Stranka</th>
                                                 <th>Radni nalog OS-a</th>
                                                 <th>Naziv OS-a</th>
                                                 <th>Poslano u OS</th>
