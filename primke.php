@@ -639,7 +639,7 @@ $("#sve_primke").on("click", "tbody tr", function () {
                                 $('#inputSifra').val(pp[0].sifraUredaja);
                                 $('#inputBrand').val(pp[0].brand);
                                 $('#inputTip').val(pp[0].tip);
-                                $('#inputSerijski').val(pp[0].serijski);
+                                $('#inputSerijski').val(pp[0].serial);
                                 if (dk.getFullYear()!='1970' && dk)
                                     $('#inputDK').val([dk.getDate(), dk.getMonth() + 1, dk.getFullYear()].join('.'));
                                 $('#inputRacun').val(pp[0].racun);

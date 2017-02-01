@@ -1,6 +1,6 @@
 <?php
 
-
+include_once '../checkLogin.php';
 include '../klase/database.php';
 $conn = new database();
 

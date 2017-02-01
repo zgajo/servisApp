@@ -219,7 +219,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             $('#zap').text([dz.getDate(), dz.getMonth() + 1, dz.getFullYear()].join('.') + ' /  ' + [(dz.getHours() < 10 ? '0' : '') + dz.getHours(), (dz.getMinutes() < 10 ? '0' : '') + dz.getMinutes()].join(':'));
                                             $('#po').text(primka[0].pot_ime + ' ' + primka[0].pot_prezime);
                                             $('#nu').text(primka[0].naziv);
-                                            $('#serijski').text(primka[0].serijski);
+                                            $('#serijski').text(primka[0].serial);
                                             $('#brand').text(primka[0].brand);
                                             $('#tip').text(primka[0].tip);
                                             (dk.getFullYear() !== '1970' && dk) ? $('#dk').text() : $('#dk').text([dk.getDate(), dk.getMonth() + 1, dk.getFullYear()].join('.'));
@@ -239,7 +239,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 $('#inputSifra').val(primka[0].sifraUredaja);
                                 $('#inputBrand').val(primka[0].brand);
                                 $('#inputTip').val(primka[0].tip);
-                                $('#inputSerijski').val(primka[0].serijski);
+                                $('#inputSerijski').val(primka[0].serial);
                                 var dk = new Date(primka[0].datumKupnje);
                                 if (dk.getFullYear() != '1970' && dk)
                                     $('#inputDK').val([dk.getDate(), dk.getMonth() + 1, dk.getFullYear()].join('.'));
@@ -422,6 +422,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 "id": idkupca
                             });
                             upisprik(rnid);
+                            upisprik(rnid);
                         $('#upr').show();
                         $('#uredi_kupca').hide();
                         $('#urn').show();
@@ -452,6 +453,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 "ok": opis, "pp": prilozeno, "r": racun, "dk": dat_k, "id": pid
                             });
 
+                           upisprik(rnid);
                            upisprik(rnid);
                         $('#upr').show();
                         $('#uredi_primku').hide();

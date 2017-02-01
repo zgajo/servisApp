@@ -157,8 +157,13 @@ $('#rucna').click(function(){
                         $(document).ready(function (){
                             
                             var rnid = <?php echo $_GET['radni_nalog'] ?>;
+                            
+                            
+                           upisrn();
+                           upisprik();
+                            
                           //        UPIS RADNOG NALOGA
-                        function upisrn(rnid){
+                        function upisrn(){
                                $.post("json/rn/getById.php", {"id":rnid},  function(rn){
                                
                                var pocetak = new Date(rn[0].pocetakRada);
@@ -188,7 +193,7 @@ $('#rucna').click(function(){
                            
                            
                            //       UPIS PRIMKE
-                          function  upisprik(rnid){
+                          function  upisprik(){
                               $.post("json/rn/getById.php", {"id":rnid},  function(rn){
                                   
                                $.get("json/primka/getById.php", {"id": rn[0].primka_id}, function(primka){
@@ -221,7 +226,7 @@ $('#rucna').click(function(){
                                      $('#zap').text([dz.getDate(), dz.getMonth()+1, dz.getFullYear()].join('.') +' /  '+[(dz.getHours()<10?'0':'') + dz.getHours(), (dz.getMinutes()<10?'0':'') + dz.getMinutes()].join(':'));
                                      $('#po').text(primka[0].pot_ime + ' ' + primka[0].pot_prezime);
                                      $('#nu').text(primka[0].naziv);
-                                     $('#serijski').text(primka[0].serijski);
+                                     $('#serijski').text(primka[0].serial);
                                      $('#brand').text(primka[0].brand);
                                      $('#tip').text(primka[0].tip);
                                      (dk.getFullYear()=='1970') ? $('#dk').text() : $('#dk').text([dk.getDate(), dk.getMonth()+1, dk.getFullYear()].join('.'));
@@ -242,7 +247,7 @@ $('#rucna').click(function(){
                                 $('#inputSifra').val(primka[0].sifraUredaja);
                                 $('#inputBrand').val(primka[0].brand);
                                 $('#inputTip').val(primka[0].tip);
-                                $('#inputSerijski').val(primka[0].serijski);
+                                $('#inputSerijski').val(primka[0].serial);
                                 var dk = new Date(primka[0].datumKupnje);
                                 if (!isNaN(dk.getDate()) && dk.getFullYear()!='1970')
                                     $('#inputDK').val([dk.getDate(), dk.getMonth() + 1, dk.getFullYear()].join('.'));
@@ -259,8 +264,6 @@ $('#rucna').click(function(){
                            
                            
                            
-                           upisrn(rnid);
-                           upisprik(rnid);
                            
                             //Ažuriranje upita
                             $('#azuriraj_status').on("click", this, function(){
@@ -290,6 +293,8 @@ $('#rucna').click(function(){
                                                 
                                                 upisrn(rnid);
                                                 upisprik(rnid);
+                                                 upisrn(rnid);
+                                                upisprik(rnid);
                                                 
                                                 var ruc = window.open('rucne.php?primka='+primka_id, '_blank');
                                                 var pre = window.open('pregled.php?primka='+primka_id, '_blank');
@@ -309,6 +314,8 @@ $('#rucna').click(function(){
                                            $.post("json/primka/primkaStatusUpdate.php", {"status": status, "id":primka_id}, function(){
                                                 
                                                 upisrn(rnid);
+                                                upisprik(rnid);
+                                                 upisrn(rnid);
                                                 upisprik(rnid);
                                                 var pre = window.open('pregled.php?primka='+primka_id, '_blank');
                                                     if (pre) {
@@ -344,12 +351,16 @@ $('#rucna').click(function(){
                                                 
                                                 upisrn(rnid);
                                                 upisprik(rnid);
+                                                 upisrn(rnid);
+                                                upisprik(rnid);
 
                                             });
                                         }else{
                                            $.post("json/primka/primkaStatusUpdate.php", {"status": status, "id":primka_id}, function(){
                                                 
                                                 upisrn(rnid);
+                                                upisprik(rnid);
+                                                 upisrn(rnid);
                                                 upisprik(rnid);
 
                                             });
@@ -368,7 +379,7 @@ $('#rucna').click(function(){
                     });
 
                     $('#ponistiK').click(function () {
-                        upisprik(rnid);
+                        upisprik();
                         $('#upr').show();
                         $('#uredi_kupca').hide();
                         $('#urn').show();
@@ -382,7 +393,7 @@ $('#rucna').click(function(){
                     });
 
                     $('#ponistiUK').click(function () {
-                        upisprik(rnid);
+                        upisprik();
                         $('#upr').show();
                         $('#uredi_primku').hide();
                         $('#urn').show();
@@ -415,7 +426,8 @@ $('#rucna').click(function(){
                                 "email": email,
                                 "id": idkupca
                             });
-                            upisprik(rnid);
+                            upisprik();
+                            upisprik();
                         $('#upr').show();
                         $('#uredi_kupca').hide();
                         $('#urn').show();
@@ -445,8 +457,9 @@ $('#rucna').click(function(){
                                 "su": sifra, "b": brand, "t": tip, "n": naziv, "s": serijski,
                                 "ok": opis, "pp": prilozeno, "r": racun, "dk": dat_k, "id": pid
                             });
+                            upisprik();
+                            upisprik();
 
-                         upisprik(rnid);  
                         $('#upr').show();
                         $('#uredi_primku').hide();
                         $('#urn').show();
