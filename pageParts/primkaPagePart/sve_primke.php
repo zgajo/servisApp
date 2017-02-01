@@ -202,7 +202,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="inputBrand" class="col-sm-2 control-label">Brand</label>
+                                        <label for="inputBrand" class="col-sm-2 control-label"  id="required">Brand</label>
                                         <div class="col-sm-10">
                                             <input class="form-control" id="inputBrand" placeholder="Toshiba, Lenovo, Epson ..." type="text" name="brand">
                                         </div>

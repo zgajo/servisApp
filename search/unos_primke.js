@@ -196,6 +196,12 @@
                    
                    $('#submit').on("click",function (e){
                       e.preventDefault();
+                      $('#inputIme').removeAttr( 'style' );
+                      $('#inputPrezime').removeAttr( 'style' );
+                      $('#inputKontakt').removeAttr( 'style' );
+                      $('#inputNaziv').removeAttr( 'style' );
+                      $('#inputPK').removeAttr( 'style' );
+                      $('#inputBrand').removeAttr( 'style' );
                       
                       //kupac
                       var tvrtka = $('#inputTvrtka').val();
@@ -220,7 +226,14 @@
                       var prilozeno = $('#inputPP').val();
                       
                       //  UKOLIKO SU PRAZNA BITNA POLJA
-                      if(ime === '' || prezime === '' || kontakt === '' || pk === '' || naziv === '') {
+                      if(ime === '' || prezime === '' || kontakt === '' || pk === '' || naziv === '' || brand === '') {
+                         if(ime ==='') $('#inputIme').css('border', '2px solid red');
+                          if(prezime ==='') $('#inputPrezime').css('border', '2px solid red');
+                         if(kontakt ==='')  $('#inputKontakt').css('border', '2px solid red');
+                         if(pk ==='')  $('#inputPK').css('border', '2px solid red');
+                         if(naziv ==='')  $('#inputNaziv').css('border', '2px solid red');
+                         if(brand ==='')  $('#inputBrand').css('border', '2px solid red');
+                         
                           alert('Molim vas da ispunite sva obavezna polja');
                       }
                       
