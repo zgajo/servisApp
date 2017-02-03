@@ -40,8 +40,51 @@ class djelatnik extends osoba{
                 setcookie("user", "$this->ime $this->prezime", time()+3600, '/', '', '', TRUE);
                 setcookie("id", $this->id, time()+3600, '/', '', '', TRUE);
                 setcookie("odjel", $this->odjel, time()+3600, '/', '', '', TRUE);
+                
+               
+                
+                // KORISTITI UNUTAR EUROTRADE
+                 $host= gethostname();
+                $ip = gethostbyname($host);
+                $ip = substr($ip, 8,2);
+                
+                switch ($ip){
+                    
+                    case 10:
+                        setcookie("centar", "Zagreb", time()+3600, '/', '', '', TRUE);
+                        break;
+                    case 20:
+                        setcookie("centar", "Split", time()+3600, '/', '', '', TRUE);
+                        break;
+                    case 30:
+                        setcookie("centar", "Rijeka Andrea", time()+3600, '/', '', '', TRUE);
+                        break;
+                    case 40:
+                        setcookie("centar", "Varaždin", time()+3600, '/', '', '', TRUE);
+                        break;
+                    case 50:
+                        setcookie("centar", "Osijek", time()+3600, '/', '', '', TRUE);
+                        break;
+                    case 60:
+                        setcookie("centar", "Sisak", time()+3600, '/', '', '', TRUE);
+                        break;
+                    case 70:
+                        setcookie("centar", "Pula", time()+3600, '/', '', '', TRUE);
+                        break;
+                    case 80:
+                        setcookie("centar", "Rijeka Korzo", time()+3600, '/', '', '', TRUE);
+                        break;
+                    case 90:
+                        setcookie("centar", "Rovinj", time()+3600, '/', '', '', TRUE);
+                        break;
+                    
+                }
+                //  * KRAJ KORISTITI UNUTAR EUROTRADEA
+                
+                /*  KORISTITI VAN EUROTRADEA
                 setcookie("centar", $this->p_centar, time()+3600, '/', '', '', TRUE);
-
+                */
+                
                 $query->close();
                 header('Location: ./primke.php');
                 exit();
