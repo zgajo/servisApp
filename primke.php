@@ -218,7 +218,7 @@ $("#sve_primke").on("mouseover", "#pregledaj_p", function () {
     $(this).attr('title', 'Pregled / ispis primke');
 })
 $("#sve_primke").on("mouseover", "#ispisi", function () {
-    $(this).attr('title', 'Ispis primke');
+    $(this).attr('title', 'Ispis potvrde rada');
 })
 $("#sve_primke").on("mouseover", "#novi_rn", function () {
     $(this).attr('title', 'Stvori novi radni nalog');
@@ -321,11 +321,11 @@ $("#sve_primke").on("click", "tbody tr", function () {
                    '<a class="btn btn-app" id="novi_rma" name="'+ $(this).find('#primka_id').attr('name') +'" style=" float: right; height:initial; background-color:ivory  ">'+
                         '<i class="glyphicon glyphicon-random" style="font-size:small; display:inline;"></i> RMA nalog'+
                     '</a>  '  +
-                    
+                    <?php if($_COOKIE['odjel'] == "Servis") { ?>
                     '<a  class="btn btn-app"  id="narudzba" name="'+ $(this).find('#primka_id').attr('name') +'" style=" float: right; height:initial; background-color:ivory ">'+
                        ' <i id="str_id" name="'+ $(this).find('#stranka_id').attr('name')+'" class="fa fa-reorder" style="font-size:small; display:inline;"></i> Narudžba'+
                     '</a>'+
-                         
+                          <?php } ?>   
                     '<a class="btn btn-app" id="rucne" name="'+ $(this).find('#primka_id').attr('name') +'" style=" float: right; height:initial; background-color:ivory ">'+
                    '     <i class="fa fa-send" style="font-size:small; display:inline;"></i> Ručna izdatnica'+
                    ' </a>'+

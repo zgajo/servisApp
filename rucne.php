@@ -18,7 +18,11 @@ include_once './checkLogin.php';
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         <!-- Theme style -->
         <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
-        
+        <style>
+            .inputSyle{
+                display: inline; width: 80%; margin-left: 5px;float: right; 
+            }
+        </style>
         
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -31,7 +35,10 @@ include_once './checkLogin.php';
     <body>
         <div class="wrapper">
             <!-- Main content -->
-            <section class="invoice" style="margin-left: 30px; margin-right: 30px">
+            <section class="invoice" style="padding-top: 0px;">
+                <div style="margin-left: auto; margin-right: auto; padding-left: 0px; padding-right: 0px;">
+                    
+               
                 <!-- title row -->
                 <div class="no-print" style="font-size: 20px; background-color: #d80200; color: white; width: 250px "><input id="op" type="checkbox" style="margin-left: 5px" > Dodati: Oprez - lomljivo</div>
                 
@@ -57,11 +64,11 @@ include_once './checkLogin.php';
 
                 <div class="row" style=" width: 95%;  margin-top: 50px;  margin-left: 2px; margin-right: 2px "> 
                     <p style="margin-bottom: 2px"  class="lead"><b style=" font-size: 17px">PRIMA:</b></p>
-                    <div class="col-xs-12" style="border: 1px solid black; font-size: 16px ">
-                        <b style="font-size: 17px"><p style="display: inline; float: left">Tvrtka: </p><input id="pt" style="display: inline; border: none; font-size: 17px; width: 90%; margin-left: 5px; float: right"></input></b><br><br>
-                        <b><strong style="display: inline; float: left">Adresa: </strong><input id="pa"  style="display: inline; border: none;  width: 90%; margin-left: 5px; float: right"></input></b><br>
-                        <b><strong style="display: inline; float: left">Grad: </strong><input id="pg" style="display: inline; border: none;  width: 90%; margin-left: 5px;float: right"></input></b><br>
-                        <b><strong style="display: inline; float: left">Kontakt: </strong><input id="pb" style="display: inline;  border: none; width: 90%; margin-left: 5px;float: right"></input></b><br>
+                    <div class="col-xs-12" style="border: 1px solid black; font-size: 16px; padding-bottom: 1px; padding-top: 1px ">
+                        <div style="font-size: 17px; height: 28px"><strong style="display: inline; float: left">Tvrtka: </strong><input id="pt"  class="inputSyle"></input></div><br>
+                        <div style="height: 28px; margin-bottom: 1px; margin-top: 1px"><strong style="display: inline; float: left">Adresa: </strong><input id="pa"   class="inputSyle"></input></div>
+                        <div style="height: 28px; margin-bottom: 1px; margin-top: 1px"><strong style="display: inline; float: left">Grad: </strong><input id="pg" class="inputSyle"></input></div>
+                        <div style="height: 28px; margin-bottom: 1px; margin-top: 1px"><strong style="display: inline; float: left">Kontakt: </strong><input id="pb"  class="inputSyle"></input></div>
                         
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -101,7 +108,7 @@ include_once './checkLogin.php';
 
                 <div class="col-xs-12" style="margin-top: 40px; width: 95%; ">
                     <div style="float: left">
-                        <b>Zatražio: </b><p id="z"></p>
+                        <b>Zatražio: </b><p id="z"></p><br>
                         <b>Zaprimio skladištar: </b><p></p>
                     </div>
                     <div style="float: right">
@@ -115,7 +122,7 @@ include_once './checkLogin.php';
                                 <a  class="btn btn-default" onclick="printaj()"><i class="fa fa-print"></i> Print</a>
                             </div>
                         </div>
-
+ </div>
             </section><!-- /.content -->
         </div><!-- ./wrapper -->
         <!-- jQuery 2.1.4 -->
@@ -128,7 +135,15 @@ include_once './checkLogin.php';
         <script src="plugins/select2/select2.full.min.js"></script>
         <script>
                 function printaj(){
+                    $("#pg").css("border", "none");
+                    $("#pt").css("border", "none");
+                    $("#pa").css("border", "none");
+                    $("#pb").css("border", "none");
                     window.print();
+                     $("#pg").removeAttr("style");
+                    $("#pt").removeAttr("style");
+                    $("#pa").removeAttr("style");
+                    $("#pb").removeAttr("style");
                 }
                 
                 $("#op").on("click", this, function(){

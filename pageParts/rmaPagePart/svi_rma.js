@@ -86,20 +86,20 @@
                                                                     if (diffDays > 14)
                                                                         var sty = "label label-danger";
 
-                                                                    var a = '<a  style="cursor: default;"  class="' + sty + '">' + row.pid + '</a>'; // row object contains the row data
+                                                                    var a = '<a name ="'+row.pid+'"  style="cursor: default;"  class="' + sty + '">' + row.pid + '</a>'; // row object contains the row data
                                                                     return a;
                                                                 }},
+                                                            {"data": "id" ,"render": function(data, type, row, meta){
+                                                            var  output = '<strong>RMA. ' +row.id+ '</strong><a  name ="'+row.pid+'" style="margin-left:10px;" href="rma.php?rma='+row.id+'"><i id="uredi_rma" style=" display:none;" class="glyphicon glyphicon-pencil"></i></a><br>';
+                                                            return output;
+                                                            }},
+                                                            {"data": "naziv","render": function(data, type, row, meta){return row.brand + ' ' + row.naziv}},
+                                                            {"data": "serijski"},
                                                             {"data": "s_ime", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
                                                                 var osoba = row.s_ime + ' ' + row.s_prezime;
                                                                 return osoba;
                                                             }},
-                                                            {"data": "naziv"},
-                                                            {"data": "serijski"},
                                                             
-                                                            {"data": "id" ,"render": function(data, type, row, meta){
-                                                            var  output = '<strong>RMA. ' +row.id+ '</strong><a style="margin-left:10px;" href="rma.php?rma='+row.id+'"><i id="uredi_rma" style=" display:none;" class="glyphicon glyphicon-pencil"></i></a><br>';
-                                                            return output;
-                                                            }},
                                                             {"data": "rnOs"},
                                                             {"data": "nazivOS"},
                                                             {"data": "poslano","render": function(data, type, row, meta){
@@ -125,8 +125,8 @@
                 $(this).attr("title", "Uredi radni nalog");
             })
             $('#sviRMA').on("click", " tbody tr td:first-child", function(){
-                window.open("rn.php?radni_nalog="+$(this).find('a').attr("name"), "_blank");
+                window.open("rma.php?rma="+$(this).find('a').attr("name"), "_blank");
             })
             $('#sviRMA').on("click", " tbody tr td:nth-child(2)", function(){
-                window.open("rn.php?rma="+$(this).find('a').attr("name"), "_blank");
+                window.open("rma.php?rma="+$(this).find('a').attr("name"), "_blank");
             })
