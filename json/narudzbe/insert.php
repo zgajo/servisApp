@@ -14,6 +14,6 @@ $n->insert($_POST['dio'], $_POST['dob'], $_POST['pn'], $_POST['vpc'], $_POST['sk
 }else{
  //unesi kupca pa primku
      $stranka = new stranka();
-     $last_stranka = $stranka->insert($_POST['tvrtka'], $_POST['ime'], $_POST['prezime'], $_POST['adresa'], $_POST['grad'], $_POST['post_broj'], $_POST['kontakt_broj'], $_POST['email']);
+     $last_stranka = $stranka->insert($_POST['tvrtka'], $_POST['ime'], $_POST['prezime'], $_POST['adresa'], $_POST['grad'], $_POST['kontakt_broj'], $_POST['email']);
      $n->insert($_POST['dio'], $_POST['dob'], $_POST['pn'], $_POST['vpc'], $_POST['skl'], $last_stranka, $_POST['p']);
 }

@@ -54,7 +54,6 @@
                         $('#inputPrezime').val(osoba.prezime).prop( "disabled", true );
                         $('#inputAdresa').val(osoba.adresa).prop( "disabled", true );
                         $('#inputGrad').val(osoba.grad).prop( "disabled", true );
-                        $('#inputPB').val(osoba.postanskiBroj).prop( "disabled", true );
                         $('#inputKontakt').val(osoba.kontakt).prop( "disabled", true );
                         $('#inputEmail').val(osoba.email).prop( "disabled", true );
                         
@@ -74,7 +73,6 @@
                         $('#inputPrezime').val(null).prop( "disabled", false );
                         $('#inputAdresa').val(null).prop( "disabled", false );
                         $('#inputGrad').val(null).prop( "disabled", false );
-                        $('#inputPB').val(null).prop( "disabled", false );
                         $('#inputKontakt').val(null).prop( "disabled", false );
                         $('#inputEmail').val(null).prop( "disabled", false );
                         
@@ -115,7 +113,6 @@
                         $('#inputPrezime').prop( "disabled", false );
                         $('#inputAdresa').prop( "disabled", false );
                         $('#inputGrad').prop( "disabled", false );
-                        $('#inputPB').prop( "disabled",false );
                         $('#inputKontakt').prop( "disabled", false );
                         $('#inputEmail').prop( "disabled", false );
                         
@@ -139,7 +136,6 @@
                       var prezime = $('#inputPrezime').val();
                       var adresa = $('#inputAdresa').val();
                       var grad = $('#inputGrad').val();
-                      var pb = $('#inputPB').val();
                       var kontakt = $('#inputKontakt').val();
                       var email = $('#inputEmail').val();
                        var idkupca = $( '#inputid' ).text();
@@ -153,7 +149,6 @@
                            "prezime":prezime, 
                            "adresa" : adresa, 
                            "grad" : grad, 
-                           "pb" : pb, 
                            "kontakt":kontakt, 
                            "email":email,
                            "id" : idkupca
@@ -209,7 +204,6 @@
                       var prezime = $('#inputPrezime').val();
                       var adresa = $('#inputAdresa').val();
                       var grad = $('#inputGrad').val();
-                      var pb = $('#inputPB').val();
                       var kontakt = $('#inputKontakt').val();
                       var email = $('#inputEmail').val();
                       
@@ -248,7 +242,7 @@
                                  type: 'POST',
                                  url: "json/primka/insertPrimka.php",
                                  data: {"sifra":sifra,"brand":brand, "tip":tip, "naziv":naziv, "serijski": serijski, "opis":opis, "prilozeno":prilozeno, "racun":racun, "dk": dat_k, "stranka_id": idkupca,
-                                 "tvrtka" : tvrtka, "ime":ime, "prezime":prezime, "adresa" : adresa, "grad":grad, "post_broj": pb, "kontakt_broj":kontakt, "email" : email},
+                                 "tvrtka" : tvrtka, "ime":ime, "prezime":prezime, "adresa" : adresa, "grad":grad,  "kontakt_broj":kontakt, "email" : email},
                                  success: function (data) {
                                      var primkaID = JSON.parse(JSON.stringify(data));
                                         

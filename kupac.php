@@ -220,7 +220,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                            a+= (zaprimljeno && zaprimljeno.getFullYear() != '1970') ? [zaprimljeno.getDate(), zaprimljeno.getMonth()+1, zaprimljeno.getFullYear()].join('.') : '';
                             return a;
                         }},
-                        {"data": "naziv"},
+                        {"data": "naziv","render": function(data,type,row,meta) { return row.brand + ' ' + row.naziv}},
                         {"data": "serial"},
                         {"data": "opisKvara"}
                     ]
@@ -237,14 +237,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         $('#adresa').text(kupac[zadnji].adresa);
                         $('#kontakt').text(kupac[zadnji].kontaktBroj);
                         $('#email').text(kupac[zadnji].email);
-                        (kupac[0].postBroj) ? $('#grad').text(kupac[zadnji].grad + ', ' + kupac[zadnji].postBroj) : $('#grad').text(kupac[zadnji].grad);
+                        $('#grad').text(kupac[zadnji].grad);
 
                         $('#inputTvrtka').val(kupac[0].tvrtka);
                         $('#inputIme').val(kupac[0].ime);
                         $('#inputPrezime').val(kupac[0].prezime);
                         $('#inputAdresa').val(kupac[0].adresa);
                         $('#inputGrad').val(kupac[0].grad);
-                        $('#inputPB').val(kupac[0].postBroj);
                         $('#inputKontakt').val(kupac[0].kontaktBroj);
                         $('#inputEmail').val(kupac[0].email);
 
@@ -262,7 +261,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     var prezime = $('#inputPrezime').val();
                     var adresa = $('#inputAdresa').val();
                     var grad = $('#inputGrad').val();
-                    var pb = $('#inputPB').val();
                     var kontakt = $('#inputKontakt').val();
                     var email = $('#inputEmail').val();
 
@@ -272,7 +270,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         "prezime": prezime,
                         "adresa": adresa,
                         "grad": grad,
-                        "pb": pb,
                         "kontakt": kontakt,
                         "email": email,
                         "id": kid

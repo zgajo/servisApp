@@ -200,12 +200,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             </div>
                                                         </div>
 
-                                                        <div class="form-group">
-                                                            <label for="inputPB" class="col-sm-2 control-label">Poštanski broj</label>
-                                                            <div class="col-sm-10">
-                                                                <input name="post_broj" class="form-control" id="inputPB" placeholder="Poštanski broj" type="number">
-                                                            </div>
-                                                        </div>
 
 
                                                         <div class="form-group">

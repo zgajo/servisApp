@@ -216,7 +216,6 @@ $('#rucna').click(function(){
                                         $('#inputPrezime').val(primka[0].prezime);
                                         $('#inputAdresa').val(primka[0].adresa);
                                         $('#inputGrad').val(primka[0].grad);
-                                        $('#inputPB').val(primka[0].postBroj);
                                         $('#inputKontakt').val(primka[0].kontaktBroj);
                                         $('#inputEmail').val(primka[0].email);
                         
@@ -407,7 +406,6 @@ $('#rucna').click(function(){
                         var prezime = $('#inputPrezime').val();
                         var adresa = $('#inputAdresa').val();
                         var grad = $('#inputGrad').val();
-                        var pb = $('#inputPB').val();
                         var kontakt = $('#inputKontakt').val();
                         var email = $('#inputEmail').val();
                         var idkupca = $('#inputid').text();
@@ -421,7 +419,6 @@ $('#rucna').click(function(){
                                 "prezime": prezime,
                                 "adresa": adresa,
                                 "grad": grad,
-                                "pb": pb,
                                 "kontakt": kontakt,
                                 "email": email,
                                 "id": idkupca

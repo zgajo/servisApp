@@ -33,12 +33,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="inputPB" class="col-sm-2 control-label">Poštanski broj</label>
-                        <div class="col-sm-10">
-                            <input name="post_broj" class="form-control" id="inputPB" placeholder="Poštanski broj" type="number">
-                        </div>
-                    </div>
+                    
 
 
                     <div class="form-group">
@@ -49,7 +44,7 @@
                                 <div class="input-group-addon" style="">
                                     <i class="fa fa-phone"></i>
                                 </div>
-                                <input name="kontakt_broj" type="text" id="inputKontakt"  required="" class="form-control" data-inputmask="&quot;mask&quot;: &quot;999 999 99 99&quot;" data-mask="">
+                                <input name="kontakt_broj" type="text" id="inputKontakt"  required="" class="form-control" >
                             </div><!-- /.input group -->
                         </div>
                     </div>

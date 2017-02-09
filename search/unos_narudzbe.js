@@ -62,7 +62,6 @@ function upisKupca(idkupca) {
         $('#inputPrezime').val(osoba.prezime).prop("disabled", true);
         $('#inputAdresa').val(osoba.adresa).prop("disabled", true);
         $('#inputGrad').val(osoba.grad).prop("disabled", true);
-        $('#inputPB').val(osoba.postanskiBroj).prop("disabled", true);
         $('#inputKontakt').val(osoba.kontakt).prop("disabled", true);
         $('#inputEmail').val(osoba.email).prop("disabled", true);
 
@@ -82,7 +81,6 @@ $('#editPonistiBtn').click(function () {
     $('#inputPrezime').val(null).prop("disabled", false);
     $('#inputAdresa').val(null).prop("disabled", false);
     $('#inputGrad').val(null).prop("disabled", false);
-    $('#inputPB').val(null).prop("disabled", false);
     $('#inputKontakt').val(null).prop("disabled", false);
     $('#inputEmail').val(null).prop("disabled", false);
 
@@ -123,7 +121,6 @@ $('#editBtn').click(function (e) {
     $('#inputPrezime').prop("disabled", false);
     $('#inputAdresa').prop("disabled", false);
     $('#inputGrad').prop("disabled", false);
-    $('#inputPB').prop("disabled", false);
     $('#inputKontakt').prop("disabled", false);
     $('#inputEmail').prop("disabled", false);
 
@@ -147,7 +144,6 @@ $('#spremiKupca').click(function (e) {
     var prezime = $('#inputPrezime').val();
     var adresa = $('#inputAdresa').val();
     var grad = $('#inputGrad').val();
-    var pb = $('#inputPB').val();
     var kontakt = $('#inputKontakt').val();
     var email = $('#inputEmail').val();
     var idkupca = $('#inputid').text();
@@ -158,7 +154,6 @@ $('#spremiKupca').click(function (e) {
         "prezime": prezime,
         "adresa": adresa,
         "grad": grad,
-        "pb": pb,
         "kontakt": kontakt,
         "email": email,
         "id": idkupca
@@ -205,7 +200,6 @@ $('#insertNarudzba').click(function (e) {
     var prezime = $('#inputPrezime').val();
     var adresa = $('#inputAdresa').val();
     var grad = $('#inputGrad').val();
-    var pb = $('#inputPB').val();
     var kontakt = $('#inputKontakt').val();
     var email = $('#inputEmail').val();
 
@@ -231,7 +225,7 @@ $('#insertNarudzba').click(function (e) {
                     type: 'POST',
                     url: "json/narudzbe/insert.php",
                     data: {"dio": pro, "dob": dob, "vpc": vpc, "skl": skl, "p": p, "pn": pn, "stranka_id": idkupca,
-                        "tvrtka": tvrtka, "ime": ime, "prezime": prezime, "adresa": adresa, "grad": grad, "post_broj": pb, "kontakt_broj": kontakt, "email": email},
+                        "tvrtka": tvrtka, "ime": ime, "prezime": prezime, "adresa": adresa, "grad": grad, "kontakt_broj": kontakt, "email": email},
                     success: function (data) {
                         window.location.href = "narudzbe.php";
 

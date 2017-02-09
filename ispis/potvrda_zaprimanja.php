@@ -68,7 +68,7 @@
                           
                             
                             <div class="col-sm-4 invoice-col" style="float: right; font-size: 12px">
-                                <h5 style="margin-top: 0px"><b>Potvrda o zaprimanju na servis</b></h5>
+                                <h5 style="margin-top: 0px"><b>Potvrda o zaprimanju</b></h5>
                                 <h4 style="margin-top: 0px" id="primka"></h4>
                                 <b>Zaprimio: </b><p style="display: inline" id="zap"></p><br>
                                 <b>Zaprimljeno: </b><p style="display: inline"  id="dz"></p>
@@ -132,7 +132,8 @@
 
                                     Sve radove, materijale i ostale troškove vezane uz radni nalog (troškovi koji nisu pokriveni ugovornom obvezom ili jamstvom) vlasnik neopozivo naručuje potpisom radnog naloga.
                                 </p>
-                                <strong>Potpis vlasnika</strong><br><div style="border-bottom:  1px solid black; width: 200px;height: 30px"></div><br>
+                                <strong>Predao:</strong><br><br><div style="border-bottom:  1px solid black; width: 200px;height: 30px"></div><br><br>
+                                <strong>Zaprimio:</strong><br><br><div style="border-bottom:  1px solid black; width: 200px;height: 30px"></div><br>
                             </div><!-- /.col -->
                             <div class="col-xs-6" style="font-size: 9px">
                                 <p class="lead" style="font-size: 12px"><b>Ostali Eurotrade centri</b></p>

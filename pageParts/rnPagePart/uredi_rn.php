@@ -21,7 +21,6 @@
                             <p id="ip_kupca"></p>
                             <p id="grad"></p>
                             <p id="adresa"></p>
-                            <p id="pb"></p>
                             <i><strong>Kontakt: </strong></i><p style="display: inline" id="kontakt"></p><br>
                             <i><strong>Email: </strong><p style="display: inline" id="email"></p></i>
 

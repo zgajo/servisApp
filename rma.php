@@ -210,7 +210,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         $('#inputPrezime').val(primka[0].prezime);
                                         $('#inputAdresa').val(primka[0].adresa);
                                         $('#inputGrad').val(primka[0].grad);
-                                        $('#inputPB').val(primka[0].postBroj);
                                         $('#inputKontakt').val(primka[0].kontaktBroj);
                                         $('#inputEmail').val(primka[0].email);
 
@@ -402,7 +401,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         var prezime = $('#inputPrezime').val();
                         var adresa = $('#inputAdresa').val();
                         var grad = $('#inputGrad').val();
-                        var pb = $('#inputPB').val();
                         var kontakt = $('#inputKontakt').val();
                         var email = $('#inputEmail').val();
                         var idkupca = $('#inputid').text();
@@ -416,7 +414,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 "prezime": prezime,
                                 "adresa": adresa,
                                 "grad": grad,
-                                "pb": pb,
                                 "kontakt": kontakt,
                                 "email": email,
                                 "id": idkupca

@@ -120,7 +120,7 @@ class rmaNalog extends RN{
     
     public function RMAbyPrimka($p) {
         
-        $query=$this->mysqli->prepare("SELECT s.ime as s_ime, s.prezime as s_prezime, rma.rma_id, p.primka_id, p.serial as serijski, p.naziv as dio, p.datumZaprimanja, rma.status,  rma.napomena, rma.poslanoOSu, rma.rnOS, "
+        $query=$this->mysqli->prepare("SELECT s.ime as s_ime, s.prezime as s_prezime, rma.rma_id, p.primka_id, p.serial as serijski, p.naziv as dio, p.brand as brand, p.datumZaprimanja, rma.status,  rma.napomena, rma.poslanoOSu, rma.rnOS, "
                 . "rma.nazivOS, rma.naplata, rma.danZaprimanja,  rma.opisPopravka, rma.danZavrsetka, "
                 . "do.ime as doi, do.prezime as dop, dz.ime as dzi, dz.prezime as dzp "
                 . "FROM radniNaloziRMA rma "
@@ -138,7 +138,7 @@ class rmaNalog extends RN{
         
         if($query->execute()){
             
-            $query->bind_result( $si, $sp,$this->id, $pr, $ser, $dio, $datumZaprimanja, $status,  $napomena, $poslano, $r, $os, $naplata, $prip, $opis, $zavrseno, $oime, $oprezime, $zime, $zprezime);
+            $query->bind_result( $si, $sp,$this->id, $pr, $ser, $dio, $brand, $datumZaprimanja, $status,  $napomena, $poslano, $r, $os, $naplata, $prip, $opis, $zavrseno, $oime, $oprezime, $zime, $zprezime);
             while($row = $query->fetch()){
                 $rma[] = array(
                     "s_ime" => $si,
@@ -147,6 +147,7 @@ class rmaNalog extends RN{
                     "pid" => $pr,
                     "serijski" => $ser,
                     "naziv" => $dio,
+                    "brand" => $brand,
                     "datumZaprimanja" => $datumZaprimanja,
                     "status" => $status,
                     "napomena" => $napomena,

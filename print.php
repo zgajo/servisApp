@@ -225,7 +225,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     $('#osoba').text(primka[0].ime + ' ' +primka[0].prezime);
                     
                     
-                    $('#uredaj').text(primka[0].naziv);
+                    $('#uredaj').text(primka[0].brand + ' ' + primka[0].naziv);
                     $('#serijski').text(primka[0].serial);
                     
                     var kupljeno = new Date(primka[0].datumKupnje);

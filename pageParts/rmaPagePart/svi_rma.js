@@ -1,5 +1,12 @@
 
+$("#sviRMA").on("mouseover", "tbody tr", function () {
+    $(this).css('background-color', '#ccffcc');
+    
+});
 
+$("#sviRMA").on("mouseout", "tbody tr", function () {
+    $(this).removeAttr( 'style' );
+});
             
          
                               
@@ -90,7 +97,7 @@
                                                                     return a;
                                                                 }},
                                                             {"data": "id" ,"render": function(data, type, row, meta){
-                                                            var  output = '<strong>RMA. ' +row.id+ '</strong><a  name ="'+row.pid+'" style="margin-left:10px;" href="rma.php?rma='+row.id+'"><i id="uredi_rma" style=" display:none;" class="glyphicon glyphicon-pencil"></i></a><br>';
+                                                            var  output = '<strong>RMA. ' +row.id+ '</strong><a  name ="'+row.pid+'" style="margin-left:10px; cursor:pointer;" ><i id="uredi_rma" style=" display:none;" class="glyphicon glyphicon-pencil"></i></a><br>';
                                                             return output;
                                                             }},
                                                             {"data": "naziv","render": function(data, type, row, meta){return row.brand + ' ' + row.naziv}},

@@ -125,24 +125,7 @@ class djelatnik extends osoba{
         
     }
     
-    public function izmijeniCentar($centar, $id) {
-        
-        $query = $this->mysqli->prepare("UPDATE djelatnici SET p_centar = ? WHERE djelatnik_id = ?");
-        if($query === false){
-            trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
-        }
-        
-        $query->bind_param("si", $centar, $id);
-        $query->execute();
-        
-        $expire = time() - 60 * 60 * 24;
-        setcookie('centar', "", $expire, '/', '', '', TRUE);
-        
-        $expire = time() + 60 * 60 * 99999;
-        setcookie('centar', $centar, $expire, '/', '', '', TRUE);
-        
-        $query->close();
-    }
+  
 }
 // -----------  KRAJ DJELATNIKA -------------//
 
@@ -157,15 +140,15 @@ class stranka extends osoba{
         $this->mysqli = $con->getConnection();
     }
     
-    public function insert($tvrtka, $ime,$prezime,$adresa=NULL, $grad=NULL,$post_broj=null, $kontakt_broj=NULL, $email=NULL){
+    public function insert($tvrtka, $ime,$prezime,$adresa=NULL, $grad=NULL, $kontakt_broj=NULL, $email=NULL){
         
-        $query = $this->mysqli->prepare("INSERT INTO stranka(tvrtka, ime, prezime, adresa, grad, postBroj,kontaktBroj, email) VALUES(?,?,?,?,?,?,?,?)");
+        $query = $this->mysqli->prepare("INSERT INTO stranka(tvrtka, ime, prezime, adresa, grad, kontaktBroj, email) VALUES(?,?,?,?,?,?,?)");
         
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
         }
         
-        $query->bind_param('sssssiss',$tvrtka, $ime,$prezime,$adresa, $grad,$post_broj, $kontakt_broj, $email);
+        $query->bind_param('sssssss',$tvrtka, $ime,$prezime,$adresa, $grad, $kontakt_broj, $email);
         
         if($query->execute()) { $query->close(); return  $this->mysqli->insert_id; }
         
@@ -174,7 +157,7 @@ class stranka extends osoba{
     }
     
     public function getById($id) {
-        $query = $this->mysqli->prepare("SELECT tvrtka, ime, prezime, adresa, grad, postBroj,kontaktBroj, email FROM stranka WHERE stranka_id = ? ");
+        $query = $this->mysqli->prepare("SELECT tvrtka, ime, prezime, adresa, grad, kontaktBroj, email FROM stranka WHERE stranka_id = ? ");
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
         }
@@ -182,7 +165,7 @@ class stranka extends osoba{
         $query->bind_param('i', $id);
         
        if($query->execute()) { 
-           $query->bind_result($tvrtka, $ime, $prezime, $adresa, $grad, $postanski_broj, $kontakt, $email);
+           $query->bind_result($tvrtka, $ime, $prezime, $adresa, $grad,  $kontakt, $email);
            $query->fetch();
            
            $result = array(
@@ -192,7 +175,6 @@ class stranka extends osoba{
                "prezime" => $prezime,
                "adresa" =>$adresa,
                "grad" =>$grad,
-               "postanskiBroj" => $postanski_broj,
                "kontakt" => $kontakt,
                "email" => $email
            );
@@ -207,16 +189,16 @@ class stranka extends osoba{
         
     }
     
-    public function update($tvrtka, $ime,$prezime,$adresa=NULL, $grad=NULL,$post_broj=null, $kontakt_broj=NULL, $email=NULL, $id){
+    public function update($tvrtka, $ime,$prezime,$adresa=NULL, $grad=NULL, $kontakt_broj=NULL, $email=NULL, $id){
         
-        $query = $this->mysqli->prepare("UPDATE stranka SET tvrtka = ?, ime = ?, prezime = ?, adresa = ?, grad = ?, postBroj = ?,kontaktBroj = ?, email = ? "
+        $query = $this->mysqli->prepare("UPDATE stranka SET tvrtka = ?, ime = ?, prezime = ?, adresa = ?, grad = ?, kontaktBroj = ?, email = ? "
                 . "WHERE stranka_id = ?");
         
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
         }
         
-        $query->bind_param('sssssissi',$tvrtka, $ime,$prezime,$adresa, $grad,$post_broj, $kontakt_broj, $email,$id);
+        $query->bind_param('sssssssi',$tvrtka, $ime,$prezime,$adresa, $grad, $kontakt_broj, $email,$id);
         
         if($query->execute()) { $query->close(); }
         
@@ -227,7 +209,7 @@ class stranka extends osoba{
     
     public function primkaByKupac($id) {
         $query = $this->mysqli->prepare("SELECT s.*, "
-                . "p.primka_id, p.naziv, p.datumZaprimanja, p.datumZatvaranja, p.opisKvara,p.status, p.serial  "
+                . "p.primka_id, p.naziv, p.datumZaprimanja, p.brand, p.datumZatvaranja, p.opisKvara,p.status, p.serial  "
                 . "FROM stranka s "
                 . "LEFT JOIN primka p ON s.stranka_id = p.stranka_id "
                 . "WHERE s.stranka_id = ?  ORDER BY p.primka_id DESC");

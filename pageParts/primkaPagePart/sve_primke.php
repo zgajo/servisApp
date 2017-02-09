@@ -1,9 +1,8 @@
-<div class="col-md-push-12">
     <!-- Custom Tabs -->
     <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
             <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true"><strong>Sve otvorene primke</strong></a></li>
-            <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false"><strong>Primke poslane u Centralni Servis - Rovinj</strong></a></li>
+           <?php if(!(($_COOKIE["odjel"] == "Maloprodaja" || $_COOKIE["odjel"] == "Ostalo" ) && $_COOKIE['centar'] == "Rovinj")){ ?> <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false"><strong>Primke poslane u Centralni Servis - Rovinj</strong></a></li><?php } ?>
             <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false"><strong>Nova primka</strong></a></li>
         </ul>
         <div class="tab-content">
@@ -130,13 +129,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="inputPB" class="col-sm-2 control-label">Poštanski broj</label>
-                                        <div class="col-sm-10">
-                                            <input name="post_broj" class="form-control" id="inputPB" placeholder="Poštanski broj" type="number">
-                                        </div>
-                                    </div>
-
+                                    
 
                                     <div class="form-group">
                                         <label for="inputKontakt" class="col-sm-2 control-label"  id="required">Kontakt broj</label>

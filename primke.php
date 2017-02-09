@@ -262,12 +262,12 @@ $("#sve_primke").on("click", "#rucne", function () {
 });
 $("#sve_primke").on("click", "#uredi", function () {
     var pr= $(this).attr("name");
-    window.open("primke.php?primka="+pr, "_blank");
+    window.location = "primke.php?primka="+pr;
     
 });
 $("#sve_primke").on("click", "#pregledaj_p", function () {
     var pr= $(this).attr("name");
-    window.open("pregled.php?primka="+pr, "_blank");
+    window.location = "pregled.php?primka="+pr;
     
 });
 $("#sve_primke").on("click", "#ispisi", function () {
@@ -646,7 +646,7 @@ $("#sve_primke").on("click", "tbody tr", function () {
                                 $('#inputPP').val(pp[0].prilozeno_primijeceno);
 
                                 //  AKO JE KUPAC PREUZEO PRIMKU
-                                if (pp[0].p_status == 'Kupac preuzeo') {
+                                if (pp[0].p_status == 'Kupac preuzeo' || pp[0].p_status == 'Ekološki zbrinuto') {
                                     $('#skp').show();
 
                                     $('#azurirajDiv').hide();
@@ -800,7 +800,8 @@ $("#sve_primke").on("click", "tbody tr", function () {
                                                         alert('Molim Vas, omogućite prikaz skočnih prozora');
                                                     }
                                                 }
-                                window.location = "primke.php?primka=" + pid;
+                                               
+                                window.location = "primke.php";
                             },
                             error: function (e) {
                                 alert('nije u redu' + e);

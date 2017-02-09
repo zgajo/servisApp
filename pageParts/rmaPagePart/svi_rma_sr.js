@@ -1,4 +1,11 @@
+$("#sviRMA").on("mouseover", "tbody tr", function () {
+    $(this).css('background-color', '#ccffcc');
+    
+});
 
+$("#sviRMA").on("mouseout", "tbody tr", function () {
+    $(this).removeAttr( 'style' );
+});
 
             
          
