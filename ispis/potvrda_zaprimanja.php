@@ -38,7 +38,7 @@
 
                         <div style="display: inline; float: right; font-size: 10px">
                             <span style="float: left; margin-right: 8px">
-                                Naselje Gripole spine 53/c<br>
+                                Naselje Gripole 53/c<br>
                                 Rovinj, 52210<br>
                                 Radno vrijeme: <br>Pon-pet: 08:00 - 19:30; Sub: 09:00 - 14:00</span>
                             <span style="float: right; margin-left: 8px; ">
