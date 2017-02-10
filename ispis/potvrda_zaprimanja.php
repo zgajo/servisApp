@@ -240,7 +240,7 @@
 
         <script src="../plugins/jQuery/jQuery-2.1.4.min.js"></script>
         <script>
-                            var id = <?php echo $_GET['primka'] ?>
+                            var id = <?php echo $_GET['primka'] ?>;
                             $.get("../json/primka/getById.php", {"id": id}, function (primka) {
                                 console.log(primka);
 
