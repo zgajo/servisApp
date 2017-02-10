@@ -40,10 +40,10 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="korisnik.php?id=<?php echo $_COOKIE['id']?>" class="btn btn-default btn-flat">Profile</a>
+                                <a href="korisnik.php?id=<?php echo $_COOKIE['id']?>" class="btn btn-default btn-flat">Profil</a>
                             </div>
                             <div class="pull-right">
-                                <a href="./login.php?action=logout" class="btn btn-default btn-flat">Odlogiraj se</a>
+                                <a href="./login.php?action=logout" class="btn btn-default btn-flat">Odjavi se</a>
                             </div>
                         </li>
                     </ul>

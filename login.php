@@ -42,10 +42,10 @@ if(isset($_GET['action'])){
   <body class="hold-transition login-page">
     <div class="login-box">
       <div class="login-logo">
-        <a><b>E</b>urotrade</a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
-        <p class="login-box-msg">Sign in to start your session</p>
+          <img src="ispis/logo.png" style="width: 300px">
+        <p class="login-box-msg">Prijavite se kako bi započeli rad!</p>
         <form action="" method="post">
           <div class="form-group has-feedback">
               <input type="text" class="form-control" placeholder="Username" name="username" required>
@@ -59,7 +59,7 @@ if(isset($_GET['action'])){
             <div class="col-xs-8">
             </div><!-- /.col -->
             <div class="col-xs-4">
-              <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+              <button type="submit" class="btn btn-primary btn-block btn-flat">Prijavi se</button>
             </div><!-- /.col -->
           </div>
         </form>
