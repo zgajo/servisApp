@@ -39,12 +39,14 @@
                                 <div style="display: inline; float: right; font-size: 10px">
                                     <span style="float: left; margin-right: 8px">
                                         Naselje Gripole spine 53/c<br>
-                                        Rovinj, 52210<br></span>
+                                        Rovinj, 52210<br>
+                                        Radno vrijeme: <br>Pon-pet: 08:00 - 19:30; Sub: 09:00 - 14:00</span>
                                     <span style="float: right; margin-left: 8px; ">
 
 
                                         Kontakt: 052 803 699<br>
                                         Email: servis-ro@eurotrade.hr
+                                        
                                     </span>
                                 </div><!-- /.col -->
 
@@ -57,8 +59,8 @@
                             <div class="col-sm-4 invoice-col"  style="font-size: 12px">
                                 <strong>Podaci o vlasniku</strong>
                                 <address>
-                                    <div id="osoba"></div>
                                     <div id="tvrtka"></div>
+                                    <div id="osoba"></div>
                                     <div id="adresa"></div>
                                     <div id="grad"></div>
                                     Kontakt: <div id="kontakt" style="display: inline"></div><br>
@@ -143,51 +145,71 @@
                                             <th style="width:50%">PULA</th>
                                             <td>
                                                 Benediktinske opatije 3<br>
-                                                tel. 052/211-632, fax 052/211-637
+                                                tel. 052/211-632, fax 052/211-637<br>
+                                                Radno vrijeme: <br>
+                                                pon-pet 8-19:30; 
+                                                subota 8-13
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>ZAGREB</th>
                                             <td>
                                                 Gospodarska ulica 15, Donji Stupnik <br>
-                                                tel. 01/6531-230, fax 01/6531-231
+                                                tel. 01/6531-230, fax 01/6531-231<br>
+                                                Radno vrijeme: <br>
+                                                pon-pet 8-16; 
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>VARAŽDIN</th>
                                             <td>
                                                 Miroslava Krleže 1<br>
-                                                tel. 042/331-177, fax 042/331-149
+                                                tel. 042/331-177, fax 042/331-149<br>
+                                                Radno vrijeme: <br>
+                                                pon-pet 8-19:30; 
+                                                subota 8-13
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>RIJEKA</th>
                                             <td>
                                                 Eugena Kovačića 2, TC Andrea<br>
-                                                tel. 051/680-760, fax 051/680-763<br>                                            
+                                                tel. 051/680-760, fax 051/680-763<br>    
+                                                Radno vrijeme: <br>
+                                                pon-pet 8-16; <br>
                                                 Trg 128 brigade HV 4, Korzo<br>
-                                                tel. 051/212-321 
+                                                tel. 051/212-321 <br>
+                                                Radno vrijeme: <br>
+                                                pon-pet 8-19:30; subota 8-14
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>SPLIT</th>
                                             <td>
                                                 Matoševa 86, Solin<br>
-                                                tel. 021/262-012, fax 021/262-015
+                                                tel. 021/262-012, fax 021/262-015<br>    
+                                                Radno vrijeme: <br>
+                                                pon-pet 8-16; 
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>OSIJEK</th>
                                             <td>
                                                 Vijenac Jakova Gotovca 5<br>
-                                                tel. 031/210-999
+                                                tel. 031/210-999<br>
+                                                Radno vrijeme: <br>
+                                                pon-pet 8-19:30; 
+                                                subota 8-13
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>SISAK</th>
                                             <td>
                                                 Ante Starčevića 13<br>
-                                                tel. 044/524-498, fax 044/524-499
+                                                tel. 044/524-498, fax 044/524-499<br>
+                                                Radno vrijeme: <br>
+                                                pon-pet 8-19:30; 
+                                                subota 8-13
                                             </td>
 
                                     </table>

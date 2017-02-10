@@ -66,7 +66,7 @@
             </div><!-- /.tab-pane -->
             <div  class="tab-pane <?php if($_COOKIE['odjel'] != 'Servis') echo 'active'?>" id="tab_3">
 
-                <form id="unosPrimke" class="form-horizontal" action="" method="POST" >
+                <form id="unosPrimke" class="form-horizontal" action="">
                     <div class="row">
                         <div class="col-md-6">
                             <!-- Dio za stranku -->
@@ -154,11 +154,11 @@
                                         </div>
                                     </div>
                                     <a class="btn btn-app" id="editBtn" style="display: none;  float: right">
-                                        <i class="fa fa-edit"></i> Izmijeni
+                                        <i class="fa fa-edit"></i> Izmijeni podatke kupca
                                     </a>
                                     
                                     <a class="btn btn-app" id="editPonistiBtn" style="display: none;  float: right">
-                                        <i class="fa fa-undo"></i> Poništi
+                                        <i class="fa fa-undo"></i> Poništi odabir kupca
                                     </a>
 
                                     <a class="btn btn-app"  id="spremiKupca" style="display: none;  float: right">
@@ -166,7 +166,7 @@
                                     </a>
 
                                     <a class="btn btn-app"  id="ponistiK" style="display: none; float: right">
-                                        <i class="fa  fa-undo"></i> Poništi
+                                        <i class="fa  fa-undo"></i> Poništi izmjene
                                     </a>
 
                                 </div><!-- /.box -->
@@ -277,7 +277,7 @@
 
                                 </div><!-- /.box-body -->
                                 <div class="box-footer">
-                                    <input type="submit" id="submit" name="submit" class="btn btn-info pull-right" value="Unesi podatke" />
+                                    <input  id="submit" name="submit" class="btn btn-info pull-right" autocomplete="off" value="Unesi podatke" />
                                 </div>
 
                             </div><!-- /.box -->

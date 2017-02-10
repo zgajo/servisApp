@@ -36,16 +36,18 @@ class primka{
     
     
     public function svePrimke() {
+        
         $query = $this->mysqli->prepare("SELECT p.*, s.stranka_id, s.ime as s_ime, s.prezime as s_prezime, s.tvrtka FROM primka p 
                                         LEFT JOIN stranka s ON  p.stranka_id = s.stranka_id
                                         WHERE p.status != 'Kupac preuzeo' AND p.status != 'Ekološki zbrinuto' 
                                         AND p.status NOT LIKE  'Poslano u CS%'  
                                         
-                                        and p.centar = '".$_COOKIE['centar']."'
+                                        and p.centar = ?
                                         ORDER BY p.primka_id ASC");
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
         }
+        $query->bind_param('s', $_COOKIE['centar']);
         if($query->execute()){
             $meta = $query->result_metadata(); 
             while ($field = $meta->fetch_field()) 
@@ -84,34 +86,18 @@ class primka{
         
         return $result;
     } 
-    /*   Mislim da ovo više ničemu ne služi
-    public function svePrimkeRN() {
-        $query = $this->mysqli->query("SELECT p.*, s.ime as s_ime, s.prezime as s_prezime, s.tvrtka FROM primka p 
-                                        LEFT JOIN stranka s ON  p.stranka_id = s.stranka_id
-                                        WHERE p.status != 'Kupac preuzeo' 
-                                        and p.centar = '".$_COOKIE['centar']."'
-                                        ORDER BY p.primka_id ASC");
-        if($query === false){
-            trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
-        }
-        while($row = $query->fetch_object()){
-            $result[]  = $row;
-        }
-        
-        return $result;
-    }
-    */
     
        public function svePoslanePrimke() {
         $query = $this->mysqli->prepare("SELECT p.*, s.ime as s_ime, s.prezime as s_prezime, s.tvrtka FROM primka p 
                                         LEFT JOIN stranka s ON  p.stranka_id = s.stranka_id
                                         WHERE p.status != 'Kupac preuzeo' AND   p.status != 'Ekološki zbrinuto' AND 
                                        ( p.status LIKE 'Poslano u CS - Rovinj%') AND 
-                                        (p.centar = '".$_COOKIE['centar']."' OR '".$_COOKIE['odjel']."' = 'Servis' OR '".$_COOKIE['odjel']."' = 'Reklamacije')  
+                                        (p.centar = ? OR ? = 'Servis' OR ? = 'Reklamacije')  
                                         ORDER BY p.primka_id ASC");
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
         }
+        $query->bind_param('sss', $_COOKIE['centar'],$_COOKIE['odjel'], $_COOKIE['odjel'] );
         if($query->execute()){
             $meta = $query->result_metadata(); 
             while ($field = $meta->fetch_field()) 
