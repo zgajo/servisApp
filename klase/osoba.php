@@ -39,7 +39,7 @@ class djelatnik extends osoba {
                 setcookie("id", $this->id, time() + 3600, '/', '', '', TRUE);
                 setcookie("odjel", $this->odjel, time() + 3600, '/', '', '', TRUE);
 
-
+                
 
                 // KORISTITI UNUTAR EUROTRADE
                 $host = gethostname();
