@@ -11,7 +11,7 @@ class primka{
         $this->mysqli = $con->getConnection();
     }
     
-    public function insertPrimka($centar, $sifra=NULL, $brand=NULL, $tip=NULL, $naziv, $serijski=NULL, $opisKvara, $prilozeno_primijeceno=NULL, $racun=NULL, $status, $dk, $djelatnik_otvorio_id, $stranka_id){
+    public function insertPrimka($centar, $sifra=NULL, $brand=NULL, $tip=NULL, $naziv, $serijski=NULL, $opisKvara, $prilozeno_primijeceno=NULL, $racun=NULL, $status, $dk=NULL, $djelatnik_otvorio_id, $stranka_id){
         date_default_timezone_set('Europe/Zagreb');
         $zaprimljeno = date('Y-m-d H:i:s', time());
         $datum_kupnje = date('Y-m-d', strtotime($dk));

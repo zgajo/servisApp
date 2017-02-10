@@ -188,7 +188,7 @@ $.ajax({
 
                         var a = '';
                         a += (zaprimljeno && zaprimljeno.getFullYear() != '1970') ? [zaprimljeno.getDate(), zaprimljeno.getMonth() + 1, zaprimljeno.getFullYear()].join('.') : '';
-                        a += ' (Broj dana u servisu: '+diffDays+')';
+                        a += ' <a id="broj_dana" style="display:none"> '+diffDays+'</a>';
                         return a;
                     }},
                 {"data": "naziv", "render": function (data, type, row, meta) { return row.brand +  '  ' + row.naziv }},
@@ -279,7 +279,8 @@ $("#sve_primke").on("click", "#ispisi", function () {
 
 
 $("#sve_primke").on("mouseover", "tbody tr", function () {
-    $(this).attr('title', 'Kliknite za više opcija');
+    var brdana  = $(this).find('#broj_dana').text();
+    $(this).attr('title', 'Broj dana od zaprimanja: '+brdana+'. Kliknite za više opcija ');
     $(this).css('background-color', '#ccffcc');
     $(this).find('#opcije').show();
     
@@ -311,7 +312,7 @@ $("#sve_primke").on("click", "tbody tr", function () {
                     '</a>  '+
                     
                     '<a   class="btn btn-app" id="ispisi" name="'+ $(this).find('#primka_id').attr('name') +'" style=" float: left;   height:initial; background-color:ivory  ">'+
-                    '<i class="glyphicon glyphicon-print" style="font-size:small; display:inline;" ></i> Ispis'+
+                    '<i class="glyphicon glyphicon-print" style="font-size:small; display:inline;" ></i> Ispis potvrde rada'+
                     '</a>  '+
                            <?php if($_COOKIE['odjel'] == "Servis") { ?>
                    '<a   class="btn btn-app" id="novi_rn" name="'+ $(this).find('#primka_id').attr('name') +'"  style=" float: right;   height:initial; background-color:ivory  ">'+
@@ -325,11 +326,11 @@ $("#sve_primke").on("click", "tbody tr", function () {
                     '<a  class="btn btn-app"  id="narudzba" name="'+ $(this).find('#primka_id').attr('name') +'" style=" float: right; height:initial; background-color:ivory ">'+
                        ' <i id="str_id" name="'+ $(this).find('#stranka_id').attr('name')+'" class="fa fa-reorder" style="font-size:small; display:inline;"></i> Narudžba'+
                     '</a>'+
-                          <?php } ?>   
+                          <?php } ?>   /*
                     '<a class="btn btn-app" id="rucne" name="'+ $(this).find('#primka_id').attr('name') +'" style=" float: right; height:initial; background-color:ivory ">'+
                    '     <i class="fa fa-send" style="font-size:small; display:inline;"></i> Ručna izdatnica'+
                    ' </a>'+
-                    
+                    */
                     
                 '</div></td>')}
 });

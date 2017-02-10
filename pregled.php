@@ -52,6 +52,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
                     <section class="invoice" >
+                        <!-- this row will not appear when printing -->
+                        <div id="t" class="row no-print">
+                            <div class="col-xs-12">
+                                <a  class="btn btn-default" onclick="printaj()"><i class="fa fa-print"></i> Print</a>
+                            </div>
+                        </div>
                         <!-- title row -->
                         <div class="row">
                             <div class="col-xs-12">
@@ -171,7 +177,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                     Sve radove, materijale i ostale troškove vezane uz radni nalog (troškovi koji nisu pokriveni ugovornom obvezom ili jamstvom) vlasnik neopozivo naručuje potpisom radnog naloga.
                                 </p>
-                                <strong style="font-size: 13px">Potpis vlasnika</strong><br><div style="border-bottom:  1px solid black; width: 200px;height: 30px"></div><br>
+                                <strong style="font-size: 13px">PREUZEO:</strong><br><br><div style="border-bottom:  1px solid black; width: 200px;height: 30px"></div><br>
                             </div><!-- /.col -->
                             <div class="col-xs-6" style="font-size: 12px">
                                 <p class="lead" style="font-size: 12px">Šifre za naplatiti</p>
@@ -191,12 +197,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         
                         
 
-                        <!-- this row will not appear when printing -->
-                        <div id="t" class="row no-print">
-                            <div class="col-xs-12">
-                                <a  class="btn btn-default" onclick="printaj()"><i class="fa fa-print"></i> Print</a>
-                            </div>
-                        </div>
+                        
                         
                     </section><!-- /.content -->
                     

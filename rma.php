@@ -318,6 +318,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     $.post("json/rma/azuriraj.php", {"id": rnid, "status": status, "popravak": $('#inputPopravak').val(), "napomena": $('#inputNapomena').val(), "naplata": $("#inputNaplata").val(), "rnOS": $("#inputrnOS").val(), "nazivOS": $('#inputOSnaziv').val()});
 
                                 } else {
+                                    var ruc = window.open('rucne.php?primka='+primka_id, '_blank');
+                                                    if (ruc) {
+                                                        //Browser has allowed it to be opened
+                                                        ruc.focus();
+                                                    } else {
+                                                        //Browser has blocked it
+                                                        alert('Molim Vas, omogućite prikaz skočnih prozora');
+                                                    }
                                     $.post("json/rma/posalji.php", {"id": rnid, "status": status, "popravak": $('#inputPopravak').val(), "napomena": $('#inputNapomena').val(), "naplata": $("#inputNaplata").val(), "rnOS": $("#inputrnOS").val(), "nazivOS": $('#inputOSnaziv').val()});
 
                                 }

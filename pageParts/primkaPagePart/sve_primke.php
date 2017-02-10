@@ -1,12 +1,12 @@
     <!-- Custom Tabs -->
     <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true"><strong>Sve otvorene primke</strong></a></li>
+            <li <?php if($_COOKIE['odjel'] == 'Servis') echo "class='active'"?>><a href="#tab_1" data-toggle="tab" aria-expanded="true"><strong>Sve otvorene primke</strong></a></li>
            <?php if(!(($_COOKIE["odjel"] == "Maloprodaja" || $_COOKIE["odjel"] == "Ostalo" ) && $_COOKIE['centar'] == "Rovinj")){ ?> <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false"><strong>Primke poslane u Centralni Servis - Rovinj</strong></a></li><?php } ?>
-            <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false"><strong>Nova primka</strong></a></li>
+            <li <?php if($_COOKIE['odjel'] != 'Servis') echo "class='active'"?>><a href="#tab_3" data-toggle="tab" aria-expanded="false"><strong>Nova primka</strong></a></li>
         </ul>
         <div class="tab-content">
-            <div class="tab-pane active" id="tab_1">
+            <div class="tab-pane <?php if($_COOKIE['odjel'] == 'Servis') echo 'active'?>" id="tab_1">
                 <!-- TABLE: Sve otvorene primke -->
                 <div class="box box-info" style="border-top: none">
 
@@ -15,11 +15,11 @@
                             <thead>
                                 <tr>
                                     <th>Primka</th>
-                                    <th>Datum zaprimanja</th>
+                                    <th>Zaprimljeno</th>
                                     <th>Uređaj</th>
                                     <th>Serijski</th>
                                     <th>Stranka</th>
-                                    <th>Status primke</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody style="text-align: center"></tbody>
@@ -64,7 +64,7 @@
                 
               
             </div><!-- /.tab-pane -->
-            <div class="tab-pane" id="tab_3">
+            <div  class="tab-pane <?php if($_COOKIE['odjel'] != 'Servis') echo 'active'?>" id="tab_3">
 
                 <form id="unosPrimke" class="form-horizontal" action="" method="POST" >
                     <div class="row">
