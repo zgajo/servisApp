@@ -29,22 +29,19 @@
                     </a>
                     <ul class="dropdown-menu">
                         <!-- The user image in the menu -->
-                        <li class="user-header">
-                            
-                            <p>
-                                <?php echo $_COOKIE['user'] ?>
-                            </p>
-                        </li>
-                        <!-- Menu Body -->
-                        
-                        <!-- Menu Footer-->
-                        <li class="user-footer">
+                        <li class="user-header" style="height:auto">
                             <div class="pull-left">
                                 <a href="korisnik.php?id=<?php echo $_COOKIE['id']?>" class="btn btn-default btn-flat">Profil</a>
                             </div>
                             <div class="pull-right">
                                 <a href="./login.php?action=logout" class="btn btn-default btn-flat">Odjavi se</a>
                             </div>
+                            <div style="clear:both"></div>
+                        </li>
+                        <!-- Menu Body -->
+                        
+                        <!-- Menu Footer-->
+                        <li class="user-footer" >
                         </li>
                     </ul>
                 </li>
