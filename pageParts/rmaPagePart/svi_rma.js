@@ -93,11 +93,11 @@ $("#sviRMA").on("mouseout", "tbody tr", function () {
                                                                     if (diffDays > 14)
                                                                         var sty = "label label-danger";
 
-                                                                    var a = '<a name ="'+row.pid+'"  style="cursor: default;"  class="' + sty + '">' + row.pid + '</a>'; // row object contains the row data
+                                                                    var a = '<a name ="'+row.id+'"  style="cursor: default;"  class="' + sty + '">' + row.pid + '</a>'; // row object contains the row data
                                                                     return a;
                                                                 }},
                                                             {"data": "id" ,"render": function(data, type, row, meta){
-                                                            var  output = '<strong>RMA. ' +row.id+ '</strong><a  name ="'+row.pid+'" style="margin-left:10px; cursor:pointer;" ><i id="uredi_rma" style=" display:none;" class="glyphicon glyphicon-pencil"></i></a><br>';
+                                                            var  output = '<strong>RMA. ' +row.id+ '</strong><a  name ="'+row.id+'" style="margin-left:10px; cursor:pointer;" ><i id="uredi_rma" style=" display:none;" class="glyphicon glyphicon-pencil"></i></a><br>';
                                                             return output;
                                                             }},
                                                             {"data": "naziv","render": function(data, type, row, meta){return row.brand + ' ' + row.naziv}},
