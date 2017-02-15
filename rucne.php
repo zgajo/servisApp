@@ -194,12 +194,12 @@ include_once './checkLogin.php';
                             s_grad = "Zagreb, 10000";
                             s_kontakt = "01/6531-230";
                             break;
-                        case "Rijeka":
+                        case "Rijeka Andrea":
                             s_adresa = "Eugena Kovačića 2, TC Andrea";
                             s_grad = "Rijeka, 51000";
                             s_kontakt = "051/680-760";
                             break;
-                        case "Rijeka - Korzo":
+                        case "Rijeka Korzo":
                             s_adresa = "Trg 128 brigade HV 4, Korzo";
                             s_grad = "Rijeka, 51000";
                             s_kontakt = "051/212-321";

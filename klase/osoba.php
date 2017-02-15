@@ -90,7 +90,7 @@ class djelatnik extends osoba {
                 exit();
             } else {
                 $query->close();
-                die('<script>alert("Nije pronađen korisnik")</script>');
+                die('<script>alert("Upisano krivo korisničko ime i / ili lozinka")</script>');
             }
         } else {
             trigger_error(", ERROR: " . $conn->errno . " " . $conn->error, E_USER_ERROR);

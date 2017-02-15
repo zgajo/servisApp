@@ -10,7 +10,10 @@
 
             </div>
             <div class="pull-left info">
-                <p><?php echo $_COOKIE['user'] ?></p>
+                <p><?php echo $_COOKIE['user'] ?></p><br>
+                    <?php $localIP = getHostByName(getHostName());
+                    $ip = substr($localIP, 8, 2);
+                    echo $localIP;?>; <?php  echo $ip?>
                 <!-- Status -->
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
