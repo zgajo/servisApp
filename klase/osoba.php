@@ -42,8 +42,8 @@ class djelatnik extends osoba {
                 
 
                 // KORISTITI UNUTAR EUROTRADE
-                $host = gethostname();
-                $ip = gethostbyname($host);
+                
+                $ip = $_SERVER['REMOTE_ADDR'];
                 $ip = substr($ip, 8, 2);
 
                 switch ($ip) {
