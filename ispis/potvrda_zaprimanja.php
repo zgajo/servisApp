@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,7 +14,18 @@
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         <!-- Theme style -->
         <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
-
+<style>            
+    section{                 
+        size: A4;                 
+        margin: 0;             
+    }             
+    @media print {                 
+        html, body {                     
+            width: 210mm;                     
+            height: 297mm;                 
+        }                            
+    }         
+</style>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -28,6 +38,11 @@
             <!-- Main content -->
 
             <section class="invoice">
+                <div id="t" class="row no-print">
+                    <div class="col-xs-12">
+                        <a  class="btn btn-default" onclick="printaj()"><i class="fa fa-print"></i> Print</a>
+                    </div>
+                </div>
                 <!-- title row -->
                 <div class="row">
                     <div class="col-xs-12">
@@ -225,11 +240,7 @@
                 </div><!-- /.row -->
 
                 <!-- this row will not appear when printing -->
-                <div id="t" class="row no-print">
-                    <div class="col-xs-12">
-                        <a  class="btn btn-default" onclick="printaj()"><i class="fa fa-print"></i> Print</a>
-                    </div>
-                </div>
+                
             </section><!-- /.content -->
 
 
@@ -243,36 +254,27 @@
                             var id = <?php echo $_GET['primka'] ?>;
                             $.get("../json/primka/getById.php", {"id": id}, function (primka) {
                                 console.log(primka);
-
                                 var zaprimljeno = new Date(primka[0].datumZaprimanja);
-
                                 $('#dz').text([zaprimljeno.getDate(), zaprimljeno.getMonth() + 1, zaprimljeno.getFullYear()].join('.') + ' / ' + [((zaprimljeno.getHours() < 10) ? '0' : '') + zaprimljeno.getHours(), ((zaprimljeno.getMinutes() < 10) ? '0' : '') + zaprimljeno.getMinutes()].join(':'));
                                 $('#zap').text(primka[0].pot_ime + ' ' + primka[0].pot_prezime);
                                 $('#primka').text('Primka: ' + primka[0].primka_id);
-
                                 (primka[0].tvrtka != null && primka[0].tvrtka != '') ? $('#tvrtka').text(primka[0].tvrtka) : $('#tvrtka').text('');
                                 $('#adresa').text(primka[0].adresa);
                                 $('#grad').text(primka[0].grad);
                                 $('#kontakt').text(primka[0].kontaktBroj);
                                 $('#email').text(primka[0].email);
                                 $('#osoba').text(primka[0].ime + ' ' + primka[0].prezime);
-
-
                                 $('#uredaj').text(primka[0].naziv);
                                 $('#serijski').text(primka[0].serial);
-
                                 var kupljeno = new Date(primka[0].datumKupnje);
                                 console.log(kupljeno.getMinutes());
                                 (kupljeno && kupljeno.getFullYear() != '1970' && !isNaN(kupljeno)) ? $('#dp').text([kupljeno.getDate(), kupljeno.getMonth() + 1, kupljeno.getFullYear()].join('.')) : $('#dp').text('');
                                 ;
-
                                 $('#racun').text(primka[0].racun);
                                 $('#opis').text(primka[0].opisKvara);
                                 $('#prilozeno').text(primka[0].prilozeno_primijeceno);
-
                                 printaj();
                             });
-
                             function printaj() {
                                 window.print();
                                 //setTimeout(function(){window.close();}, 10);

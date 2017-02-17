@@ -1,4 +1,4 @@
-
+// PRIKAZ SVIH RMA NALOGA ZA OSTALE DJELATNIKE
 $("#sviRMA").on("mouseover", "tbody tr", function () {
     $(this).css('background-color', '#ccffcc');
     

@@ -95,7 +95,7 @@ class rmaNalog extends RN{
     
     
     
-    public function posalji( $rma,  $status, $opisPopravka, $napomena, $naplata, $os, $r, $did) {
+    public function posalji( $rma,  $status, $opisPopravka, $napomena, $naplata, $r, $os, $did) {
         
         date_default_timezone_set('Europe/Zagreb');
         $date = date('Y-m-d H:i:s', time());

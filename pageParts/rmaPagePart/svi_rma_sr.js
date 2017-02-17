@@ -1,3 +1,5 @@
+//PRIKAZ SVIH RMA NALOGA ZA SERVIS I REKLAMACIJE
+
 $("#sviRMA").on("mouseover", "tbody tr", function () {
     $(this).css('background-color', '#ccffcc');
     
