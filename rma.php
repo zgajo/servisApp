@@ -1,5 +1,5 @@
 <?php
-include_once './checkLogin.php';
+include_once './klase/checkLogin.php';
 require_once './klase/primka.php';
 require_once './klase/radniNalog.php';
 ?>

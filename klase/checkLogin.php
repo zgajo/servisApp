@@ -1,8 +1,10 @@
 <?php
 
 if (!isset($_COOKIE['user']) && !isset($_COOKIE['id'])) {
-    header('Location: login.php');
-    exit();
+    $uri_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    $uri_segments = explode('/', $uri_path);
+    header("Location: http://$_SERVER[HTTP_HOST]/$uri_segments[1]/login.php");
+    die();
 } else {
     $user = $_COOKIE['user'];
     $id = $_COOKIE['id'];

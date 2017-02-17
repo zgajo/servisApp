@@ -1,6 +1,6 @@
 <?php
 
-include_once '../../checkLogin.php';
+include_once '../../klase/checkLogin.php';
 include_once '../../klase/osoba.php';
 header('Content-type: application/json');
 $osoba=new djelatnik();

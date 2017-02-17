@@ -83,7 +83,7 @@
                                             $('#serijski').text(primka[0].serial);
                                             $('#brand').text(primka[0].brand);
                                             $('#tip').text(primka[0].tip);
-                                            (dk.getFullYear() !== '1970' && dk) ? $('#dk').text() : $('#dk').text([dk.getDate(), dk.getMonth() + 1, dk.getFullYear()].join('.'));
+                                            (dk.getFullYear()!='1970' && dk) ? $('#dk').text([dk.getDate(), dk.getMonth() + 1, dk.getFullYear()].join('.')) :  $('#dk').text() ;
                                             $('#br').text(primka[0].racun);
                                             $('#ok').text(primka[0].opisKvara);
                                             $('#pp').text(primka[0].prilozeno_primijeceno);
@@ -101,7 +101,6 @@
                                 $('#inputBrand').val(primka[0].brand);
                                 $('#inputTip').val(primka[0].tip);
                                 $('#inputSerijski').val(primka[0].serial);
-                                var dk = new Date(primka[0].datumKupnje);
                                 if (dk.getFullYear() != '1970' && dk)
                                     $('#inputDK').val([dk.getDate(), dk.getMonth() + 1, dk.getFullYear()].join('.'));
                                 $('#inputRacun').val(primka[0].racun);

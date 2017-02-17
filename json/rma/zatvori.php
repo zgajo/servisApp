@@ -1,6 +1,6 @@
 <?php
 
-include_once '../../checkLogin.php';
+include_once '../../klase/checkLogin.php';
 include_once '../../klase/radniNalog.php';
 
 $r = new rmaNalog();

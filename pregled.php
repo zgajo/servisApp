@@ -1,5 +1,5 @@
 <?php
-include_once './checkLogin.php';
+include_once './klase/checkLogin.php';
 ?>
 
 <!DOCTYPE html>
@@ -29,6 +29,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
         
         <link href="search/search.css" rel="stylesheet">
+        
+        <style>            
+    section{                 
+        size: A4;                 
+        margin: 0;             
+    }             
+    @media print {                 
+        html, body {                     
+            width: 210mm;                     
+            height: 297mm;                 
+        }                            
+    }         
+</style>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>

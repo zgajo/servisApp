@@ -1,5 +1,5 @@
 <?php
-include_once 'checkLogin.php';
+include_once './klase/checkLogin.php';
 ?>
 
 <!DOCTYPE html>

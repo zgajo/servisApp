@@ -188,6 +188,8 @@
                                 <option>Stranka odustala od popravka</option>
                                 <option>Uređaj zamijenjen novim</option>
                                 <option>Odobren povrat novca</option>
+                                <option>DOA - Uređaj zamijenjen novim</option>
+                                <option>DOA - Odobren povrat novca</option>
                             </select>
                         </div>
                     </div>

@@ -1,3 +1,7 @@
+<?php
+include_once '../klase/checkLogin.php';
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,18 +18,20 @@
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         <!-- Theme style -->
         <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
-<style>            
-    section{                 
-        size: A4;                 
-        margin: 0;             
-    }             
-    @media print {                 
-        html, body {                     
-            width: 210mm;                     
-            height: 297mm;                 
-        }                            
-    }         
-</style>
+        <style>            
+            section{                 
+                size: A4;                 
+                margin: 0; 
+                width: 210mm;                     
+                height: 297mm;
+            }             
+            @media print {                 
+                html, body {                     
+                    width: 210mm;                     
+                    height: 297mm;                 
+                }                            
+            }         
+        </style>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -52,17 +58,7 @@
                         </h2>
 
                         <div style="display: inline; float: right; font-size: 10px">
-                            <span style="float: left; margin-right: 8px">
-                                Naselje Gripole 53/c<br>
-                                Rovinj, 52210<br>
-                                Radno vrijeme: <br>Pon-pet: 08:00 - 19:30; Sub: 09:00 - 14:00</span>
-                            <span style="float: right; margin-left: 8px; ">
 
-
-                                Kontakt: 052 803 699<br>
-                                Email: servis-ro@eurotrade.hr
-
-                            </span>
                         </div><!-- /.col -->
 
                     </div><!-- /.col -->
@@ -71,7 +67,15 @@
                 <!-- info row -->
                 <div class="row invoice-info" >
 
-                    <div class="col-sm-4 invoice-col"  style="font-size: 12px">
+                    <div class="col-sm-4 invoice-col" style="float: left; font-size: 14px">
+                        <h5 style="margin-top: 0px"><b>Potvrda o zaprimanju</b></h5>
+                        <strong><h2 style="margin-top: 0px; text-decoration: underline;" id="primka"></h2></strong>
+                        <b>Zaprimio: </b><p style="display: inline" id="zap"></p><br>
+                        <b>Zaprimljeno: </b><p style="display: inline"  id="dz"></p>
+
+                    </div><!-- /.col -->
+
+                    <div class="col-sm-4 invoice-col"  style="float: right;font-size: 14px">
                         <strong>Podaci o vlasniku</strong>
                         <address>
                             <div id="tvrtka"></div>
@@ -84,19 +88,13 @@
                     </div><!-- /.col -->
 
 
-                    <div class="col-sm-4 invoice-col" style="float: right; font-size: 12px">
-                        <h5 style="margin-top: 0px"><b>Potvrda o zaprimanju</b></h5>
-                        <h4 style="margin-top: 0px" id="primka"></h4>
-                        <b>Zaprimio: </b><p style="display: inline" id="zap"></p><br>
-                        <b>Zaprimljeno: </b><p style="display: inline"  id="dz"></p>
 
-                    </div><!-- /.col -->
                 </div><!-- /.row -->
 
                 <!-- Table row -->
                 <div class="row" style="clear: both">
                     <div class="col-xs-12 table-responsive">
-                        <table class="table table-striped" style="font-size: 12px">
+                        <table class="table table-striped" style="font-size: 14px">
                             <thead>
                                 <tr>
 
@@ -116,12 +114,12 @@
                             </tbody>
                         </table>
 
-                        <table class="table table-striped" style="font-size: 12px">
+                        <table class="table table-striped" style="font-size: 14px; ">
                             <thead>
                                 <tr>
 
                                     <th>Opis kvara</th>
-                                    <th>Priloženo</th>
+                                    <th>Priloženo / zapažanja</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -135,116 +133,54 @@
                     </div><!-- /.col -->
                 </div><!-- /.row -->
 
-                <div class="row">
-                    <!-- accepted payments column -->
-                    <div class="col-xs-6">
-                        <p class="lead" style="font-size: 12px"><b>Napomena:</b></p>
 
-                        <p class="text-muted well well-sm no-shadow" style="font-size: 9px;margin-top: 10px;">
-                            Eurotrade d.o.o. ne odgovara za podatke na računalu, HDD uređaju ili bilo kojem uređaju koji služi za pohranu podataka ili eventualni njihov gubitak. Kod pisača u jamstvu Eurotrade d.o.o. koristi vlastiti potrošni materijal. Kod pisača van jamstva Eurotrade d.o.o. koristi potrošni materijal koji se nalazi u pisaču te postoji mogućnost da će se zbog potrebe servisiranja taj isti potrošiti djelomično ili u cijelosti.
-
-                            Eurotrade d.o.o. poslije 60 dana od zatvaranja radnog naloga ne snosi odgovornost za robu ukoliko ona nije podignuta.
-
-                            U slučaju odustajanja od popravka naplaćuje se dijagnostika po važećem cjeniku.
-
-                            Sve radove, materijale i ostale troškove vezane uz radni nalog (troškovi koji nisu pokriveni ugovornom obvezom ili jamstvom) vlasnik neopozivo naručuje potpisom radnog naloga.
-                        </p>
-                        <p class="text-muted well well-sm no-shadow" style="font-size: 9px;margin-top: 10px;">
-                            Eurotrade d.o.o. poštuje Vašu privatnost. Vaši podaci su zaštićeni i čuvaju se u skladu sa Zakonom o zaštiti osobnih podataka.
-
-                            Osobne podatke koje prikupljamo prilikom izrade servisne primke služe isključivo za dokazivanje vlasništva kao i za potrebu komunikacije između Vas i naših djelatnika.
-
-                            U svako doba imate pravo zatražiti dopunu, izmjenu ili brisanje osobnih podataka.
-                        </p>
-                        <strong>Predao:</strong><br><br><div style="border-bottom:  1px solid black; width: 200px;height: 30px"></div><br><br>
-                        <strong>Zaprimio:</strong><br><br><div style="border-bottom:  1px solid black; width: 200px;height: 30px"></div><br>
-                    </div><!-- /.col -->
-                    <div class="col-xs-6" style="font-size: 9px">
-                        <p class="lead" style="font-size: 12px"><b>Ostali Eurotrade centri</b></p>
-                        <div class="table-responsive">
-                            <table class="table">
-                                <tr>
-                                    <th style="width:50%">PULA</th>
-                                    <td>
-                                        Benediktinske opatije 3<br>
-                                        tel. 052/211-632, fax 052/211-637<br>
-                                        Radno vrijeme: <br>
-                                        pon-pet 8-19:30; 
-                                        subota 8-13
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>ZAGREB</th>
-                                    <td>
-                                        Gospodarska ulica 15, Donji Stupnik <br>
-                                        tel. 01/6531-230, fax 01/6531-231<br>
-                                        Radno vrijeme: <br>
-                                        pon-pet 8-16; 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>VARAŽDIN</th>
-                                    <td>
-                                        Miroslava Krleže 1<br>
-                                        tel. 042/331-177, fax 042/331-149<br>
-                                        Radno vrijeme: <br>
-                                        pon-pet 8-19:30; 
-                                        subota 8-13
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>RIJEKA</th>
-                                    <td>
-                                        Eugena Kovačića 2, TC Andrea<br>
-                                        tel. 051/680-760, fax 051/680-763<br>    
-                                        Radno vrijeme: <br>
-                                        pon-pet 8-16; <br>
-                                        Trg 128 brigade HV 4, Korzo<br>
-                                        tel. 051/212-321 <br>
-                                        Radno vrijeme: <br>
-                                        pon-pet 8-19:30; subota 8-14
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>SPLIT</th>
-                                    <td>
-                                        Matoševa 86, Solin<br>
-                                        tel. 021/262-012, fax 021/262-015<br>    
-                                        Radno vrijeme: <br>
-                                        pon-pet 8-16; 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>OSIJEK</th>
-                                    <td>
-                                        Vijenac Jakova Gotovca 5<br>
-                                        tel. 031/210-999<br>
-                                        Radno vrijeme: <br>
-                                        pon-pet 8-19:30; 
-                                        subota 8-13
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>SISAK</th>
-                                    <td>
-                                        Ante Starčevića 13<br>
-                                        tel. 044/524-498, fax 044/524-499<br>
-                                        Radno vrijeme: <br>
-                                        pon-pet 8-19:30; 
-                                        subota 8-13
-                                    </td>
-
-                            </table>
-                        </div>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
 
                 <!-- this row will not appear when printing -->
-                
+                <div class="footer" style="position:absolute;bottom:0;clear: both; ">
+                    <div class="row">
+                        <!-- accepted payments column -->
+                        <div class="col-xs-12">
+                            <p class="lead" style="font-size: 12px"><b>Napomena:</b></p>
+
+                            <p class="text-muted well well-sm no-shadow" style="font-size: 12px; margin-bottom: 5px; float: left; width: 100%">
+                                Eurotrade d.o.o. ne odgovara za podatke na računalu, HDD uređaju ili bilo kojem uređaju koji služi za pohranu podataka ili eventualni njihov gubitak. Kod pisača u jamstvu Eurotrade d.o.o. koristi vlastiti potrošni materijal. Kod pisača van jamstva Eurotrade d.o.o. koristi potrošni materijal koji se nalazi u pisaču te postoji mogućnost da će se zbog potrebe servisiranja taj isti potrošiti djelomično ili u cijelosti.
+
+                                Eurotrade d.o.o. poslije 60 dana od zatvaranja radnog naloga ne snosi odgovornost za robu ukoliko ona nije podignuta.
+
+                                U slučaju odustajanja od popravka naplaćuje se dijagnostika po važećem cjeniku.
+
+                                Sve radove, materijale i ostale troškove vezane uz radni nalog (troškovi koji nisu pokriveni ugovornom obvezom ili jamstvom) vlasnik neopozivo naručuje potpisom radnog naloga.
+                            </p>
+                            <p class="text-muted well well-sm no-shadow" style="font-size: 12px; float: right;width: 100%">
+                                Eurotrade d.o.o. poštuje Vašu privatnost. Vaši podaci su zaštićeni i čuvaju se u skladu sa Zakonom o zaštiti osobnih podataka.
+
+                                Osobne podatke koje prikupljamo prilikom izrade servisne primke služe isključivo za dokazivanje vlasništva kao i za potrebu komunikacije između Vas i naših djelatnika.
+
+                                U svako doba imate pravo zatražiti dopunu, izmjenu ili brisanje osobnih podataka.
+                            </p>
+                            <div style="clear:both"></div>
+                            <span style="float: left"><strong>Predao:</strong><br><br><div style="border-bottom:  1px solid black; width: 200px;height: 30px; "></div><p id="predao"  style=" text-align: center"></p><br><br></span>
+                            <span style="float: right"><strong>Zaprimio:</strong><br><br><div style="border-bottom:  1px solid black; width: 200px;height: 30px; float: right"></div><p id="zaprimio" style=" text-align: center"></p><br></span>
+                        </div><!-- /.col -->
+
+                    </div><!-- /.row -->
+                    <div style="border: 0.5px solid gray; padding: 0.5em;  font-size: 12px">
+                        <strong>ROVINJ</strong>, Naselje Gripole 53/C, tel. 052/803-699, fax 052/830-430 • 
+                        <strong>ZAGREB</strong>, Gospodarska ulica 15, Donji Stupnik, tel. 01/6531-230, fax 01/6531-231 • 
+                        <strong>VARAŽDIN</strong>, Miroslava Krleže 1, tel. 042/331-177, fax 042/331-149 • 
+                        <strong>RIJEKA</strong>, Eugena Kovačića 2, TC Andrea, tel. 051/680-760, fax 051/680-763 • 
+                        <strong>RIJEKA</strong>, Trg 128 brigade HV 4, Korzo, tel. 051/212-321 • 
+                        <strong>SPLIT</strong>, Matoševa 86, Solin, tel. 021/262-012, fax 021/262-015 • 
+                        <strong>OSIJEK</strong>, Vijenac Jakova Gotovca 5, tel. 031/210-999 • 
+                        <strong> PULA</strong>, Benediktinske opatije 3, tel. 052/211-632, fax 052/211-637 • 
+                        <strong>SISAK</strong>, Ante Starčevića 13, tel. 044/524-498, fax 044/524-499
+                    </div>
+                </div>
             </section><!-- /.content -->
 
 
         </div><!-- ./wrapper -->
+
 
         <!-- AdminLTE App -->
 
@@ -257,6 +193,7 @@
                                 var zaprimljeno = new Date(primka[0].datumZaprimanja);
                                 $('#dz').text([zaprimljeno.getDate(), zaprimljeno.getMonth() + 1, zaprimljeno.getFullYear()].join('.') + ' / ' + [((zaprimljeno.getHours() < 10) ? '0' : '') + zaprimljeno.getHours(), ((zaprimljeno.getMinutes() < 10) ? '0' : '') + zaprimljeno.getMinutes()].join(':'));
                                 $('#zap').text(primka[0].pot_ime + ' ' + primka[0].pot_prezime);
+                                $('#zaprimio').text(primka[0].pot_ime + ' ' + primka[0].pot_prezime);
                                 $('#primka').text('Primka: ' + primka[0].primka_id);
                                 (primka[0].tvrtka != null && primka[0].tvrtka != '') ? $('#tvrtka').text(primka[0].tvrtka) : $('#tvrtka').text('');
                                 $('#adresa').text(primka[0].adresa);
@@ -264,6 +201,7 @@
                                 $('#kontakt').text(primka[0].kontaktBroj);
                                 $('#email').text(primka[0].email);
                                 $('#osoba').text(primka[0].ime + ' ' + primka[0].prezime);
+                                $('#predao').text(primka[0].ime + ' ' + primka[0].prezime);
                                 $('#uredaj').text(primka[0].naziv);
                                 $('#serijski').text(primka[0].serial);
                                 var kupljeno = new Date(primka[0].datumKupnje);

@@ -2,6 +2,9 @@
 
 
 <?php
+include_once './klase/checkLogin.php';
+
+
 if(file_exists('upload/'. $_GET['primka'] . '/')){
    if ($handle = opendir('upload/'. $_GET['primka'] . '/' )) {
     $files = array();

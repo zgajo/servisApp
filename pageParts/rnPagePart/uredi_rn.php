@@ -59,13 +59,13 @@
                     </div>
 
                 </div>
-               <a class="btn btn-app" id="rucne"  style=" float: left; height:initial;">
-                       <i class="fa fa-send" style="font-size:small; display:inline;"></i> Ručna izdatnica
-                   </a>
-                
+                <a class="btn btn-app" id="rucne"  style=" float: left; height:initial;">
+                    <i class="fa fa-send" style="font-size:small; display:inline;"></i> Ručna izdatnica
+                </a>
+
                 <a class="btn btn-app" id="narudzba"  style=" float: left; height:initial;">
-                       <i class="fa fa-reorder" style="font-size:small; display:inline;"></i> Narudžba
-                   </a>
+                    <i class="fa fa-reorder" style="font-size:small; display:inline;"></i> Narudžba
+                </a>
 
                 <div class="box-body" style="clear: both">
 
@@ -174,6 +174,9 @@
                                     <option>Popravak završen van jamstva</option>
                                     <option>Stranka odustala od popravka</option>
                                     <option>Uređaj zamijenjen novim</option>
+                                    <option>Odobren povrat novca</option>
+                                    <option>DOA - Uređaj zamijenjen novim</option>
+                                    <option>DOA - Odobren povrat novca</option>
 
                                 </select>
                             </div>
@@ -244,21 +247,21 @@
                 </div>
 
                 <div class="form-group">
-                        <label for="inputTip" class="col-sm-2 control-label">Tip</label>
-                        <div class="col-sm-10">
-                            <select class="form-control" id="inputTip" type="text" name="tip">
-                                <option>STOLNA RAČUNALA</option>
-                                <option>PRIJENOSNICI</option>
-                                <option>KOMPONENTE</option>
-                                <option>MONITORI</option>
-                                <option>PISAČI</option>
-                                <option>RAČUNALNA PERIFERIJA</option>
-                                <option>MOBITELI</option>
-                                <option>TABLET</option>
-                                <option>OSTALO</option>
-                            </select>
-                        </div>
+                    <label for="inputTip" class="col-sm-2 control-label">Tip</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" id="inputTip" type="text" name="tip">
+                            <option>STOLNA RAČUNALA</option>
+                            <option>PRIJENOSNICI</option>
+                            <option>KOMPONENTE</option>
+                            <option>MONITORI</option>
+                            <option>PISAČI</option>
+                            <option>RAČUNALNA PERIFERIJA</option>
+                            <option>MOBITELI</option>
+                            <option>TABLET</option>
+                            <option>OSTALO</option>
+                        </select>
                     </div>
+                </div>
                 <div class="form-group">
                     <label for="inputNaziv" class="col-sm-2 control-label"  id="required">Naziv</label>
                     <div class="col-sm-10">
@@ -332,27 +335,27 @@
     <div style="clear: both"></div>
 </form>
 
- <!-- jQuery 2.1.4 -->
-        <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
-        <script>
-           
-        $("#narudzba").on("mouseover", this, function () {
-                $(this).attr('title', 'Stvori novu narudžbu');
-            })
-            
-            $("#rucne").on("mouseover", this, function () {
-                $(this).attr('title', 'Stvori novu ručnu izdatnicu');
-            })
-            
-            $("#narudzba").click(function (e) {
-                 var primka_id = $('#primka_id').text();
-           var stranka = $('#inputid').text();
-                window.open("narudzbe.php?primka="+primka_id+"&stranka="+stranka,"_blank");
-            }) 
-            
-            $("#rucne").click(function (e) {
-                 var primka_id = $('#primka_id').text();
-          
-                window.open("rucne.php?primka="+primka_id,"_blank");
-            }) 
-        </script>
+<!-- jQuery 2.1.4 -->
+<script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script>
+
+    $("#narudzba").on("mouseover", this, function () {
+        $(this).attr('title', 'Stvori novu narudžbu');
+    })
+
+    $("#rucne").on("mouseover", this, function () {
+        $(this).attr('title', 'Stvori novu ručnu izdatnicu');
+    })
+
+    $("#narudzba").click(function (e) {
+        var primka_id = $('#primka_id').text();
+        var stranka = $('#inputid').text();
+        window.open("narudzbe.php?primka=" + primka_id + "&stranka=" + stranka, "_blank");
+    })
+
+    $("#rucne").click(function (e) {
+        var primka_id = $('#primka_id').text();
+
+        window.open("rucne.php?primka=" + primka_id, "_blank");
+    })
+</script>

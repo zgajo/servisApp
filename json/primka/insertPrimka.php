@@ -1,5 +1,5 @@
 <?php
-include_once '../../checkLogin.php';
+include_once '../../klase/checkLogin.php';
 include_once '../../klase/primka.php';
 include_once '../../klase/osoba.php';
 
