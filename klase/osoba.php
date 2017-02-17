@@ -34,6 +34,8 @@ class djelatnik extends osoba {
                 $query->bind_result($this->id, $this->ime, $this->prezime, $this->odjel, $this->p_centar);
                 $query->fetch();
 
+                
+                // UKOLIKO BUDE POTREBNO, STAVITI COOKIE KAO TOKEN U BAZU, TE PROVJERAVATI I DOHVAĆATI DJELATNIKA NA TAJ NAČIN
                 $expire = time() + 60 * 60;
                 setcookie("user", "$this->ime $this->prezime", time() + 3600, '/', '', '', TRUE);
                 setcookie("id", $this->id, time() + 3600, '/', '', '', TRUE);
