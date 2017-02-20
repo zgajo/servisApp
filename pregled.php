@@ -79,7 +79,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                 </h2>
 
-                                <div style="display: inline; float: right; font-size: 10px">
+                              <!--   <div style="display: inline; float: right; font-size: 10px">
                                     <span style="float: left; margin-right: 8px">
                                         Naselje Gripole spine 53/c<br>
                                         Rovinj, 52210<br></span>
@@ -89,7 +89,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         Kontakt: 052 803 699<br>
                                         Email: servis-ro@eurotrade.hr
                                     </span>
-                                </div><!-- /.col -->
+                                </div>/.col -->
 
                             </div><!-- /.col -->
                             <div style="clear: both"> <h2 class="page-header"></div>
@@ -97,7 +97,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <!-- info row -->
                         <div class="row invoice-info" >
                            
-                            <div class="col-sm-4 invoice-col"  style="font-size: 12px">
+                            <div class="col-sm-4 invoice-col"  style="font-size: 14px">
                                 <strong>Podaci o vlasniku</strong>
                                 <address>
                                     <div id="osoba"></div>
@@ -109,7 +109,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </address>
                             </div><!-- /.col -->
                             
-                            <div class="col-sm-4 invoice-col" style="font-size: 12px">
+                            <div class="col-sm-4 invoice-col" style="font-size: 14px">
                                 <strong>Podaci o uređaju</strong><br>
                                 <i>Uređaj: </i><p style="display: inline" id="uredaj"></p><br>
                                 <i>Serijski: </i><p style="display: inline" id="serijski"></p><br>
@@ -117,7 +117,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <i>Račun: </i><p style="display: inline" id="racun"></p><br>
                             </div><!-- /.col -->
                             
-                            <div class="col-sm-4 invoice-col" style="float: right; font-size: 12px">
+                            <div class="col-sm-4 invoice-col" style="float: right; font-size: 14px">
                                 <h4 style="margin-top: 0px" id="primka"></h4>
                                 <b>Zaprimio: </b><p style="display: inline" id="zap"></p><br>
                                 <b>Zaprimljeno: </b><p style="display: inline"  id="dz"></p><br>
@@ -132,7 +132,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <!-- Table row -->
                         <div class="row" style="clear: both">
                             <div class="col-xs-12 table-responsive">
-                                <table class="table table-striped" style="font-size: 12px">
+                                <table class="table table-striped" style="font-size: 14px">
                                     <thead>
                                         <tr>
 
@@ -147,7 +147,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         </tr>
                                     </tbody>
                                 </table>
-                                 <table class="table table-striped" style="font-size: 12px">
+                                 <table class="table table-striped" style="font-size: 14px">
                                     <thead>
                                         <tr>
 
@@ -160,7 +160,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         </tr>
                                     </tbody>
                                 </table>
-                                 <table class="table table-striped" style="font-size: 12px">
+                                 <table class="table table-striped" style="font-size: 14px">
                                     <thead>
                                         <tr>
 
@@ -181,7 +181,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="col-xs-6">
                                 <p class="lead" style="font-size: 12px"><b>Napomena:</b></p>
 
-                                <p class="text-muted well well-sm no-shadow" style="font-size: 9px;margin-top: 10px;">
+                                <p class="text-muted well well-sm no-shadow" style="font-size: 12px;margin-top: 10px;">
                                     Eurotrade d.o.o. ne odgovara za podatke na računalu, HDD uređaju ili bilo kojem uređaju koji služi za pohranu podataka ili eventualni njihov gubitak. Kod pisača u jamstvu Eurotrade d.o.o. koristi vlastiti potrošni materijal. Kod pisača van jamstva Eurotrade d.o.o. koristi potrošni materijal koji se nalazi u pisaču te postoji mogućnost da će se zbog potrebe servisiranja taj isti potrošiti djelomično ili u cijelosti.
 
                                     Eurotrade d.o.o. poslije 60 dana od zatvaranja radnog naloga ne snosi odgovornost za robu ukoliko ona nije podignuta.
@@ -192,13 +192,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </p>
                                 <strong style="font-size: 13px">PREUZEO:</strong><br><br><div style="border-bottom:  1px solid black; width: 200px;height: 30px"></div><br>
                             </div><!-- /.col -->
-                            <div class="col-xs-6" style="font-size: 12px">
-                                <p class="lead" style="font-size: 12px">Šifre za naplatiti</p>
+                            <div class="col-xs-6" style="font-size: 14px">
+                                <p class="lead" style="font-size: 14px">Šifre za naplatiti</p>
                                 <div class="table-responsive">
                                   <table class="table">
                                     <tbody>
                                       <tr>
-                                      <th style="width:50%"  style="font-size: 10px">Naplatiti:</th>
+                                      <th style="width:50%"  style="font-size: 14px">Naplatiti:</th>
                                       <td id="naplata"></td>
                                     </tr>
                                   </tbody></table>

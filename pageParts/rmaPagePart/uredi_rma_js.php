@@ -130,7 +130,7 @@
                             var status = $('select').val();
                             var trazi = status_primke.substring(0,12);
                             // ZATVARANJE NALOGA
-                            if (status === "Popravak završen u jamstvu" || status === "Popravak završen van jamstva" || status === "Stranka odustala od popravka" || status === "Uređaj zamijenjen novim" || status === "Odobren povrat novca") {
+                            if (status === "Popravak završen u jamstvu" || status === "Popravak završen van jamstva" || status === "Stranka odustala od popravka" || status === "Uređaj zamijenjen novim" || status === "Odobren povrat novca" || status === "DOA - Uređaj zamijenjen novim" || status === "DOA - Odobren povrat novca") {
                                // PROVJERA DA LI SU UNESENA SVA BITNA POLJA
                                 if($('#inputOSnaziv').val() == '' || $('#inputPopravak').val() == ''){
                                     alert('Molim ispunite sva obavezna polja');

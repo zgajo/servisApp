@@ -2,7 +2,7 @@
 <header class="main-header">
 
     <!-- Logo -->
-    <a href="primke.php" class="logo">
+    <a href="<?php echo ($_COOKIE['odjel'] == 'Reklamacije')? 'rma.php': 'primke.php'  ?>" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>E</b>urotrade</span>
         <!-- logo for regular state and mobile devices -->

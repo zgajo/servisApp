@@ -21,8 +21,9 @@
                                     {data: "primka_id", "render": function (data, type, row, meta) {
                                             var output = "";
                                             if (odjel === "Servis" || odjel === "Reklamacije")
-                                                output += '<a target="_blank" id="novi_rn" style="margin-right:15px" class="glyphicon glyphicon-share" href="rn.php?action=novi_rn&primka_id=' + row.primka_id + '"></a>';
-                                             output += '<a target="_blank" id="novi_rma" class="glyphicon glyphicon-random" href="rma.php?action=novi_rma&poslano=Da&primka_id=' + row.primka_id + '"></a>';
+                                               
+                                            output += '<a  href="rn.php?action=novi_rn&primka_id=' + row.primka_id + '" class="btn btn-app" id="novi_rn" name="1" style=" height:initial; margin: 0 0 5px 5px; padding: 5px; background-color:ivory  " title="Otvori nalog servisiranja"><i class="glyphicon glyphicon-share" style="font-size:small; display:inline;"></i> Radni nalog</a>';
+                                            output += '<a href="rma.php?action=novi_rma&poslano=Da&primka_id=' + row.primka_id + '" class="btn btn-app" id="novi_rn" name="1" style="padding: 5px; margin: 0 0 5px 5px; height:initial; background-color:ivory  " title="Otvori nalog reklamacija"><i class="glyphicon glyphicon-random" style="font-size:small; display:inline;"></i> RMA nalog</a>';
                                             return output;
                                         }},
                                     {"data": "primka_id", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
@@ -38,7 +39,7 @@
                                                 var sty = "label label-warning";
                                             if (diffDays > 17)
                                                 var sty = "label label-danger";
-                                            output += '<a class="' + sty + '">' + row.primka_id + '</a>'; // row object contains the row data
+                                            output += '<a class="' + sty + '" href="pregled.php?primka='+row.primka_id+'">' + row.primka_id + '</a>'; // row object contains the row data
                                             return output;
                                         }},
                                     {"data": "primka_id", "render": function (data, type, row, meta) {
@@ -86,10 +87,11 @@
                                             return output;
 
                                         }},
-                                    {"data": "naziv"},
+                                    {"data": "naziv", "render": function (data, type, row, meta) { return row.brand + ' ' + row.naziv } },
                                     {"data": "serial"},
                                     {"data": "s_ime", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
-                                            var osoba = row.s_ime + ' ' + row.s_prezime;
+                                    if(row.tvrtka) var osoba =  row.tvrtka + ', ' + row.s_ime + ' ' + row.s_prezime;
+                                        else    var osoba =  row.s_ime + ' ' + row.s_prezime;
                                             return osoba;
                                         }},
                                     {"data": "datumZaprimanja", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 

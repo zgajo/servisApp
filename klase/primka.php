@@ -75,7 +75,7 @@ class primka{
     public function svePrimkeRNServis() {
         $query = $this->mysqli->query("SELECT p.*, s.ime as s_ime, s.prezime as s_prezime, s.tvrtka FROM primka p 
                                         LEFT JOIN stranka s ON  p.stranka_id = s.stranka_id
-                                        WHERE p.status != 'Kupac preuzeo' 
+                                        WHERE p.status != 'Kupac preuzeo'  AND p.status != 'Ekološki zbrinuto' 
                                         ORDER BY p.primka_id ASC");
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);

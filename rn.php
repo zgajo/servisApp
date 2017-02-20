@@ -2,7 +2,7 @@
 include_once './klase/checkLogin.php';
 require_once './klase/primka.php';
 require_once './klase/radniNalog.php';
-if($_COOKIE['odjel'] == "Servis"){
+if($_COOKIE['odjel'] == "Servis" || $_COOKIE['odjel'] == "Reklamacije"){
 ?>
 
 

@@ -44,7 +44,7 @@ class djelatnik extends osoba {
                 
 
                 // KORISTITI UNUTAR EUROTRADE
-               
+              
                 $ip = $_SERVER['REMOTE_ADDR'];
                 $ip = substr($ip, 8, 2);
 
@@ -79,14 +79,15 @@ class djelatnik extends osoba {
                         break;
                 }
                 //  * KRAJ KORISTITI UNUTAR EUROTRADEA
- /*
-                //  KORISTITI VAN EUROTRADEA
+  
+           /*     //  KORISTITI VAN EUROTRADEA
                   setcookie("centar", $this->p_centar, time()+3600, '/', '', '', TRUE);
-                 */
-
+              */  
+ 
                 $query->close();
                 
                 if($user == $passw) header("Location: ./korisnik.php?action=il&id=$this->id");
+                else if($this->odjel == "Reklamacije") header('Location: ./rma.php'); 
                 else header('Location: ./primke.php');
                 
                 exit();

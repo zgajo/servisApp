@@ -123,7 +123,7 @@
                             var trazi = status_primke.substring(0,12);
                             if(confirm('Ažurirati radni nalog?')) { 
                             //  UKOLIKO SE ZATVARA RADNI NALOG
-                            if(status === "Popravak završen u jamstvu"  || status === "Popravak završen van jamstva" || status === 'Stranka odustala od popravka'  || status === 'Uređaj zamijenjen novim'){
+                            if(status === "Popravak završen u jamstvu"  || status === "Popravak završen van jamstva" || status === 'Stranka odustala od popravka'  || status === 'Uređaj zamijenjen novim' || status === "Odobren povrat novca" || status === "DOA - Uređaj zamijenjen novim" || status === "DOA - Odobren povrat novca"){
                                
                                     $.post("json/rn/zatvori.php", 
                                             {"id":rnid, 
