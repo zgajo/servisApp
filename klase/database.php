@@ -5,7 +5,14 @@ class database {
     private $mysqli;
 
     function __construct() {
-        $this->mysqli = new mysqli("localhost", "root", "", "u273306295_euro");
+        
+        
+        
+        //KORISTITI U FIRMI
+        $i = parse_ini_file($_SERVER['DOCUMENT_ROOT'].'/dbServis.ini');
+        $this->mysqli = new mysqli($i['host'], $i['name'], $i['pass'], $i['db']);
+        
+        //KORISTITI za test ONLINE
         //$this->mysqli = new mysqli("mysql.hostinger.hr", "u273306295_euro", "Casino12", "u273306295_euro");
         
         if (mysqli_connect_errno()) {

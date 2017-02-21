@@ -12,7 +12,7 @@ $('#sviRN').on("mouseout", "tr", function () {
 //    LISTANJE SVIH OTVORENIH PRIMKI
 $.ajax({
     type: 'POST',
-    url: "json/primka/sveOtvorenePrimke.php",
+    url: "json/primka/svePoslaneRNPrimke.php",
     dataType: 'json',
     contentType: "application/json; charset=utf-8",
     success: function (data) {

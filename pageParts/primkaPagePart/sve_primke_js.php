@@ -172,11 +172,11 @@ $("#sve_primke").on("click", "tbody tr", function () {
                     '<a   class="btn btn-app" id="ispisi" name="'+ $(this).find('#primka_id').attr('name') +'" style=" float: left;   height:initial; background-color:ivory  ">'+
                     '<i class="glyphicon glyphicon-print" style="font-size:small; display:inline;" ></i> Ispis potvrde rada'+
                     '</a>  '+
-                           <?php if($_COOKIE['odjel'] == "Servis") { ?>
+                          
                    '<a   class="btn btn-app" id="novi_rn" name="'+ $(this).find('#primka_id').attr('name') +'"  style=" float: right;   height:initial; background-color:ivory  ">'+
                     '<i class="glyphicon glyphicon-share" style="font-size:small; display:inline;" ></i> Radni nalog'+
                     '</a>  '+
-                           <?php } ?>   
+                          
                    '<a class="btn btn-app" id="novi_rma" name="'+ $(this).find('#primka_id').attr('name') +'" style=" float: right; height:initial; background-color:ivory  ">'+
                         '<i class="glyphicon glyphicon-random" style="font-size:small; display:inline;"></i> RMA nalog'+
                     '</a>  '  +

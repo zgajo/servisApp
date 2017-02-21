@@ -2,7 +2,6 @@
 include_once './klase/checkLogin.php';
 require_once './klase/primka.php';
 require_once './klase/radniNalog.php';
-if($_COOKIE['odjel'] == "Servis" || $_COOKIE['odjel'] == "Reklamacije"){
 ?>
 
 
@@ -154,16 +153,22 @@ $('#rucna').click(function(){
        
 
                         
-        <?php } else{ ?>
-                        <script type="text/javascript" src="pageParts/rnPagePart/svi_rn.js"></script>                
-        <?php } ?>
-                        
+        <?php } else{ 
+            
+          
+    if($_COOKIE['odjel'] == "Servis" || $_COOKIE['odjel'] == "Reklamacije"){
+    
+    ?>
+            <script type="text/javascript" src="pageParts/rnPagePart/svi_rn_sr.js"></script> 
+    <?php }else { ?>
+             <script type="text/javascript" src="pageParts/rnPagePart/svi_rn.js"></script> 
+    <?php } ?>
+                               
+         
+            <?php } ?>            
         <!-- Optionally, you can add Slimscroll and FastClick plugins.
              Both of these plugins are recommended to enhance the
              user experience. Slimscroll is required when using the
              fixed layout. -->
     </body>
 </html>
-<?php } else{
-    echo('Nemate prava pristupa');
-}
