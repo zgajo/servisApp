@@ -41,6 +41,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             #primka{
                 width: 65%;
             }
+            #required:after { content:" *"; color: red}
             @media (max-width: 768px){
                 #stranka{ width: 100%;
                 }

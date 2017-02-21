@@ -42,7 +42,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
             #upr{
                 float: left; width: 50%;margin-left: 2%;
             }
-            
+            .rijeseno{
+                background-color: orange;
+            }
             .hover{
                 background-color: lightblue;
             }

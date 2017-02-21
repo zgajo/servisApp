@@ -119,14 +119,14 @@
                         </div>
                     </div>
                <div class="form-group"  >
-                        <label for="inputOSnaziv" class="col-sm-2 control-label">OS naziv</label>
+                   <label for="inputOSnaziv" class="col-sm-2 control-label" id="required">OS naziv</label>
                         <div class="col-sm-10">
-                            <input id="inputOSnaziv" class="form-control" rows="3" placeholder="Servis u koji je uređaj poslan..." name="nazivOS">
+                            <input id="inputOSnaziv" class="form-control" rows="3" placeholder="Servis u koji je uređaj poslan..." name="nazivOS" required="">
                         </div>
                     </div>
                
                     <div class="form-group"  >
-                        <label for="inputPopravak" class="col-sm-2 control-label">Opis popravka</label>
+                        <label for="inputPopravak" class="col-sm-2 control-label" id="required">Opis popravka</label>
                         <div class="col-sm-10">
                             <textarea id="inputPopravak" class="form-control" rows="3" placeholder="Opis rada na reklamaciji ..." name="popravak" ></textarea>
                         </div>
@@ -179,7 +179,7 @@
                         <div class="col-sm-10">
                             <select class="form-control" id="status_rma" name='status_rma'>
                                 
-                                <option>Pripremljeno za slanje OS-u</option>
+                               <option>Pripremljeno za slanje OS-u</option>
                                 <option >Čeka dio u OS-u</option>
                                 <option value="Poslano u OS">Pošalji u OS</option>
                                 <option>Vraćeno is OS-a</option>

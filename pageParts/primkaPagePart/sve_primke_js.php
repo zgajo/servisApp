@@ -18,6 +18,7 @@ $.ajax({
             },
             "columns": [
                 {"data": "primka_id", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
+                         
                         var danas = new Date();
                         var datum = new Date(row.datumZaprimanja);
                         var oneDay = 24 * 60 * 60 * 1000;
@@ -29,10 +30,14 @@ $.ajax({
                             var sty = "label label-warning";
                         if (diffDays > 14)
                             var sty = "label label-danger";
+                        
+                        if(row.status == "Stranka odustala od popravka" || row.status == "Popravak završen u jamstvu" || row.status == "Popravak završen van jamstva" || row.status == "Stranka odustala od popravka" 
+                            || row.status == "Uređaj zamijenjen novim" || row.status == "Odobren povrat novca" || row.status == "DOA - Uređaj zamijenjen novim" ||  row.status == "DOA - Odobren povrat novca" ||  row.status == "Čeka preuzimanje stranke")   {
+                        var a =   '<p style="display: initial; margin-right:10px; color:purple;"><i class="fa fa-angle-double-right"></i></p><a  class="' + sty + '" style="cursor:default">' + row.primka_id + '</a><p style="display: initial; margin-left:10px; color:purple"><i class="fa fa-angle-double-left"></i></p>';
+                        return a;
+                        }
 
-                        var a = '<i style="display:none" id="primka_id" name="'+ row.primka_id +'"></i>\n\
-                                    <i style="display:none" id="stranka_id" name ="'+ row.stranka_id +'"></i>\n\
-                        <a  class="' + sty + '" style="cursor:default">' + row.primka_id + '</a>'; // row object contains the row data
+                      var a =   '<a  class="' + sty + '" style="cursor:default">' + row.primka_id + '</a>'; // row object contains the row data
                         
                         return a;
                     }},

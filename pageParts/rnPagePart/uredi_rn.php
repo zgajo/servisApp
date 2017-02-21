@@ -105,7 +105,7 @@
                     <!-- textarea -->
 
                     <div class="form-group"  >
-                        <label for="inputPopravak" class="col-sm-2 control-label">Opis popravka</label>
+                        <label for="inputPopravak" class="col-sm-2 control-label" id="required">Opis popravka</label>
                         <div class="col-sm-10">
                             <textarea id="inputPopravak" class="form-control" rows="3" placeholder="Opis rada na reklamaciji ..." name="popravak" ></textarea>
                         </div>
@@ -122,7 +122,7 @@
                     </div>
 
                     <div class="form-group" >
-                        <label for="inputBI" class="col-sm-2 control-label">Broj ispisa</label>
+                        <label for="inputBI" class="col-sm-2 control-label" id="bi">Broj ispisa</label>
                         <div class="col-sm-3">
                             <input class="form-control" id="inputBI" placeholder="Ispisano" type="text" name="broj_ispisa" >
                         </div>

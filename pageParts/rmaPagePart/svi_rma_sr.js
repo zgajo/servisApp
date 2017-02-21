@@ -102,8 +102,8 @@ $("#sviRMA").on("mouseout", "tbody tr", function () {
                                                             var  output = '<strong>RMA. ' +row.id+ '</strong><a   name="'+ row.id +'" style="margin-left:10px;" href="#"><i id="uredi_rma" style=" display:none;" class="glyphicon glyphicon-pencil"></i></a><br>';
                                                             return output;
                                                             }},
-                                                            
-                                                            {"data": "naziv"},
+                                                            {"data": "sifra","render": function(data, type, row, meta){if(row.sifra) return row.sifra; else return ''}},
+                                                            {"data": "naziv","render": function(data, type, row, meta){return row.brand + ' ' + row.naziv}},
                                                             {"data": "serijski"},
                                                             {"data": "s_ime", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
                                                                 var osoba = row.s_ime + ' ' + row.s_prezime;

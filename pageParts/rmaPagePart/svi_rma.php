@@ -8,7 +8,8 @@
                                         <thead>
                                             <tr>
                                                 <th>Primka</th>
-                                                <th>RMA nalog</th>
+                                                <th>RMA br.</th>
+                                                <th>Šifra</th>
                                                 <th>Uređaj</th>
                                                 <th>Serijski</th>
                                                 <th>Stranka</th>

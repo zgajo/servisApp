@@ -78,6 +78,7 @@
                                      $('#serijski').text(primka[0].serial);
                                      $('#brand').text(primka[0].brand);
                                      $('#tip').text(primka[0].tip);
+                                     if(primka[0].tip != 'PISAČI') {$('#inputBI').hide(); $('#bi').hide()};
                                      (dk.getFullYear()=='1970') ? $('#dk').text() : $('#dk').text([dk.getDate(), dk.getMonth()+1, dk.getFullYear()].join('.'));
                                      $('#br').text(primka[0].racun);
                                      $('#ok').text(primka[0].opisKvara);
@@ -116,7 +117,7 @@
                            
                             //Ažuriranje upita
                             $('#azuriraj_status').on("click", this, function(){
-                            
+                            $('#inputPopravak').removeAttr( 'style' );
                             var status_primke = $('#st').text();
                             var primka_id = $('#primka_id').text();
                             var status = $('select').val();
@@ -125,12 +126,17 @@
                             //  UKOLIKO SE ZATVARA RADNI NALOG
                             if(status === "Popravak završen u jamstvu"  || status === "Popravak završen van jamstva" || status === 'Stranka odustala od popravka'  || status === 'Uređaj zamijenjen novim' || status === "Odobren povrat novca" || status === "DOA - Uređaj zamijenjen novim" || status === "DOA - Odobren povrat novca"){
                                
+                            if($('#inputPopravak').val()==''){
+                                   alert('Molim ispunite sva obavezna polja');
+                                   $('#inputPopravak').css('border', '2px solid red');
+                               }
+                               else{
                                     $.post("json/rn/zatvori.php", 
                                             {"id":rnid, 
                                             "status": status, 
                                             "popravak": $('#inputPopravak').val(), 
                                             "napomena": $('#inputNapomena').val(),
-                                            "naplata" : $("inputNaplata").val(),
+                                            "naplata" : $("#inputNaplata").val(),
                                             "ispisano" : $('#inputBI').val(),
                                             "promijenjeno" : $('#inputPromijenjeno').val()
                                         }
@@ -177,7 +183,7 @@
 
                                             });
                                         }
-                                        //  KRAJ *  AŽURIRANJE STATUSA PRIMKE   *   KRAJ
+                                      }  //  KRAJ *  AŽURIRANJE STATUSA PRIMKE   *   KRAJ
                                 }
                                 // KRAJ *   ZATVARANJE RADNOG NALOGA    *   KRAJ
                                 
@@ -188,7 +194,7 @@
                                             "status": status, 
                                             "popravak": $('#inputPopravak').val(), 
                                             "napomena": $('#inputNapomena').val(),
-                                            "naplata" : $("inputNaplata").val(),
+                                            "naplata" : $("#inputNaplata").val(),
                                             "ispisano" : $('#inputBI').val(),
                                             "promijenjeno" : $('#inputPromijenjeno').val()
                                         }

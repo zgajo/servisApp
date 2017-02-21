@@ -181,13 +181,26 @@
                             <div class="box box-info">
                                 <div class="box-header with-border">
                                     <h3 class="box-title">Otvaranje nove primke</h3>
+                                    <br>
+                                    <br>
+
+                                    <div id="box_sifra"  class="form-group" style="    padding-left: 15px;">
+                                        <!-- Prije mi je  id="box" bio na ovom spanu i bez diva -->
+                                        <span style="float: left">
+                                            <span>Šifra artikla :</span> <input type="text" id="search_box_sifra" style="    margin-left: 10px;" autocomplete="off">
+                                            <span id="search_button_sifra" >Očisti</span>
+                                        </span>
+                                        <div id="search_result_sifra">
+
+                                        </div>
+                                    </div>
                                 </div><!-- /.box-header -->
                                 <!-- form start -->
 
                                 <div class="box-body">
 
 
-                                    <div class="form-group">
+                                    <div class="form-group" id="divInputSifra" style="display:none">
                                         <label for="inputSifra" class="col-sm-2 control-label">Šifra</label>
                                         <div class="col-sm-10">
                                             <input class="form-control" id="inputSifra" placeholder="Šifra uređaja" type="number" name="sifra">

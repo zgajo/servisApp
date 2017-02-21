@@ -202,7 +202,7 @@ include_once '../klase/checkLogin.php';
                                 $('#email').text(primka[0].email);
                                 $('#osoba').text(primka[0].ime + ' ' + primka[0].prezime);
                                 $('#predao').text(primka[0].ime + ' ' + primka[0].prezime);
-                                $('#uredaj').text(primka[0].naziv);
+                                $('#uredaj').text(primka[0].brand + ' ' + primka[0].naziv);
                                 $('#serijski').text(primka[0].serial);
                                 var kupljeno = new Date(primka[0].datumKupnje);
                                 console.log(kupljeno.getMinutes());
