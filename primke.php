@@ -149,7 +149,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         
         <script src="pageParts/primkaPagePart/unos_primke.js" type="text/javascript"></script>
-
+        <script src="pageParts/primkaPagePart/unos_sifre.js" type="text/javascript"></script>
             
         <?php } else if (isset($_GET['pregled_serijski'])) { ?>                  
             <script>
