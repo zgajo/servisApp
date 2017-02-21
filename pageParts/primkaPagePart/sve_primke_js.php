@@ -34,11 +34,14 @@ $.ajax({
                         if(row.status == "Stranka odustala od popravka" || row.status == "Popravak završen u jamstvu" || row.status == "Popravak završen van jamstva" || row.status == "Stranka odustala od popravka" 
                             || row.status == "Uređaj zamijenjen novim" || row.status == "Odobren povrat novca" || row.status == "DOA - Uređaj zamijenjen novim" ||  row.status == "DOA - Odobren povrat novca" ||  row.status == "Čeka preuzimanje stranke")   {
                         var a =   '<p style="display: initial; margin-right:10px; color:purple;"><i class="fa fa-angle-double-right"></i></p><a  class="' + sty + '" style="cursor:default">' + row.primka_id + '</a><p style="display: initial; margin-left:10px; color:purple"><i class="fa fa-angle-double-left"></i></p>';
+                          a += '<i style="display:none" id="primka_id" name="'+ row.primka_id +'"></i>';
+                          a += '<i style="display:none" id="stranka_id" name ="'+ row.stranka_id +'"></i>';
                         return a;
                         }
 
                       var a =   '<a  class="' + sty + '" style="cursor:default">' + row.primka_id + '</a>'; // row object contains the row data
-                        
+                         a += '<i style="display:none" id="primka_id" name="'+ row.primka_id +'"></i>';
+                          a += '<i style="display:none" id="stranka_id" name ="'+ row.stranka_id +'"></i>';
                         return a;
                     }},
                 {"data": "datumZaprimanja", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
