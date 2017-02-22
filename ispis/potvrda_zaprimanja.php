@@ -159,7 +159,11 @@ include_once '../klase/checkLogin.php';
                                 U svako doba imate pravo zatražiti dopunu, izmjenu ili brisanje osobnih podataka.
                             </p>
                             <div style="clear:both"></div>
-                            <span style="float: left"><strong>Predao:</strong><br><br><div style="border-bottom:  1px solid black; width: 200px;height: 30px; "></div><p id="predao"  style=" text-align: center"></p><br><br></span>
+                            <span style="float: left"><strong>Predao:</strong><br><br>
+                                <div style="border-bottom:  1px solid black; width: 200px;height: 30px; "></div>
+                                <p id="predao"  style=" text-align: center"></p>
+                                <br><br>
+                            </span>
                             <span style="float: right"><strong>Zaprimio:</strong><br><br><div style="border-bottom:  1px solid black; width: 200px;height: 30px; float: right"></div><p id="zaprimio" style=" text-align: center"></p><br></span>
                         </div><!-- /.col -->
 
@@ -201,7 +205,11 @@ include_once '../klase/checkLogin.php';
                                 $('#kontakt').text(primka[0].kontaktBroj);
                                 $('#email').text(primka[0].email);
                                 $('#osoba').text(primka[0].ime + ' ' + primka[0].prezime);
-                                $('#predao').text(primka[0].ime + ' ' + primka[0].prezime);
+                                
+                                if(primka[0].tvrtka) $('#predao').text(primka[0].tvrtka + ', '+ primka[0].ime + ' ' +primka[0].prezime);
+                                else $('#predao').text(primka[0].ime + ' ' +primka[0].prezime);
+                                
+                                
                                 $('#uredaj').text(primka[0].brand + ' ' + primka[0].naziv);
                                 $('#serijski').text(primka[0].serial);
                                 var kupljeno = new Date(primka[0].datumKupnje);

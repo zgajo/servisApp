@@ -190,7 +190,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                     Sve radove, materijale i ostale troškove vezane uz radni nalog (troškovi koji nisu pokriveni ugovornom obvezom ili jamstvom) vlasnik neopozivo naručuje potpisom radnog naloga.
                                 </p>
-                                <strong style="font-size: 13px">PREUZEO:</strong><br><br><div style="border-bottom:  1px solid black; width: 200px;height: 30px"></div><br>
+                                <strong style="font-size: 13px">PREUZEO:</strong><br><br>
+                                <div style="border-bottom:  1px solid black; width: 200px;height: 30px"></div>
+                                <div id="potpis" style="text-align:center;  width: 200px;height: 30px"></div><br>
                             </div><!-- /.col -->
                             <div class="col-xs-6" style="font-size: 14px">
                                 <p class="lead" style="font-size: 14px">Šifre za naplatiti</p>
@@ -263,7 +265,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     $('#kontakt').text(primka[0].kontaktBroj);
                     $('#email').text(primka[0].email);
                     $('#osoba').text(primka[0].ime + ' ' +primka[0].prezime);
-                    
+                    if(primka[0].tvrtka) $('#potpis').text(primka[0].tvrtka + ', '+ primka[0].ime + ' ' +primka[0].prezime);
+                    else $('#potpis').text(primka[0].ime + ' ' +primka[0].prezime);
                     
                     $('#uredaj').text(primka[0].brand + ' ' + primka[0].naziv);
                     $('#serijski').text(primka[0].serial);
@@ -339,7 +342,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                              prom += (rn.promijenjeno) ? rn.promijenjeno+ '<br>':'';
                              
                              
-                             naplata += (rn.naplata!=='' && rn.naplata != null) ? ' + ' + rn.naplata + '<br>':'';
+                             naplata += (rn.naplata!=='' && rn.naplata != null) ? ' ' + rn.naplata + '<br>':'';
                         }
                         //  DOHVAĆANJE RMA NALOGA I UPISIVANJE
                         
@@ -424,7 +427,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             opis_popravka += '<br></span>';
                                             
                                             prom += (rma.promijenjeno) ? rma.promijenjeno+ '<br>':'';
-                                            naplata += (rma.naplata!=='' && rma.naplata != null) ? ' + ' + rma.naplata + '<br>':'';
+                                            naplata += (rma.naplata!=='' && rma.naplata != null) ? ' ' + rma.naplata + '<br>':'';
                                         } 
                                              $('#popravak').html(opis_popravka);
                                              $('#promijenjeno').html(prom);

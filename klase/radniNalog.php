@@ -120,7 +120,7 @@ class rmaNalog extends RN{
     
     public function RMAbyPrimka($p) {
         
-        $query=$this->mysqli->prepare("SELECT s.ime as s_ime, s.prezime as s_prezime, rma.rma_id, p.primka_id, p.sifraUredaja as sifra, p.serial as serijski, p.naziv as dio, p.brand as brand, p.datumZaprimanja, rma.status,  rma.napomena, rma.poslanoOSu, rma.rnOS, "
+        $query=$this->mysqli->prepare("SELECT s.tvrtka, s.ime as s_ime, s.prezime as s_prezime, rma.rma_id, p.primka_id, p.sifraUredaja as sifra, p.serial as serijski, p.naziv as dio, p.brand as brand, p.datumZaprimanja, rma.status,  rma.napomena, rma.poslanoOSu, rma.rnOS, "
                 . "rma.nazivOS, rma.naplata, rma.danZaprimanja,  rma.opisPopravka, rma.danZavrsetka, "
                 . "do.ime as doi, do.prezime as dop, dz.ime as dzi, dz.prezime as dzp "
                 . "FROM radniNaloziRMA rma "
@@ -138,9 +138,10 @@ class rmaNalog extends RN{
         
         if($query->execute()){
             
-            $query->bind_result( $si, $sp,$this->id, $pr, $sifra, $ser, $dio, $brand, $datumZaprimanja, $status,  $napomena, $poslano, $r, $os, $naplata, $prip, $opis, $zavrseno, $oime, $oprezime, $zime, $zprezime);
+            $query->bind_result( $st, $si, $sp,$this->id, $pr, $sifra, $ser, $dio, $brand, $datumZaprimanja, $status,  $napomena, $poslano, $r, $os, $naplata, $prip, $opis, $zavrseno, $oime, $oprezime, $zime, $zprezime);
             while($row = $query->fetch()){
                 $rma[] = array(
+                    "tvrtka" => $st,
                     "s_ime" => $si,
                     "s_prezime" => $sp,
                     "id" => $this->id,
@@ -365,7 +366,7 @@ class servisRN extends RN{
     public function RNbyPrimka($id) {
        
         
-        $query=$this->mysqli->prepare("SELECT rn.rn_id, p.primka_id, p.naziv, p.serial, p.datumZaprimanja, s.ime as s_ime, s.prezime as s_prezime, rn.status, rn.pocetakRada, rn.danZavrsetka, rn.opisPopravka, rn.naplata, rn.napomena, rn.promijenjeno, rn.broj_ispisa, d1.ime, d1.prezime, d2.ime, d2.prezime "
+        $query=$this->mysqli->prepare("SELECT rn.rn_id, p.primka_id, p.naziv, p.serial, p.datumZaprimanja, s.ime as s_ime, s.prezime as s_prezime, s.tvrtka, rn.status, rn.pocetakRada, rn.danZavrsetka, rn.opisPopravka, rn.naplata, rn.napomena, rn.promijenjeno, rn.broj_ispisa, d1.ime, d1.prezime, d2.ime, d2.prezime "
                 . "FROM radniNaloziServisa rn "
                 . "LEFT JOIN primka p ON p.primka_id = rn.primka_id "
                 . "LEFT JOIN stranka s ON p.stranka_id = s.stranka_id "
@@ -380,7 +381,7 @@ class servisRN extends RN{
         $query->bind_param("i", $id); 
         
         if($query->execute()){
-            $query->bind_result($this->id, $pid, $pn, $ps, $datZa, $si, $sp, $status, $pocetak, $dz, $op, $naplata, $napomena, $promijenjeno, $ispisano, $d1ime, $d1prezime,$d2ime, $d2prezime );
+            $query->bind_result($this->id, $pid, $pn, $ps, $datZa, $si, $sp, $st, $status, $pocetak, $dz, $op, $naplata, $napomena, $promijenjeno, $ispisano, $d1ime, $d1prezime,$d2ime, $d2prezime );
             while($row = $query->fetch()){
                 $rn[] = array(
                     "id" => $this->id,
@@ -389,6 +390,7 @@ class servisRN extends RN{
                     "serijski" => $ps,
                     "s_ime" => $si,
                     "s_prezime" => $sp,
+                    "tvrtka" => $st,
                     "primka" => $pid,
                     "status" => $status,
                     "pocetak" => $pocetak,

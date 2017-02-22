@@ -172,7 +172,7 @@ console.log(data);
                                                     '<div class="box-header with-border">' +
                                                     '<h3 class="box-title">RMA nalog br. ' + rma[i].id + ' </h3>' +
                                                     ' </div>' +
-                                                    '<div  id="primka" class="col-sm-4 invoice-col" >' +
+                                                    '<div  class="col-md-6 invoice-col" style="width:100%"  >' +
                                                     '<address>' +
                                                     '<i><strong>Pripremljeno za slanje: </strong></i>' + [rnp.getDate(), rnp.getMonth() + 1, rnp.getFullYear()].join('.') + ' /  ' + [(rnp.getHours() < 10 ? '0' : '') + rnp.getHours(), (rnp.getMinutes() < 10 ? '0' : '') + rnp.getMinutes()].join(':') + '<br>' +
                                                     '<i><strong>Poslano u ovlašteni servis: </strong></i>   </strong>';

@@ -79,11 +79,11 @@ class djelatnik extends osoba {
                         break;
                 }
                 //  * KRAJ KORISTITI UNUTAR EUROTRADEA
- /* 
+  /*
               //  KORISTITI VAN EUROTRADEA
                   setcookie("centar", $this->p_centar, time()+3600, '/', '', '', TRUE);
-              
- */ 
+         */      
+ 
                 $query->close();
                 
                 if($user == $passw) header("Location: ./korisnik.php?action=il&id=$this->id");
