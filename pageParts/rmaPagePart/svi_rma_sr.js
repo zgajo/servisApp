@@ -13,70 +13,6 @@ $("#sviRMA tbody").on("mouseout", "tr", function () {
 
 
 
-//    LISTANJE SVIH OTVORENIH PRIMKI
-$.ajax({
-    type: 'POST',
-    url: "json/primka/svePrimkeRNServis.php",
-    dataType: 'json',
-    contentType: "application/json; charset=utf-8",
-    success: function (data) {
-        var output = "";
-        var primka = JSON.parse(JSON.stringify(data));
-        var danas = new Date();
-
-        for (var i = 0; i < primka.length; ++i) {
-            var datum = new Date(primka[i].datumZaprimanja);
-            var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
-
-            var diffDays = Math.round(Math.abs((danas.getTime() - datum.getTime()) / (oneDay)));
-
-            if (diffDays <= 15)
-                var sty = "label label-success";
-            if (diffDays > 15 && diffDays <= 30)
-                var sty = "label label-warning";
-            if (diffDays > 30)
-                var sty = "label label-danger";
-
-            var rn = null;
-            var pid = primka[i].primka_id;
-
-            //  TRAŽENJE RADNIH NALOGA POVEZANIH SA PRIMKAMA
-            $.ajax({
-                async: false,
-                url: "json/rma/getRmaByPrimka.php",
-                type: 'GET',
-                data: {"primka": pid},
-                success: function (rn) {
-
-                    if (rn) {
-                        console.log(rn);
-
-                        Tabla.rows.add(rn).draw();
-
-                    }
-
-
-
-                },
-                error: function () {
-                    console.log("greška");
-                }
-            });
-
-
-
-        }
-
-
-
-
-
-    },
-    error: function (e) {
-        alert(e.message);
-    }
-});
-
 var Tabla = $('#sviRMA').DataTable({
     "columns": [
         {"data": "pid", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
@@ -115,11 +51,12 @@ var Tabla = $('#sviRMA').DataTable({
             }},
         {"data": "serijski"},
         {"data": "s_ime", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
-                if (row.tvrtka) var osoba = row.tvrtka;
-                else var osoba = row.s_ime + ' ' + row.s_prezime;
+                if (row.tvrtka)
+                    var osoba = row.tvrtka;
+                else
+                    var osoba = row.s_ime + ' ' + row.s_prezime;
                 return osoba;
             }},
-
         {"data": "rnOs"},
         {"data": "nazivOS"},
         {"data": "poslano", "render": function (data, type, row, meta) {
@@ -131,6 +68,34 @@ var Tabla = $('#sviRMA').DataTable({
         {"data": "napomena"}
     ], "bDestroy": true
 });
+
+//  TRAŽENJE RADNIH NALOGA POVEZANIH SA PRIMKAMA
+$.ajax({
+    async: false,
+    url: "json/rma/sviRmaSR.php",
+    type: 'POST',
+    dataType: 'json',
+    contentType: "application/json; charset=utf-8",
+    success: function (rn) {
+
+        if (rn) {
+            console.log(rn);
+
+            Tabla.rows.add(rn).draw();
+
+        }
+
+
+
+    },
+    error: function () {
+        console.log("greška");
+    }
+});
+
+
+
+
 
 $('#sviRMA').on("mouseover", "#uredi_rma", function () {
     $(this).attr("title", "Uredi rma nalog");

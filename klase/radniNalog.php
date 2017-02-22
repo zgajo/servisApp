@@ -177,6 +177,127 @@ class rmaNalog extends RN{
         
     }
     
+     public function sviRmaOstali($centar) {
+        
+        $query=$this->mysqli->prepare("SELECT s.tvrtka, s.ime as s_ime, s.prezime as s_prezime, rma.rma_id, p.primka_id, p.sifraUredaja as sifra, p.serial as serijski, p.naziv as dio, p.brand as brand, p.datumZaprimanja, rma.status,  rma.napomena, rma.poslanoOSu, rma.rnOS, 
+                rma.nazivOS, rma.naplata, rma.danZaprimanja,  rma.opisPopravka, rma.danZavrsetka, 
+                do.ime as doi, do.prezime as dop, dz.ime as dzi, dz.prezime as dzp 
+                FROM radniNaloziRMA rma 
+                LEFT JOIN primka p ON rma.primka_id = p.primka_id 
+                LEFT JOIN stranka s ON p.stranka_id = s.stranka_id 
+                LEFT JOIN djelatnici do ON rma.djelatnik_zapoceoRma_id = do.djelatnik_id 
+                LEFT JOIN djelatnici dz ON rma.djelatnik_zavrsioRma_id = dz.djelatnik_id 
+                WHERE p.status != 'Kupac preuzeo' AND p.status != 'Ekološki zbrinuto' 
+                                        AND p.status !=  'Poslano u CS%' 
+                                        and p.centar = ?
+                                        ORDER BY p.primka_id ASC");
+        
+        if($query === false){
+            trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
+        }
+        
+        $query->bind_param("s", $centar); 
+        
+        if($query->execute()){
+            
+            $query->bind_result( $st, $si, $sp,$this->id, $pr, $sifra, $ser, $dio, $brand, $datumZaprimanja, $status,  $napomena, $poslano, $r, $os, $naplata, $prip, $opis, $zavrseno, $oime, $oprezime, $zime, $zprezime);
+            while($row = $query->fetch()){
+                $rma[] = array(
+                    "tvrtka" => $st,
+                    "s_ime" => $si,
+                    "s_prezime" => $sp,
+                    "id" => $this->id,
+                    "pid" => $pr,
+                    "sifra" => $sifra,
+                    "serijski" => $ser,
+                    "naziv" => $dio,
+                    "brand" => $brand,
+                    "datumZaprimanja" => $datumZaprimanja,
+                    "status" => $status,
+                    "napomena" => $napomena,
+                    "poslano" => $poslano,
+                    "rnOs" => $r,
+                    "naplata" => $naplata,
+                    "pripremljeno" => $prip,
+                    "opis" => $opis,
+                    "zavrseno" => $zavrseno,
+                    "nazivOS" => $os,
+                    "doime" => $oime,
+                    "doprezime" => $oprezime,
+                    "dzime" => $zime,
+                    "dzprezime" => $zprezime
+                    );
+            }
+            $query->close();
+            if(isset($rma)) return $rma;
+            
+        
+        }else{
+             $query->close();
+        die("Neuspješno dohvaćanje rma naloga po primci");
+        } 
+        
+    }
+    
+    public function sviRmaSR() {
+        
+        $query=$this->mysqli->prepare("SELECT s.tvrtka, s.ime as s_ime, s.prezime as s_prezime, rma.rma_id, p.primka_id, p.sifraUredaja as sifra, p.serial as serijski, p.naziv as dio, p.brand as brand, p.datumZaprimanja, rma.status,  rma.napomena, rma.poslanoOSu, rma.rnOS, 
+                rma.nazivOS, rma.naplata, rma.danZaprimanja,  rma.opisPopravka, rma.danZavrsetka, 
+                do.ime as doi, do.prezime as dop, dz.ime as dzi, dz.prezime as dzp 
+                FROM radniNaloziRMA rma 
+                LEFT JOIN primka p ON rma.primka_id = p.primka_id 
+                LEFT JOIN stranka s ON p.stranka_id = s.stranka_id 
+                LEFT JOIN djelatnici do ON rma.djelatnik_zapoceoRma_id = do.djelatnik_id 
+                LEFT JOIN djelatnici dz ON rma.djelatnik_zavrsioRma_id = dz.djelatnik_id 
+                WHERE p.status != 'Kupac preuzeo'  AND p.status != 'Ekološki zbrinuto' 
+               ORDER BY p.primka_id ASC");
+        
+        if($query === false){
+            trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
+        }
+        
+        
+        if($query->execute()){
+            
+            $query->bind_result( $st, $si, $sp,$this->id, $pr, $sifra, $ser, $dio, $brand, $datumZaprimanja, $status,  $napomena, $poslano, $r, $os, $naplata, $prip, $opis, $zavrseno, $oime, $oprezime, $zime, $zprezime);
+            while($row = $query->fetch()){
+                $rma[] = array(
+                    "tvrtka" => $st,
+                    "s_ime" => $si,
+                    "s_prezime" => $sp,
+                    "id" => $this->id,
+                    "pid" => $pr,
+                    "sifra" => $sifra,
+                    "serijski" => $ser,
+                    "naziv" => $dio,
+                    "brand" => $brand,
+                    "datumZaprimanja" => $datumZaprimanja,
+                    "status" => $status,
+                    "napomena" => $napomena,
+                    "poslano" => $poslano,
+                    "rnOs" => $r,
+                    "naplata" => $naplata,
+                    "pripremljeno" => $prip,
+                    "opis" => $opis,
+                    "zavrseno" => $zavrseno,
+                    "nazivOS" => $os,
+                    "doime" => $oime,
+                    "doprezime" => $oprezime,
+                    "dzime" => $zime,
+                    "dzprezime" => $zprezime
+                    );
+            }
+            $query->close();
+            if(isset($rma)) return $rma;
+            
+        
+        }else{
+             $query->close();
+        die("Neuspješno dohvaćanje rma naloga po primci");
+        } 
+        
+    }
+    
     public function getById($id){
         $query=$this->mysqli->prepare("SELECT rma.*,  rnd1.ime as zapoceoRn_ime, rnd1.prezime as zapoceoRn_prezime,  rnd2.ime as zavrsioRn_ime, rnd2.prezime as zavrsioRn_prezime 
                                              FROM radniNaloziRMA rma 
@@ -416,8 +537,118 @@ class servisRN extends RN{
         
     }
     
+    public function sviRNostali($centar) {
+       
+        
+        $query=$this->mysqli->prepare("SELECT rn.rn_id, p.primka_id, p.naziv, p.serial, p.datumZaprimanja, s.ime as s_ime, s.prezime as s_prezime, s.tvrtka, rn.status, rn.pocetakRada, rn.danZavrsetka, rn.opisPopravka, rn.naplata, rn.napomena, rn.promijenjeno, rn.broj_ispisa, d1.ime, d1.prezime, d2.ime, d2.prezime 
+                FROM radniNaloziServisa rn 
+                LEFT JOIN primka p ON p.primka_id = rn.primka_id 
+                LEFT JOIN stranka s ON p.stranka_id = s.stranka_id 
+                LEFT JOIN djelatnici d1 ON rn.djelatnik_zapoceoRn_id = d1.djelatnik_id 
+                LEFT JOIN djelatnici d2 ON rn.djelatnik_zavrsioRn_id = d2.djelatnik_id 
+                WHERE p.status != 'Kupac preuzeo' AND p.status != 'Ekološki zbrinuto' 
+                                        AND p.status !=  'Poslano u CS%'  
+                                        
+                                        and p.centar = ? 
+                                        ORDER BY p.primka_id ASC");
+        
+        if($query === false){
+            trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
+        }
+        
+        $query->bind_param("s", $centar); 
+        
+        if($query->execute()){
+            $query->bind_result($this->id, $pid, $pn, $ps, $datZa, $si, $sp, $st, $status, $pocetak, $dz, $op, $naplata, $napomena, $promijenjeno, $ispisano, $d1ime, $d1prezime,$d2ime, $d2prezime );
+            while($row = $query->fetch()){
+                $rn[] = array(
+                    "id" => $this->id,
+                    "naziv" => $pn,
+                    "datumZaprimanja" => $datZa,
+                    "serijski" => $ps,
+                    "s_ime" => $si,
+                    "s_prezime" => $sp,
+                    "tvrtka" => $st,
+                    "primka" => $pid,
+                    "status" => $status,
+                    "pocetak" => $pocetak,
+                    "zavrsetak" => $dz,
+                    "opis" => $op,
+                    "naplata" => $naplata,
+                    "napomena" => $napomena,
+                    "promijenjeno" => $promijenjeno,
+                    "ispisano" => $ispisano,
+                    "d1ime" => $d1ime,
+                    "d1prezime" => $d1prezime,
+                    "d2ime" => $d2ime,
+                    "d2prezime" => $d2prezime
+                    );
+            }
+            $query->close();
+            if(isset($rn))return $rn;
+        
+        }else{
+             $query->close();
+        die("Neuspješno ažuriranje radnog naloga");
+        } 
+        
+    }
     
-    
+     public function sviRNservis($centar) {
+       
+        $query=$this->mysqli->prepare("SELECT rn.rn_id, p.primka_id, p.naziv, p.serial, p.datumZaprimanja, s.ime as s_ime, s.prezime as s_prezime, s.tvrtka, rn.status, rn.pocetakRada, rn.danZavrsetka, rn.opisPopravka, rn.naplata, rn.napomena, rn.promijenjeno, rn.broj_ispisa, d1.ime, d1.prezime, d2.ime, d2.prezime 
+                FROM radniNaloziServisa rn 
+                LEFT JOIN primka p ON p.primka_id = rn.primka_id 
+                LEFT JOIN stranka s ON p.stranka_id = s.stranka_id 
+                LEFT JOIN djelatnici d1 ON rn.djelatnik_zapoceoRn_id = d1.djelatnik_id 
+                LEFT JOIN djelatnici d2 ON rn.djelatnik_zavrsioRn_id = d2.djelatnik_id 
+                 WHERE p.status != 'Kupac preuzeo' AND p.status != 'Ekološki zbrinuto' 
+                 AND p.centar = ? OR p.status LIKE  'Poslano u CS%'  
+                 ORDER BY p.primka_id ASC");
+        
+        if($query === false){
+            trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
+        }
+        
+        $query->bind_param("s", $centar); 
+        
+        if($query->execute()){
+            $query->bind_result($this->id, $pid, $pn, $ps, $datZa, $si, $sp, $st, $status, $pocetak, $dz, $op, $naplata, $napomena, $promijenjeno, $ispisano, $d1ime, $d1prezime,$d2ime, $d2prezime );
+            while($row = $query->fetch()){
+                $rn[] = array(
+                    "id" => $this->id,
+                    "naziv" => $pn,
+                    "datumZaprimanja" => $datZa,
+                    "serijski" => $ps,
+                    "s_ime" => $si,
+                    "s_prezime" => $sp,
+                    "tvrtka" => $st,
+                    "primka" => $pid,
+                    "status" => $status,
+                    "pocetak" => $pocetak,
+                    "zavrsetak" => $dz,
+                    "opis" => $op,
+                    "naplata" => $naplata,
+                    "napomena" => $napomena,
+                    "promijenjeno" => $promijenjeno,
+                    "ispisano" => $ispisano,
+                    "d1ime" => $d1ime,
+                    "d1prezime" => $d1prezime,
+                    "d2ime" => $d2ime,
+                    "d2prezime" => $d2prezime
+                    );
+            }
+            $query->close();
+            if(isset($rn))return $rn;
+        
+        }else{
+             $query->close();
+        die("Neuspješno ažuriranje radnog naloga");
+        } 
+        
+    }
+
+
     public function RNjoinPrimkaOtvorenUredi($id){
         $query=$this->mysqli->prepare("SELECT rn.*, p.*, s.*, rn.status as status_rn, 
                                             rnd1.ime as zapoceoRn_ime, rnd1.prezime as zapoceoRn_prezime, rnd2.ime as zavrsioRn_ime, rnd2.prezime as zavrsioRn_prezime, 
