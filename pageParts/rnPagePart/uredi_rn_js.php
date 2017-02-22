@@ -122,6 +122,7 @@
                             var primka_id = $('#primka_id').text();
                             var status = $('select').val();
                             var trazi = status_primke.substring(0,12);
+                            var odj = "<?php echo $_COOKIE['odjel']; ?>";
                             if(confirm('Ažurirati radni nalog?')) { 
                             //  UKOLIKO SE ZATVARA RADNI NALOG
                             if(status === "Popravak završen u jamstvu"  || status === "Popravak završen van jamstva" || status === 'Stranka odustala od popravka'  || status === 'Uređaj zamijenjen novim' || status === "Odobren povrat novca" || status === "DOA - Uređaj zamijenjen novim" || status === "DOA - Odobren povrat novca"){
@@ -176,6 +177,7 @@
                                                     if (pre) {
                                                         //Browser has allowed it to be opened
                                                         pre.focus();
+                                                        if(odj = "Reklamacije") window.location = "primke.php?primka="+primka_id;
                                                     } else {
                                                         //Browser has blocked it
                                                         alert('Molim Vas, omogućite prikaz skočnih prozora');
