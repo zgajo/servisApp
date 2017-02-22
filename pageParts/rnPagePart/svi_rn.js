@@ -1,13 +1,11 @@
-
-
-
-$('#sviRN').on("mouseover", "tr", function () {
-    $(this).find('i').show();
+$('#sviRN tbody').on("mouseover", "tr", function () {
+     $(this).css('background-color', '#ccffcc');
+    $(this).find('#uredi_rn').show();
 });
-$('#sviRN').on("mouseout", "tr", function () {
-    $(this).find('i').hide();
+$('#sviRN tbody').on("mouseout", "tr", function () {
+    $(this).removeAttr('style');
+    $(this).find('#uredi_rn').hide();
 });
-
 
 //    LISTANJE SVIH OTVORENIH PRIMKI
 $.ajax({
@@ -84,8 +82,13 @@ var Tabla = $('#sviRN').DataTable({
                     var sty = "label label-warning";
                 if (diffDays > 14)
                     var sty = "label label-danger";
+                
+                 if(row.status == "Stranka odustala od popravka" || row.status == "Popravak završen u jamstvu" || row.status == "Popravak završen van jamstva" || row.status == "Stranka odustala od popravka" 
+                            || row.status == "Uređaj zamijenjen novim" || row.status == "Odobren povrat novca" || row.status == "DOA - Uređaj zamijenjen novim" ||  row.status == "DOA - Odobren povrat novca" ||  row.status == "Čeka preuzimanje stranke")   {
+                        var a = '<p style="display: initial; margin-right:10px; color:purple;"><i class="fa fa-angle-double-right"></i></p><a name="' + row.id + '" class="' + sty + '" style="cursor: default; font-size: 0.8em;">' + row.primka + '</a><p style="display: initial; margin-left:10px; color:purple"><i class="fa fa-angle-double-left"></i></p>';
+                            }
+                else var a = '<a name="' + row.id + '" class="' + sty + '" style="cursor: default; font-size: 0.8em;">' + row.primka + '</a>';
 
-                var a = '<a name="' + row.id + '" style="cursor: default;" class="' + sty + '">' + row.primka + '</a>'; // row object contains the row data
                 return a;
             }},
         {"data": "id", "render": function (data, type, row, meta) {

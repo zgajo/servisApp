@@ -96,7 +96,7 @@
                                 $('#inputNaziv').val(primka[0].naziv);
                                 $('#inputSifra').val(primka[0].sifraUredaja);
                                 $('#inputBrand').val(primka[0].brand);
-                                $('#inputTip').val(primka[0].tip);
+                                $('#inputTip').append('<option selected>'+primka[0].tip+'</option>');
                                 $('#inputSerijski').val(primka[0].serial);
                                 var dk = new Date(primka[0].datumKupnje);
                                 if (!isNaN(dk.getDate()) && dk.getFullYear()!='1970')

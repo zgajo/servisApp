@@ -16,7 +16,7 @@
                             dataType: 'json',
                             contentType: "application/json; charset=utf-8",
                             success: function (data) {
-
+console.log(data);
                                 var pp = JSON.parse(JSON.stringify(data));
 
                                 var dz = new Date(pp[0].datumZaprimanja);
@@ -80,7 +80,7 @@
                                 $('#inputNaziv').val(pp[0].naziv);
                                 $('#inputSifra').val(pp[0].sifraUredaja);
                                 $('#inputBrand').val(pp[0].brand);
-                                $('#inputTip').val(pp[0].tip);
+                                $('#inputTip').append('<option selected>'+pp[0].tip+'</option>');
                                 $('#inputSerijski').val(pp[0].serial);
                                 if (dk.getFullYear()!='1970' && dk)
                                     $('#inputDK').val([dk.getDate(), dk.getMonth() + 1, dk.getFullYear()].join('.'));
@@ -121,7 +121,7 @@
                                                     '<div class="box-header with-border">' +
                                                     '<h3 class="box-title">Radni nalog servisa br. ' + rn[i].id + '</h3> ' +
                                                     '</div>' +
-                                                    '<div  id="primka" class="col-sm-4 invoice-col" >' +
+                                                    '<div   class="col-md-6 invoice-col" style="width:100%" >' +
                                                     '<address>' +
                                                     '<i><strong>Početak rada: </strong></i>' + [rnp.getDate(), rnp.getMonth() + 1, rnp.getFullYear()].join('.') + ' /  ' + [(rnp.getHours() < 10 ? '0' : '') + rnp.getHours(), (rnp.getMinutes() < 10 ? '0' : '') + rnp.getMinutes()].join(':') + '<br>' +
                                                     '<i><strong>Rad započeo: </strong></i></strong>' + rn[i].d1ime + ' ' + rn[i].d1prezime + '<br>' +

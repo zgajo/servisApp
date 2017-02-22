@@ -99,7 +99,7 @@
                                 $('#inputNaziv').val(primka[0].naziv);
                                 $('#inputSifra').val(primka[0].sifraUredaja);
                                 $('#inputBrand').val(primka[0].brand);
-                                $('#inputTip').val(primka[0].tip);
+                                $('#inputTip').append('<option selected>'+primka[0].tip+'</option>');
                                 $('#inputSerijski').val(primka[0].serial);
                                 if (dk.getFullYear() != '1970' && dk)
                                     $('#inputDK').val([dk.getDate(), dk.getMonth() + 1, dk.getFullYear()].join('.'));

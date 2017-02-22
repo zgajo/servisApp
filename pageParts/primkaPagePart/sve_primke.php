@@ -22,7 +22,7 @@
                                     <th>Status</th>
                                 </tr>
                             </thead>
-                            <tbody style="text-align: center"></tbody>
+                            <tbody style="text-align: center; color: black"></tbody>
                         </table>
                     </div><!-- /.box-body -->
 
@@ -41,19 +41,19 @@
                         <table id="svePoslanePrimke" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <?php if ($_COOKIE['odjel'] == "Servis" || $_COOKIE['odjel'] == "Reklamacije" ) { ?><th style="text-align: center">Započni servis</th><?php } ?>
+                                        <?php if ($_COOKIE['odjel'] == "Servis" || $_COOKIE['odjel'] == "Reklamacije" ) { ?><th style="text-align: center">Započni servis</th><?php } ?>
                                         <th>Primka</th>
                                         <?php if ($_COOKIE['odjel'] == "Servis" || $_COOKIE['odjel'] == "Reklamacije") { ?><th>Radni nalog</th><?php } ?>
                                         <th>Uređaj</th>
                                         <th>Serijski</th>
                                         <th>Stranka</th>
                                         <th>Datum zaprimanja</th>
-                                        <th>Status primke</th>
-                                        <?php if ($_COOKIE['odjel'] == "Servis" || $_COOKIE['odjel'] == "Reklamacije") { ?><th>Poslano iz</th><?php } ?>
+                                        <th>Status</th>
+                                        <?php if ($_COOKIE['odjel'] == "Servis" || $_COOKIE['odjel'] == "Reklamacije") { ?><th>Poslao</th><?php } ?>
                                     
                                 </tr>
                             </thead>
-                            <tbody style="text-align: center"></tbody>
+                            <tbody style="text-align: center; color: black"></tbody>
                         </table>
                     </div><!-- /.box-body -->
 
