@@ -12,7 +12,7 @@
                     success: function (spp) {
                         if(spp){
                         if (odjel === "Servis" || odjel === "Reklamacije" ) {
-                            $('#svePoslanePrimke').DataTable({
+                            $('#svePoslanePrimkeServis').DataTable({
                                 "ajax": {
                                     "url": "json/primka/svePoslanePrimke.php",
                                     "dataSrc": ""

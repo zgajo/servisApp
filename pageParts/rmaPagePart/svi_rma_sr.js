@@ -13,61 +13,6 @@ $("#sviRMA tbody").on("mouseout", "tr", function () {
 
 
 
-var Tabla = $('#sviRMA').DataTable({
-    "columns": [
-        {"data": "pid", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
-                var danas = new Date();
-                var datum = new Date(row.datumZaprimanja);
-                var oneDay = 24 * 60 * 60 * 1000;
-                var diffDays = Math.round(Math.abs((danas.getTime() - datum.getTime()) / (oneDay)));
-
-                if (diffDays <= 15)
-                    var sty = "label label-success";
-                if (diffDays > 15 && diffDays <= 30)
-                    var sty = "label label-warning";
-                if (diffDays > 30)
-                    var sty = "label label-danger";
-
-                if (row.status == "Stranka odustala od popravka" || row.status == "Popravak završen u jamstvu" || row.status == "Popravak završen van jamstva" || row.status == "Stranka odustala od popravka"
-                        || row.status == "Uređaj zamijenjen novim" || row.status == "Odobren povrat novca" || row.status == "DOA - Uređaj zamijenjen novim" || row.status == "DOA - Odobren povrat novca" || row.status == "Čeka preuzimanje stranke") {
-                    var a = '<p style="display: initial; margin-right:10px; color:purple;"><i class="fa fa-angle-double-right"></i></p><a name="' + row.id + '" class="' + sty + '" style="cursor: default; font-size: 0.8em;">' + row.pid + '</a><p style="display: initial; margin-left:10px; color:purple"><i class="fa fa-angle-double-left"></i></p>';
-                } else
-                    var a = '<a name="' + row.id + '" class="' + sty + '" style="cursor: default; font-size: 0.8em;">' + row.pid + '</a>';
-
-                return a;
-            }},
-        {"data": "id", "render": function (data, type, row, meta) {
-                var output = '<strong>RMA. ' + row.id + '</strong><a   name="' + row.id + '" style="margin-left:10px;" href="#"><i id="uredi_rma" style=" display:none;" class="glyphicon glyphicon-pencil"></i></a><br>';
-                return output;
-            }},
-        {"data": "sifra", "render": function (data, type, row, meta) {
-                if (row.sifra)
-                    return row.sifra;
-                else
-                    return ''
-            }},
-        {"data": "naziv", "render": function (data, type, row, meta) {
-                return row.brand + ' ' + row.naziv
-            }},
-        {"data": "serijski"},
-        {"data": "s_ime", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
-                if (row.tvrtka)
-                    var osoba = row.tvrtka;
-                else
-                    var osoba = row.s_ime + ' ' + row.s_prezime;
-                return osoba;
-            }},
-        {"data": "rnOs"},
-        {"data": "nazivOS"},
-        {"data": "poslano", "render": function (data, type, row, meta) {
-                var poslano = new Date(row.poslano);
-                var output = (poslano && poslano.getFullYear() != "1970" && !isNaN(poslano)) ? [poslano.getDate(), poslano.getMonth() + 1, poslano.getFullYear()].join('.') : '';
-                return output;
-            }},
-        {"data": "status"},
-        {"data": "napomena"}
-    ], "bDestroy": true
-});
 
 //  TRAŽENJE RADNIH NALOGA POVEZANIH SA PRIMKAMA
 $.ajax({
@@ -81,7 +26,66 @@ $.ajax({
         if (rn) {
             console.log(rn);
 
-            Tabla.rows.add(rn).draw();
+            $('#sviRMA').DataTable({
+                "ajax": {
+                "url": "json/rma/sviRmaSR.php",
+                "dataSrc": ""
+            },
+                "columns": [
+                    {"data": "pid", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
+                            var danas = new Date();
+                            var datum = new Date(row.datumZaprimanja);
+                            var oneDay = 24 * 60 * 60 * 1000;
+                            var diffDays = Math.round(Math.abs((danas.getTime() - datum.getTime()) / (oneDay)));
+
+                            if (diffDays <= 15)
+                                var sty = "label label-success";
+                            if (diffDays > 15 && diffDays <= 30)
+                                var sty = "label label-warning";
+                            if (diffDays > 30)
+                                var sty = "label label-danger";
+
+                            if (row.status == "Stranka odustala od popravka" || row.status == "Popravak završen u jamstvu" || row.status == "Popravak završen van jamstva" || row.status == "Stranka odustala od popravka"
+                                    || row.status == "Uređaj zamijenjen novim" || row.status == "Odobren povrat novca" || row.status == "DOA - Uređaj zamijenjen novim" || row.status == "DOA - Odobren povrat novca" || row.status == "Čeka preuzimanje stranke") {
+                                var a = '<p style="display: initial; margin-right:10px; color:purple;"><i class="fa fa-angle-double-right"></i></p><a name="' + row.id + '" class="' + sty + '" style="cursor: default; font-size: 0.8em;">' + row.pid + '</a><p style="display: initial; margin-left:10px; color:purple"><i class="fa fa-angle-double-left"></i></p>';
+                            } else
+                                var a = '<a name="' + row.id + '" class="' + sty + '" style="cursor: default; font-size: 0.8em;">' + row.pid + '</a>';
+
+                            return a;
+                        }},
+                    {"data": "id", "render": function (data, type, row, meta) {
+                            var output = '<strong>RMA. ' + row.id + '</strong><a   name="' + row.id + '" style="margin-left:10px;" href="#"><i id="uredi_rma" style=" display:none;" class="glyphicon glyphicon-pencil"></i></a><br>';
+                            return output;
+                        }},
+                    {"data": "sifra", "render": function (data, type, row, meta) {
+                            if (row.sifra)
+                                return row.sifra;
+                            else
+                                return ''
+                        }},
+                    {"data": "naziv", "render": function (data, type, row, meta) {
+                            return row.brand + ' ' + row.naziv
+                        }},
+                    {"data": "serijski"},
+                    {"data": "s_ime", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
+                            if (row.tvrtka)
+                                var osoba = row.tvrtka;
+                            else
+                                var osoba = row.s_ime + ' ' + row.s_prezime;
+                            return osoba;
+                        }},
+                    {"data": "rnOs"},
+                    {"data": "nazivOS"},
+                    {"data": "poslano", "render": function (data, type, row, meta) {
+                            var poslano = new Date(row.poslano);
+                            var output = (poslano && poslano.getFullYear() != "1970" && !isNaN(poslano)) ? [poslano.getDate(), poslano.getMonth() + 1, poslano.getFullYear()].join('.') : '';
+                            return output;
+                        }},
+                    {"data": "status"},
+                    {"data": "napomena"}
+                ], "bDestroy": true
+            });
+
 
         }
 

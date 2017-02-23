@@ -8,48 +8,6 @@ $('#sviRN tbody').on("mouseout", "tr", function () {
 });
 
 
-var Tabla = $('#sviRN').DataTable({
-    "columns": [
-        {"data": "primka", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
-                var danas = new Date();
-                var datum = new Date(row.datumZaprimanja);
-                var oneDay = 24 * 60 * 60 * 1000;
-                var diffDays = Math.round(Math.abs((danas.getTime() - datum.getTime()) / (oneDay)));
-
-                if (diffDays <= 7)
-                    var sty = "label label-success";
-                if (diffDays > 7 && diffDays <= 14)
-                    var sty = "label label-warning";
-                if (diffDays > 14)
-                    var sty = "label label-danger";
-
-                if (row.status == "Stranka odustala od popravka" || row.status == "Popravak završen u jamstvu" || row.status == "Popravak završen van jamstva" || row.status == "Stranka odustala od popravka"
-                        || row.status == "Uređaj zamijenjen novim" || row.status == "Odobren povrat novca" || row.status == "DOA - Uređaj zamijenjen novim" || row.status == "DOA - Odobren povrat novca" || row.status == "Čeka preuzimanje stranke") {
-                    var a = '<p style="display: initial; margin-right:10px; color:purple;"><i class="fa fa-angle-double-right"></i></p><a name="' + row.id + '" class="' + sty + '" style="cursor: default; font-size: 0.8em;">' + row.primka + '</a><p style="display: initial; margin-left:10px; color:purple"><i class="fa fa-angle-double-left"></i></p>';
-                } else
-                    var a = '<a name="' + row.id + '" class="' + sty + '" style="cursor: default; font-size: 0.8em;">' + row.primka + '</a>';
-
-                return a;
-            }},
-        {"data": "id", "render": function (data, type, row, meta) {
-                var output = '<strong>RN. ' + row.id + '</strong><a name="' + row.id + '"  style="margin-left:10px;" ><i id="uredi_rn" style=" display:none;" class="glyphicon glyphicon-pencil"></i></a><br>';
-                return output;
-            }},
-        {"data": "naziv"},
-        {"data": "serijski"},
-        {"data": "s_ime", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
-                if (row.tvrtka)
-                    var osoba = row.tvrtka;
-                else
-                    var osoba = row.s_ime + ' ' + row.s_prezime;
-                return osoba;
-            }},
-        {"data": "status"},
-        {"data": "napomena"}
-    ], "bDestroy": true
-});
-
-
 //  TRAŽENJE RADNIH NALOGA POVEZANIH SA PRIMKAMA
 $.ajax({
     async: false,
@@ -62,7 +20,50 @@ $.ajax({
         console.log(rn);
         if (rn) {
 
-            Tabla.rows.add(rn).draw();
+            $('#sviRN').DataTable({
+                "ajax": {
+                    "url": "json/rn/sviRNostali.php",
+                    "dataSrc": ""
+                },
+                "columns": [
+                    {"data": "primka", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
+                            var danas = new Date();
+                            var datum = new Date(row.datumZaprimanja);
+                            var oneDay = 24 * 60 * 60 * 1000;
+                            var diffDays = Math.round(Math.abs((danas.getTime() - datum.getTime()) / (oneDay)));
+
+                            if (diffDays <= 7)
+                                var sty = "label label-success";
+                            if (diffDays > 7 && diffDays <= 14)
+                                var sty = "label label-warning";
+                            if (diffDays > 14)
+                                var sty = "label label-danger";
+
+                            if (row.status == "Stranka odustala od popravka" || row.status == "Popravak završen u jamstvu" || row.status == "Popravak završen van jamstva" || row.status == "Stranka odustala od popravka"
+                                    || row.status == "Uređaj zamijenjen novim" || row.status == "Odobren povrat novca" || row.status == "DOA - Uređaj zamijenjen novim" || row.status == "DOA - Odobren povrat novca" || row.status == "Čeka preuzimanje stranke") {
+                                var a = '<p style="display: initial; margin-right:10px; color:purple;"><i class="fa fa-angle-double-right"></i></p><a name="' + row.id + '" class="' + sty + '" style="cursor: default; font-size: 0.8em;">' + row.primka + '</a><p style="display: initial; margin-left:10px; color:purple"><i class="fa fa-angle-double-left"></i></p>';
+                            } else
+                                var a = '<a name="' + row.id + '" class="' + sty + '" style="cursor: default; font-size: 0.8em;">' + row.primka + '</a>';
+
+                            return a;
+                        }},
+                    {"data": "id", "render": function (data, type, row, meta) {
+                            var output = '<strong>RN. ' + row.id + '</strong><a name="' + row.id + '"  style="margin-left:10px;" ><i id="uredi_rn" style=" display:none;" class="glyphicon glyphicon-pencil"></i></a><br>';
+                            return output;
+                        }},
+                    {"data": "naziv"},
+                    {"data": "serijski"},
+                    {"data": "s_ime", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
+                            if (row.tvrtka)
+                                var osoba = row.tvrtka;
+                            else
+                                var osoba = row.s_ime + ' ' + row.s_prezime;
+                            return osoba;
+                        }},
+                    {"data": "status"},
+                    {"data": "napomena"}
+                ], "bDestroy": true
+            });
 
         }
 

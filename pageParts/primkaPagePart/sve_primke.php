@@ -38,22 +38,39 @@
                 <div class="box box-info" style="border-top: none">
 
                     <div class="box-body">
-                        <table id="svePoslanePrimke" class="table table-bordered table-striped">
+                        <?php if ($_COOKIE['odjel'] == "Servis" || $_COOKIE['odjel'] == "Reklamacije" ) { ?>
+                        <table id="svePoslanePrimkeServis" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                        <?php if ($_COOKIE['odjel'] == "Servis" || $_COOKIE['odjel'] == "Reklamacije" ) { ?><th>Započni servis</th><?php } ?>
+                                        <th>Započni servis</th>
                                         <th>Primka</th>
                                         <th>Uređaj</th>
                                         <th>Serijski</th>
                                         <th>Stranka</th>
                                         <th>Zaprimljeno</th>
                                         <th>Status</th>
-                                        <?php if ($_COOKIE['odjel'] == "Servis" || $_COOKIE['odjel'] == "Reklamacije") { ?><th>Poslao</th><?php } ?>
+                                       <th>Poslao</th>
                                     
                                 </tr>
                             </thead>
                             <tbody style="text-align: center; color: black"></tbody>
                         </table>
+                        <?php } else{ ?>
+                        <table id="svePoslanePrimke" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                        <th>Primka</th>
+                                        <th>Uređaj</th>
+                                        <th>Serijski</th>
+                                        <th>Stranka</th>
+                                        <th>Zaprimljeno</th>
+                                        <th>Status</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody style="text-align: center; color: black"></tbody>
+                        </table>
+                        <?php } ?>
                     </div><!-- /.box-body -->
 
                     <div style="clear: both">

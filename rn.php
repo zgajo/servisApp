@@ -23,11 +23,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <!-- Ionicons -->
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+        <!-- DataTables -->
+        <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
         <!-- Theme style -->
         <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
-                <link href="search/search.css" rel="stylesheet">
+        <link href="search/search.css" rel="stylesheet">
 
         <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
               page. However, you can choose any other skin. Make sure you
@@ -35,20 +35,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
         -->
         <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
         <style>
-                #stranka{ width: 35%;
-                }
-                #primka{
-                    width: 65%;
-                }
-                #required:after { content:" *"; color: red}
-                @media (max-width: 768px){
-                   #stranka{ width: 100%;
+            #stranka{ width: 35%;
+            }
+            #primka{
+                width: 65%;
+            }
+            #required:after { content:" *"; color: red}
+            @media (max-width: 768px){
+                #stranka{ width: 100%;
                 }
                 #primka{
                     width: 100%;
                 }
             }
-            
+
         </style>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -57,7 +57,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
-    
+
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
 
@@ -67,57 +67,56 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
-                
+
 
                 <!-- Main content -->
                 <section class="content">
 
-                    <?php if(isset($_GET['action'])) {if($_GET['action'] == "novi_rn"  && !empty($_GET['primka_id'])) { 
-                        
-                        $rn  = new servisRN();
-                        $last = $rn->insert($_GET['primka_id'], $_COOKIE['id']);
-                        unset($rn);
-                        
-                        $primka = new primka();
-                        $primka = $primka->getById($_GET['primka_id']);
-                        $trazi = substr($primka[0]["p_status"], 0, 12);
-                        if($trazi == "Poslano u CS"){
-                           
-                            unset($primka);
+                    <?php
+                    if (isset($_GET['action'])) {
+                        if ($_GET['action'] == "novi_rn" && !empty($_GET['primka_id'])) {
+
+                            $rn = new servisRN();
+                            $last = $rn->insert($_GET['primka_id'], $_COOKIE['id']);
+                            unset($rn);
+
                             $primka = new primka();
-                            $primka->azurirajStatus("Poslano u CS - Rovinj / Započelo servisiranje", $_GET['primka_id']);
-                            
-                        }else{
-                           
+                            $primka = $primka->getById($_GET['primka_id']);
+                            $trazi = substr($primka[0]["p_status"], 0, 12);
+                            if ($trazi == "Poslano u CS") {
+
+                                unset($primka);
+                                $primka = new primka();
+                                $primka->azurirajStatus("Poslano u CS - Rovinj / Započelo servisiranje", $_GET['primka_id']);
+                            } else {
+
+                                unset($primka);
+                                $primka = new primka();
+                                $primka->azurirajStatus("U servisu", $_GET['primka_id']);
+                            }
+
                             unset($primka);
-                            $primka = new primka();
-                            $primka->azurirajStatus("U servisu", $_GET['primka_id']);
-                            
+                            echo '<script>'
+                            . 'setTimeout(function(){ window.location.href="rn.php?radni_nalog=' . $last . '";}, 100);'
+                            . '</script>';
+                            ?>
+
+                        <?php
                         }
-                        
-                        unset($primka);
-                        echo '<script>'
-                           . 'setTimeout(function(){ window.location.href="rn.php?radni_nalog='.$last.'";}, 100);'
-                           . '</script>';
-                      
-                        
-                        ?>
-                                      
-<?php }} else if(!empty($_GET['radni_nalog'])){
-                    
-                    require_once('./pageParts/rnPagePart/uredi_rn.php');
-                    
-                    } else{  
-                    
-                    require_once('./pageParts/rnPagePart/svi_rn.php');
-                    
-                    } ?>
+                    } else if (!empty($_GET['radni_nalog'])) {
+
+                        require_once('./pageParts/rnPagePart/uredi_rn.php');
+                    } else {
+
+                        require_once('./pageParts/rnPagePart/svi_rn.php');
+                    }
+                    ?>
                 </section><!-- /.content -->
             </div><!-- /.content-wrapper -->
 
-           <?php require_once('./pageParts/footer.php') ?>
+            <?php require_once('./pageParts/footer.php') ?>
 
-            
+
         </div><!-- ./wrapper -->
 
         <!-- REQUIRED JS SCRIPTS -->
@@ -130,9 +129,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="dist/js/app.min.js"></script>
         <!-- Select2 -->
         <script src="plugins/select2/select2.full.min.js"></script>
-    <!-- DataTables -->
-    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+        <!-- DataTables -->
+        <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
         <!-- InputMask -->
         <script src="plugins/input-mask/jquery.inputmask.js"></script>
         <script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
@@ -142,31 +141,62 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script type="text/javascript" src="search/searchprimka.js"></script>
         <script type="text/javascript" src="search/searchserijski.js"></script>
         <script>
-$('#rucna').click(function(){
-    var primka = $('#primka_id').text();
-    window.open("rucne.php?primka="+primka, "_blank");
-});
-</script>
-        <?php if(!empty($_GET['radni_nalog'])){
-            
-     require_once './pageParts/rnPagePart/uredi_rn_js.php';
-            ?>
-       
+            $('#rucna').click(function () {
+                var primka = $('#primka_id').text();
+                window.open("rucne.php?primka=" + primka, "_blank");
+            });
+        </script>
+        <?php
+        if (!empty($_GET['radni_nalog'])) {
 
-                        
-        <?php } else{ 
-            
-          
-    if($_COOKIE['odjel'] == "Servis" || $_COOKIE['odjel'] == "Reklamacije"){
-    
-    ?>
-            <script type="text/javascript" src="pageParts/rnPagePart/svi_rn_sr.js"></script> 
-    <?php }else { ?>
-             <script type="text/javascript" src="pageParts/rnPagePart/svi_rn.js"></script> 
-    <?php } ?>
-                               
-         
-            <?php } ?>            
+            require_once './pageParts/rnPagePart/uredi_rn_js.php';
+            ?>
+
+
+
+        <?php
+        } else {
+
+
+            if ($_COOKIE['odjel'] == "Servis" || $_COOKIE['odjel'] == "Reklamacije") {
+                ?>
+                <script type="text/javascript" src="pageParts/rnPagePart/svi_rn_sr.js"></script> 
+            <?php } else { ?>
+                <script type="text/javascript" src="pageParts/rnPagePart/svi_rn.js"></script> 
+            <?php } ?>
+
+
+        <?php } ?>         
+
+
+        <script  type="text/javascript" >
+                    var table = $('#sviRN').DataTable();
+
+                    setInterval(function () {
+                        table.ajax.reload();
+                    }, 30000);
+
+                    $(window).on("blur focus", function (e) {
+                        var prevType = $(this).data("prevType");
+
+                        if (prevType != e.type) {   //  reduce double fire issues
+                            switch (e.type) {
+                                case "blur":
+                                    console.log('not-active');
+                                    break;
+                                case "focus":
+                                    var table = $('#sviRN').DataTable();
+
+                                    table.ajax.reload();
+                                    console.log('active');
+                                    break;
+                            }
+                        }
+
+
+                        $(this).data("prevType", e.type);
+                    })
+        </script>
         <!-- Optionally, you can add Slimscroll and FastClick plugins.
              Both of these plugins are recommended to enhance the
              user experience. Slimscroll is required when using the

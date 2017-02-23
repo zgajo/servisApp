@@ -203,7 +203,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             setInterval(function () {
                 table.ajax.reload();
             }, 30000);
-
+            var check = "<?php echo $_COOKIE['odjel'] ?>";
             $(window).on("blur focus", function (e) {
                 var prevType = $(this).data("prevType");
 
@@ -214,10 +214,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             break;
                         case "focus":
                             var table = $('#sve_primke').DataTable();
-                            //var poslano = $('#svePoslanePrimke').DataTable();
+                            if(check == "Servis" ||check =="Reklamacije"){
+                            var poslano =   $('#svePoslanePrimkeServis').DataTable();
+                            }else{
+                              var poslano =  $('#svePoslanePrimke').DataTable();  
+                            }
+                           
+                            
 
                             table.ajax.reload();
-                           // poslano.ajax.reload();
+                            poslano.ajax.reload();
                             console.log('active');
                             break;
                     }
