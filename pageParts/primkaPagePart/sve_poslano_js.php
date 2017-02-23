@@ -22,8 +22,8 @@
                                             var output = "";
                                             if (odjel === "Servis" || odjel === "Reklamacije")
                                                
-                                            output += '<a  href="rn.php?action=novi_rn&primka_id=' + row.primka_id + '" class="btn btn-app" id="novi_rn" name="1" style=" height:initial; margin: 0 0 5px 5px; padding: 5px; background-color:ivory  " title="Otvori nalog servisiranja"><i class="glyphicon glyphicon-share" style="font-size:small; display:inline;"></i> Radni nalog</a>';
-                                            output += '<a href="rma.php?action=novi_rma&poslano=Da&primka_id=' + row.primka_id + '" class="btn btn-app" id="novi_rn" name="1" style="padding: 5px; margin: 0 0 5px 5px; height:initial; background-color:ivory  " title="Otvori nalog reklamacija"><i class="glyphicon glyphicon-random" style="font-size:small; display:inline;"></i> RMA nalog</a>';
+                                            output += '<a target="_blank" href="rn.php?action=novi_rn&primka_id=' + row.primka_id + '" class="btn btn-app" id="novi_rn" name="1" style=" height:initial; margin: 0 0 5px 5px; padding: 5px; background-color:ivory  " title="Otvori nalog servisiranja"><i class="glyphicon glyphicon-share" style="font-size:small; display:inline;"></i> Radni nalog</a>';
+                                            output += '<a target="_blank" href="rma.php?action=novi_rma&poslano=Da&primka_id=' + row.primka_id + '" class="btn btn-app" id="novi_rn" name="1" style="padding: 5px; margin: 0 0 5px 5px; height:initial; background-color:ivory  " title="Otvori nalog reklamacija"><i class="glyphicon glyphicon-random" style="font-size:small; display:inline;"></i> RMA nalog</a>';
                                             return output;
                                         }},
                                     {"data": "primka_id", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
@@ -41,51 +41,6 @@
                                                 var sty = "label label-danger";
                                             output += '<a class="' + sty + '" href="pregled.php?primka='+row.primka_id+'">' + row.primka_id + '</a>'; // row object contains the row data
                                             return output;
-                                        }},
-                                    {"data": "primka_id", "render": function (data, type, row, meta) {
-                                            var r = null;
-                                            var rm = null;
-
-
-                                            var output = '';
-                                            //    DOHVAĆANJE RADNIH NALOGA
-                                            $.ajax({
-                                                async: false,
-                                                url: "json/rn/getRNbyPrimka.php",
-                                                type: 'POST',
-                                                data: {"primka": row.primka_id},
-                                                success: function (data) {
-
-                                                    r = data;
-
-                                                }});
-                                            //    DOHVAĆANJE RMA NALOGA
-                                            $.ajax({
-                                                async: false,
-                                                url: "json/rma/getRmaByPrimka.php",
-                                                type: 'GET',
-                                                data: {"primka": row.primka_id},
-                                                success: function (data) {
-
-                                                    rm = data;
-
-                                                }});
-                                            //    UKOLIKO IMA DOHVAĆENIH rn
-                                            if (r !== null && r.length > 0) {
-                                                for (var j = 0; j < r.length; ++j) {
-                                                    output += '<a target="_blank" id="uredi_rn" href="rn.php?radni_nalog=' + r[j].id + '"> RN. ' + r[j].id + '</a><br>';
-                                                }
-                                            }
-                                            //    UKOLIKO IMA DOHVAĆENIH rma
-
-                                            if (rm !== null && rm.length > 0) {
-                                                for (var j = 0; j < rm.length; ++j) {
-                                                    output += '<a target="_blank" id="uredi_rma" href="rma.php?rma=' + rm[j].id + '"> RMA. ' + rm[j].id + '</a><br>';
-                                                }
-                                            }
-
-                                            return output;
-
                                         }},
                                     {"data": "naziv", "render": function (data, type, row, meta) { return row.brand + ' ' + row.naziv } },
                                     {"data": "serial"},

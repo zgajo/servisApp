@@ -22,7 +22,8 @@ var left = $('#sk').position().left;
                             var primka = JSON.parse(JSON.stringify(data));
                             console.log(JSON.parse(JSON.stringify(data)));
                             
-                            //Prikaz pronađenih podataka
+                            if(data){
+                                //Prikaz pronađenih podataka
                             var output ='<ul >';
                             for(var i=0; i < primka.length; ++i){
                                 output += '<li><a style="color:#001F3F" class="a" id="k" name="'+ primka[i].id + '"> ';
@@ -31,8 +32,14 @@ var left = $('#sk').position().left;
                             } 
                             
                             output +='</ul>';   //kraj ispis liste
-                            
                             $('#search_result_kupac').html(output);
+                            
+                            }else{
+                                $('#search_result_kupac').html('Nema rezultata');
+                            }
+                            
+                            
+                            
                             
                             
                         }).fail(function(){$('#search_result_kupac').html('Nema rezultata');});

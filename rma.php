@@ -156,7 +156,34 @@ require_once './pageParts/rmaPagePart/uredi_rma_js.php'; ?>
 
 <?php } ?>
 
+<script  type="text/javascript" >
+         var table = $('#sviRMA').DataTable();
 
+            setInterval(function () {
+                table.ajax.reload();
+            }, 30000);
+
+            $(window).on("blur focus", function (e) {
+                var prevType = $(this).data("prevType");
+
+                if (prevType != e.type) {   //  reduce double fire issues
+                    switch (e.type) {
+                        case "blur":
+                            console.log('not-active');
+                            break;
+                        case "focus":
+                            var table = $('#sviRMA').DataTable();
+
+                            table.ajax.reload();
+                            console.log('active');
+                            break;
+                    }
+                }
+
+
+                $(this).data("prevType", e.type);
+            })
+        </script>
         <!-- Optionally, you can add Slimscroll and FastClick plugins.
              Both of these plugins are recommended to enhance the
              user experience. Slimscroll is required when using the

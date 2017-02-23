@@ -22,7 +22,7 @@ var left = $('#ss').position().left;
                             success: function (primka) {
                             
                             //Prikaz pronađenih podataka
-                           
+                           if(primka){
                                 var output ='<ul >';
                             for(var i=0; i < primka.length; ++i){
                                
@@ -34,6 +34,10 @@ var left = $('#ss').position().left;
                             output +='</ul>';   //kraj ispis liste
                             
                             $('#search_result_serijski').html(output);
+                           }else{
+                                $('#search_result_serijski').html('Nema rezultata');
+                           }
+                               
                            
                         },
                         error: function(nema){

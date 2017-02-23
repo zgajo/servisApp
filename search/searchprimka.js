@@ -17,8 +17,8 @@ var left = $('#sp').position().left;
                         //Ispis kupaca
                         $.post('search/pretrazi_primku.php', {value: value}, function (primka) {
                             
-                            
-                            //Prikaz pronađenih podataka
+                            if(primka){
+                              //Prikaz pronađenih podataka
                             var output ='<ul >';
                             for(var i=0; i < primka.length; ++i){
                                 output += '<li><a style="color:#001F3F" class="a" id="k" name="'+ primka[i].primka + '">Primka '+ primka[i].primka + ', ';
@@ -26,9 +26,15 @@ var left = $('#sp').position().left;
                                 output += primka[i].ime+' ' + primka[i].prezime +'</a></li>'
                             } 
                             
-                            output +='</ul>';   //kraj ispis liste
-                            
+                            output +='</ul>';   //kraj ispis liste 
                             $('#search_result_primka').html(output);
+                            
+                            }else{
+                                $('#search_result_primka').html('Nema rezultata');
+                            }
+                            
+                            
+                            
                             
                         }).fail(function(){$('#search_result_primka').html('Nema rezultata');});
                         

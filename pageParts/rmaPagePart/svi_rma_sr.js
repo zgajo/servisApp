@@ -108,8 +108,8 @@ $('#sviRMA').on("mouseover", " tbody tr td:nth-child(2)", function () {
     $(this).attr("title", "Uredi radni nalog");
 })
 $('#sviRMA').on("click", " tbody tr td:first-child", function () {
-    window.open("rma.php?rma=" + $(this).find('a').attr("name"), "_blank");
+    window.location = "rma.php?rma=" + $(this).find('a').attr("name");
 })
 $('#sviRMA').on("click", " tbody tr td:nth-child(2)", function () {
-    window.open("rma.php?rma=" + $(this).find('a').attr("name"), "_blank");
+    window.location = "rma.php?rma=" + $(this).find('a').attr("name");
 })

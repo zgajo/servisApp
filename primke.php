@@ -141,16 +141,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script type="text/javascript" src="search/searchserijski.js"></script>
 
 
-        <?php if (!isset($_GET['primka']) && !isset($_GET['pregled_serijski'])) { 
+        <?php
+        if (!isset($_GET['primka']) && !isset($_GET['pregled_serijski'])) {
             //Prikaz svih primki
-     require_once './pageParts/primkaPagePart/sve_primke_js.php';
-     require_once './pageParts/primkaPagePart/sve_poslano_js.php';
+            require_once './pageParts/primkaPagePart/sve_primke_js.php';
+            require_once './pageParts/primkaPagePart/sve_poslano_js.php';
             ?>
 
-        
-        <script src="pageParts/primkaPagePart/unos_primke.js" type="text/javascript"></script>
-        <script src="pageParts/primkaPagePart/unos_sifre.js" type="text/javascript"></script>
-            
+
+            <script src="pageParts/primkaPagePart/unos_primke.js" type="text/javascript"></script>
+            <script src="pageParts/primkaPagePart/unos_sifre.js" type="text/javascript"></script>
+
         <?php } else if (isset($_GET['pregled_serijski'])) { ?>                  
             <script>
 
@@ -178,11 +179,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     ]
                 });
             </script>               
-        <?php } else { 
+            <?php
+        } else {
             //Uređivanje primke
-     require_once './pageParts/primkaPagePart/uredi_primku_js.php';
+            require_once './pageParts/primkaPagePart/uredi_primku_js.php';
             ?>
-            
+
         <?php } ?>
         <!-- date-range-picker -->
         <script>
@@ -195,6 +197,36 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 $("[data-mask]").inputmask();
 
             });
+
+            var table = $('#sve_primke').DataTable();
+
+            setInterval(function () {
+                table.ajax.reload();
+            }, 30000);
+
+            $(window).on("blur focus", function (e) {
+                var prevType = $(this).data("prevType");
+
+                if (prevType != e.type) {   //  reduce double fire issues
+                    switch (e.type) {
+                        case "blur":
+                            console.log('not-active');
+                            break;
+                        case "focus":
+                            var table = $('#sve_primke').DataTable();
+                            //var poslano = $('#svePoslanePrimke').DataTable();
+
+                            table.ajax.reload();
+                           // poslano.ajax.reload();
+                            console.log('active');
+                            break;
+                    }
+                }
+
+
+                $(this).data("prevType", e.type);
+            })
+
         </script>
         <!-- Optionally, you can add Slimscroll and FastClick plugins.
              Both of these plugins are recommended to enhance the

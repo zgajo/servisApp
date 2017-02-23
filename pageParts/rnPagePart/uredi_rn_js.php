@@ -153,7 +153,7 @@
                                                 upisprik(rnid);
                                                 
                                                 var ruc = window.open('rucne.php?primka='+primka_id, '_blank');
-                                                var pre = window.open('pregled.php?primka='+primka_id, '_blank');
+                                                var pre = window.open("print.php?primka="+primka_id, "_blank",   "location=1,status=1,scrollbars=1, resizable=1, directories=1, toolbar=1, titlebar=1, width=800, height=800");
                                                     if (ruc) {
                                                         //Browser has allowed it to be opened
                                                         ruc.focus();
@@ -173,7 +173,7 @@
                                                 upisprik(rnid);
                                                  upisrn(rnid);
                                                 upisprik(rnid);
-                                                var pre = window.open('pregled.php?primka='+primka_id, '_blank');
+                                                var pre = window.open("print.php?primka="+primka_id, "_blank",   "location=1,status=1,scrollbars=1, resizable=1, directories=1, toolbar=1, titlebar=1, width=800, height=800");
                                                     if (pre) {
                                                         //Browser has allowed it to be opened
                                                         pre.focus();

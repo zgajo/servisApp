@@ -88,8 +88,8 @@ $('#sviRN').on("mouseover", " tbody tr td:nth-child(2)", function () {
     $(this).attr("title", "Uredi radni nalog");
 })
 $('#sviRN').on("click", " tbody tr td:first-child", function () {
-    window.open("rn.php?radni_nalog=" + $(this).find('a').attr("name"), "_blank");
+    window.location = "rn.php?radni_nalog=" + $(this).find('a').attr("name");
 })
 $('#sviRN').on("click", " tbody tr td:nth-child(2)", function () {
-    window.open("rn.php?radni_nalog=" + $(this).find('a').attr("name"), "_blank");
+   window.location = "rn.php?radni_nalog=" + $(this).find('a').attr("name");
 })
