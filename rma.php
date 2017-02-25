@@ -27,7 +27,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Theme style -->
         <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
         <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
-        
+<link rel="icon" type="ispis/logo.png" href="ispis/icon.ico.png">
         <link href="search/search.css" rel="stylesheet">
 
         <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
@@ -83,8 +83,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
                             $primka = new primka();
-                            if(!empty($_GET['poslano']) && $_GET['poslano'] == "Da") $primka->azurirajStatus("Poslano u CS - Rovinj / Pripremljeno za slanje OS-u", $_GET['primka_id']);
-                            else $primka->azurirajStatus("Pripremljeno za slanje OS-u", $_GET['primka_id']);
+                            if (!empty($_GET['poslano']) && $_GET['poslano'] == "Da")
+                                $primka->azurirajStatus("Poslano u CS - Rovinj / Pripremljeno za slanje OS-u", $_GET['primka_id']);
+                            else
+                                $primka->azurirajStatus("Pripremljeno za slanje OS-u", $_GET['primka_id']);
 
 
 
@@ -94,7 +96,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             . '</script>';
                             ?>
 
-                        <?php
+                            <?php
                         }
                     } else if (!empty($_GET['rma'])) {
 
@@ -107,7 +109,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </section><!-- /.content -->
             </div><!-- /.content-wrapper -->
 
-<?php require_once('pageParts/footer.php') ?>
+            <?php require_once('pageParts/footer.php') ?>
 
 
         </div><!-- ./wrapper -->
@@ -122,9 +124,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="dist/js/app.min.js"></script>
         <!-- Select2 -->
         <script src="plugins/select2/select2.full.min.js"></script>
-         <!-- DataTables -->
-    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+        <!-- DataTables -->
+        <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
         <!-- InputMask -->
         <script src="plugins/input-mask/jquery.inputmask.js"></script>
         <script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
@@ -136,32 +138,37 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
 
-<?php if (!empty($_GET['rma'])) { ?>
-           
-<?php
+        <?php if (!empty($_GET['rma'])) { ?>
+
+            <?php
 //UREĐIVANJE RMA NALOGA
-require_once './pageParts/rmaPagePart/uredi_rma_js.php'; ?>
+            require_once './pageParts/rmaPagePart/uredi_rma_js.php';
+            ?>
 
-<?php } 
-    else { 
-    
-    if($_COOKIE['odjel'] == "Servis" || $_COOKIE['odjel'] == "Reklamacije"){
-    
-    ?>
-            <script type="text/javascript" src="pageParts/rmaPagePart/svi_rma_sr.js"></script>
-    <?php }else { ?>
-             <script type="text/javascript" src="pageParts/rmaPagePart/svi_rma.js"></script>
-    <?php } ?>
-           
+            <?php
+        } else {
 
-<?php } ?>
+            if ($_COOKIE['odjel'] == "Servis" || $_COOKIE['odjel'] == "Reklamacije") {
+                ?>
+                <script type="text/javascript" src="pageParts/rmaPagePart/svi_rma_sr.js"></script>
+            <?php } else { ?>
+                <script type="text/javascript" src="pageParts/rmaPagePart/svi_rma.js"></script>
+            <?php } ?>
 
-<script  type="text/javascript" >
-         var table = $('#sviRMA').DataTable();
 
-            setInterval(function () {
-                table.ajax.reload();
-            }, 30000);
+        <?php } ?>
+
+        <script  type="text/javascript" >
+           var table = $('#sviRMA').DataTable();
+            var data = table
+                    .rows()
+                    .data();
+            // provjeri da li ima već unešenih redova i stavi interval osvježavanja ukoliko postoje redovi
+            if (data.length != 0) {
+                setInterval(function () {
+                    table.ajax.reload();
+                }, 30000);
+            }
 
             $(window).on("blur focus", function (e) {
                 var prevType = $(this).data("prevType");
@@ -173,8 +180,13 @@ require_once './pageParts/rmaPagePart/uredi_rma_js.php'; ?>
                             break;
                         case "focus":
                             var table = $('#sviRMA').DataTable();
-
-                            table.ajax.reload();
+                            var data = table
+                                    .rows()
+                                    .data();
+                            // provjeri da li ima već unešenih redova i stavi interval osvježavanja ukoliko postoje redovi
+                            if (data.length != 0) {
+                                table.ajax.reload();
+                            }
                             console.log('active');
                             break;
                     }

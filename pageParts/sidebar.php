@@ -15,8 +15,7 @@
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 <br>
                     <?php $localIP = $_SERVER['REMOTE_ADDR'];
-                    $ip = substr($localIP, 8, 2);
-                    echo $localIP;?>; <?php  echo $ip?>
+                    echo $localIP;?>;
             </div>
         </div>
 

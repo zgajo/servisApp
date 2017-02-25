@@ -36,54 +36,55 @@ class djelatnik extends osoba {
 
                 
                 // UKOLIKO BUDE POTREBNO, STAVITI COOKIE KAO TOKEN U BAZU, TE PROVJERAVATI I DOHVAĆATI DJELATNIKA NA TAJ NAČIN
-                $expire = time() + 60 * 60;
-                setcookie("user", "$this->ime $this->prezime", time() + 3600, '/', '', '', TRUE);
-                setcookie("id", $this->id, time() + 3600, '/', '', '', TRUE);
-                setcookie("odjel", $this->odjel, time() + 3600, '/', '', '', TRUE);
+                date_default_timezone_set('Europe/Zagreb');
+                $expire = time() + 43200;
+                setcookie("user", "$this->ime $this->prezime", $expire, '/', '', '', TRUE);
+                setcookie("id", $this->id, $expire, '/', '', '', TRUE);
+                setcookie("odjel", $this->odjel, $expire, '/', '', '', TRUE);
 
                 
 
                 // KORISTITI UNUTAR EUROTRADE
-              
+             
                 $ip = $_SERVER['REMOTE_ADDR'];
                 $ip = substr($ip, 8, 2);
 
                 switch ($ip) {
 
                     case 10:
-                        setcookie("centar", "Zagreb", time() + 3600, '/', '', '', TRUE);
+                        setcookie("centar", "Zagreb", $expire, '/', '', '', TRUE);
                         break;
                     case 20:
-                        setcookie("centar", "Split", time() + 3600, '/', '', '', TRUE);
+                        setcookie("centar", "Split", $expire, '/', '', '', TRUE);
                         break;
                     case 30:
-                        setcookie("centar", "Rijeka Andrea", time() + 3600, '/', '', '', TRUE);
+                        setcookie("centar", "Rijeka Andrea", $expire, '/', '', '', TRUE);
                         break;
                     case 40:
-                        setcookie("centar", "Varaždin", time() + 3600, '/', '', '', TRUE);
+                        setcookie("centar", "Varaždin", $expire, '/', '', '', TRUE);
                         break;
                     case 50:
-                        setcookie("centar", "Osijek", time() + 3600, '/', '', '', TRUE);
+                        setcookie("centar", "Osijek", $expire, '/', '', '', TRUE);
                         break;
                     case 60:
-                        setcookie("centar", "Sisak", time() + 3600, '/', '', '', TRUE);
+                        setcookie("centar", "Sisak", $expire, '/', '', '', TRUE);
                         break;
                     case 70:
-                        setcookie("centar", "Pula", time() + 3600, '/', '', '', TRUE);
+                        setcookie("centar", "Pula", $expire, '/', '', '', TRUE);
                         break;
                     case 80:
-                        setcookie("centar", "Rijeka Korzo", time() + 3600, '/', '', '', TRUE);
+                        setcookie("centar", "Rijeka Korzo", $expire, '/', '', '', TRUE);
                         break;
                     case 90:
-                        setcookie("centar", "Rovinj", time() + 3600, '/', '', '', TRUE);
+                        setcookie("centar", "Rovinj", $expire, '/', '', '', TRUE);
                         break;
                 }
                 //  * KRAJ KORISTITI UNUTAR EUROTRADEA
    /* 
               //  KORISTITI VAN EUROTRADEA
-                  setcookie("centar", $this->p_centar, time()+3600, '/', '', '', TRUE);
-           
- */
+                  setcookie("centar", $this->p_centar, $expire, '/', '', '', TRUE);
+       */    
+ 
                 $query->close();
                 
                 if($user == $passw) header("Location: ./korisnik.php?action=il&id=$this->id");

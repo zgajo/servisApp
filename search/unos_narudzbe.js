@@ -299,9 +299,9 @@ $.ajax({
         {"data": "primka_id"},
         {"data": "skl"},
         {"data":"narudzbe_id", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
-                        var a = ' <a style="margin-right:15px" href="narudzbe.php?narudzba=' + row.narudzbe_id + '"><i style=" " class="fa  fa-edit "></i></a>';
-                        a += '<i style="cursor: pointer; cursor: hand; color:green;margin-right:15px " id="zavrsi" name="'+ row.narudzbe_id +'" class="fa fa-check"></i>';
-                        a += '<i style="cursor: pointer; cursor: hand; color:red " id="brisi" name="'+ row.narudzbe_id +'" class="fa fa-remove "></i>';
+                        var a = ' <a title="Uredi narudžbu" style="margin-right:15px" href="narudzbe.php?narudzba=' + row.narudzbe_id + '"><i style=" " class="fa  fa-edit "></i></a>';
+                        a += '<i   style="cursor: pointer; cursor: hand; color:green;margin-right:15px " id="zavrsi" name="'+ row.narudzbe_id +'" class="fa fa-check"></i>';
+                        a += '<i  style="cursor: pointer; cursor: hand; color:red " id="brisi" name="'+ row.narudzbe_id +'" class="fa fa-remove "></i>';
                         return a;
                     }}
         ]
@@ -330,4 +330,13 @@ $("#sve_narudzbe").on("click", "#brisi", function(){
        });
    }
    
+}); 
+
+$("#sve_narudzbe").on("mouseover", "#zavrsi", function(){
+   $(this).attr('title','Stiglo');
+});        
+
+
+$("#sve_narudzbe").on("mouseover", "#brisi", function(){
+   $(this).attr('title','Izbriši / kupac odustao');
 }); 

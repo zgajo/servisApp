@@ -27,7 +27,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               apply the skin class to the body tag so the changes take effect.
         -->
         <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
-        
+        <link rel="icon" type="ispis/logo.png" href="ispis/icon.ico.png">
         <link href="search/search.css" rel="stylesheet">
         
         <style>            
@@ -100,6 +100,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="col-sm-4 invoice-col"  style="font-size: 14px">
                                 <strong>Podaci o vlasniku</strong>
                                 <address>
+                                    <div id="tvrtka"></div>
                                     <div id="osoba"></div>
                                     <div id="tvrtka"></div>
                                     <div id="adresa"></div>
@@ -321,10 +322,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 opis_popravka +=  '<span  class="no-print">';
 
                                 opis_popravka +=  '<br><b>Završetak servisiranja:</b> '+ [zavrsen_servis.getDate(), zavrsen_servis.getMonth()+1, zavrsen_servis.getFullYear()].join('.') + '. ';
-                                opis_popravka +=  '</span>';
+                                opis_popravka +=  '<br class="no-print"></span>';
                              }
                              
-                             if(rn.napomena !== null && rn.napomena !== '' && odjel === 'Servis'){
+                             if(rn.napomena !== null && rn.napomena !== '' && (odjel === 'Servis' || odjel === 'Servis'  )){
                                  opis_popravka += '<span   class="no-print"><br>';
                                  opis_popravka += '<b>Napomena: </b>'+  rn.napomena+ '. <br class="no-print">';
                                  opis_popravka += '</span>';

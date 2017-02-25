@@ -52,7 +52,7 @@ $.ajax({
                             return a;
                         }},
                     {"data": "id", "render": function (data, type, row, meta) {
-                            var output = '<strong>RMA. ' + row.id + '</strong><a  name ="' + row.id + '" style="margin-left:10px; cursor:pointer;" ><i id="uredi_rma" style=" display:none;" class="glyphicon glyphicon-pencil"></i></a><br>';
+                            var output = '<strong>' + row.id + '</strong><a  name ="' + row.id + '" style="margin-left:10px; cursor:pointer;" ><i id="uredi_rma" style=" display:none;" class="glyphicon glyphicon-pencil"></i></a><br>';
                             return output;
                         }},
                     {"data": "sifra", "render": function (data, type, row, meta) {

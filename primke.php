@@ -26,6 +26,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- DataTables -->
         <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
         <!-- Theme style -->
+        <link rel="icon" type="ispis/logo.png" href="ispis/icon.ico.png">
         <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
         <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
               page. However, you can choose any other skin. Make sure you
@@ -199,11 +200,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
             });
 
             var table = $('#sve_primke').DataTable();
+            var data = table
+                    .rows()
+                    .data();
+            // provjeri da li ima već unešenih redova i stavi interval osvježavanja ukoliko postoje redovi
+            if (data.length != 0) {
+                setInterval(function () {
+                    table.ajax.reload();
+                }, 30000);
+            }
 
-            setInterval(function () {
-                table.ajax.reload();
-            }, 30000);
             var check = "<?php echo $_COOKIE['odjel'] ?>";
+            var centar = "<?php echo $_COOKIE['centar'] ?>";
+
             $(window).on("blur focus", function (e) {
                 var prevType = $(this).data("prevType");
 
@@ -214,17 +223,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             break;
                         case "focus":
                             var table = $('#sve_primke').DataTable();
-                            if(check == "Servis" ||check =="Reklamacije"){
-                            var poslano =   $('#svePoslanePrimkeServis').DataTable();
-                            }else{
-                              var poslano =  $('#svePoslanePrimke').DataTable();  
+                            var data = table
+                                    .rows()
+                                    .data();
+                            // provjeri da li ima već unešenih redova i osvježi ukoliko postoje redovi
+                            if (data.length != 0) {
+                                console.log(data.length);
+                                var table = $('#sve_primke').DataTable();
+                                table.ajax.reload();
                             }
-                           
-                            
 
-                            table.ajax.reload();
-                            poslano.ajax.reload();
-                            console.log('active');
+                            console.log('active2');
                             break;
                     }
                 }
@@ -232,6 +241,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 $(this).data("prevType", e.type);
             })
+
+
+
+
+
 
         </script>
         <!-- Optionally, you can add Slimscroll and FastClick plugins.

@@ -28,7 +28,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Theme style -->
         <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
         <link href="search/search.css" rel="stylesheet">
-
+<link rel="icon" type="ispis/logo.png" href="ispis/icon.ico.png">
         <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
               page. However, you can choose any other skin. Make sure you
               apply the skin class to the body tag so the changes take effect.
@@ -101,7 +101,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             . '</script>';
                             ?>
 
-                        <?php
+                            <?php
                         }
                     } else if (!empty($_GET['radni_nalog'])) {
 
@@ -154,7 +154,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
 
-        <?php
+            <?php
         } else {
 
 
@@ -170,32 +170,43 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
         <script  type="text/javascript" >
-                    var table = $('#sviRN').DataTable();
+            var table = $('#sviRN').DataTable();
+            var data = table
+                    .rows()
+                    .data();
+            // provjeri da li ima već unešenih redova i stavi interval osvježavanja ukoliko postoje redovi
+            if (data.length != 0) {
 
-                    setInterval(function () {
-                        table.ajax.reload();
-                    }, 30000);
+                setInterval(function () {
+                    table.ajax.reload();
+                }, 30000);
+            }
 
-                    $(window).on("blur focus", function (e) {
-                        var prevType = $(this).data("prevType");
+            $(window).on("blur focus", function (e) {
+                var prevType = $(this).data("prevType");
 
-                        if (prevType != e.type) {   //  reduce double fire issues
-                            switch (e.type) {
-                                case "blur":
-                                    console.log('not-active');
-                                    break;
-                                case "focus":
-                                    var table = $('#sviRN').DataTable();
-
-                                    table.ajax.reload();
-                                    console.log('active');
-                                    break;
+                if (prevType != e.type) {   //  reduce double fire issues
+                    switch (e.type) {
+                        case "blur":
+                            console.log('not-active');
+                            break;
+                        case "focus":
+                            var table = $('#sviRN').DataTable();
+                            var data = table
+                                    .rows()
+                                    .data();
+                            // provjeri da li ima već unešenih redova i stavi interval osvježavanja ukoliko postoje redovi
+                            if (data.length != 0) {
+                                table.ajax.reload();
                             }
-                        }
+                            console.log('active');
+                            break;
+                    }
+                }
 
 
-                        $(this).data("prevType", e.type);
-                    })
+                $(this).data("prevType", e.type);
+            })
         </script>
         <!-- Optionally, you can add Slimscroll and FastClick plugins.
              Both of these plugins are recommended to enhance the

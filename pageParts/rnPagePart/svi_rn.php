@@ -7,7 +7,7 @@
                                     <table  id="sviRN"  class="table table-bordered table-striped" style="text-align: center; color: black">
                                         <thead>
                                             <tr>
-                                                <th>Pr</th>
+                                                <th>Primka</th>
                                                 <th>RN</th>
                                                 <th>Uređaj</th>
                                                 <th>Serijski</th>

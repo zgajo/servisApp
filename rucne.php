@@ -17,6 +17,7 @@ include_once './klase/checkLogin.php';
         <!-- Ionicons -->
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         <!-- Theme style -->
+        <link rel="icon" type="ispis/logo.png" href="ispis/icon.ico.png">
         <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
         <style>
             .inputSyle{
@@ -171,7 +172,7 @@ include_once './klase/checkLogin.php';
                     var s_kontakt;
                     
                     
-                    $('#su').text(pr[0].naziv);
+                    $('#su').text(pr[0].brand+' '+pr[0].naziv);
                     $('#ss').text(pr[0].serial);
                     $('#p').text(pr[0].primka_id);
                    

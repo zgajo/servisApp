@@ -27,7 +27,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               apply the skin class to the body tag so the changes take effect.
         -->
         <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
-        
+        <link rel="icon" type="ispis/logo.png" href="ispis/icon.ico.png">
         <link href="search/search.css" rel="stylesheet">
         
         <!-- jQuery 2.1.4 -->
@@ -61,18 +61,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                 </h2>
 
-                                <div style="display: inline; float: right; font-size: 10px">
-                                    <span style="float: left; margin-right: 8px">
-                                        Naselje Gripole spine 53/c<br>
-                                        Rovinj, 52210<br></span>
-                                    <span style="float: right; margin-left: 8px; ">
-
-
-                                        Kontakt: 052 803 699<br>
-                                        Email: servis-ro@eurotrade.hr
-                                    </span>
-                                </div><!-- /.col -->
-
                             </div><!-- /.col -->
                             <div style="clear: both"> <h2 class="page-header"></div>
                         </div>
@@ -82,8 +70,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="col-sm-4 invoice-col"  style="font-size: 12px">
                                 <strong>Podaci o vlasniku</strong>
                                 <address>
-                                    <div id="osoba"></div>
                                     <div id="tvrtka"></div>
+                                    <div id="osoba"></div>
                                     <div id="adresa"></div>
                                     <div id="grad"></div>
                                     Kontakt: <div id="kontakt" style="display: inline"></div><br>
@@ -172,7 +160,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                     Sve radove, materijale i ostale troškove vezane uz radni nalog (troškovi koji nisu pokriveni ugovornom obvezom ili jamstvom) vlasnik neopozivo naručuje potpisom radnog naloga.
                                 </p>
-                                <strong style="font-size: 13px">Potpis vlasnika</strong><br><div style="border-bottom:  1px solid black; width: 200px;height: 30px"></div><br>
+                                <strong style="font-size: 13px">PREUZEO:</strong><br><br>
+                                <div style="border-bottom:  1px solid black; width: 200px;height: 30px"></div>
+                                <div id="potpis" style="text-align:center;  width: 200px;height: 30px"></div><br>
                             </div><!-- /.col -->
                             <div class="col-xs-6" style="font-size: 12px">
                                 <p class="lead" style="font-size: 12px">Šifre za naplatiti</p>
@@ -223,7 +213,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     $('#kontakt').text(primka[0].kontaktBroj);
                     $('#email').text(primka[0].email);
                     $('#osoba').text(primka[0].ime + ' ' +primka[0].prezime);
-                    
+                    if(primka[0].tvrtka) $('#potpis').text(primka[0].tvrtka + ', '+ primka[0].ime + ' ' +primka[0].prezime);
+                    else $('#potpis').text(primka[0].ime + ' ' +primka[0].prezime);
                     
                     $('#uredaj').text(primka[0].brand + ' ' + primka[0].naziv);
                     $('#serijski').text(primka[0].serial);
@@ -306,7 +297,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                              prom += (rn.promijenjeno) ? rn.promijenjeno+ '<br>':'';
                              
                              
-                             naplata += (rn.naplata!=='' && rn.naplata != null) ? ' + ' + rn.naplata + '<br>':'';
+                             naplata += (rn.naplata!=='' && rn.naplata != null) ? '  ' + rn.naplata + '<br>':'';
                         }
                         //  DOHVAĆANJE RMA NALOGA I UPISIVANJE
                         
@@ -399,7 +390,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             opis_popravka += '<br></span>';
                                             
                                             prom += (rma.promijenjeno) ? rma.promijenjeno+ '<br>':'';
-                                            naplata += (rma.naplata!=='' && rma.naplata != null) ? ' + ' + rma.naplata + '<br>':'';
+                                            naplata += (rma.naplata!=='' && rma.naplata != null) ? '  ' + rma.naplata + '<br>':'';
                                         } 
                                              $('#popravak').html(opis_popravka);
                                              $('#promijenjeno').html(prom);

@@ -28,7 +28,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
               page. However, you can choose any other skin. Make sure you
               apply the skin class to the body tag so the changes take effect.
-        -->
+        --><link rel="icon" type="ispis/logo.png" href="ispis/icon.ico.png">
         <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
         <link href="search/search.css" rel="stylesheet">
         <style>

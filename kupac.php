@@ -28,7 +28,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
- 
+ <link rel="icon" type="ispis/logo.png" href="ispis/icon.ico.png">
 
        
               

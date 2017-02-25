@@ -50,10 +50,12 @@ $.ajax({
                             return a;
                         }},
                     {"data": "id", "render": function (data, type, row, meta) {
-                            var output = '<strong>RN. ' + row.id + '</strong><a name="' + row.id + '"  style="margin-left:10px;" ><i id="uredi_rn" style=" display:none;" class="glyphicon glyphicon-pencil"></i></a><br>';
+                            var output = '<strong>' + row.id + '</strong><a name="' + row.id + '"  style="margin-left:10px;" ><i id="uredi_rn" style=" display:none;" class="glyphicon glyphicon-pencil"></i></a><br>';
                             return output;
                         }},
-                    {"data": "naziv"},
+                    {"data": "naziv", "render": function (data, type, row, meta) {
+                            return row.brand + ' ' + row.naziv;
+                    }},
                     {"data": "serijski"},
                     {"data": "s_ime", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
                             if (row.tvrtka)
