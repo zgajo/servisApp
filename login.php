@@ -45,7 +45,7 @@ if(isset($_GET['action'])){
       </div><!-- /.login-logo -->
       <div class="login-box-body">
           <img src="ispis/logo.png" style="width: 300px">
-        <p class="login-box-msg">Prijavite se kako bi započeli rad! Test na VIsual studio code</p>
+        <p class="login-box-msg">Prijavite se kako bi započeli rad!</p>
         <form action="" method="post">
           <div class="form-group has-feedback">
               <input type="text" class="form-control" placeholder="Username" name="username" required>
