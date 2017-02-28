@@ -257,7 +257,7 @@
                                     <div class="form-group">
                                         <label for="inputSerijski" class="col-sm-2 control-label">Serijski broj</label>
                                         <div class="col-sm-10">
-                                            <input class="form-control" id="inputSerijski" placeholder="Serijski broj ..." type="text" name="serijski">
+                                            <input class="form-control" id="inputSerijski" placeholder="Serijski broj ..." type="text" name="serijski" style="text-transform:uppercase">
                                         </div>
                                     </div>
 

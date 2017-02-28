@@ -148,9 +148,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <?php
         } else {
 
-            if ($_COOKIE['odjel'] == "Servis" || $_COOKIE['odjel'] == "Reklamacije") {
+            if ($_COOKIE['odjel'] == "Servis") {
                 ?>
-                <script type="text/javascript" src="pageParts/rmaPagePart/svi_rma_sr.js"></script>
+                 <script type="text/javascript" src="pageParts/rmaPagePart/svi_rma_sr.js"></script>
+                <?php } elseif($_COOKIE['odjel'] == "Reklamacije") { ?>
+                <script type="text/javascript" src="pageParts/rmaPagePart/svi_rma_reklamacije.js"></script>
             <?php } else { ?>
                 <script type="text/javascript" src="pageParts/rmaPagePart/svi_rma.js"></script>
             <?php } ?>

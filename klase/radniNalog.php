@@ -740,3 +740,32 @@ class servisRN extends RN{
     
     
 }
+
+
+class odobrenja{
+    private $mysqli;
+    function __construct(){
+        $con = new database();
+        $this->mysqli = $con->getConnection();
+    }
+
+    public function svaOtvorena(){
+        $query = $this->mysqli->query("SELECT f.*, CONCAT(p.brand, ' ', p.naziv) as uredaj, p.sifraUredaja as sifra, p.centar, p.serial  FROM fin_odobrenja f 
+                                        LEFT JOIN primka p ON f.primka_id = p.primka_id 
+                                        WHERE f.status != 'Financijski odobreno' AND f.status != 'Zamijenjeno za novo'");
+
+        
+        while($row = $query->fetch_object()){
+            $result[]  = $row;
+        }
+        if($result) return $result;
+        $query->close();        
+        exit();                       
+    }
+
+    public function insert(){
+        
+    }
+
+
+}

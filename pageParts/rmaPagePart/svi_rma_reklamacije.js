@@ -97,6 +97,42 @@ $.ajax({
     }
 });
 
+$.ajax({
+    url: "json/odobrenja/odobrenja.php",
+    type: "POST",
+    dataType: "json",
+    contentType: "application/json; charset=utf-8",
+    success: function(odobrenja){
+        
+            $("#svaOdob").DataTable({
+                "ajax": {
+                "url": "json/odobrenja/odobrenja.php",
+                "dataSrc": ""
+            },
+                "columns": [
+                    {"data": "dan_odobrenja", "render":function(data, type, row, meta){
+                        var od = new Date(row.dan_odobrenja);
+                        var output = (od && od.getFullYear() != "1970" && !isNaN(od)) ? [od.getDate(), od.getMonth() + 1, od.getFullYear()].join('.') : '';
+                            return output;
+                    }},
+                    {"data": "dobavljac"},
+                    {"data": "sifra"},
+                    {"data": "uredaj"},
+                    {"data": "serial"},
+                    {"data": "napomena"},
+                    {"data": "status"},
+                    {"data": "primka_id"},
+                    {"data": "centar"},
+                ]
+            });
+        
+    },
+    error: function(e){
+       // alert(e.error);
+    }
+})
+
+
 
 $('#sviRMA').on("mouseover", "#uredi_rma", function () {
     $(this).attr("title", "Uredi rma nalog");
@@ -114,3 +150,5 @@ $('#sviRMA').on("click", " tbody tr td:first-child", function () {
 $('#sviRMA').on("click", " tbody tr td:nth-child(2)", function () {
     window.location = "rma.php?rma=" + $(this).find('a').attr("name");
 })
+
+
