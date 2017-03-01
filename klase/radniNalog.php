@@ -752,7 +752,7 @@ class odobrenja{
     public function svaOtvorena(){
         $query = $this->mysqli->query("SELECT f.*, CONCAT(p.brand, ' ', p.naziv) as uredaj, p.sifraUredaja as sifra, p.centar, p.serial  FROM fin_odobrenja f 
                                         LEFT JOIN primka p ON f.primka_id = p.primka_id 
-                                        WHERE f.status != 'Financijski odobreno' AND f.status != 'Zamijenjeno za novo' OR f.status IS null");
+                                        WHERE f.rijeseno != 'Da' ORDER BY f.primka_id ASC");
 
         
         while($row = $query->fetch_object()){
@@ -767,17 +767,82 @@ class odobrenja{
 
         $od = date("Y-m-d", strtotime($od));
 
-        $query = $this->mysqli->prepare("INSERT INTO fin_odobrenja (dobavljac, dan_odobrenja, napomena, status, primka_id) VALUES (?, ?, ?, ?, ?)");
+        $query = $this->mysqli->prepare("INSERT INTO fin_odobrenja (dobavljac, zatrazeno, napomena, status, primka_id, rijeseno) VALUES (?, ?, ?, ?, ?, ?)");
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
         }
-        $query->bind_param("ssssi", $dob, $od, $nap, $st, $pr );
+        $rijeseno = 'Ne';
+        $query->bind_param("ssssis", $dob, $od, $nap, $st, $pr, $rijeseno );
 
         $query->execute();
         $query->close();
         exit();
 
-        
+
+    }
+
+    public function ById($id){
+        $id = (int) $id;
+
+        if($id){
+            $query = $this->mysqli->query("SELECT f.*  FROM fin_odobrenja f  WHERE f.fin_id = $id LIMIT 1");
+
+            $result[]  = $query->fetch_object();
+            $query->close();
+            if($result) return $result;
+
+            exit();
+        } else{
+            die("Nije broj");
+        }
+    }
+
+    public function update($dob, $od, $nap, $st, $pr, $ri, $id){
+
+        $od = date("Y-m-d", strtotime($od));
+        if($ri == "Da"){
+            date_default_timezone_set('Europe/Zagreb');
+            $odobreno = date('Y-m-d', time());
+        }
+
+        if($ri == "Da"){
+    $query = $this->mysqli->prepare("UPDATE fin_odobrenja SET
+                                        dobavljac = ?,
+                                        dan_odobrenja = ? ,
+                                        napomena = ? ,
+                                        status = ? ,
+                                        primka_id = ? ,
+                                        zatrazeno = ? ,
+                                        rijeseno  = ?
+                                        WHERE fin_id =? ");
+        }else{
+    $query = $this->mysqli->prepare("UPDATE fin_odobrenja SET
+                                        dobavljac = ?  ,
+                                        napomena = ? ,
+                                        status = ? ,
+                                        primka_id = ? ,
+                                        zatrazeno = ? ,
+                                        rijeseno  = ?
+                                        WHERE fin_id =? ");
+    }
+
+
+        if($query === false){
+            trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
+        }
+
+        if($ri == "Da"){
+            $query->bind_param("ssssissi", $dob, $odobreno, $nap, $st, $pr, $od, $ri, $id );
+        }else{
+            $query->bind_param("sssissi", $dob,  $nap, $st, $pr, $od, $ri, $id );
+        }
+
+
+        $query->execute();
+        $query->close();
+        exit();
+
+
     }
 
 

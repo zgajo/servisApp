@@ -74,19 +74,20 @@
         </div>
         <!-- /.tab-pane -->
         <div class="tab-pane" id="tab_2">
-            <div class="box box-info" style="border-top: none">
+           <input style="display:none" id="fin_id"></input>
+            <div id="finOdobDiv" class="box box-info" style="border-top: none">
                 <div class="box-body">
                     <table id="svaOdob" class="table table-bordered table-striped" style="text-align: center; color: black">
                         <thead>
                             <tr>
-                                <th>Odobreno</th>
+                               <th>Primka</th>
+                                <th>Zatraženo</th>
                                 <th>Dobavljač</th>
                                 <th>Šifra</th>
                                 <th>Uređaj</th>
                                 <th>Serijski</th>
                                 <th>Napomena</th>
                                 <th>Status</th>
-                                <th>Primka</th>
                                 <th>Centar</th>
                             </tr>
                         </thead>
@@ -100,8 +101,82 @@
                 <!-- /.box-footer -->
             </div>
             <!-- /.box -->
+            <div class="form-horizontal" id="updateOdobrenje" style="display:none">
 
+                <div class="box box-info" style="border-top: none">
+                    <div class="col-md-6">
+                        <div class="box-body">
 
+                            <div class="form-group">
+                                <label for="updateDobavljac" class="col-sm-2 control-label">Dobavljač</label>
+                                <div class="col-sm-10">
+                                    <input name="updatedobavljac" class="form-control" id="updateDobavljac" placeholder="Dobavljač od kojeg se čega odobrenje" type="text"
+                                        required="">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="updateOD" class="col-sm-2 control-label">Zatraženo</label>
+                                <div class="col-sm-10">
+
+                                    <input class="form-control pull-right" id="updatedatepicker" name="updatedatepicker" type="text">
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+
+                            <div class="form-group">
+                                <label for="updateNapomena" class="col-sm-2 control-label">Napomena</label>
+                                <div class="col-sm-10">
+                                    <textarea name="updatenapomena" class="form-control" id="updateNapomena" rows="3" placeholder="Napomena" type="text" ></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="updateStatus" class="col-sm-2 control-label">Status</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" id="updateStatus" type="text" name="updatestatus">
+                                        <option></option>
+                                        <option value="Financijsko odobrenje">Financijsko odobrenje</option>
+                                        <option value="Uređaj zamijenjen novim">Uređaj zamijenjen novim</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="updatePrimka" class="col-sm-2 control-label">Primka</label>
+                                <div class="col-sm-10">
+                                    <input name="updateprimka" class="form-control" id="updatePrimka" placeholder="Broj primke" type="text" required="">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="updateStatus" class="col-sm-2 control-label">Riješeno</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" id="updateRijeseno" type="text" name="updaterijeseno">
+                                        <option value="Ne">Ne</option>
+                                        <option value="Da">Da</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <button id="updatesubmit"  name="updatesubmit" class="btn btn-info pull-left" >Unesi podatke </button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- /.box -->
+                    <!-- /.box-body -->
+
+                    <div class="box-footer clearfix">
+
+                    </div>
+                    <!-- /.box-footer -->
+                </div>
+            </div>
         </div>
 
         <!-- /.tab-pane -->
@@ -121,7 +196,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="inputOD" class="col-sm-2 control-label">Odobreno</label>
+                                <label for="inputOD" class="col-sm-2 control-label">Zatraženo</label>
                                 <div class="col-sm-10">
                                     <div class="input-group date">
                                         <div class="input-group-addon">
@@ -134,9 +209,9 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="inputNapomena" class="col-sm-2 control-label" id="required">Napomena</label>
+                                <label for="inputNapomena" class="col-sm-2 control-label">Napomena</label>
                                 <div class="col-sm-10">
-                                    <textarea name="napomena" class="form-control" id="inputNapomena" rows="3" placeholder="Napomena" type="text" required=""></textarea>
+                                    <textarea name="napomena" class="form-control" id="inputNapomena" rows="3" placeholder="Napomena" type="text" ></textarea>
                                 </div>
                             </div>
 
@@ -160,7 +235,7 @@
 
                             <div class="form-group">
                                 <div class="col-sm-10">
-                                    <input id="submit"  name="submit" class="btn btn-info pull-left" autocomplete="off" value="Unesi podatke" />
+                                    <button id="submit"  name="submit" class="btn btn-info pull-left" >Unesi podatke </button>
                                 </div>
                             </div>
 

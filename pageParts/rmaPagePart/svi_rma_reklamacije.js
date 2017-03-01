@@ -11,6 +11,57 @@ $("#sviRMA tbody").on("mouseout", "tr", function () {
     $(this).find('#uredi_rma').hide();
 });
 
+$("#svaOdob tbody").on("mouseover", " tr", function () {
+    $(this).css('background-color', '#ccffcc');
+
+});
+
+$("#svaOdob tbody").on("mouseout", "tr", function () {
+    $(this).removeAttr('style');
+});
+
+function updateFun(fin_id){
+    if(fin_id){
+        $("#finOdobDiv").hide();
+        $("#updateOdobrenje").show();
+
+        $.ajax({
+            type: "POST",
+            url: "json/odobrenja/ById.php",
+            data: {"id": fin_id},
+            success: function(f){
+                for(f of f){
+
+                    console.log(f);
+                    $("#updateDobavljac").val(f.dobavljac);
+                    var zatrazeno = new Date(f.zatrazeno);
+                    var z = (zatrazeno && zatrazeno.getFullYear() != "1970" && !isNaN(zatrazeno)) ? [zatrazeno.getDate(), zatrazeno.getMonth() + 1, zatrazeno.getFullYear()].join('.') : '';
+                    console.log(z)
+                    $("#updatedatepicker").val(z);
+                    $("#updateNapomena").val(f.napomena);
+                    $("#updateStatus").val(f.status);
+                    $("#updatePrimka").val(f.primka_id);
+                    $("#updateRijeseno").val(f.rijeseno);
+
+                }
+            },
+            error: function(e){
+
+            }
+        })
+
+    }else{
+        $("#finOdobDiv").show();
+        $("#updateOdobrenje").hide();
+    }
+}
+
+$("#svaOdob tbody").on("click", "tr", function () {
+    var id = $(this).find("#fin").text();
+    $("#fin_id").val(id);
+    updateFun($("#fin_id").val());
+});
+
 
 
 
@@ -110,18 +161,21 @@ $.ajax({
                 "dataSrc": ""
             },
                 "columns": [
-                    {"data": "dan_odobrenja", "render":function(data, type, row, meta){
-                        var od = new Date(row.dan_odobrenja);
+                    {"data": "primka_id"},
+                    {"data": "zatrazeno", "render":function(data, type, row, meta){
+                        var od = new Date(row.zatrazeno);
                         var output = (od && od.getFullYear() != "1970" && !isNaN(od)) ? [od.getDate(), od.getMonth() + 1, od.getFullYear()].join('.') : '';
-                            return output;
+                        output += '<a style="display:none" id="fin">'+row.fin_id+'</a>';
+                        return output;
                     }},
                     {"data": "dobavljac"},
-                    {"data": "sifra"},
+                    {"data": "sifra", "render":function(data, type, row, meta){
+                        return (row.sifra != 0) ? row.sifra : '';
+                    }},
                     {"data": "uredaj"},
                     {"data": "serial"},
                     {"data": "napomena"},
                     {"data": "status"},
-                    {"data": "primka_id"},
                     {"data": "centar"},
                 ]
             });
@@ -130,8 +184,53 @@ $.ajax({
     error: function(e){
        // alert(e.error);
     }
-})
+});
 
+$("#updateOdobrenje").on("click", "#updatesubmit", function(){
+    var dob = $("#updateDobavljac").val();
+    var od = $("#updatedatepicker").val();
+    var nap = $("#updateNapomena").val();
+    var st = $("#updateStatus").val();
+    var pr = $("#updatePrimka").val();
+    var ri = $("#updateRijeseno").val();
+    var fin_id = $("#fin_id").val();
+
+    $('#updateDobavljac').removeAttr( 'style' );
+    $('#updatedatepicker').removeAttr( 'style' );
+    $('#updatePrimka').removeAttr( 'style' );
+    $('#updateRijeseno').removeAttr( 'style' );
+
+    if(dob === '' || od === '' || pr  === ''){
+        alert("Molim ispunite sva obavezna polja!");
+        if(dob ==='') $('#updateDobavljac').css('border', '2px solid red');
+        if(od ==='') $('#updatedatepicker').css('border', '2px solid red');
+        if(pr ==='')  $('#updatePrimka').css('border', '2px solid red');
+        if(pr ==='')  $('#updateRijeseno').css('border', '2px solid red');
+    }else{
+         $.ajax({
+        type: "GET",
+        url: "json/odobrenja/update.php",
+        data: {"dob": dob, "od": od, "nap": nap, "st": st, "pr": pr, "ri":ri, "id": fin_id},
+        success: function(e){
+            var table = $('#svaOdob').DataTable();
+                            var data = table
+                                    .rows()
+                                    .data();
+                            // provjeri da li ima već unešenih redova i stavi interval osvježavanja ukoliko postoje redovi
+                            if (data.length != 0) {
+                                table.ajax.reload();
+                            }
+            $("#fin_id").val('');
+            updateFun('');
+        },
+        error: function(e){
+        }
+    })
+    }
+
+
+
+})
 
 
 $('#sviRMA').on("mouseover", "#uredi_rma", function () {
@@ -159,7 +258,17 @@ $("#novoOdobrenje").on("click", "#submit", function(){
     var st = $("#status").val();
     var pr = $("#inputPrimka").val();
 
-    $.ajax({
+    $('#inputDobavljac').removeAttr( 'style' );
+    $('#datepicker').removeAttr( 'style' );
+    $('#inputPrimka').removeAttr( 'style' );
+
+    if(dob === '' || od === '' || pr  === ''){
+        alert("Molim ispunite sva obavezna polja!");
+        if(dob ==='') $('#inputDobavljac').css('border', '2px solid red');
+        if(od ==='') $('#datepicker').css('border', '2px solid red');
+        if(pr ==='')  $('#inputPrimka').css('border', '2px solid red');
+    }else{
+         $.ajax({
         type: "POST",
         url: "json/odobrenja/insert.php",
         data: {"dob": dob, "od": od, "nap": nap, "st": st, "pr": pr},
@@ -170,6 +279,9 @@ $("#novoOdobrenje").on("click", "#submit", function(){
             alert(e.error);
         }
     })
+    }
+
+
 
 })
 

@@ -115,7 +115,7 @@
                <div class="form-group"  >
                         <label for="inputrnOS" class="col-sm-2 control-label">RN OS-a</label>
                         <div class="col-sm-10">
-                            <input id="inputrnOS" class="form-control" rows="3" placeholder="Broj naloga pod kojim je uređaj zaprimljen..." name="rnOS">
+                            <input id="inputrnOS" class="form-control" rows="3" placeholder="Broj naloga ovlaštenog servisa..." name="rnOS">
                         </div>
                     </div>
                <div class="form-group"  >
