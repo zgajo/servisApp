@@ -135,7 +135,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script type="text/javascript" src="search/searchkupca.js"></script>
         <script type="text/javascript" src="search/searchprimka.js"></script>
         <script type="text/javascript" src="search/searchserijski.js"></script>
+  <link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
 
+<!-- date-range-picker -->
+<script src="plugins/moment/moment.min.js"></script>
+<script src="plugins/daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap datepicker -->
+<script src="plugins/datepicker/bootstrap-datepicker.js"></script>
 
 
         <?php if (!empty($_GET['rma'])) { ?>

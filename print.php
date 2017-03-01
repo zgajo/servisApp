@@ -152,7 +152,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <p class="lead" style="font-size: 12px"><b>Napomena:</b></p>
 
                                 <p class="text-muted well well-sm no-shadow" style="font-size: 9px;margin-top: 10px;">
-                                    Eurotrade d.o.o. ne odgovara za podatke na računalu, HDD uređaju ili bilo kojem uređaju koji služi za pohranu podataka ili eventualni njihov gubitak. Kod pisača u jamstvu Eurotrade d.o.o. koristi vlastiti potrošni materijal. Kod pisača van jamstva Eurotrade d.o.o. koristi potrošni materijal koji se nalazi u pisaču te postoji mogućnost da će se zbog potrebe servisiranja taj isti potrošiti djelomično ili u cijelosti.
+                                    Eurotrade d.o.o. ne odgovara za podatke na računalu, HDD uređaju ili bilo kojem uređaju koji služi za pohranu podataka ili eventualni njihov gubitak. Kod popravka pisača, postoji mogućnost da će se zbog potrebe servisiranja potrošni materijal koji se nalazi u pisaču, djelomično ili u cjelosti potrošiti.
 
                                     Eurotrade d.o.o. poslije 60 dana od zatvaranja radnog naloga ne snosi odgovornost za robu ukoliko ona nije podignuta.
 

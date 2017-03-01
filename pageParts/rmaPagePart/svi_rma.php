@@ -103,15 +103,78 @@
 
 
         </div>
+
         <!-- /.tab-pane -->
         <div class="tab-pane" id="tab_3">
-            <div class="box box-info" style="border-top: none">
-                
-                <!-- /.box-body -->
-                <div class="box-footer clearfix">
+            <form class="form-horizontal" id="novoOdobrenje">
 
-                </div>
-                <!-- /.box-footer -->
+                <div class="box box-info" style="border-top: none">
+                    <div class="col-md-6">
+                        <div class="box-body">
+
+                            <div class="form-group">
+                                <label for="inputDobavljac" class="col-sm-2 control-label">Dobavljač</label>
+                                <div class="col-sm-10">
+                                    <input name="dobavljac" class="form-control" id="inputDobavljac" placeholder="Dobavljač od kojeg se čega odobrenje" type="text"
+                                        required="">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputOD" class="col-sm-2 control-label">Odobreno</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input class="form-control pull-right" id="datepicker" name="datepicker" type="text">
+                                    </div>
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputNapomena" class="col-sm-2 control-label" id="required">Napomena</label>
+                                <div class="col-sm-10">
+                                    <textarea name="napomena" class="form-control" id="inputNapomena" rows="3" placeholder="Napomena" type="text" required=""></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputStatus" class="col-sm-2 control-label">Status</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" id="inputStatus" type="text" name="status">
+                                        <option></option>
+                                        <option>Financijsko odobrenje</option>
+                                        <option>Uređaj zamijenjen novim</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputPrimka" class="col-sm-2 control-label">Primka</label>
+                                <div class="col-sm-10">
+                                    <input name="primka" class="form-control" id="inputPrimka" placeholder="Broj primke" type="text" required="">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <input id="submit"  name="submit" class="btn btn-info pull-left" autocomplete="off" value="Unesi podatke" />
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- /.box -->
+                    <!-- /.box-body -->
+
+                    <div class="box-footer clearfix">
+
+                    </div>
+                    <!-- /.box-footer -->
+            </form>
             </div>
             <!-- /.box -->
 

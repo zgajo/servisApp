@@ -752,7 +752,7 @@ class odobrenja{
     public function svaOtvorena(){
         $query = $this->mysqli->query("SELECT f.*, CONCAT(p.brand, ' ', p.naziv) as uredaj, p.sifraUredaja as sifra, p.centar, p.serial  FROM fin_odobrenja f 
                                         LEFT JOIN primka p ON f.primka_id = p.primka_id 
-                                        WHERE f.status != 'Financijski odobreno' AND f.status != 'Zamijenjeno za novo'");
+                                        WHERE f.status != 'Financijski odobreno' AND f.status != 'Zamijenjeno za novo' OR f.status IS null");
 
         
         while($row = $query->fetch_object()){
@@ -763,7 +763,20 @@ class odobrenja{
         exit();                       
     }
 
-    public function insert(){
+    public function insert($dob, $od, $nap, $st, $pr){
+
+        $od = date("Y-m-d", strtotime($od));
+
+        $query = $this->mysqli->prepare("INSERT INTO fin_odobrenja (dobavljac, dan_odobrenja, napomena, status, primka_id) VALUES (?, ?, ?, ?, ?)");
+        if($query === false){
+            trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
+        }
+        $query->bind_param("ssssi", $dob, $od, $nap, $st, $pr );
+
+        $query->execute();
+        $query->close();
+        exit();
+
         
     }
 

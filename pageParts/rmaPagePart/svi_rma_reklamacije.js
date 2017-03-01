@@ -152,3 +152,35 @@ $('#sviRMA').on("click", " tbody tr td:nth-child(2)", function () {
 })
 
 
+$("#novoOdobrenje").on("click", "#submit", function(){
+    var dob = $("#inputDobavljac").val();
+    var od = $("#datepicker").val();
+    var nap = $("#inputNapomena").val();
+    var st = $("#status").val();
+    var pr = $("#inputPrimka").val();
+
+    $.ajax({
+        type: "POST",
+        url: "json/odobrenja/insert.php",
+        data: {"dob": dob, "od": od, "nap": nap, "st": st, "pr": pr},
+        success: function(e){
+            window.location = "rma.php";
+        },
+        error: function(e){
+            alert(e.error);
+        }
+    })
+
+})
+
+$(function () {
+
+
+    //Date picker
+    $('#datepicker').datepicker({
+      autoclose: true
+
+    });
+
+
+  });
