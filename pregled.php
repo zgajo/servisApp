@@ -332,7 +332,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                              }
                              
                              if(rn.ispisano !== null && rn.ispisano !== '' && odjel === 'Servis'){
-                                 opis_popravka += '<span   class="no-print">';
+                                 opis_popravka += '<span>';
                                  opis_popravka += '<b>Ispisano stranica: </b>'+  rn.ispisano+ '. <br class="no-print">';
                                  opis_popravka += '</span>';
                              }

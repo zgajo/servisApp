@@ -34,12 +34,12 @@
 <!-- Custom Tabs -->
 <div class="nav-tabs-custom">
     <ul class="nav nav-tabs">
-        <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true"><strong>Sve otvorene primke</strong></a></li>
+        <li <?php if(!isset($_GET['action'])){ ?> class="active" <?php } ?>><a href="#tab_1" data-toggle="tab" aria-expanded="true"><strong>Sve otvorene primke</strong></a></li>
         <li><a href="#tab_2" data-toggle="tab" aria-expanded="true"><strong>Financijska odobrenja</strong></a></li>
-        <li><a href="#tab_3" data-toggle="tab" aria-expanded="true"><strong>Novo financijsko odobrenje</strong></a></li>
+        <li <?php if(isset($_GET['action']) && $_GET['action'] == "fin"){ ?> class=" active" <?php } ?>><a href="#tab_3" data-toggle="tab" aria-expanded="true"><strong>Novo financijsko odobrenje</strong></a></li>
     </ul>
     <div class="tab-content">
-        <div class="tab-pane active" id="tab_1">
+        <div <?php if(!isset($_GET['action'])){ ?> class="tab-pane active" <?php }else{ ?>  class="tab-pane" <?php } ?> id="tab_1">
             <!-- TABLE: Sve otvoreni RMA -->
             <div class="box box-info" style="border-top: none">
                 <div class="box-body">
@@ -180,7 +180,7 @@
         </div>
 
         <!-- /.tab-pane -->
-        <div class="tab-pane" id="tab_3">
+        <div<?php if(isset($_GET['action']) && $_GET['action'] == "fin"){ ?> class="tab-pane active" <?php } else{ ?> class="tab-pane"  <?php } ?> id="tab_3">
             <form class="form-horizontal" id="novoOdobrenje">
 
                 <div class="box box-info" style="border-top: none">
@@ -229,7 +229,7 @@
                             <div class="form-group">
                                 <label for="inputPrimka" class="col-sm-2 control-label">Primka</label>
                                 <div class="col-sm-10">
-                                    <input name="primka" class="form-control" id="inputPrimka" placeholder="Broj primke" type="text" required="">
+                                    <input name="primka" class="form-control" id="inputPrimka" placeholder="Broj primke" type="text" required="" value="<?php if(isset($_GET['p'])) echo $_GET['p'] ?>">
                                 </div>
                             </div>
 

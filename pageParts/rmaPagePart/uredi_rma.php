@@ -63,6 +63,10 @@
                 <a class="btn btn-app" id="rucne"  style=" float: left; height:initial;">
                        <i class="fa fa-send" style="font-size:small; display:inline;"></i> Ručna izdatnica
                    </a>
+
+                   <a class="btn btn-app" id="fin_odobrenje"  style=" float: left; height:initial;">
+                       <i class="glyphicon glyphicon-shopping-cart" style="font-size:small; display:inline;"></i> Financijsko odobrenje
+                   </a>
                 <!--
                 <a class="btn btn-app" id="narudzba"  style=" float: left; height:initial;">
                        <i class="fa fa-reorder" style="font-size:small; display:inline;"></i> Narudžba
@@ -179,7 +183,7 @@
                         <div class="col-sm-10">
                             <select class="form-control" id="status_rma" name='status_rma'>
                                 
-                               <option>Pripremljeno za slanje OS-u</option>
+                                <option>Pripremljeno za slanje OS-u</option>
                                 <option >Čeka dio u OS-u</option>
                                 <option value="Poslano u OS">Pošalji u OS</option>
                                 <option>Vraćeno is OS-a</option>
@@ -372,4 +376,12 @@
           
                 window.open("rucne.php?primka="+primka,"_blank");
             }) 
+
+            $("#fin_odobrenje").click(function (e) {
+                 var primka = $('#primka_id').text();
+
+                window.location = "rma.php?action=fin&p="+primka;
+            })
+
+
         </script>

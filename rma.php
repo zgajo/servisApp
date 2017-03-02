@@ -98,6 +98,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                             <?php
                         }
+                        if($_GET['action'] == "fin"){
+                            require_once('pageParts/rmaPagePart/svi_rma.php');
+                        }
                     } else if (!empty($_GET['rma'])) {
 
                         require_once('pageParts/rmaPagePart/uredi_rma.php');
