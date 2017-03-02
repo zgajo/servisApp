@@ -7,7 +7,7 @@ $conn = new database();
 if (isset($_POST['value'])){ 
 $value = $_POST['value'];
 
-$query = $conn->getConnection()->prepare("SELECT p.primka_id, p.serial, p.naziv, p.datumZaprimanja, p.status "
+$query = $conn->getConnection()->prepare("SELECT p.primka_id, p.serial, CONCAT(p.brand, ' ', p.naziv) as naziv, p.datumZaprimanja, p.status "
         . "FROM primka p "
         
         . "WHERE p.serial LIKE  CONCAT(?,'%') LIMIT 1");

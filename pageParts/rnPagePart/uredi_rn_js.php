@@ -83,7 +83,13 @@
                     $('#serijski').text(primka[0].serial);
                     $('#brand').text(primka[0].brand);
                     $('#tip').text(primka[0].tip);
-                    if (primka[0].tip != 'PISAČI') {
+
+                    var strNaziv = primka[0].naziv;
+                    var searchNaziv = strNaziv.search('PISAČ');
+                    var strTip = primka[0].tip;
+                    var searchTip = strTip.search('PISAČ');
+
+                    if (searchTip == -1 && searchNaziv == -1) {
                         $('#inputBI').hide();
                         $('#bi').hide()
                     }

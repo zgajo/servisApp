@@ -252,15 +252,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         
                            
                             
-                            //      Upis radnih naloga u opasku servisa
+                           //      Upis radnih naloga u opasku servisa
                         for(rn of rn){
                             var pocetak_servisa = new Date(rn.pocetak);
                             // PArent span
                             opis_popravka += '<span>';
-                            
-                            opis_popravka += '<span class="no-print"><br>';
-                            opis_popravka += '<b>Radni nalog:</b> '+rn.id+'. ';
-                            opis_popravka +=  '<input style="display:inline;margin-left:15px" type="checkbox" value="Prikazuje se pri ispisu" name="" checked="">'+
+                            opis_popravka += '<b style="display:inline">Radni nalog:</b> '+rn.id+'. ';
+                            opis_popravka += '<span class="no-print">';
+                            opis_popravka +=  '<input style="display:inline;margin-left:15px" type="checkbox" value="Prikazuje se pri ispisu" name="'+rn.id+'" checked="">'+
                                               '<span class="text">Prikaži prilikom printanja</span><br>';
                             opis_popravka += '</span>';
                             
@@ -276,31 +275,32 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 opis_popravka +=  '<span  class="no-print">';
 
                                 opis_popravka +=  '<br><b>Završetak servisiranja:</b> '+ [zavrsen_servis.getDate(), zavrsen_servis.getMonth()+1, zavrsen_servis.getFullYear()].join('.') + '. ';
-                                opis_popravka +=  '</span>';
+                                opis_popravka +=  '<br class="no-print"></span>';
                              }
                              
-                             if(rn.napomena !== null && rn.napomena !== '' && odjel === 'Servis'){
+                             if(rn.napomena !== null && rn.napomena !== '' && (odjel === 'Servis' || odjel === 'Servis'  )){
                                  opis_popravka += '<span   class="no-print"><br>';
                                  opis_popravka += '<b>Napomena: </b>'+  rn.napomena+ '. <br class="no-print">';
                                  opis_popravka += '</span>';
                              }
                              
                              if(rn.ispisano !== null && rn.ispisano !== '' && odjel === 'Servis'){
-                                 opis_popravka += '<span   class="no-print">';
+                                 opis_popravka += '<span>';
                                  opis_popravka += '<b>Ispisano stranica: </b>'+  rn.ispisano+ '. <br class="no-print">';
                                  opis_popravka += '</span>';
                              }
                             
                             
-                            opis_popravka += '<br  class="no-print"></span>';
+                            opis_popravka += '<br></span>';
                             
-                             prom += (rn.promijenjeno) ? rn.promijenjeno+ '<br>':'';
+                             prom += (rn.promijenjeno) ? '<span id="p'+ rn.id +'"><b style="display:inline">Radni nalog:</b> '+rn.id+': ' +rn.promijenjeno+ '<br></span>':'';
                              
                              
-                             naplata += (rn.naplata!=='' && rn.naplata != null) ? '  ' + rn.naplata + '<br>':'';
+                             naplata += (rn.naplata!=='' && rn.naplata != null) ? '<span id="n'+ rn.id +'"> ' + rn.naplata + '<br></span>':'';
                         }
                         //  DOHVAĆANJE RMA NALOGA I UPISIVANJE
                         
+
                         
                         
                         
@@ -407,12 +407,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
                    
                 });
                 
+                 function isprintati(i){
+                    $(document).ready(function(){
+                        $(this).find("#p"+i).removeClass('no-print');
+                        $(this).find("#n"+i).removeClass('no-print');
+                    })
+                }
+
+                function sakrij(i){
+                    $(document).ready(function(){
+                    $(this).find("#p"+i).addClass('no-print');
+                        $(this).find("#n"+i).addClass('no-print');
+                    })
+                }
+
                 $('#popravak').on("click", 'input',function(){
                 
                 if($(this).is(":checked")) {
                     $(this).parent().parent().removeClass('no-print');
+                    isprintati($(this).attr('name'));
                 }else{
                      $(this).parent().parent().addClass('no-print');
+                    sakrij($(this).attr('name'));
                 }
                
                 });

@@ -63,10 +63,11 @@
                 <a class="btn btn-app" id="rucne"  style=" float: left; height:initial;">
                        <i class="fa fa-send" style="font-size:small; display:inline;"></i> Ručna izdatnica
                    </a>
-
+                    <?php if($_COOKIE['odjel'] === "Reklamacije"){ ?>
                    <a class="btn btn-app" id="fin_odobrenje"  style=" float: left; height:initial;">
                        <i class="glyphicon glyphicon-shopping-cart" style="font-size:small; display:inline;"></i> Financijsko odobrenje
                    </a>
+                   <?php  } ?>
                 <!--
                 <a class="btn btn-app" id="narudzba"  style=" float: left; height:initial;">
                        <i class="fa fa-reorder" style="font-size:small; display:inline;"></i> Narudžba
