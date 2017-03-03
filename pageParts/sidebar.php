@@ -36,7 +36,7 @@
             <li class="header">PRETRAGA</li> 
         </ul>
         <!-- search form (Optional) -->
-        <form class="sidebar-form" autocomplete="off"> 
+        <div class="sidebar-form" autocomplete="off">
             <div class="input-group" id="sk">
                 <input type="text" name="q" class="form-control" id="search_kupca" placeholder="Pretraži kupca..." autocomplete="off">
                 <span  id="ikonek"  class="input-group-btn">
@@ -46,9 +46,9 @@
             <div id="search_result_kupac">
 
             </div>
-        </form>
+        </div>
 
-        <form class="sidebar-form" autocomplete="off">
+        <div class="sidebar-form" autocomplete="off">
             <div class="input-group" id="sp">
                 <input type="text" name="q" class="form-control" id="search_primka" placeholder="Pretraži po primci..." autocomplete="off">
                 <span  id="ikonep"  class="input-group-btn">
@@ -58,9 +58,9 @@
             <div id="search_result_primka">
 
             </div>
-        </form>
+        </div>
         
-         <form class="sidebar-form" autocomplete="off">
+         <div class="sidebar-form" autocomplete="off">
             <div class="input-group" id="ss">
                 <input type="text" name="q" class="form-control" id="search_serijski" placeholder="Pretraži po serijskom..." autocomplete="off">
                 <span id="ikones" class="input-group-btn">
@@ -70,7 +70,7 @@
             <div id="search_result_serijski">
 
             </div>
-        </form>
+        </div>
 
 
     </section>

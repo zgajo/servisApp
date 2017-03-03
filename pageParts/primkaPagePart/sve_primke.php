@@ -22,7 +22,7 @@
                                     <th>Status</th>
                                 </tr>
                             </thead>
-                            <tbody style="text-align: center; color: black"></tbody>
+                            <tbody style="color: black"></tbody>
                         </table>
                     </div><!-- /.box-body -->
 
@@ -53,7 +53,7 @@
                                     
                                 </tr>
                             </thead>
-                            <tbody style="text-align: center; color: black"></tbody>
+                            <tbody style="color: black"></tbody>
                         </table>
                         <?php } else{ ?>
                         <table id="svePoslanePrimke" class="table table-bordered table-striped">
@@ -68,7 +68,7 @@
                                     
                                 </tr>
                             </thead>
-                            <tbody style="text-align: center; color: black"></tbody>
+                            <tbody style="color: black"></tbody>
                         </table>
                         <?php } ?>
                     </div><!-- /.box-body -->
@@ -329,4 +329,3 @@
 
 </div><!-- /.box-footer -->
 
- 

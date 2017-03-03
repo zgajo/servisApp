@@ -79,17 +79,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                 </h2>
 
-                              <!--   <div style="display: inline; float: right; font-size: 10px">
-                                    <span style="float: left; margin-right: 8px">
-                                        Naselje Gripole spine 53/c<br>
-                                        Rovinj, 52210<br></span>
-                                    <span style="float: right; margin-left: 8px; ">
+                              <div style="display: inline; float: right; font-size: 14px" class="no-print"><b>Status:</b>
+                                    <span style="margin-right: 8px" id="status_primke">
 
-
-                                        Kontakt: 052 803 699<br>
-                                        Email: servis-ro@eurotrade.hr
-                                    </span>
-                                </div>/.col -->
+                                  </span>
+                                </div>
 
                             </div><!-- /.col -->
                             <div style="clear: both"> <h2 class="page-header"></div>
@@ -196,7 +190,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <div id="potpis" style="text-align:center;  width: 200px;height: 30px"></div><br>
                             </div><!-- /.col -->
                             <div class="col-xs-6" style="font-size: 14px">
-                                <p class="lead" style="font-size: 14px">Šifre za naplatiti</p>
+                               <p class="lead"  id="status_rada" style="font-size: 14px">Status obavljenog rada: </p><div></div>
+                               <p class="lead" style="font-size: 14px">Šifre za naplatiti</p>
                                 <div class="table-responsive">
                                   <table class="table">
                                     <tbody>
@@ -259,6 +254,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                    $('#dz').text([zaprimljeno.getDate(), zaprimljeno.getMonth()+1, zaprimljeno.getFullYear()].join('.') );
                    $('#zap').text(primka[0].pot_ime+ ' ' +primka[0].pot_prezime);
                    $('#primka').text('Primka br. ' +primka[0].primka_id);
+                    $("#status_primke").text(primka[0].status);
                    
                    (primka[0].tvrtka != null && primka[0].tvrtka != '') ? $('#tvrtka').text(primka[0].tvrtka) : $('#tvrtka').text('');
                     $('#adresa').text(primka[0].adresa);
@@ -301,6 +297,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             //      Upis radnih naloga u opasku servisa
                         for(rn of rn){
                             var pocetak_servisa = new Date(rn.pocetak);
+                            var status_rada =  '<div  id="s'+ rn.id +'">' + rn.status + '</div>';
+                            $("#status_rada").html($("#status_rada").html() +status_rada);
+
                             // PArent span
                             opis_popravka += '<span>';
                             opis_popravka += '<b style="display:inline">Radni nalog:</b> '+rn.id+'. ';
@@ -449,6 +448,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     $(document).ready(function(){
                         $(this).find("#p"+i).removeClass('no-print');
                         $(this).find("#n"+i).removeClass('no-print');
+                        $(this).find("#s"+i).removeClass('no-print');
                     })
                 }
 
@@ -456,6 +456,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     $(document).ready(function(){
                     $(this).find("#p"+i).addClass('no-print');
                         $(this).find("#n"+i).addClass('no-print');
+                         $(this).find("#s"+i).addClass('no-print');
                     })
                 }
 

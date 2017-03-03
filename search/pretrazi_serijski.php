@@ -10,7 +10,7 @@ $value = $_POST['value'];
 $query = $conn->getConnection()->prepare("SELECT p.primka_id, p.serial, CONCAT(p.brand, ' ', p.naziv) as naziv, p.datumZaprimanja, p.status "
         . "FROM primka p "
         
-        . "WHERE p.serial LIKE  CONCAT(?,'%') LIMIT 1");
+        . "WHERE p.serial LIKE  CONCAT(?,'%')  LIMIT 5");
 
  if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $conn->getConnection()->errno . " " . $conn->getConnection()->error, E_USER_ERROR);

@@ -47,7 +47,7 @@ $.ajax({
 
                             if (row.status == "Stranka odustala od popravka" || row.status == "Popravak završen u jamstvu" || row.status == "Popravak završen van jamstva" || row.status == "Stranka odustala od popravka"
                                     || row.status == "Uređaj zamijenjen novim" || row.status == "Odobren povrat novca" || row.status == "DOA - Uređaj zamijenjen novim" || row.status == "DOA - Odobren povrat novca" || row.status == "Čeka preuzimanje stranke") {
-                                var a = '<p style="display: initial; margin-right:10px; color:purple;"><i class="fa fa-angle-double-right"></i></p><a name="' + row.id + '" class="' + sty + '" style="cursor: default; font-size: 0.8em;">' + row.pid + '</a><p style="display: initial; margin-left:10px; color:purple"><i class="fa fa-angle-double-left"></i></p>';
+                                var a = '<a name="' + row.id + '" class="' + sty + '" style="cursor: default; font-size: 0.8em;">' + row.pid + '</a><p style="display: initial; margin-left:10px; color:purple"><i class="fa fa-angle-double-left"></i></p>';
                             } else
                                 var a = '<a name="' + row.id + '" class="' + sty + '" style="cursor: default; font-size: 0.8em;">' + row.pid + '</a>';
 

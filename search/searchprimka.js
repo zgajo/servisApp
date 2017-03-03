@@ -12,7 +12,10 @@ var left = $('#sp').position().left;
                     if (value != '') {
                          $('#searchp').hide();
                         $('#cancelp').show();
-                        $('#search_result_primka').show();
+                        $('#search_result_primka').show(function(){
+                            $(this).find("li").first().addClass("hover_a");
+                            $(this).find("a").first().css("background", "#4aaee7");
+                        });
 
                         //Ispis kupaca
                         $.post('search/pretrazi_primku.php', {value: value}, function (primka) {

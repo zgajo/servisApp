@@ -4,7 +4,7 @@
                         <!-- TABLE: Sve otvorene primke -->
                         <div class="box box-info"  style="border-top: none">
                             <div class="box-body">
-                                    <table  id="sviRN"  class="table table-bordered table-striped" style="text-align: center; color: black">
+                                    <table  id="sviRN"  class="table table-bordered table-striped" style="color: black">
                                         <thead>
                                             <tr>
                                                 <th>Primka</th>
@@ -23,4 +23,3 @@
                                 
                             </div><!-- /.box-footer -->
                         </div><!-- /.box -->
-                        

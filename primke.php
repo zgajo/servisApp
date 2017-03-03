@@ -5,12 +5,13 @@ require_once './klase/radniNalog.php';
 ?>
 
 
-<!DOCTYPE html>
-<!--
+    <!DOCTYPE html>
+    <!--
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
-<html>
+    <html>
+
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,41 +36,60 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
         <link href="search/search.css" rel="stylesheet">
         <style>
-            #stranka{ width: 35%;
+            #stranka {
+                width: 35%;
             }
-            #primka{
+
+            #primka {
                 width: 65%;
             }
-            #upr{
-                float: left; width: 50%;margin-left: 2%;
+
+            #upr {
+                float: left;
+                width: 50%;
+                margin-left: 2%;
             }
-            .rijeseno{
+
+            .rijeseno {
                 background-color: orange;
             }
-            .hover{
+
+            .hover {
                 background-color: lightblue;
             }
 
-            #urn{
-                float: right; width: 45%; margin-right: 2%;
+            #urn {
+                float: right;
+                width: 45%;
+                margin-right: 2%;
             }
-            #required:after { content:" *"; color: red}
 
-            @media (max-width: 1024px){
-                #stranka{ width: 100%;
-                }
-                #primka{
+            #required:after {
+                content: " *";
+                color: red
+            }
+
+            @media (max-width: 1024px) {
+                #stranka {
                     width: 100%;
                 }
-                #upr{
-                    float: left; width: 100%; margin: auto;
+                #primka {
+                    width: 100%;
                 }
-                #urn{
-                    float: right; width: 100%;margin: auto;
+                #upr {
+                    float: left;
+                    width: 100%;
+                    margin: auto;
                 }
-                #required:after { content:" *"; }
+                #urn {
+                    float: right;
+                    width: 100%;
+                    margin: auto;
+                }
+                #required:after {
+                    content: " *";
+                }
             }
-
         </style>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -83,16 +103,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="wrapper">
 
             <?php include 'pageParts/header.php'; ?>
-            <?php include 'pageParts/sidebar.php'; ?>
+                <?php include 'pageParts/sidebar.php'; ?>
 
-            <!-- Content Wrapper. Contains page content -->
-            <div class="content-wrapper">
-                <!-- Content Header (Page header) -->
+                    <!-- Content Wrapper. Contains page content -->
+                    <div class="content-wrapper">
+                        <!-- Content Header (Page header) -->
 
-                <!-- Main content -->
-                <section class="content">
+                        <!-- Main content -->
+                        <section class="content">
 
-                    <?php
+                            <?php
                     /*
                       UKOLIKO SE PROVJERAVA PRIMKA
                      */
@@ -109,13 +129,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     }
                     ?>
 
-                </section><!-- /.content -->
-            </div><!-- /.content-wrapper -->
+                        </section>
+                        <!-- /.content -->
+                    </div>
+                    <!-- /.content-wrapper -->
 
-            <!-- Main Footer -->
-            <?php require_once('pageParts/footer.php') ?>
+                    <!-- Main Footer -->
+                    <?php require_once('pageParts/footer.php') ?>
 
-        </div><!-- ./wrapper -->
+        </div>
+        <!-- ./wrapper -->
 
         <!-- REQUIRED JS SCRIPTS -->
 
@@ -153,104 +176,122 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <script src="pageParts/primkaPagePart/unos_primke.js" type="text/javascript"></script>
             <script src="pageParts/primkaPagePart/unos_sifre.js" type="text/javascript"></script>
 
-        <?php } else if (isset($_GET['pregled_serijski'])) { ?>                  
-            <script>
-
-                var serijski = "<?php echo $_GET['pregled_serijski'] ?>";
-                console.log(serijski);
-                $('#serijski_primke').DataTable({
-                    "ajax": {
-                        "url": "json/primka/getBySerijski.php?serijski=" + serijski,
-                        "dataSrc": ""
-                    },
-                    "columns": [
-                        {"data": "primka", "render": function (data, type, row, meta) {
-                                var a = '<a style="margin-right:20px" href="pregled.php?primka=' + row.primka + '"><i style="" class="fa  fa-file-text-o"></i></a><p style="display:inline">' + row.primka + '</p>';
-                                return a;
-                            }},
-                        {"data": "status", "render": function (data, type, row, meta) {
-                                var dz = new Date(row.zaprimljeno);
-                                return [dz.getDate(), dz.getMonth() + 1, dz.getFullYear()].join('.');
-                            }},
-                        {"data": "uredaj"},
-                        {"data": "status", "render": function (data, type, row, meta) {
-                                return row.ime + ' ' + row.prezime;
-                            }},
-                        {"data": "status"}
+            <?php } else if (isset($_GET['pregled_serijski'])) { ?>
+                <script>
+                    var serijski = "<?php echo $_GET['pregled_serijski'] ?>";
+                    console.log(serijski);
+                    $('#serijski_primke').DataTable({
+                        "ajax": {
+                            "url": "json/primka/getBySerijski.php?serijski=" + serijski,
+                            "dataSrc": ""
+                        },
+                        "columns": [
+                            {
+                                "data": "primka",
+                                "render": function (data, type, row, meta) {
+                                    var a = '<a style="margin-right:20px" href="pregled.php?primka=' + row.primka + '"><i style="" class="fa  fa-file-text-o"></i></a><p style="display:inline">' + row.primka + '</p>';
+                                    return a;
+                                }
+                            },
+                            {
+                                "data": "status",
+                                "render": function (data, type, row, meta) {
+                                    var dz = new Date(row.zaprimljeno);
+                                    return [dz.getDate(), dz.getMonth() + 1, dz.getFullYear()].join('.');
+                                }
+                            },
+                            {
+                                "data": "uredaj"
+                            },
+                            {
+                                "data": "status",
+                                "render": function (data, type, row, meta) {
+                                    return row.ime + ' ' + row.prezime;
+                                }
+                            },
+                            {
+                                "data": "status"
+                            }
                     ]
-                });
-            </script>               
-            <?php
+                    });
+                </script>
+                <?php
         } else {
             //Uređivanje primke
             require_once './pageParts/primkaPagePart/uredi_primku_js.php';
             ?>
 
-        <?php } ?>
-        <!-- date-range-picker -->
-        <script>
-            $(function () {
+                    <?php } ?>
+                        <!-- date-range-picker -->
+                        <script>
+                            $(function () {
 
-                //Datemask dd/mm/yyyy
-                $("#datemask").inputmask("dd.mm.yyyy", {"placeholder": "dd.mm.yyyy"});
+                                //Datemask dd/mm/yyyy
+                                $("#datemask").inputmask("dd.mm.yyyy", {
+                                    "placeholder": "dd.mm.yyyy"
+                                });
 
-                //Money Euro
-                $("[data-mask]").inputmask();
+                                //Money Euro
+                                $("[data-mask]").inputmask();
 
-            });
+                            });
 
-            var table = $('#sve_primke').DataTable();
-            var data = table
-                    .rows()
-                    .data();
-            // provjeri da li ima već unešenih redova i stavi interval osvježavanja ukoliko postoje redovi
-            if (data.length != 0) {
-                setInterval(function () {
-                    table.ajax.reload();
-                }, 30000);
-            }
-
-            var check = "<?php echo $_COOKIE['odjel'] ?>";
-            var centar = "<?php echo $_COOKIE['centar'] ?>";
-
-            $(window).on("blur focus", function (e) {
-                var prevType = $(this).data("prevType");
-
-                if (prevType != e.type) {   //  reduce double fire issues
-                    switch (e.type) {
-                        case "blur":
-                            console.log('not-active');
-                            break;
-                        case "focus":
                             var table = $('#sve_primke').DataTable();
                             var data = table
-                                    .rows()
-                                    .data();
-                            // provjeri da li ima već unešenih redova i osvježi ukoliko postoje redovi
+                                .rows()
+                                .data();
+                            // provjeri da li ima već unešenih redova i stavi interval osvježavanja ukoliko postoje redovi
                             if (data.length != 0) {
-                                console.log(data.length);
-                                var table = $('#sve_primke').DataTable();
-                                table.ajax.reload();
+                                setInterval(function () {
+                                    table.ajax.reload();
+                                }, 30000);
                             }
 
-                            console.log('active2');
-                            break;
-                    }
-                }
+                            var check = "<?php echo $_COOKIE['odjel'] ?>";
+                            var centar = "<?php echo $_COOKIE['centar'] ?>";
+
+                            $(window).on("blur focus", function (e) {
+                                var prevType = $(this).data("prevType");
+
+                                if (prevType != e.type) { //  reduce double fire issues
+                                    switch (e.type) {
+                                    case "blur":
+                                        console.log('not-active');
+                                        break;
+                                    case "focus":
+                                            console.log($("#search_result_primka").is(":visible"));
+                                        var table = $('#sve_primke').DataTable();
+                                        var data = table
+                                            .rows()
+                                            .data();
+                                        // provjeri da li ima već unešenih redova i osvježi ukoliko postoje redovi
+                                        if (data.length != 0) {
+                                            console.log(data.length);
+                                            var table = $('#sve_primke').DataTable();
+                                            table.ajax.reload();
+                                        }
+
+                                        console.log('active2');
+                                        break;
+                                    }
+                                }
 
 
-                $(this).data("prevType", e.type);
-            })
+                                $(this).data("prevType", e.type);
+                            })
 
 
 
+                            $(document).ready(function () {
+                                console.log($("#search_result_primka").is(":visible"));
 
+                                });
 
-
-        </script>
-        <!-- Optionally, you can add Slimscroll and FastClick plugins.
+                        </script>
+                        <!-- Optionally, you can add Slimscroll and FastClick plugins.
              Both of these plugins are recommended to enhance the
              user experience. Slimscroll is required when using the
              fixed layout. -->
     </body>
-</html>
+
+    </html>

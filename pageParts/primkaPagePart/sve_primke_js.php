@@ -33,7 +33,7 @@ $.ajax({
                         
                         if(row.status == "Stranka odustala od popravka" || row.status == "Popravak završen u jamstvu" || row.status == "Popravak završen van jamstva" || row.status == "Stranka odustala od popravka" 
                             || row.status == "Uređaj zamijenjen novim" || row.status == "Odobren povrat novca" || row.status == "DOA - Uređaj zamijenjen novim" ||  row.status == "DOA - Odobren povrat novca" ||  row.status == "Čeka preuzimanje stranke")   {
-                        var a =   '<p style="display: initial; margin-right:10px; color:purple;"><i class="fa fa-angle-double-right"></i></p><a  class="' + sty + '" style="cursor:default; font-size: 0.8em;">' + row.primka_id + '</a><p style="display: initial; margin-left:10px; color:purple"><i class="fa fa-angle-double-left"></i></p>';
+                        var a =   '<a  class="' + sty + '" style="cursor:default; font-size: 0.8em;">' + row.primka_id + '</a><p style="display: initial; margin-left:10px; color:purple"><i class="fa fa-angle-double-left"></i></p>';
                           a += '<i style="display:none" id="primka_id" name="'+ row.primka_id +'"></i>';
                           a += '<i style="display:none" id="stranka_id" name ="'+ row.stranka_id +'"></i>';
                         return a;
@@ -192,11 +192,11 @@ $("#sve_primke").on("click", "tbody tr", function () {
                     '<a  class="btn btn-app"  id="narudzba" name="'+ $(this).find('#primka_id').attr('name') +'" style=" float: right; height:initial; background-color:ivory ">'+
                        ' <i id="str_id" name="'+ $(this).find('#stranka_id').attr('name')+'" class="fa fa-reorder" style="font-size:small; display:inline;"></i> Narudžba'+
                     '</a>'+
-                          <?php } ?>   /*
+
                     '<a class="btn btn-app" id="rucne" name="'+ $(this).find('#primka_id').attr('name') +'" style=" float: right; height:initial; background-color:ivory ">'+
                    '     <i class="fa fa-send" style="font-size:small; display:inline;"></i> Ručna izdatnica'+
                    ' </a>'+
-                    */
+                    <?php } ?>
                     
                 '</div></td>')}
 });
