@@ -259,7 +259,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         console.log('not-active');
                                         break;
                                     case "focus":
-                                            console.log($("#search_result_primka").is(":visible"));
+                                        console.log($("#search_result_primka").is(":visible"));
                                         var table = $('#sve_primke').DataTable();
                                         var data = table
                                             .rows()
@@ -283,10 +283,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
                             $(document).ready(function () {
-                                console.log($("#search_result_primka").is(":visible"));
+                                $(document).keypress(function (e) {
+                                    if($("#search_result_primka").is(":visible")){
+                                        if (e.which == 13) {
+                                            alert('You pressed enter!');
+                                            console.log($("#search_result_primka").is(":visible"));
+                                        }
+                                    }
 
                                 });
 
+
+                            });
                         </script>
                         <!-- Optionally, you can add Slimscroll and FastClick plugins.
              Both of these plugins are recommended to enhance the
