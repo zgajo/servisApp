@@ -24,7 +24,6 @@ include_once './klase/checkLogin.php';
                 display: inline; width: 80%; margin-left: 5px;float: right; 
             }
         </style>
-        
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

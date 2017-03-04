@@ -7,7 +7,7 @@ $conn = new database();
 if (isset($_POST['value'])){ 
 $value = $_POST['value'];
 
-$query = $conn->getConnection()->prepare("SELECT p.primka_id, p.serial, CONCAT(p.brand, ' ', p.naziv) as naziv, p.datumZaprimanja, p.status "
+$query = $conn->getConnection()->prepare("SELECT p.primka_id, p.serial, CONCAT(p.brand, ' ', p.naziv) as naziv "
         . "FROM primka p "
         
         . "WHERE p.serial LIKE  CONCAT(?,'%')  LIMIT 5");
@@ -19,14 +19,16 @@ $query = $conn->getConnection()->prepare("SELECT p.primka_id, p.serial, CONCAT(p
         $query->bind_param("s", $value); 
         
         if($query->execute()) { 
-           $query->bind_result($id, $serial, $uredaj, $z, $s);
-           while($row = $query->fetch()){
+
+           $query->bind_result($id, $serial, $uredaj);
+
+            while($row = $query->fetch()){
+               $out = "Uređaj: $uredaj sn: $serial";
+
                $result[] = array(
-               "primka" => $id,
-               "serijski" => $serial,
-               "uredaj" => $uredaj,
-               "zaprimljeno" => $z,
-               "status" => $s
+                   "ser" => $serial,
+               "value" => $out,
+               "label" => $out
            );
            }
            

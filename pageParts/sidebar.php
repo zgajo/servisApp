@@ -43,9 +43,7 @@
                     <span type="submit" name="search" id="search-btn" class="btn btn-flat"><i id="searchk" class="fa fa-search"></i><i id="cancelk" style="display: none" class="fa fa-remove"></i></span>
                 </span>
             </div>
-            <div id="search_result_kupac">
 
-            </div>
         </div>
 
         <div class="sidebar-form" autocomplete="off">
@@ -55,9 +53,7 @@
                     <span type="submit" name="search" id="search-btn" class="btn btn-flat"><i id="searchp" class="fa fa-search"></i><i id="cancelp" style="display: none" class="fa fa-remove"></i></span>
                 </span>
             </div>
-            <div id="search_result_primka">
 
-            </div>
         </div>
         
          <div class="sidebar-form" autocomplete="off">
@@ -67,9 +63,7 @@
                     <span type="submit" name="search" id="search-btn" class="btn btn-flat"><i id="searchs" class="fa fa-search"></i><i id="cancels" style="display: none" class="fa fa-remove"></i></span>
                 </span>
             </div>
-            <div id="search_result_serijski">
 
-            </div>
         </div>
 
 

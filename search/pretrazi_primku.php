@@ -21,11 +21,13 @@ $query = $conn->getConnection()->prepare("SELECT p.primka_id, s.ime, s.prezime, 
         if($query->execute()) { 
            $query->bind_result($id, $ime, $prezime, $tvrtka);
            while($row = $query->fetch()){
+
+               $out = ($tvrtka) ? $id. ": $tvrtka: ". $ime. " ".  $prezime : $id. ": " . $ime. " ".  $prezime;
+
                $result[] = array(
-               "primka" => $id,
-               "ime" => $ime,
-               "prezime" => $prezime,
-               "tvrtka" =>$tvrtka
+                   "id" => $id,
+               "value" => $out,
+               "label" => $out
            );
            }
            

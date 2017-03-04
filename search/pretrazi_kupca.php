@@ -17,14 +17,16 @@ $query = $conn->getConnection()->prepare("SELECT stranka_id, ime, prezime, tvrtk
         
         if($query->execute()) { 
            $query->bind_result($id, $ime, $prezime, $tvrtka,$adresa, $grad);
+
+
+
            while($row = $query->fetch()){
+               $out = ($tvrtka) ? "$tvrtka: $ime $prezime, $grad, $adresa "  : "$ime $prezime, $grad, $adresa ";
+
                $result[] = array(
-               "id" => $id,
-               "ime" => $ime,
-               "prezime" => $prezime,
-               "tvrtka" =>$tvrtka,
-                "adresa" => $adresa,
-                "grad" => $grad
+                   "id" => $id,
+               "value" => $out,
+               "label" => $out
            );
            }
            

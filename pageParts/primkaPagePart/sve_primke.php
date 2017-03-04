@@ -102,9 +102,7 @@
                                             <span>Pretraži kupca u bazi :</span> <input type="text" id="search_box" style="    margin-left: 10px;" autocomplete="off">
                                             <span id="search_button" >Očisti</span>
                                         </span>
-                                        <div id="search_result">
 
-                                        </div>
                                     </div>
 
                                 </div><!-- /.box-header -->

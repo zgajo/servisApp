@@ -1,70 +1,76 @@
-var left = $('#sp').position().left;
-                var top = $('#sp').position().top;
-                var width = $('#sp').width();
+//  PRETRAGA ZA PRIMKOM
+$('#search_primka').keydown(function () {
 
 
-                $('#search_result_primka').css('top', top + 27).css('width', width+100 ).css('z-index', 4);
 
-                //  PRETRAGA ZA KUPCEM
-                $('#search_primka').keyup(function () {
-                    var value = $(this).val();
+    $(function () {
 
-                    if (value != '') {
-                         $('#searchp').hide();
-                        $('#cancelp').show();
-                        $('#search_result_primka').show(function(){
-                            $(this).find("li").first().addClass("hover_a");
-                            $(this).find("a").first().css("background", "#4aaee7");
-                        });
-
-                        //Ispis kupaca
-                        $.post('search/pretrazi_primku.php', {value: value}, function (primka) {
-                            
-                            if(primka){
-                              //Prikaz pronađenih podataka
-                            var output ='<ul >';
-                            for(var i=0; i < primka.length; ++i){
-                                output += '<li><a style="color:#001F3F" class="a" id="k" name="'+ primka[i].primka + '">Primka '+ primka[i].primka + ', ';
-                                if(primka[i].tvrtka) output += primka[i].tvrtka+', '; 
-                                output += primka[i].ime+' ' + primka[i].prezime +'</a></li>'
-                            } 
-                            
-                            output +='</ul>';   //kraj ispis liste 
-                            $('#search_result_primka').html(output);
-                            
-                            }else{
-                                $('#search_result_primka').html('Nema rezultata');
-                            }
-                            
-                            
-                            
-                            
-                        }).fail(function(){$('#search_result_primka').html('Nema rezultata');});
+        $("#search_primka").autocomplete({
+            autoFocus: true,
+            minLength: 1,
+            source: function (request, response) {
+                $.ajax({
+                    type: "POST",
+                    url: "search/pretrazi_primku.php",
+                    dataType: "json",
+                    data: {
+                        value: request.term
+                    },
+                    success: function (data) {
                         
-                    } else {
-                        $('#searchp').show();
-                        $('#cancelp').hide();
-                        $('#search_result_primka').hide();
+
+                        response(data);
+
+                            $('#cancelp').show();
+                            $('#searchp').hide();
+
+                    },
+                    error: function(e){
+
+                            var v = [{
+                                id: 0,
+                                value: 0,
+                                label: "Nema pronađenih primki"
+                            }];
+
+                        response(v);
+
+                         $('#cancelp').show();
+                            $('#searchp').hide();
                     }
+                });
+            },
+            open: function () {
+                setTimeout(function () {
+                    $('.ui-autocomplete').css('z-index', 99999999999999);
+                }, 0);
+            },
+            select: function (event, ui) {
 
-                });
-                //  KRAJ * PRETRAGA ZA KUPCEM * KRAJ
+                if(ui.item.id !== 0) window.location = "pregled.php?primka=" + ui.item.id;
                 
-                 $('#ikonep').on("click", this, function(e){
-                     $('#search_primka').val(null);
-                     $('#cancelp').hide();
-                    $('#searchp').show();
-                    $('#search_result_primka').hide();
-                });
-                
-                
-                
-                //  UPIS PODATAKA ODABRANOG KUPCA U POLJE
-                $('#search_result_primka').on("click", 'a', function(e){
-                    e.preventDefault();
-                    
-                    var idprimka = $( this ).attr('name');
-                   window.location = "pregled.php?primka=" + idprimka;
+            }
 
-                    
-                });
+        });
+
+    });
+
+
+
+});
+
+
+$('#search_primka').keyup(function () {
+
+    if ($('#search_primka').val() == '') {
+        $('#cancelp').hide();
+        $('#searchp').show();
+    }
+})
+
+$('#ikonep').on("click", function () {
+        $('#search_primka').val(null);
+        $('#cancelp').hide();
+        $('#searchp').show();
+    })
+    // KRAJ PRETRAGE ZA PRIMKOM
