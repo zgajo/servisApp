@@ -2,8 +2,9 @@
 include_once './klase/checkLogin.php';
 ?>
 
-<!DOCTYPE html>
-<html>
+    <!DOCTYPE html>
+    <html>
+
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,15 +14,19 @@ include_once './klase/checkLogin.php';
         <!-- Bootstrap 3.3.5 -->
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+
         <!-- Ionicons -->
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         <!-- Theme style -->
         <link rel="icon" type="ispis/logo.png" href="ispis/icon.ico.png">
         <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
         <style>
-            .inputSyle{
-                display: inline; width: 80%; margin-left: 5px;float: right; 
+            .inputSyle {
+                display: inline;
+                width: 80%;
+                margin-left: 5px;
+                float: right;
             }
         </style>
 
@@ -32,78 +37,104 @@ include_once './klase/checkLogin.php';
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
+
     <body>
         <div class="wrapper">
             <!-- Main content -->
             <section class="invoice" style="padding-top: 0px;">
                 <div style="margin-left: auto; margin-right: auto; padding-left: 0px; padding-right: 0px;">
-                    
-               
-                <!-- title row -->
-                <div class="no-print" style="font-size: 20px; background-color: #d80200; color: white; width: 250px "><input id="op" type="checkbox" style="margin-left: 5px" > Dodati: Oprez - lomljivo</div>
-                
-                <!-- info row -->
-                <strong><div  style="margin-left: auto; margin-right: auto; text-align: center; ">
+
+
+                    <!-- title row -->
+                    <div class="no-print" style="font-size: 20px; background-color: #d80200; color: white; width: 250px ">
+                        <input id="op" type="checkbox" style="margin-left: 5px"> Dodati: Oprez - lomljivo</div>
+
+                    <!-- info row -->
+                    <strong><div  style="margin-left: auto; margin-right: auto; text-align: center; ">
                     <div style="font-size: 20px">Ručna izdatnica br. </div>
                     <input id="rb" style="border: none; text-align: center; font-size: 20px" value="broj">
                 </div></strong>
 
-                
-                 <div class="row" style=" width: 95%; margin-top: 50px; margin-left: 2px; margin-right: 2px ">
-                    <p style="margin-bottom: 2px"  class="lead"><b style=" font-size: 14px">ŠALJE:</b></p>
-                    <div class="col-xs-12" style="float:left;  border: 1px solid black; font-size: 14px ">
-                        <b>Centar: <p id="sc" style="display: inline"></p></b><br><br>
-                        <b>Adresa: <p id="sa" style="display: inline"></p></b><br>
-                        <b>Grad: <p id="sg" style="display: inline"></p></b><br>
-                        <b>Kontakt: <p id="sb" style="display: inline"></p></b><br>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-                
-                
+
+                    <div class="row" style=" width: 95%; margin-top: 50px; margin-left: 2px; margin-right: 2px ">
+                        <p style="margin-bottom: 2px" class="lead"><b style=" font-size: 14px">ŠALJE:</b></p>
+                        <div class="col-xs-12" style="float:left;  border: 1px solid black; font-size: 14px ">
+                            <b>Centar: <p id="sc" style="display: inline"></p></b>
+                            <br>
+                            <br>
+                            <b>Adresa: <p id="sa" style="display: inline"></p></b>
+                            <br>
+                            <b>Grad: <p id="sg" style="display: inline"></p></b>
+                            <br>
+                            <b>Kontakt: <p id="sb" style="display: inline"></p></b>
+                            <br>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
 
 
-                <div class="row" style=" width: 95%;  margin-top: 50px;  margin-left: 2px; margin-right: 2px "> 
-                    <p style="margin-bottom: 2px"  class="lead"><b style=" font-size: 17px">PRIMA:</b></p>
-                    <div class="col-xs-12" style="border: 1px solid black; font-size: 16px; padding-bottom: 1px; padding-top: 1px ">
-                        <div style="font-size: 17px; height: 28px"><strong style="display: inline; float: left">Tvrtka: </strong><input id="pt"  class="inputSyle"></input></div><br>
-                        <div style="height: 28px; margin-bottom: 1px; margin-top: 1px"><strong style="display: inline; float: left">Adresa: </strong><input id="pa"   class="inputSyle"></input></div>
-                        <div style="height: 28px; margin-bottom: 1px; margin-top: 1px"><strong style="display: inline; float: left">Grad: </strong><input id="pg" class="inputSyle"></input></div>
-                        <div style="height: 28px; margin-bottom: 1px; margin-top: 1px"><strong style="display: inline; float: left">Kontakt: </strong><input id="pb"  class="inputSyle"></input></div>
-                        
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-               
-                
-                <div class="row" style="width: 95%;  margin-top: 40px; margin-left: 2px; margin-right: 2px; text-align: center  ">
-                    <table style="width: 100%;border: 1px solid black; ">
-                        <thead style="text-align: center" >
-                        <th style="border: 1px solid black; text-align: center">Uređaj</th>
-                        <th style="border: 1px solid black; text-align: center">Serijski</th>
-                        <th style="border: 1px solid black; text-align: center">Primka</th>
-                        </thead>
-                        <tbody >
-                        <tr>
-                            <td style="border: 1px solid black; font-size: 14px"><p  id="su"></p></td>
-                            <td style="border: 1px solid black; font-size: 14px"><p id="ss"></p></td>
-                            <td style="border: 1px solid black; font-size: 14px"><p id="p"></p></td>
-                        </tbody>
-                        
-                    </table>
 
-                </div>
-                
-                <div class="row" style= " width: 95%; margin-top: 40px;  margin-left: 2px; margin-right: 2px  ">
-                    Napomena:
-                    <textarea rows="2" style="width: 100%; border: 1px solid black"></textarea>
 
-                </div>
-                
-                
-                <div id="oprez" style="display: none">
-                   <div style="font-size: 50px; text-align: center">
-                    <u> OPREZ LOMLJIVO!</u>
-                </div>
-                <div style="font-size: 32px; text-align: center "><strong>GORNJA STRANA PRILIKOM TRANSPORTA!!!<strong></div> 
+                    <div class="row" style=" width: 95%;  margin-top: 50px;  margin-left: 2px; margin-right: 2px ">
+                        <p style="margin-bottom: 2px" class="lead"><b style=" font-size: 17px">PRIMA:</b></p>
+                        <div class="col-xs-12" style="border: 1px solid black; font-size: 16px; padding-bottom: 1px; padding-top: 1px ">
+                            <div style="font-size: 17px; height: 28px"><strong style="display: inline; float: left">Tvrtka: </strong>
+                                <input id="pt" class="inputSyle"></input>
+                            </div>
+                            <br>
+                            <div style="height: 28px; margin-bottom: 1px; margin-top: 1px"><strong style="display: inline; float: left">Adresa: </strong>
+                                <input id="pa" class="inputSyle"></input>
+                            </div>
+                            <div style="height: 28px; margin-bottom: 1px; margin-top: 1px"><strong style="display: inline; float: left">Grad: </strong>
+                                <input id="pg" class="inputSyle"></input>
+                            </div>
+                            <div style="height: 28px; margin-bottom: 1px; margin-top: 1px"><strong style="display: inline; float: left">Kontakt: </strong>
+                                <input id="pb" class="inputSyle"></input>
+                            </div>
+
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+
+
+                    <div class="row" style="width: 95%;  margin-top: 40px; margin-left: 2px; margin-right: 2px; text-align: center  ">
+                        <table style="width: 100%;border: 1px solid black; ">
+                            <thead style="text-align: center">
+                                <th style="border: 1px solid black; text-align: center">Uređaj</th>
+                                <th style="border: 1px solid black; text-align: center">Serijski</th>
+                                <th style="border: 1px solid black; text-align: center">Primka</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="border: 1px solid black; font-size: 14px">
+                                        <p id="su"></p>
+                                    </td>
+                                    <td style="border: 1px solid black; font-size: 14px">
+                                        <p id="ss"></p>
+                                    </td>
+                                    <td style="border: 1px solid black; font-size: 14px">
+                                        <p id="p"></p>
+                                    </td>
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                    <div class="row" style=" width: 95%; margin-top: 40px;  margin-left: 2px; margin-right: 2px  ">
+                        Napomena:
+                        <textarea rows="2" style="width: 100%; border: 1px solid black"></textarea>
+
+                    </div>
+
+
+                    <div id="oprez" style="display: none">
+                        <div style="font-size: 50px; text-align: center">
+                            <u> OPREZ LOMLJIVO!</u>
+                        </div>
+                        <div style="font-size: 32px; text-align: center "><strong>GORNJA STRANA PRILIKOM TRANSPORTA!!!<strong></div>
                 </div>
 
                 <div class="col-xs-12" style="margin-top: 40px; width: 95%; ">

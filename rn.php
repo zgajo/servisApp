@@ -5,12 +5,13 @@ require_once './klase/radniNalog.php';
 ?>
 
 
-<!DOCTYPE html>
-<!--
+    <!DOCTYPE html>
+    <!--
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
-<html>
+    <html>
+
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,7 +21,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Bootstrap 3.3.5 -->
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <!-- Font Awesome -->
-        <link rel="stylesheet" href="font/font-awesome.min.css">
+        <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+
         <!-- Ionicons -->
         <link rel="stylesheet" href="font/ionicons.min.css">
         <!-- DataTables -->
@@ -28,7 +30,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Theme style -->
         <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
         <link href="search/search.css" rel="stylesheet">
-<link rel="icon" type="ispis/logo.png" href="ispis/icon.ico.png">
+        <link rel="icon" type="ispis/logo.png" href="ispis/icon.ico.png">
         <link rel="stylesheet" href="jquery-ui.css">
         <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
               page. However, you can choose any other skin. Make sure you
@@ -36,20 +38,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
         -->
         <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
         <style>
-            #stranka{ width: 35%;
+            #stranka {
+                width: 35%;
             }
-            #primka{
+
+            #primka {
                 width: 65%;
             }
-            #required:after { content:" *"; color: red}
-            @media (max-width: 768px){
-                #stranka{ width: 100%;
+
+            #required:after {
+                content: " *";
+                color: red
+            }
+
+            @media (max-width: 768px) {
+                #stranka {
+                    width: 100%;
                 }
-                #primka{
+                #primka {
                     width: 100%;
                 }
             }
-
         </style>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -63,17 +72,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="wrapper">
 
             <?php include './pageParts/header.php'; ?>
-            <?php include './pageParts/sidebar.php'; ?>
+                <?php include './pageParts/sidebar.php'; ?>
 
-            <!-- Content Wrapper. Contains page content -->
-            <div class="content-wrapper">
-                <!-- Content Header (Page header) -->
+                    <!-- Content Wrapper. Contains page content -->
+                    <div class="content-wrapper">
+                        <!-- Content Header (Page header) -->
 
 
-                <!-- Main content -->
-                <section class="content">
+                        <!-- Main content -->
+                        <section class="content">
 
-                    <?php
+                            <?php
                     if (isset($_GET['action'])) {
                         if ($_GET['action'] == "novi_rn" && !empty($_GET['primka_id'])) {
 
@@ -102,7 +111,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             . '</script>';
                             ?>
 
-                            <?php
+                                <?php
                         }
                     } else if (!empty($_GET['radni_nalog'])) {
 
@@ -112,13 +121,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         require_once('./pageParts/rnPagePart/svi_rn.php');
                     }
                     ?>
-                </section><!-- /.content -->
-            </div><!-- /.content-wrapper -->
+                        </section>
+                        <!-- /.content -->
+                    </div>
+                    <!-- /.content-wrapper -->
 
-            <?php require_once('./pageParts/footer.php') ?>
+                    <?php require_once('./pageParts/footer.php') ?>
 
 
-        </div><!-- ./wrapper -->
+        </div>
+        <!-- ./wrapper -->
 
         <!-- REQUIRED JS SCRIPTS -->
 
@@ -162,57 +174,58 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             if ($_COOKIE['odjel'] == "Servis" || $_COOKIE['odjel'] == "Reklamacije") {
                 ?>
-                <script type="text/javascript" src="pageParts/rnPagePart/svi_rn_sr.js"></script> 
-            <?php } else { ?>
-                <script type="text/javascript" src="pageParts/rnPagePart/svi_rn.js"></script> 
-            <?php } ?>
+                <script type="text/javascript" src="pageParts/rnPagePart/svi_rn_sr.js"></script>
+                <?php } else { ?>
+                    <script type="text/javascript" src="pageParts/rnPagePart/svi_rn.js"></script>
+                    <?php } ?>
 
 
-        <?php } ?>         
+                        <?php } ?>
 
 
-        <script  type="text/javascript" >
-            var table = $('#sviRN').DataTable();
-            var data = table
-                    .rows()
-                    .data();
-            // provjeri da li ima već unešenih redova i stavi interval osvježavanja ukoliko postoje redovi
-            if (data.length != 0) {
-
-                setInterval(function () {
-                    table.ajax.reload();
-                }, 30000);
-            }
-
-            $(window).on("blur focus", function (e) {
-                var prevType = $(this).data("prevType");
-
-                if (prevType != e.type) {   //  reduce double fire issues
-                    switch (e.type) {
-                        case "blur":
-                            console.log('not-active');
-                            break;
-                        case "focus":
-                            var table = $('#sviRN').DataTable();
-                            var data = table
+                            <script type="text/javascript">
+                                var table = $('#sviRN').DataTable();
+                                var data = table
                                     .rows()
                                     .data();
-                            // provjeri da li ima već unešenih redova i stavi interval osvježavanja ukoliko postoje redovi
-                            if (data.length != 0) {
-                                table.ajax.reload();
-                            }
-                            console.log('active');
-                            break;
-                    }
-                }
+                                // provjeri da li ima već unešenih redova i stavi interval osvježavanja ukoliko postoje redovi
+                                if (data.length != 0) {
+
+                                    setInterval(function () {
+                                        table.ajax.reload();
+                                    }, 30000);
+                                }
+
+                                $(window).on("blur focus", function (e) {
+                                    var prevType = $(this).data("prevType");
+
+                                    if (prevType != e.type) { //  reduce double fire issues
+                                        switch (e.type) {
+                                        case "blur":
+                                            console.log('not-active');
+                                            break;
+                                        case "focus":
+                                            var table = $('#sviRN').DataTable();
+                                            var data = table
+                                                .rows()
+                                                .data();
+                                            // provjeri da li ima već unešenih redova i stavi interval osvježavanja ukoliko postoje redovi
+                                            if (data.length != 0) {
+                                                table.ajax.reload();
+                                            }
+                                            console.log('active');
+                                            break;
+                                        }
+                                    }
 
 
-                $(this).data("prevType", e.type);
-            })
-        </script>
-        <!-- Optionally, you can add Slimscroll and FastClick plugins.
+                                    $(this).data("prevType", e.type);
+                                })
+                            </script>
+                            <!-- Optionally, you can add Slimscroll and FastClick plugins.
              Both of these plugins are recommended to enhance the
              user experience. Slimscroll is required when using the
              fixed layout. -->
     </body>
-</html>
+
+    </html>

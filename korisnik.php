@@ -3,12 +3,13 @@ include_once './klase/checkLogin.php';
 ?>
 
 
-<!DOCTYPE html>
-<!--
+    <!DOCTYPE html>
+    <!--
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
-<html>
+    <html>
+
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,7 +19,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Bootstrap 3.3.5 -->
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <!-- Font Awesome -->
-        <link rel="stylesheet" href="font/font-awesome.min.css">
+        <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+
         <!-- Ionicons -->
         <link rel="stylesheet" href="font/ionicons.min.css">
         <!-- DataTables -->
@@ -26,13 +28,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Theme style -->
         <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
         <link href="search/search.css" rel="stylesheet">
-<link rel="icon" type="ispis/logo.png" href="ispis/icon.ico.png">
+        <link rel="icon" type="ispis/logo.png" href="ispis/icon.ico.png">
         <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
               page. However, you can choose any other skin. Make sure you
               apply the skin class to the body tag so the changes take effect.
         -->
         <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
-<link rel="stylesheet" href="jquery-ui.css">
+        <link rel="stylesheet" href="jquery-ui.css">
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -45,59 +47,60 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="wrapper">
 
             <?php include './pageParts/header.php'; ?>
-            <?php include './pageParts/sidebar.php'; ?>
-            <!-- Content Wrapper. Contains page content -->
-            <div class="content-wrapper">
-                <!-- Content Header (Page header) -->
+                <?php include './pageParts/sidebar.php'; ?>
+                    <!-- Content Wrapper. Contains page content -->
+                    <div class="content-wrapper">
+                        <!-- Content Header (Page header) -->
 
 
-                <!-- Main content -->
-                <section class="content">
-                    <div class="box box-info">
-                        <?php if($_GET['action'] == "il") { ?>
-                        <div class="alert alert-warning alert-dismissable">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                            <h4><i class="icon fa fa-warning"></i> Pažnja!</h4>
-                            Molim Vas izmjenite lozinku. Postavite je da se razlikuje od vašeg korisničkog imena!
-                        </div>
-                        <?php } ?>
-                        <div class="alert alert-danger alert-dismissable" style="display:none" id="greska">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                            <h4><i class="icon fa fa-ban"></i> Pažnja!</h4>
-                            Upisana ista lozinka, molim ponovite unos.
-                        </div>
-
-                        <div class="alert alert-success alert-dismissable" style="display:none" id="uspjesno">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                            <h4>	<i class="icon fa fa-check"></i> Pažnja!</h4>
-                            Upješno izmijenjena lozinka, slobodno nastavite rad! Klinite ovdje za dalje: <a href="primke.php">Nastavi rad</a>
-                        </div>
-
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Izmjena lozinke</h3>
-                        </div><!-- /.box-header -->
-                        <!-- form start -->
-                        <form class="form-horizontal">
-                            <div class="box-body">
-                                <div class="form-group">
-                                    <label for="loz" class="col-sm-2 control-label">Nova lozinka</label>
-                                    <div class="col-sm-10">
-                                        <input type="password" class="form-control" id="loz" placeholder="Lozinka" required="">
+                        <!-- Main content -->
+                        <section class="content">
+                            <div class="box box-info">
+                                <?php if($_GET['action'] == "il") { ?>
+                                    <div class="alert alert-warning alert-dismissable">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-warning"></i> Pažnja!</h4> Molim Vas izmjenite lozinku. Postavite je da se razlikuje od vašeg korisničkog imena!
                                     </div>
-                                </div>
-                            </div><!-- /.box-body -->
-                            <div class="box-footer">
-                                <button id="submit" class="btn btn-info pull-right">Izmjena</button>
-                            </div><!-- /.box-footer -->
-                        </form>
-                        
+                                    <?php } ?>
+                                        <div class="alert alert-danger alert-dismissable" style="display:none" id="greska">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                            <h4><i class="icon fa fa-ban"></i> Pažnja!</h4> Upisana ista lozinka, molim ponovite unos.
+                                        </div>
+
+                                        <div class="alert alert-success alert-dismissable" style="display:none" id="uspjesno">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                            <h4>	<i class="icon fa fa-check"></i> Pažnja!</h4> Upješno izmijenjena lozinka, slobodno nastavite rad! Klinite ovdje za dalje: <a href="primke.php">Nastavi rad</a>
+                                        </div>
+
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">Izmjena lozinke</h3>
+                                        </div>
+                                        <!-- /.box-header -->
+                                        <!-- form start -->
+                                        <form class="form-horizontal">
+                                            <div class="box-body">
+                                                <div class="form-group">
+                                                    <label for="loz" class="col-sm-2 control-label">Nova lozinka</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="password" class="form-control" id="loz" placeholder="Lozinka" required="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /.box-body -->
+                                            <div class="box-footer">
+                                                <button id="submit" class="btn btn-info pull-right">Izmjena</button>
+                                            </div>
+                                            <!-- /.box-footer -->
+                                        </form>
+
+                            </div>
+                        </section>
                     </div>
-                </section>
-            </div>
-            <?php require_once('./pageParts/footer.php') ?>
+                    <?php require_once('./pageParts/footer.php') ?>
 
 
-        </div><!-- ./wrapper -->
+        </div>
+        <!-- ./wrapper -->
 
         <!-- REQUIRED JS SCRIPTS -->
 
@@ -136,7 +139,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         async: false,
                         type: 'POST',
                         url: "json/djelatnik/pl.php",
-                        data: {"id": i, "l": lozinka},
+                        data: {
+                            "id": i,
+                            "l": lozinka
+                        },
                         success: function (r) {
                             console.log(r);
                             if (r && r != null)
@@ -149,7 +155,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             $.ajax({
                                 type: 'POST',
                                 url: "json/djelatnik/izmjena_lozinke.php",
-                                data: {"id": i, "l": lozinka},
+                                data: {
+                                    "id": i,
+                                    "l": lozinka
+                                },
                                 success: function (r) {
                                     if (r && r != null)
                                         $('#uspjesno').show();
@@ -178,4 +187,5 @@ scratch. This page gets rid of all links and provides the needed markup only.
              user experience. Slimscroll is required when using the
              fixed layout. -->
     </body>
-</html>
+
+    </html>

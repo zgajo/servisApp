@@ -2,12 +2,13 @@
 include_once './klase/checkLogin.php';
 ?>
 
-<!DOCTYPE html>
-<!--
+    <!DOCTYPE html>
+    <!--
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
-<html>
+    <html>
+
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,7 +18,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Bootstrap 3.3.5 -->
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <!-- Font Awesome -->
-        <link rel="stylesheet" href="font/font-awesome.min.css">
+        <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+
         <!-- Ionicons -->
         <link rel="stylesheet" href="font/ionicons.min.css">
         <!-- Theme style -->
@@ -30,18 +32,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <link rel="icon" type="ispis/logo.png" href="ispis/icon.ico.png">
         <link href="search/search.css" rel="stylesheet">
         <link rel="stylesheet" href="jquery-ui.css">
-        <style>            
-    section{                 
-        size: A4;                 
-        margin: 0;             
-    }             
-    @media print {                 
-        html, body {                     
-            width: 210mm;                     
-            height: 297mm;                 
-        }                            
-    }         
-</style>
+        <style>
+            section {
+                size: A4;
+                margin: 0;
+            }
+
+            @media print {
+                html,
+                body {
+                    width: 210mm;
+                    height: 297mm;
+                }
+            }
+        </style>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -50,43 +54,45 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <![endif]-->
     </head>
 
-    <body class="hold-transition skin-blue sidebar-mini"  >
+    <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
 
             <?php include 'pageParts/header.php'; ?>
-            <?php include 'pageParts/sidebar.php'; ?>
+                <?php include 'pageParts/sidebar.php'; ?>
 
-            <!-- Content Wrapper. Contains page content -->
-            <div class="content-wrapper">
-                <!-- Content Header (Page header) -->
+                    <!-- Content Wrapper. Contains page content -->
+                    <div class="content-wrapper">
+                        <!-- Content Header (Page header) -->
 
-                <!-- Main content -->
-                <section class="content" onload="printaj()">
+                        <!-- Main content -->
+                        <section class="content" onload="printaj()">
 
 
-                    <section class="invoice" >
-                        <!-- this row will not appear when printing -->
-                        <div id="t" class="row no-print">
-                            <div class="col-xs-12">
-                                <a  class="btn btn-default" onclick="printaj()"><i class="fa fa-print"></i> Print</a>
-                            </div>
-                        </div>
-                        <!-- title row -->
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <h2>
+                            <section class="invoice">
+                                <!-- this row will not appear when printing -->
+                                <div id="t" class="row no-print">
+                                    <div class="col-xs-12">
+                                        <a class="btn btn-default" onclick="printaj()"><i class="fa fa-print"></i> Print</a>
+                                    </div>
+                                </div>
+                                <!-- title row -->
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <h2>
                                     <img src="ispis/logo.png" style="height: 50px; display: inline; float: left">
 
                                 </h2>
 
-                              <div style="display: inline; float: right; font-size: 14px" class="no-print"><b>Status:</b>
-                                    <span style="margin-right: 8px" id="status_primke">
+                                        <div style="display: inline; float: right; font-size: 14px" class="no-print"><b>Status:</b>
+                                            <span style="margin-right: 8px" id="status_primke">
 
                                   </span>
-                                </div>
+                                        </div>
 
-                            </div><!-- /.col -->
-                            <div style="clear: both"> <h2 class="page-header"></div>
+                                    </div>
+                                    <!-- /.col -->
+                                    <div style="clear: both">
+                                        <h2 class="page-header"></div>
                         </div>
                         <!-- info row -->
                         <div class="row invoice-info" >

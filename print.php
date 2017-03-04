@@ -2,12 +2,13 @@
 include_once './klase/checkLogin.php';
 ?>
 
-<!DOCTYPE html>
-<!--
+    <!DOCTYPE html>
+    <!--
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
-<html>
+    <html>
+
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,7 +18,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Bootstrap 3.3.5 -->
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <!-- Font Awesome -->
-        <link rel="stylesheet" href="font/font-awesome.min.css">
+        <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+
         <!-- Ionicons -->
         <link rel="stylesheet" href="font/ionicons.min.css">
         <!-- Theme style -->
@@ -29,7 +31,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
         <link rel="icon" type="ispis/logo.png" href="ispis/icon.ico.png">
         <link href="search/search.css" rel="stylesheet">
-        
+
         <!-- jQuery 2.1.4 -->
         <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
         <!-- Bootstrap 3.3.5 -->
@@ -40,8 +42,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="plugins/select2/select2.full.min.js"></script>
         <!-- InputMask -->
 
-       
-        
+
+
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -50,19 +52,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <![endif]-->
     </head>
 
-    <body class="hold-transition skin-blue sidebar-mini"  >
-       
-                    <section class="invoice" >
-                        <!-- title row -->
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <h2>
+    <body class="hold-transition skin-blue sidebar-mini">
+
+        <section class="invoice">
+            <!-- title row -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2>
                                     <img src="ispis/logo.png" style="height: 50px; display: inline; float: left">
 
                                 </h2>
 
-                            </div><!-- /.col -->
-                            <div style="clear: both"> <h2 class="page-header"></div>
+                </div>
+                <!-- /.col -->
+                <div style="clear: both">
+                    <h2 class="page-header"></div>
                         </div>
                         <!-- info row -->
                         <div class="row invoice-info" >
