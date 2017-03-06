@@ -28,7 +28,7 @@
 
 
 
-       //  PRETRAGA ZA PRIMKOM
+       //  PRETRAGA ZA Kupcem
        $('#search_box').keydown(function () {
 
 
