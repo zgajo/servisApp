@@ -297,7 +297,7 @@ include_once './klase/checkLogin.php';
                                 p_grad = "Rijeka, 51000";
                                 p_kontakt = "051/680-760";
                                 break;
-                            case "Rijeka - Korzo":
+                            case "Rijeka Korzo":
                                 p_adresa = "Trg 128 brigade HV 4, Korzo";
                                 p_grad = "Rijeka, 51000";
                                 p_kontakt = "051/212-321";

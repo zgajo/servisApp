@@ -2,12 +2,12 @@
 include_once './klase/checkLogin.php';
 ?>
 
-    <!DOCTYPE html>
-    <!--
+<!DOCTYPE html>
+<!--
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
-    <html>
+<html>
 
     <head>
         <meta charset="utf-8">
@@ -33,18 +33,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <link href="search/search.css" rel="stylesheet">
         <link rel="stylesheet" href="jquery-ui.css">
         <style>
-            section {
-                size: A4;
-                margin: 0;
-            }
-
-            @media print {
-                html,
-                body {
-                    width: 210mm;
-                    height: 297mm;
-                }
-            }
+            
         </style>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -58,46 +47,46 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="wrapper">
 
             <?php include 'pageParts/header.php'; ?>
-                <?php include 'pageParts/sidebar.php'; ?>
+            <?php include 'pageParts/sidebar.php'; ?>
 
-                    <!-- Content Wrapper. Contains page content -->
-                    <div class="content-wrapper">
-                        <!-- Content Header (Page header) -->
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
 
-                        <!-- Main content -->
-                        <section class="content" onload="printaj()">
+                <!-- Main content -->
+                
+                <div style="margin-top: -15px"></div>
 
-
-                            <section class="invoice">
-                                <!-- this row will not appear when printing -->
-                                <div id="t" class="row no-print">
-                                    <div class="col-xs-12">
-                                        <a class="btn btn-default" onclick="printaj()"><i class="fa fa-print"></i> Print</a>
-                                    </div>
-                                </div>
-                                <!-- title row -->
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <h2>
+                    <section class="invoice">
+                        <!-- this row will not appear when printing -->
+                        <div id="t" class="row no-print">
+                            <div class="col-xs-12">
+                                <a class="btn btn-default" onclick="printaj()"><i class="fa fa-print"></i> Print</a>
+                            </div>
+                        </div>
+                        <!-- title row -->
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h2>
                                     <img src="ispis/logo.png" style="height: 50px; display: inline; float: left">
 
                                 </h2>
 
-                                        <div style="display: inline; float: right; font-size: 14px" class="no-print"><b>Status:</b>
-                                            <span style="margin-right: 8px" id="status_primke">
+                                <div style="display: inline; float: right; font-size: 14px" class="no-print"><b>Status:</b>
+                                    <span style="margin-right: 8px" id="status_primke">
 
-                                  </span>
-                                        </div>
+                                    </span>
+                                </div>
 
-                                    </div>
-                                    <!-- /.col -->
-                                    <div style="clear: both">
-                                        <h2 class="page-header"></div>
+                            </div>
+                            <!-- /.col -->
+                            <div style="clear: both">
+                                <h2 class="page-header"></div>
                         </div>
                         <!-- info row -->
                         <div class="row invoice-info" >
-                           
-                            <div class="col-sm-4 invoice-col"  style="font-size: 14px">
+
+                            <div class="col-sm-4 invoice-col"  style="font-size: 12px">
                                 <strong>Podaci o vlasniku</strong>
                                 <address>
                                     <div id="tvrtka"></div>
@@ -109,31 +98,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     Email: <div id="email" style="display: inline"></div><br>
                                 </address>
                             </div><!-- /.col -->
-                            
-                            <div class="col-sm-4 invoice-col" style="font-size: 14px">
+
+                            <div class="col-sm-4 invoice-col" style="font-size: 12px">
                                 <strong>Podaci o uređaju</strong><br>
                                 <i>Uređaj: </i><p style="display: inline" id="uredaj"></p><br>
                                 <i>Serijski: </i><p style="display: inline" id="serijski"></p><br>
                                 <i>Datum prodaje: </i><p style="display: inline"  id="dp"></p><br>
                                 <i>Račun: </i><p style="display: inline" id="racun"></p><br>
                             </div><!-- /.col -->
-                            
-                            <div class="col-sm-4 invoice-col" style="float: right; font-size: 14px">
+
+                            <div class="col-sm-4 invoice-col" style="float: right; font-size: 12px">
                                 <h4 style="margin-top: 0px" id="primka"></h4>
                                 <b>Zaprimio: </b><p style="display: inline" id="zap"></p><br>
                                 <b>Zaprimljeno: </b><p style="display: inline"  id="dz"></p><br>
                                 <span  id="saround"><b id="zav">Datum završetka: </b><br>
                                     <b  id="zav_ser">Završio serviser: </b><br></span>
                                 <span id="osaround"><b  id="os">Ovlašteni servis: </b><br>
-                                <b  id="os_rn">RN ovlaštenog servisa: </b><br>
-                                <b  id="os_v">Vraćeno iz ovlaštenog servisa: </b></span>
+                                    <b  id="os_rn">RN ovlaštenog servisa: </b><br>
+                                    <b  id="os_v">Vraćeno iz ovlaštenog servisa: </b></span>
                             </div><!-- /.col -->
                         </div><!-- /.row -->
 
                         <!-- Table row -->
                         <div class="row" style="clear: both">
                             <div class="col-xs-12 table-responsive">
-                                <table class="table table-striped" style="font-size: 14px">
+                                <table class="table table-striped" style="font-size: 12px">
                                     <thead>
                                         <tr>
 
@@ -148,7 +137,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         </tr>
                                     </tbody>
                                 </table>
-                                 <table class="table table-striped" style="font-size: 14px">
+                                <table class="table table-striped" style="font-size: 12px">
                                     <thead>
                                         <tr>
 
@@ -161,7 +150,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         </tr>
                                     </tbody>
                                 </table>
-                                 <table class="table table-striped" style="font-size: 14px">
+                                <table class="table table-striped" style="font-size: 12px">
                                     <thead>
                                         <tr>
 
@@ -182,7 +171,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="col-xs-6">
                                 <p class="lead" style="font-size: 12px"><b>Napomena:</b></p>
 
-                                <p class="text-muted well well-sm no-shadow" style="font-size: 12px;margin-top: 10px;">
+                                <p class="text-muted well well-sm no-shadow" style="font-size: 9px;margin-top: 10px;">
                                     Eurotrade d.o.o. ne odgovara za podatke na računalu, HDD uređaju ili bilo kojem uređaju koji služi za pohranu podataka ili eventualni njihov gubitak. Kod popravka pisača, postoji mogućnost da će se zbog potrebe servisiranja potrošni materijal koji se nalazi u pisaču, djelomično ili u cjelosti potrošiti.
 
                                     Eurotrade d.o.o. poslije 60 dana od zatvaranja radnog naloga ne snosi odgovornost za robu ukoliko ona nije podignuta.
@@ -195,34 +184,33 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <div style="border-bottom:  1px solid black; width: 200px;height: 30px"></div>
                                 <div id="potpis" style="text-align:center;  width: 200px;height: 30px"></div><br>
                             </div><!-- /.col -->
-                            <div class="col-xs-6" style="font-size: 14px">
-                               <p class="lead"  id="status_rada" style="font-size: 14px">Status obavljenog rada: </p><div></div>
-                               <p class="lead" style="font-size: 14px">Šifre za naplatiti</p>
+                            <div class="col-xs-6" style="font-size: 12px">
+                                <p class="lead"  id="status_rada" style="font-size: 14px">Status obavljenog rada: </p><div></div>
+                                <p class="lead" style="font-size: 12px">Šifre za naplatiti</p>
                                 <div class="table-responsive">
-                                  <table class="table">
-                                    <tbody>
-                                      <tr>
-                                      <th style="width:50%"  style="font-size: 14px">Naplatiti:</th>
-                                      <td id="naplata"></td>
-                                    </tr>
-                                  </tbody></table>
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:50%"  style="font-size: 10px">Naplatiti:</th>
+                                                <td id="naplata"></td>
+                                            </tr>
+                                        </tbody></table>
                                 </div>
-                              </div>
+                            </div>
                         </div><!-- /.row -->
-                        
-                        
-                        
-                        
 
-                        
-                        
+
+
+
+
+
+
                     </section><!-- /.content -->
-                    
-                     
-                   <?php require 'upload.php'; ?>
+
+
+                    <?php require 'upload.php'; ?>
                     <div style="clear:both"></div>
-                </section><!-- /.content -->
-               
+
             </div><!-- /.content-wrapper -->
 
             <!-- Main Footer --><div class="no-print">
@@ -234,7 +222,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         <!-- jQuery 2.1.4 -->
         <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
-            <script src="jquery-ui.js"></script>
+        <script src="jquery-ui.js"></script>
         <!-- Bootstrap 3.3.5 -->
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <!-- AdminLTE App -->
@@ -248,243 +236,249 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script type="text/javascript" src="search/searchprimka.js"></script>
         <script type="text/javascript" src="search/searchserijski.js"></script>
         <script>
-            var id = <?php echo $_GET['primka'] ?>  
-            var opis_popravka ='';
-            var prom = '';   
-            var naplata = '';
-            var odjel = "<?php echo $_COOKIE['odjel'] ?>"; 
-            
-                $.get("json/primka/getById.php", {"id":id}, function(primka){
-                   
-                   var zaprimljeno = new Date(primka[0].datumZaprimanja);
-                   
-                   $('#dz').text([zaprimljeno.getDate(), zaprimljeno.getMonth()+1, zaprimljeno.getFullYear()].join('.') );
-                   $('#zap').text(primka[0].pot_ime+ ' ' +primka[0].pot_prezime);
-                   $('#primka').text('Primka br. ' +primka[0].primka_id);
-                    $("#status_primke").text(primka[0].status);
-                   
-                   (primka[0].tvrtka != null && primka[0].tvrtka != '') ? $('#tvrtka').text(primka[0].tvrtka) : $('#tvrtka').text('');
-                    $('#adresa').text(primka[0].adresa);
-                    $('#grad').text(primka[0].grad);
-                    $('#kontakt').text(primka[0].kontaktBroj);
-                    $('#email').text(primka[0].email);
-                    $('#osoba').text(primka[0].ime + ' ' +primka[0].prezime);
-                    if(primka[0].tvrtka) $('#potpis').text(primka[0].tvrtka + ', '+ primka[0].ime + ' ' +primka[0].prezime);
-                    else $('#potpis').text(primka[0].ime + ' ' +primka[0].prezime);
-                    
-                    $('#uredaj').text(primka[0].brand + ' ' + primka[0].naziv);
-                    $('#serijski').text(primka[0].serial);
-                    
-                    var kupljeno = new Date(primka[0].datumKupnje);
-                    
-                    (kupljeno && kupljeno.getFullYear() != '1970' && !isNaN(kupljeno)) ?  $('#dp').text([kupljeno.getDate(), kupljeno.getMonth()+1, kupljeno.getFullYear()].join('.') ):  $('#dp').text('');;
-                   
-                    $('#racun').text(primka[0].racun);
-                    $('#opis').text(primka[0].opisKvara);
-                    $('#prilozeno').text(primka[0].prilozeno_primijeceno);
-                    
-                    
-                    
-                    //  DOHVATI RADNI NALOG POVEZAN SA PRIMKOM
-                    $.post("json/rn/getRNbyPrimka.php", {"primka":id}, function(rn){
-                        console.log(rn);
-                        //  UKOLIKO POSTOJI RN POVEZAN SA PRIMKOM
-                        if(rn){
-                            
-                        var rnvelicina= rn.length-1;
-                        var rn_zav = new Date(rn[rnvelicina].zavrsetak);
-                            
-                        (rn_zav && rn_zav.getFullYear() !='1970') ? $('#zav').after([rn_zav.getDate(), rn_zav.getMonth()+1, rn_zav.getFullYear()].join('.')  + '' ):$('#zav').after('');
-                        (rn[rnvelicina].d2ime) ? $('#zav_ser').after(rn[rnvelicina].d2ime+' '+rn[rnvelicina].d2prezime + '') : $('#zav_ser').after('');    
-                            
-                        opis_popravka += '<b>OPASKA SERVISA:</b> <br>';
-                        
-                           
-                            
-                            //      Upis radnih naloga u opasku servisa
-                        for(rn of rn){
-                            var pocetak_servisa = new Date(rn.pocetak);
-                            var status_rada =  '<div  id="s'+ rn.id +'">' + rn.status + '</div>';
-                            $("#status_rada").html($("#status_rada").html() +status_rada);
+                                            var id = <?php echo $_GET['primka'] ?>;
+                                            var opis_popravka = '';
+                                            var prom = '';
+                                            var naplata = '';
+                                            var odjel = "<?php echo $_COOKIE['odjel'] ?>";
 
-                            // PArent span
-                            opis_popravka += '<span>';
-                            opis_popravka += '<b style="display:inline">Radni nalog:</b> '+rn.id+'. ';
-                            opis_popravka += '<span class="no-print">';
-                            opis_popravka +=  '<input style="display:inline;margin-left:15px" type="checkbox" value="Prikazuje se pri ispisu" name="'+rn.id+'" checked="">'+
-                                              '<span class="text">Prikaži prilikom printanja</span><br>';
-                            opis_popravka += '</span>';
-                            
-                            if(rn.opis !== null) opis_popravka += '<br class="no-print">'+  rn.opis+ '. <br>';
-                            
-                            opis_popravka += '<span class="no-print"><br>';
-                            opis_popravka += '<b>Početak servisiranja uređaja:</b> '+ [pocetak_servisa.getDate(), pocetak_servisa.getMonth()+1, pocetak_servisa.getFullYear()].join('.') + '. ';
-                            opis_popravka += '</span>';
-                            
-                            var zavrsen_servis = new Date(rn.zavrsetak); 
-                            
-                             if(zavrsen_servis && zavrsen_servis.getFullYear()!='1970') {
-                                opis_popravka +=  '<span  class="no-print">';
+                                            $.get("json/primka/getById.php", {"id": id}, function (primka) {
 
-                                opis_popravka +=  '<br><b>Završetak servisiranja:</b> '+ [zavrsen_servis.getDate(), zavrsen_servis.getMonth()+1, zavrsen_servis.getFullYear()].join('.') + '. ';
-                                opis_popravka +=  '<br class="no-print"></span>';
-                             }
-                             
-                             if(rn.napomena !== null && rn.napomena !== '' && (odjel === 'Servis' || odjel === 'Servis'  )){
-                                 opis_popravka += '<span   class="no-print"><br>';
-                                 opis_popravka += '<b>Napomena: </b>'+  rn.napomena+ '. <br class="no-print">';
-                                 opis_popravka += '</span>';
-                             }
-                             
-                             if(rn.ispisano !== null && rn.ispisano !== '' && odjel === 'Servis'){
-                                 opis_popravka += '<span>';
-                                 opis_popravka += '<b>Ispisano stranica: </b>'+  rn.ispisano+ '. <br class="no-print">';
-                                 opis_popravka += '</span>';
-                             }
-                            
-                            
-                            opis_popravka += '<br></span>';
-                            
-                             prom += (rn.promijenjeno) ? '<span id="p'+ rn.id +'"><b style="display:inline">Radni nalog:</b> '+rn.id+': ' +rn.promijenjeno+ '<br></span>':'';
-                             
-                             
-                             naplata += (rn.naplata!=='' && rn.naplata != null) ? '<span id="n'+ rn.id +'"> ' + rn.naplata + '<br></span>':'';
-                        }
-                        //  DOHVAĆANJE RMA NALOGA I UPISIVANJE
-                        
-                        
-                        
-                        
-                            $('#popravak').html(opis_popravka);
-                            $('#promijenjeno').html(prom);
-                            $('#naplata').html(naplata);
-                        }// UKOLIKO NE POSTOJI RN POVEZAN SA PRIMKOM
-                        else{
-                                        $('#saround').hide();
-                                        }
-                      
-                        
-                    });
-                    
-                    // DOHVATI RMA NALOG POVEZAN SA PRIMKOM
-                  $.get("json/rma/getRmaByPrimka.php", {"primka" : id}, function(rma){
-                        
-                                        
-                                        console.log(rma);
-                                        
-                                           
-                                        
-                                        if(rma){
-                                            
-                                        opis_popravka += '<b>OPASKA OVLAŠTENOG SERVISA:</b><br> ';
-                                        
-                                        
-                                        var vraceno = new Date(rma[rma.length-1].zavrseno);
-                                        if(vraceno && vraceno.getFullYear() != '1970') $('#os_v').after([vraceno.getDate(), vraceno.getMonth()+1, vraceno.getFullYear()].join('.'));
-                                        
-                                        $('#os').after(rma[rma.length-1].nazivOS);
-                                        $('#os_rn').after(rma[rma.length-1].rnOs);
-                                        
-                                        for (rma of rma){
-                                            
-                                              
-                                            var pripremljeno = new Date(rma.pripremljeno);
-                                            var poslano = new Date(rma.poslano);
-                                            var vraceno = new Date(rma.vraceno);
-                                            
-                                            opis_popravka += '<span>';
-                                            
-                                            opis_popravka += '<span class="no-print"><br>';
-                                            opis_popravka += '<b>RMA nalog:</b> '+rma.id+'. ';
-                                          opis_popravka +=  '<input style="display:inline;margin-left:15px" type="checkbox" value="Prikazuje se pri ispisu" name="" checked="">'+
-                                                            '<span class="text">Prikaži prilikom printanja</span><br>';
-                                            opis_popravka += '<b>Pripremljeno za slanje:</b> ';
-                                            opis_popravka += (pripremljeno && pripremljeno.getFullYear() != '1970') ? [pripremljeno.getDate(), pripremljeno.getMonth()+1, pripremljeno.getFullYear()].join('.') + '. ' : '';
-                                            opis_popravka += '</span>';
-                                            
-                                            opis_popravka += '<span class="no-print"><br>';
-                                            opis_popravka += '<b>Poslano:</b> ';
-                                            opis_popravka += (poslano && poslano.getFullYear() != '1970') ? [poslano.getDate(), poslano.getMonth()+1, poslano.getFullYear()].join('.') + '. ' : '';
-                                            opis_popravka += '</span>';
-                                            
-                                            opis_popravka += '<span class="no-print"><br>';
-                                            opis_popravka += '<b>Ovlašteni servis:</b> ';opis_popravka += (rma.nazivOS)?rma.nazivOS:'';
-                                            opis_popravka += '</span>';
-                                            
-                                            opis_popravka += '<span class="no-print"><br>';
-                                            opis_popravka += '<b>Radni nalog ovlaštenog servisa:</b> ';opis_popravka += (rma.rnOs)?rma.rnOs:''; 
-                                            opis_popravka += '</span>';
-                                            
-                                             if(rma.opis !== null && rma.opis != '') opis_popravka += '<br class="no-print">'+  rma.opis+ '. ';
-                                             
-                                             if(rma.napomena !== null && rma.napomena !== '' && odjel === 'Servis'){
-                                                    opis_popravka += '<span   class="no-print"><br>';
-                                                    opis_popravka += '<b>Napomena: </b>'+  rma.napomena+ '. ';
-                                                    opis_popravka += '</span>';
+                                                var zaprimljeno = new Date(primka[0].datumZaprimanja);
+
+                                                $('#dz').text([zaprimljeno.getDate(), zaprimljeno.getMonth() + 1, zaprimljeno.getFullYear()].join('.'));
+                                                $('#zap').text(primka[0].pot_ime + ' ' + primka[0].pot_prezime);
+                                                $('#primka').text('Primka br. ' + primka[0].primka_id);
+                                                $("#status_primke").text(primka[0].status);
+
+                                                (primka[0].tvrtka != null && primka[0].tvrtka != '') ? $('#tvrtka').text(primka[0].tvrtka) : $('#tvrtka').text('');
+                                                $('#adresa').text(primka[0].adresa);
+                                                $('#grad').text(primka[0].grad);
+                                                $('#kontakt').text(primka[0].kontaktBroj);
+                                                $('#email').text(primka[0].email);
+                                                $('#osoba').text(primka[0].ime + ' ' + primka[0].prezime);
+                                                if (primka[0].tvrtka)
+                                                    $('#potpis').text(primka[0].tvrtka + ', ' + primka[0].ime + ' ' + primka[0].prezime);
+                                                else
+                                                    $('#potpis').text(primka[0].ime + ' ' + primka[0].prezime);
+
+                                                $('#uredaj').text(primka[0].brand + ' ' + primka[0].naziv);
+                                                $('#serijski').text(primka[0].serial);
+
+                                                var kupljeno = new Date(primka[0].datumKupnje);
+
+                                                (kupljeno && kupljeno.getFullYear() != '1970' && !isNaN(kupljeno)) ? $('#dp').text([kupljeno.getDate(), kupljeno.getMonth() + 1, kupljeno.getFullYear()].join('.')) : $('#dp').text('');
+                                                ;
+
+                                                $('#racun').text(primka[0].racun);
+                                                $('#opis').text(primka[0].opisKvara);
+                                                $('#prilozeno').text(primka[0].prilozeno_primijeceno);
+
+
+
+                                                //  DOHVATI RADNI NALOG POVEZAN SA PRIMKOM
+                                                $.post("json/rn/getRNbyPrimka.php", {"primka": id}, function (rn) {
+                                                    console.log(rn);
+                                                    //  UKOLIKO POSTOJI RN POVEZAN SA PRIMKOM
+                                                    if (rn) {
+
+                                                        var rnvelicina = rn.length - 1;
+                                                        var rn_zav = new Date(rn[rnvelicina].zavrsetak);
+
+                                                        (rn_zav && rn_zav.getFullYear() != '1970') ? $('#zav').after([rn_zav.getDate(), rn_zav.getMonth() + 1, rn_zav.getFullYear()].join('.') + '') : $('#zav').after('');
+                                                        (rn[rnvelicina].d2ime) ? $('#zav_ser').after(rn[rnvelicina].d2ime + ' ' + rn[rnvelicina].d2prezime + '') : $('#zav_ser').after('');
+
+                                                        opis_popravka += '<b>OPASKA SERVISA:</b> <br>';
+
+
+
+                                                        //      Upis radnih naloga u opasku servisa
+                                                        for (rn of rn) {
+                                                            var pocetak_servisa = new Date(rn.pocetak);
+                                                            var status_rada = '<div  id="s' + rn.id + '">' + rn.status + '</div>';
+                                                            $("#status_rada").html($("#status_rada").html() + status_rada);
+
+                                                            // PArent span
+                                                            opis_popravka += '<span>';
+                                                            opis_popravka += '<b style="display:inline">Radni nalog:</b> ' + rn.id + '. ';
+                                                            opis_popravka += '<span class="no-print">';
+                                                            opis_popravka += '<input style="display:inline;margin-left:15px" type="checkbox" value="Prikazuje se pri ispisu" name="' + rn.id + '" checked="">' +
+                                                                    '<span class="text">Prikaži prilikom printanja</span><br>';
+                                                            opis_popravka += '</span>';
+
+                                                            if (rn.opis !== null)
+                                                                opis_popravka += '<br class="no-print">' + rn.opis + '. <br>';
+
+                                                            opis_popravka += '<span class="no-print"><br>';
+                                                            opis_popravka += '<b>Početak servisiranja uređaja:</b> ' + [pocetak_servisa.getDate(), pocetak_servisa.getMonth() + 1, pocetak_servisa.getFullYear()].join('.') + '. ';
+                                                            opis_popravka += '</span>';
+
+                                                            var zavrsen_servis = new Date(rn.zavrsetak);
+
+                                                            if (zavrsen_servis && zavrsen_servis.getFullYear() != '1970') {
+                                                                opis_popravka += '<span  class="no-print">';
+
+                                                                opis_popravka += '<br><b>Završetak servisiranja:</b> ' + [zavrsen_servis.getDate(), zavrsen_servis.getMonth() + 1, zavrsen_servis.getFullYear()].join('.') + '. ';
+                                                                opis_popravka += '<br class="no-print"></span>';
+                                                            }
+
+                                                            if (rn.napomena !== null && rn.napomena !== '' && (odjel === 'Servis' || odjel === 'Servis')) {
+                                                                opis_popravka += '<span   class="no-print"><br>';
+                                                                opis_popravka += '<b>Napomena: </b>' + rn.napomena + '. <br class="no-print">';
+                                                                opis_popravka += '</span>';
+                                                            }
+
+                                                            if (rn.ispisano !== null && rn.ispisano !== '' && odjel === 'Servis') {
+                                                                opis_popravka += '<span>';
+                                                                opis_popravka += '<b>Ispisano stranica: </b>' + rn.ispisano + '. <br class="no-print">';
+                                                                opis_popravka += '</span>';
+                                                            }
+
+
+                                                            opis_popravka += '<br></span>';
+
+                                                            prom += (rn.promijenjeno) ? '<span id="p' + rn.id + '"><b style="display:inline">Radni nalog:</b> ' + rn.id + ': ' + rn.promijenjeno + '<br></span>' : '';
+
+
+                                                            naplata += (rn.naplata !== '' && rn.naplata != null) ? '<span id="n' + rn.id + '"> ' + rn.naplata + '<br></span>' : '';
+                                                        }
+                                                        //  DOHVAĆANJE RMA NALOGA I UPISIVANJE
+
+
+
+
+                                                        $('#popravak').html(opis_popravka);
+                                                        $('#promijenjeno').html(prom);
+                                                        $('#naplata').html(naplata);
+                                                    }// UKOLIKO NE POSTOJI RN POVEZAN SA PRIMKOM
+                                                    else {
+                                                        $('#saround').hide();
+                                                    }
+
+
+                                                });
+
+                                                // DOHVATI RMA NALOG POVEZAN SA PRIMKOM
+                                                $.get("json/rma/getRmaByPrimka.php", {"primka": id}, function (rma) {
+
+
+                                                    console.log(rma);
+
+
+
+                                                    if (rma) {
+
+                                                        opis_popravka += '<b>OPASKA OVLAŠTENOG SERVISA:</b><br> ';
+
+
+                                                        var vraceno = new Date(rma[rma.length - 1].zavrseno);
+                                                        if (vraceno && vraceno.getFullYear() != '1970')
+                                                            $('#os_v').after([vraceno.getDate(), vraceno.getMonth() + 1, vraceno.getFullYear()].join('.'));
+
+                                                        $('#os').after(rma[rma.length - 1].nazivOS);
+                                                        $('#os_rn').after(rma[rma.length - 1].rnOs);
+
+                                                        for (rma of rma) {
+
+
+                                                            var pripremljeno = new Date(rma.pripremljeno);
+                                                            var poslano = new Date(rma.poslano);
+                                                            var vraceno = new Date(rma.vraceno);
+
+                                                            opis_popravka += '<span>';
+
+                                                            opis_popravka += '<span class="no-print"><br>';
+                                                            opis_popravka += '<b>RMA nalog:</b> ' + rma.id + '. ';
+                                                            opis_popravka += '<input style="display:inline;margin-left:15px" type="checkbox" value="Prikazuje se pri ispisu" name="" checked="">' +
+                                                                    '<span class="text">Prikaži prilikom printanja</span><br>';
+                                                            opis_popravka += '<b>Pripremljeno za slanje:</b> ';
+                                                            opis_popravka += (pripremljeno && pripremljeno.getFullYear() != '1970') ? [pripremljeno.getDate(), pripremljeno.getMonth() + 1, pripremljeno.getFullYear()].join('.') + '. ' : '';
+                                                            opis_popravka += '</span>';
+
+                                                            opis_popravka += '<span class="no-print"><br>';
+                                                            opis_popravka += '<b>Poslano:</b> ';
+                                                            opis_popravka += (poslano && poslano.getFullYear() != '1970') ? [poslano.getDate(), poslano.getMonth() + 1, poslano.getFullYear()].join('.') + '. ' : '';
+                                                            opis_popravka += '</span>';
+
+                                                            opis_popravka += '<span class="no-print"><br>';
+                                                            opis_popravka += '<b>Ovlašteni servis:</b> ';
+                                                            opis_popravka += (rma.nazivOS) ? rma.nazivOS : '';
+                                                            opis_popravka += '</span>';
+
+                                                            opis_popravka += '<span class="no-print"><br>';
+                                                            opis_popravka += '<b>Radni nalog ovlaštenog servisa:</b> ';
+                                                            opis_popravka += (rma.rnOs) ? rma.rnOs : '';
+                                                            opis_popravka += '</span>';
+
+                                                            if (rma.opis !== null && rma.opis != '')
+                                                                opis_popravka += '<br class="no-print">' + rma.opis + '. ';
+
+                                                            if (rma.napomena !== null && rma.napomena !== '' && odjel === 'Servis') {
+                                                                opis_popravka += '<span   class="no-print"><br>';
+                                                                opis_popravka += '<b>Napomena: </b>' + rma.napomena + '. ';
+                                                                opis_popravka += '</span>';
+                                                            }
+
+                                                            opis_popravka += '<span class="no-print"><br>';
+                                                            opis_popravka += '<b>Vraćeno iz ovlaštenog servisa: </b>';
+                                                            opis_popravka += (vraceno && vraceno.getFullYear() != '1970' && !isNaN(vraceno)) ? [vraceno.getDate(), vraceno.getMonth() + 1, vraceno.getFullYear()].join('.') + '. ' : '';
+                                                            opis_popravka += '<br></span>';
+
+
+
+                                                            opis_popravka += '<br></span>';
+
+                                                            prom += (rma.promijenjeno) ? rma.promijenjeno + '<br>' : '';
+                                                            naplata += (rma.naplata !== '' && rma.naplata != null) ? ' ' + rma.naplata + '<br>' : '';
+                                                        }
+                                                        $('#popravak').html(opis_popravka);
+                                                        $('#promijenjeno').html(prom);
+                                                        $('#naplata').html(naplata);
+                                                    } else {
+                                                        $('#osaround').hide();
+                                                    }
+
+                                                });
+
+
+
+                                            });
+
+
+                                            function isprintati(i) {
+                                                $(document).ready(function () {
+                                                    $(this).find("#p" + i).removeClass('no-print');
+                                                    $(this).find("#n" + i).removeClass('no-print');
+                                                    $(this).find("#s" + i).removeClass('no-print');
+                                                })
+                                            }
+
+                                            function sakrij(i) {
+                                                $(document).ready(function () {
+                                                    $(this).find("#p" + i).addClass('no-print');
+                                                    $(this).find("#n" + i).addClass('no-print');
+                                                    $(this).find("#s" + i).addClass('no-print');
+                                                })
+                                            }
+
+                                            $('#popravak').on("click", 'input', function () {
+
+                                                if ($(this).is(":checked")) {
+                                                    $(this).parent().parent().removeClass('no-print');
+                                                    isprintati($(this).attr('name'));
+                                                } else {
+                                                    $(this).parent().parent().addClass('no-print');
+                                                    sakrij($(this).attr('name'));
                                                 }
-                                                
-                                            opis_popravka += '<span class="no-print"><br>';
-                                            opis_popravka += '<b>Vraćeno iz ovlaštenog servisa: </b>';
-                                            opis_popravka += (vraceno && vraceno.getFullYear() != '1970' && !isNaN(vraceno)) ? [vraceno.getDate(), vraceno.getMonth()+1, vraceno.getFullYear()].join('.') + '. ' : '';
-                                            opis_popravka += '<br></span>';
-                                            
-                                            
-                                             
-                                            opis_popravka += '<br></span>';
-                                            
-                                            prom += (rma.promijenjeno) ? rma.promijenjeno+ '<br>':'';
-                                            naplata += (rma.naplata!=='' && rma.naplata != null) ? ' ' + rma.naplata + '<br>':'';
-                                        } 
-                                             $('#popravak').html(opis_popravka);
-                                             $('#promijenjeno').html(prom);
-                                             $('#naplata').html(naplata);
-                                        }
-                                        
-                                        else{
-                                        $('#osaround').hide();
-                                        }
-                                        
-                                        });
-                                        
-                                       
-                   
-                });
-                
 
-                function isprintati(i){
-                    $(document).ready(function(){
-                        $(this).find("#p"+i).removeClass('no-print');
-                        $(this).find("#n"+i).removeClass('no-print');
-                        $(this).find("#s"+i).removeClass('no-print');
-                    })
-                }
-
-                function sakrij(i){
-                    $(document).ready(function(){
-                    $(this).find("#p"+i).addClass('no-print');
-                        $(this).find("#n"+i).addClass('no-print');
-                         $(this).find("#s"+i).addClass('no-print');
-                    })
-                }
-
-                $('#popravak').on("click", 'input',function(){
-                
-                if($(this).is(":checked")) {
-                    $(this).parent().parent().removeClass('no-print');
-                    isprintati($(this).attr('name'));
-                }else{
-                     $(this).parent().parent().addClass('no-print');
-                    sakrij($(this).attr('name'));
-                }
-               
-                });
+                                            });
 
 
-                
-                
-                function printaj(){
-                    window.print();
-                }
+
+
+                                            function printaj() {
+                                                window.print();
+                                            }
         </script>
 
     </body>

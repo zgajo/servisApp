@@ -144,7 +144,7 @@ class narudzba {
     public function zatvori($id) {
         date_default_timezone_set('Europe/Zagreb');
         $rijeseno = date('Y-m-d H:i:s', time());
-       $query = $this->mysqli->prepare("UPDATE  narudzbe SET status = 'rijeseno', rijeseno = '$rijeseno' WHERE narudzbe_id = ? "); 
+       $query = $this->mysqli->prepare("UPDATE  narudzbe SET status = 'rijeseno',  stiglo  = '$rijeseno' WHERE narudzbe_id = ? "); 
        
        if ($query === false) {
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);

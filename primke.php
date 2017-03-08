@@ -245,7 +245,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             // provjeri da li ima već unešenih redova i stavi interval osvježavanja ukoliko postoje redovi
                             if (data.length != 0) {
                                 setInterval(function () {
-                                    table.ajax.reload();
+                                    table.ajax.reload(null, false);
                                 }, 30000);
                             }
 
@@ -270,7 +270,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         if (data.length != 0) {
                                             console.log(data.length);
                                             var table = $('#sve_primke').DataTable();
-                                            table.ajax.reload();
+                                            table.ajax.reload(null, false);
                                         }
 
                                         console.log('active2');

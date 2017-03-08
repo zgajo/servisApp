@@ -190,7 +190,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         // provjeri da li ima već unešenih redova i stavi interval osvježavanja ukoliko postoje redovi
                                         if (data.length != 0) {
                                             setInterval(function () {
-                                                table.ajax.reload();
+                                                table.ajax.reload(null, false);
                                             }, 30000);
                                         }
 
@@ -209,7 +209,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         .data();
                                                     // provjeri da li ima već unešenih redova i stavi interval osvježavanja ukoliko postoje redovi
                                                     if (data.length != 0) {
-                                                        table.ajax.reload();
+                                                        table.ajax.reload(null, false);
                                                     }
                                                     console.log('active');
                                                     break;
