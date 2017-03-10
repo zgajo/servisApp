@@ -59,7 +59,7 @@ $.ajax({
                 {"data": "naziv", "render": function (data, type, row, meta) { return row.brand +  '  ' + row.naziv }},
                 {"data": "serial"},
                 {"data": "s_ime", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
-                        if(row.tvrtka) var osoba = row.tvrtka;
+                        if(row.tvrtka) var osoba = row.tvrtka + ', ' + row.s_ime + ' ' + row.s_prezime;
                         else var osoba = row.s_ime + ' ' + row.s_prezime;
                         return osoba;
                     }},

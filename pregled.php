@@ -101,6 +101,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                             <div class="col-sm-4 invoice-col" style="font-size: 12px">
                                 <strong>Podaci o uređaju</strong><br>
+                                <span id="sifraUredajaSpan"><i>Šifra: </i><p style="display: inline" id="sifra"></p><br></span>
                                 <i>Uređaj: </i><p style="display: inline" id="uredaj"></p><br>
                                 <i>Serijski: </i><p style="display: inline" id="serijski"></p><br>
                                 <i>Datum prodaje: </i><p style="display: inline"  id="dp"></p><br>
@@ -261,6 +262,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     $('#potpis').text(primka[0].tvrtka + ', ' + primka[0].ime + ' ' + primka[0].prezime);
                                                 else
                                                     $('#potpis').text(primka[0].ime + ' ' + primka[0].prezime);
+
+                                                (primka[0].sifraUredaja) ? $('#sifra').text(primka[0].sifraUredaja) : $('#sifraUredajaSpan').hide();    
 
                                                 $('#uredaj').text(primka[0].brand + ' ' + primka[0].naziv);
                                                 $('#serijski').text(primka[0].serial);
