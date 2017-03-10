@@ -117,7 +117,25 @@ $("#sve_primke").on("click", "#novi_rma", function () {
 
 $("#sve_primke").on("click", "#novi_rn", function () {
     var pr= $(this).attr("name");
-    if(confirm('Stvoriti novi servisni nalog?'))  window.open("rn.php?action=novi_rn&primka_id="+pr, "_blank");
+    $.ajax({
+        type: "POST",
+        url: "json/rn/getRNbyPrimka.php",
+        data: {"primka": pr},
+        success: function(rn){
+            if(rn){
+                if(confirm("Već postoji otvoren radni nalog povezan sa ovom primkom. Želite li otvoriti njega?")){
+                    window.location="rn.php?radni_nalog="+ rn[0].id;
+                }
+                else{
+                    if(confirm('Stvoriti novi servisni nalog?'))  window.location = "rn.php?action=novi_rn&primka_id="+pr;
+                }
+            }else{
+                if(confirm('Stvoriti novi servisni nalog?'))  window.open("rn.php?action=novi_rn&primka_id="+pr, "_blank");
+            }
+
+        }
+    })
+
     
 });
 

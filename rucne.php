@@ -292,7 +292,7 @@ include_once './klase/checkLogin.php';
                                 p_grad = "Zagreb, 10000";
                                 p_kontakt = "01/6531-230";
                             break;
-                            case "Rijeka":
+                            case "Rijeka Andrea":
                                 p_adresa = "Eugena Kovačića 2, TC Andrea";
                                 p_grad = "Rijeka, 51000";
                                 p_kontakt = "051/680-760";
