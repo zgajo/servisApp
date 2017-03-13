@@ -62,7 +62,14 @@ $.ajax({
                     {
                         "data": "naziv",
                         "render": function (data, type, row, meta) {
-                            return row.brand + ' ' + row.naziv;
+                            var danas = new Date();
+                            var datum = new Date(row.datumZaprimanja);
+                            var oneDay = 24 * 60 * 60 * 1000;
+                            var diffDays = Math.round(Math.abs((danas.getTime() - datum.getTime()) / (oneDay)));
+                             var a= row.brand + ' ' + row.naziv;
+                            a += ' <a id="broj_dana" style="display:none"> ' + diffDays + '</a>';
+
+                            return a;
                         }
                     },
                     {

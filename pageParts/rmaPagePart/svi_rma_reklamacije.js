@@ -106,7 +106,8 @@ $.ajax({
                                 var a = '<a name="' + row.id + '" class="' + sty + '" style="cursor: default; font-size: 0.8em;">' + row.pid + '</a><p style="display: initial; margin-left:10px; color:purple"><i class="fa fa-angle-double-left"></i></p>';
                             } else
                                 var a = '<a name="' + row.id + '" class="' + sty + '" style="cursor: default; font-size: 0.8em;">' + row.pid + '</a>';
-                            a += ' <a id="broj_dana" style="display:none"> ' + diffDays + '</a>';
+
+
                             return a;
                         }
                     },
@@ -129,7 +130,14 @@ $.ajax({
                     {
                         "data": "naziv",
                         "render": function (data, type, row, meta) {
-                            return row.brand + ' ' + row.naziv
+                            var danas = new Date();
+                            var datum = new Date(row.datumZaprimanja);
+                            var oneDay = 24 * 60 * 60 * 1000;
+                            var diffDays = Math.round(Math.abs((danas.getTime() - datum.getTime()) / (oneDay)));
+                             var a= row.brand + ' ' + row.naziv;
+                            a += ' <a id="broj_dana" style="display:none"> ' + diffDays + '</a>';
+
+                            return a;
                         }
                     },
                     {
