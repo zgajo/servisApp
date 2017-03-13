@@ -3,7 +3,8 @@
 $("#sviRMA tbody").on("mouseover", " tr", function () {
     $(this).css('background-color', '#ccffcc');
     $(this).find('#uredi_rma').show();
-
+var brdana  = $(this).find('#broj_dana').text();
+    $(this).attr('title', 'Broj dana od zaprimanja: '+brdana+'. Kliknite za više opcija ');
 });
 
 $("#sviRMA tbody").on("mouseout", "tr", function () {
@@ -50,6 +51,7 @@ $.ajax({
                                 var a = '<a name="' + row.id + '" class="' + sty + '" style="cursor: default; font-size: 0.8em;">' + row.pid + '</a><p style="display: initial; margin-left:10px; color:purple"><i class="fa fa-angle-double-left"></i></p>';
                             } else
                                 var a = '<a name="' + row.id + '" class="' + sty + '" style="cursor: default; font-size: 0.8em;">' + row.pid + '</a>';
+                        a += ' <a id="broj_dana" style="display:none"> '+diffDays+'</a>';
 
                             return a;
                         }},

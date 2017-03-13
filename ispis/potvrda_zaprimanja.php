@@ -71,8 +71,8 @@ include_once '../klase/checkLogin.php';
                         <h5 style="margin-top: 0px"><b>Potvrda o zaprimanju</b></h5>
                         <strong><h2 style="margin-top: 0px; text-decoration: underline;" id="primka"></h2></strong>
                         <b>Zaprimio: </b><p style="display: inline" id="zap"></p><br>
-                        <b>Zaprimljeno: </b><p style="display: inline"  id="dz"></p>
-
+                        <b>Zaprimljeno: </b><p style="display: inline"  id="dz"></p><br>
+                        <b>Mjesto zaprimanja: </b><p style="display: inline"  >Eurotrade <?php echo $_COOKIE['centar'] ?></p>
                     </div><!-- /.col -->
 
                     <div class="col-sm-4 invoice-col"  style="float: right;font-size: 14px">

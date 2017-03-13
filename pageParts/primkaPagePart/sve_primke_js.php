@@ -111,7 +111,24 @@ $("#sve_primke").on("click", "#narudzba", function () {
 
 $("#sve_primke").on("click", "#novi_rma", function () {
     var pr= $(this).attr("name");
-    if(confirm('Stvoriti novi RMA nalog?'))  window.open("rma.php?action=novi_rma&primka_id="+pr, "_blank");
+    $.ajax({
+        type: "GET",
+        url: "json/rma/getRmaByPrimka.php",
+        data: {"primka": pr},
+        success: function(rma){
+            if(rma){
+                if(confirm("Već postoji otvoren RMA nalog povezan sa ovom primkom. Želite li otvoriti njega?")){
+                    window.location="rma.php?rma="+ rma[0].id;
+                }
+                else{
+                    if(confirm('Stvoriti novi RMA nalog?'))  window.location = "rma.php?action=novi_rma&primka_id="+pr;
+                }
+            }else{
+                if(confirm('Stvoriti novi RMA nalog?'))  window.open("rma.php?action=novi_rma&primka_id="+pr, "_blank");
+            }
+
+        }
+    })
     
 });
 

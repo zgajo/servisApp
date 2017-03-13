@@ -1,6 +1,9 @@
 $('#sviRN tbody').on("mouseover", "tr", function () {
     $(this).css('background-color', '#ccffcc');
     $(this).find('#uredi_rn').show();
+    var brdana = $(this).find('#broj_dana').text();
+    $(this).attr('title', 'Broj dana od zaprimanja: ' + brdana + '. Kliknite za više opcija ');
+
 });
 $('#sviRN tbody').on("mouseout", "tr", function () {
     $(this).removeAttr('style');
@@ -26,7 +29,9 @@ $.ajax({
                     "dataSrc": ""
                 },
                 "columns": [
-                    {"data": "primka", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
+                    {
+                        "data": "primka",
+                        "render": function (data, type, row, meta) { // render event defines the markup of the cell text
                             var danas = new Date();
                             var datum = new Date(row.datumZaprimanja);
                             var oneDay = 24 * 60 * 60 * 1000;
@@ -39,32 +44,48 @@ $.ajax({
                             if (diffDays > 14)
                                 var sty = "label label-danger";
 
-                            if (row.status == "Stranka odustala od popravka" || row.status == "Popravak završen u jamstvu" || row.status == "Popravak završen van jamstva" || row.status == "Stranka odustala od popravka"
-                                    || row.status == "Uređaj zamijenjen novim" || row.status == "Odobren povrat novca" || row.status == "DOA - Uređaj zamijenjen novim" || row.status == "DOA - Odobren povrat novca" || row.status == "Čeka preuzimanje stranke") {
+                            if (row.status == "Stranka odustala od popravka" || row.status == "Popravak završen u jamstvu" || row.status == "Popravak završen van jamstva" || row.status == "Stranka odustala od popravka" || row.status == "Uređaj zamijenjen novim" || row.status == "Odobren povrat novca" || row.status == "DOA - Uređaj zamijenjen novim" || row.status == "DOA - Odobren povrat novca" || row.status == "Čeka preuzimanje stranke") {
                                 var a = '<a name="' + row.id + '" class="' + sty + '" style="cursor: default; font-size: 0.8em;">' + row.primka + '</a><p style="display: initial; margin-left:10px; color:purple"><i class="fa fa-angle-double-left"></i></p>';
                             } else
                                 var a = '<a name="' + row.id + '" class="' + sty + '" style="cursor: default; font-size: 0.8em;">' + row.primka + '</a>';
-
+                            a += ' <a id="broj_dana" style="display:none"> ' + diffDays + '</a>';
                             return a;
-                        }},
-                    {"data": "id", "render": function (data, type, row, meta) {
+                        }
+                    },
+                    {
+                        "data": "id",
+                        "render": function (data, type, row, meta) {
                             var output = '<strong>' + row.id + '</strong><a name="' + row.id + '"  style="margin-left:10px;" ><i id="uredi_rn" style=" display:none;" class="glyphicon glyphicon-pencil"></i></a><br>';
                             return output;
-                        }},
-                    {"data": "naziv", "render": function (data, type, row, meta) {
+                        }
+                    },
+                    {
+                        "data": "naziv",
+                        "render": function (data, type, row, meta) {
                             return row.brand + ' ' + row.naziv;
-                    }},
-                    {"data": "serijski"},
-                    {"data": "s_ime", "render": function (data, type, row, meta) { // render event defines the markup of the cell text 
+                        }
+                    },
+                    {
+                        "data": "serijski"
+                    },
+                    {
+                        "data": "s_ime",
+                        "render": function (data, type, row, meta) { // render event defines the markup of the cell text
                             if (row.tvrtka)
                                 var osoba = row.tvrtka + ', ' + row.s_ime + ' ' + row.s_prezime;
                             else
                                 var osoba = row.s_ime + ' ' + row.s_prezime;
                             return osoba;
-                        }},
-                    {"data": "status"},
-                    {"data": "napomena"}
-                ], "bDestroy": true
+                        }
+                    },
+                    {
+                        "data": "status"
+                    },
+                    {
+                        "data": "napomena"
+                    }
+                ],
+                "bDestroy": true
             });
 
         }

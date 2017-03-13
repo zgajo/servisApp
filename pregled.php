@@ -112,7 +112,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <h4 style="margin-top: 0px" id="primka"></h4>
                                 <b>Zaprimio: </b><p style="display: inline" id="zap"></p><br>
                                 <b>Zaprimljeno: </b><p style="display: inline"  id="dz"></p><br>
-                                <span  id="saround"><b id="zav">Datum završetka: </b><br>
+                                <span  id="saround"><b >Datum završetka: </b><span id="zav"></span><div style="display:none" id="dat_z"></div><br>
                                     <b  id="zav_ser">Završio serviser: </b><br></span>
                                 <span id="osaround"><b  id="os">Ovlašteni servis: </b><br>
                                     <b  id="os_rn">RN ovlaštenog servisa: </b><br>
@@ -288,9 +288,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         var rnvelicina = rn.length - 1;
                                                         var rn_zav = new Date(rn[rnvelicina].zavrsetak);
 
-                                                        (rn_zav && rn_zav.getFullYear() != '1970') ? $('#zav').after([rn_zav.getDate(), rn_zav.getMonth() + 1, rn_zav.getFullYear()].join('.') + '') : $('#zav').after('');
+                                                        (rn_zav && rn_zav.getFullYear() != '1970') ? $('#zav').text([rn_zav.getDate(), rn_zav.getMonth() + 1, rn_zav.getFullYear()].join('.') + '') : $('#zav').text('');
                                                         (rn[rnvelicina].d2ime) ? $('#zav_ser').after(rn[rnvelicina].d2ime + ' ' + rn[rnvelicina].d2prezime + '') : $('#zav_ser').after('');
-
+                                                        $("#dat_z").text([rn_zav.getDate(), rn_zav.getMonth() + 1, rn_zav.getFullYear()].join('.'))
                                                         opis_popravka += '<b>OPASKA SERVISA:</b> <br>';
 
 
@@ -318,7 +318,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                                             var zavrsen_servis = new Date(rn.zavrsetak);
 
+
                                                             if (zavrsen_servis && zavrsen_servis.getFullYear() != '1970') {
+
+                                                                var dat_zav = new Date($("#dat_z").text().split(".").reverse().join("-"));
+
+                                                                if((zavrsen_servis.getTime() > dat_zav.getTime()) || dat_zav.getFullYear() == '1970') {
+                                                                    $("#dat_z").text([zavrsen_servis.getDate(), zavrsen_servis.getMonth() + 1, zavrsen_servis.getFullYear()].join('.'));
+                                                                    $('#zav').text([zavrsen_servis.getDate(), zavrsen_servis.getMonth() + 1, zavrsen_servis.getFullYear()].join('.'))
+                                                                }
+
                                                                 opis_popravka += '<span  class="no-print">';
 
                                                                 opis_popravka += '<br><b>Završetak servisiranja:</b> ' + [zavrsen_servis.getDate(), zavrsen_servis.getMonth() + 1, zavrsen_servis.getFullYear()].join('.') + '. ';

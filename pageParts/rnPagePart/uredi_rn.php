@@ -35,10 +35,11 @@
                             <i><strong>Primku otvorio: </strong></i><p  id="po" style="display: inline"></p>  <br>
                             <hr>
 
+                           <i ><strong>Brand: </strong></i><p id="brand" style="display: inline"></p>   <br>
                             <i><strong>Naziv uređaja: </strong></i><p  id="nu" style="display: inline"></p>   <br>
-                            <i><strong>Serijski: </strong></i><p  id="serijski" style="display: inline"></p>  </br>
-                            <i ><strong>Brand: </strong></i><p id="brand" style="display: inline"></p>   <br> 
                             <i ><strong>Tip: </strong></i><p id="tip" style="display: inline"></p> <br>
+                            <i><strong>Serijski: </strong></i><p  id="serijski" style="display: inline"></p>  </br>
+
                             <i><strong>Datum kupnje: </strong></i><p  id="dk" style="display: inline"></p> </br> 
                             <i><strong>Broj računa: </strong></i><p   id="br" style="display: inline"></p> </br>
                             <hr>
