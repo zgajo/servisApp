@@ -169,6 +169,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             <th>Uređaj</th>
                                                             <th>Serijski</th>
                                                             <th>Opis kvara</th>
+                                                            <th>Status</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody></tbody>
@@ -269,6 +270,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         },
                         {
                             "data": "opisKvara"
+                        },
+                        {
+                            "data": "status"
                         }
                     ]
 

@@ -3,7 +3,7 @@
 <?php if($_COOKIE['odjel'] != "Reklamacije") { ?>
 <div class="box box-info" style="border-top: none">
     <div class="box-body">
-        <table id="sviRMA" class="table table-bordered table-striped" style="color: black">
+        <table id="sviRMA" class="table table-bordered table-striped" style="color: black; min-width: 100%">
             <thead>
                 <tr>
                     <th>Primka</th>
@@ -43,7 +43,7 @@
             <!-- TABLE: Sve otvoreni RMA -->
             <div class="box box-info" style="border-top: none">
                 <div class="box-body">
-                    <table id="sviRMA" class="table table-bordered table-striped" style="color: black">
+                    <table id="sviRMA" class="table table-bordered table-striped" style="color: black; min-width: 100%">
                         <thead>
                             <tr>
                                 <th>Primka</th>
@@ -77,7 +77,7 @@
            <input style="display:none" id="fin_id"></input>
             <div id="finOdobDiv" class="box box-info" style="border-top: none">
                 <div class="box-body">
-                    <table id="svaOdob" class="table table-bordered table-striped" style="color: black">
+                    <table id="svaOdob" class="table table-bordered table-striped" style="color: black; min-width: 100%">
                         <thead>
                             <tr>
                                <th>Primka</th>
