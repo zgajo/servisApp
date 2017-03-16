@@ -1,13 +1,13 @@
 <script>
-                $("#uk").attr('title', 'Otvori formu za izmjenu podataka kupca');
-                $("#up").attr('title', 'Otvori formu za izmjenu podataka primke');
-                $(document).ready(function () {
+    $("#uk").attr('title', 'Otvori formu za izmjenu podataka kupca');
+    $("#up").attr('title', 'Otvori formu za izmjenu podataka primke');
+    $(document).ready(function () {
 
-                    var pid = <?php echo $_GET['primka'] ?>
-                    
-                    funPrimka();
+        var pid = <?php echo $_GET['primka'] ?>
 
-                    function funPrimka() {
+        funPrimka();
+
+        function funPrimka() {
                         // Dohvaćanje i pregled upita
                         $.ajax({
                             type: 'GET',
@@ -16,7 +16,7 @@
                             dataType: 'json',
                             contentType: "application/json; charset=utf-8",
                             success: function (data) {
-console.log(data);
+                                console.log(data);
                                 var pp = JSON.parse(JSON.stringify(data));
 
                                 var dz = new Date(pp[0].datumZaprimanja);
@@ -46,9 +46,9 @@ console.log(data);
                                 $('#ok').text(pp[0].opisKvara);
                                 $('#pp').text(pp[0].prilozeno_primijeceno);
                                 
-                                 var st = pp[0].p_status;
+                                var st = pp[0].p_status;
 
-                                if(st.substring(0,12) !="Poslano u CS"){
+                            if(st.substring(0,12) !="Poslano u CS"){
                                 // POSTAVLJANJE ZA SELECTED
                                 var o = new Option(st, st);
                                 /// jquerify the DOM object 'o' so we can use the html method
@@ -62,18 +62,18 @@ console.log(data);
                                 $(o).html(st);
                                 $("#status_primke").append(o);
                                 $('#status_primke option[value="' + st + '"]').attr("selected", true);
-                               $("#status_primke").prop("disabled", true); 
+                                $("#status_primke").prop("disabled", true); 
                             }
-                                    
-                                $('#inputTvrtka').val(pp[0].tvrtka);
-                                $('#inputIme').val(pp[0].ime);
-                                $('#inputPrezime').val(pp[0].prezime);
-                                $('#inputAdresa').val(pp[0].adresa);
-                                $('#inputGrad').val(pp[0].grad);
-                                $('#inputPB').val(pp[0].postBroj);
-                                $('#inputKontakt').val(pp[0].kontaktBroj);
-                                $('#inputEmail').val(pp[0].email);
-                                $('#inputid').text(pp[0].stranka_id);
+
+                            $('#inputTvrtka').val(pp[0].tvrtka);
+                            $('#inputIme').val(pp[0].ime);
+                            $('#inputPrezime').val(pp[0].prezime);
+                            $('#inputAdresa').val(pp[0].adresa);
+                            $('#inputGrad').val(pp[0].grad);
+                            $('#inputPB').val(pp[0].postBroj);
+                            $('#inputKontakt').val(pp[0].kontaktBroj);
+                            $('#inputEmail').val(pp[0].email);
+                            $('#inputid').text(pp[0].stranka_id);
 
                                 //primka u input
                                 $('#inputPK').val(pp[0].opisKvara);
@@ -116,33 +116,33 @@ console.log(data);
                                             var rnz = new Date(rn[i].zavrsetak);
 
                                             output += '<div class="col-md-6" style="width: 100%">' +
-                                                    '<div class="box box-info" style="border-top-color:#00a65a">' +
-                                                    '<div class="box-body" style="clear: both">' +
-                                                    '<div class="box-header with-border">' +
-                                                    '<h3 class="box-title">Radni nalog servisa br. ' + rn[i].id + '</h3> ' +
-                                                    '</div>' +
-                                                    '<div   class="col-md-6 invoice-col" style="width:100%" >' +
-                                                    '<address>' +
-                                                    '<i><strong>Početak rada: </strong></i>' + [rnp.getDate(), rnp.getMonth() + 1, rnp.getFullYear()].join('.') + ' /  ' + [(rnp.getHours() < 10 ? '0' : '') + rnp.getHours(), (rnp.getMinutes() < 10 ? '0' : '') + rnp.getMinutes()].join(':') + '<br>' +
-                                                    '<i><strong>Rad započeo: </strong></i></strong>' + rn[i].d1ime + ' ' + rn[i].d1prezime + '<br>' +
-                                                    '<i><strong>Opis popravka: </strong></i></strong>';
+                                            '<div class="box box-info" style="border-top-color:#00a65a">' +
+                                            '<div class="box-body" style="clear: both">' +
+                                            '<div class="box-header with-border">' +
+                                            '<h3 class="box-title">Radni nalog servisa br. ' + rn[i].id + '</h3> ' +
+                                            '</div>' +
+                                            '<div   class="col-md-6 invoice-col" style="width:100%" >' +
+                                            '<address>' +
+                                            '<i><strong>Početak rada: </strong></i>' + [rnp.getDate(), rnp.getMonth() + 1, rnp.getFullYear()].join('.') + ' /  ' + [(rnp.getHours() < 10 ? '0' : '') + rnp.getHours(), (rnp.getMinutes() < 10 ? '0' : '') + rnp.getMinutes()].join(':') + '<br>' +
+                                            '<i><strong>Rad započeo: </strong></i></strong>' + rn[i].d1ime + ' ' + rn[i].d1prezime + '<br>' +
+                                            '<i><strong>Opis popravka: </strong></i></strong>';
                                             output += (rn[i].opis) ? rn[i].opis : "";
                                             output += "<hr><i><strong>Status radnog naloga: </strong></i>"; output += (rn[i].status) ?rn[i].status:'' ;
                                             output += '<hr>' +
-                                                    '<i><strong>Naplatiti: </strong></i></strong>';
+                                            '<i><strong>Naplatiti: </strong></i></strong>';
                                             output += (rn[i].naplata) ? rn[i].naplata : "";
                                             output += '<br>' +
-                                                    '<i><strong>Rad završio: </strong></i></strong>';
+                                            '<i><strong>Rad završio: </strong></i></strong>';
                                             output += (rn[i].d2ime) ? rn[i].d2ime + ' ' + rn[i].d2prezime : "";
                                             output += '<br>' +
-                                                    '<i><strong>Završetak rada: </strong></i> </strong>';
+                                            '<i><strong>Završetak rada: </strong></i> </strong>';
                                             output += (rnz && rnz.getFullYear() != "1970") ? [rnz.getDate(), rnz.getMonth() + 1, rnz.getFullYear()].join('.') + ' /  ' + [(rnz.getHours() < 10 ? '0' : '') + rnz.getHours(), (rnz.getMinutes() < 10 ? '0' : '') + rnz.getMinutes()].join(':') : "";
                                             output += '<br>' +
-                                                    '</address>' +
-                                                    ' </div>' +
-                                                    '</div>' +
-                                                    '</div>' +
-                                                    '</div>';
+                                            '</address>' +
+                                            ' </div>' +
+                                            '</div>' +
+                                            '</div>' +
+                                            '</div>';
 
                                         }
                                         $('#urn').html(output);
@@ -167,35 +167,35 @@ console.log(data);
                                             var rnvr = new Date(rma[i].zavrseno);
 
                                             output += '<div class="col-md-6" style="width: 100%">' +
-                                                    '<div class="box box-info" style="border-top-color:#ec971f">' +
-                                                    '<div class="box-body" style="clear: both">' +
-                                                    '<div class="box-header with-border">' +
-                                                    '<h3 class="box-title">RMA nalog br. ' + rma[i].id + ' </h3>' +
-                                                    ' </div>' +
-                                                    '<div  class="col-md-6 invoice-col" style="width:100%"  >' +
-                                                    '<address>' +
-                                                    '<i><strong>Pripremljeno za slanje: </strong></i>' + [rnp.getDate(), rnp.getMonth() + 1, rnp.getFullYear()].join('.') + ' /  ' + [(rnp.getHours() < 10 ? '0' : '') + rnp.getHours(), (rnp.getMinutes() < 10 ? '0' : '') + rnp.getMinutes()].join(':') + '<br>' +
-                                                    '<i><strong>Poslano u ovlašteni servis: </strong></i>   </strong>';
+                                            '<div class="box box-info" style="border-top-color:#ec971f">' +
+                                            '<div class="box-body" style="clear: both">' +
+                                            '<div class="box-header with-border">' +
+                                            '<h3 class="box-title">RMA nalog br. ' + rma[i].id + ' </h3>' +
+                                            ' </div>' +
+                                            '<div  class="col-md-6 invoice-col" style="width:100%"  >' +
+                                            '<address>' +
+                                            '<i><strong>Pripremljeno za slanje: </strong></i>' + [rnp.getDate(), rnp.getMonth() + 1, rnp.getFullYear()].join('.') + ' /  ' + [(rnp.getHours() < 10 ? '0' : '') + rnp.getHours(), (rnp.getMinutes() < 10 ? '0' : '') + rnp.getMinutes()].join(':') + '<br>' +
+                                            '<i><strong>Poslano u ovlašteni servis: </strong></i>   </strong>';
                                             output += (rnpos && rnpos.getFullYear() != "1970" && !isNaN(rnpos)) ? [rnpos.getDate(), rnpos.getMonth() + 1, rnpos.getFullYear()].join('.') + ' /  ' + [(rnpos.getHours() < 10 ? '0' : '') + rnpos.getHours(), (rnpos.getMinutes() < 10 ? '0' : '') + rnpos.getMinutes()].join(':') : "";
                                             output += '<br>' +
-                                                    '<i><strong>Uređaj poslao:  </strong></i>   </strong>' + rma[i].doime + ' ' + rma[i].doprezime + '<hr>' +
-                                                    '<i><strong>Ovlašteni servis: </strong></i> </strong>'; 
+                                            '<i><strong>Uređaj poslao:  </strong></i>   </strong>' + rma[i].doime + ' ' + rma[i].doprezime + '<hr>' +
+                                            '<i><strong>Ovlašteni servis: </strong></i> </strong>'; 
                                             output +=  (rma[i].nazivOS) ? rma[i].nazivOS  : '';
                                             output += '<br>' +
-                                                    '<i><strong>Radni nalog ovlaštenog servisa: </strong></i>  </strong>' + rma[i].rnOs + '<br>' +
-                                                    '<i><strong>Opis popravka: </strong></i>   </strong> ' + rma[i].opis + '<br>                ' +
-                                                    '<i><strong>Status reklamacije: </strong></i>   </strong>' + rma[i].status + '<hr>' +
-                                                    ' <i><strong>Vraćeno iz ovlaštenog servisa: </strong></i> </strong>';
+                                            '<i><strong>Radni nalog ovlaštenog servisa: </strong></i>  </strong>' + rma[i].rnOs + '<br>' +
+                                            '<i><strong>Opis popravka: </strong></i>   </strong> ' + rma[i].opis + '<br>                ' +
+                                            '<i><strong>Status reklamacije: </strong></i>   </strong>' + rma[i].status + '<hr>' +
+                                            ' <i><strong>Vraćeno iz ovlaštenog servisa: </strong></i> </strong>';
                                             output += (rnvr && rnvr.getFullYear() != "1970") ? [rnvr.getDate(), rnvr.getMonth() + 1, rnvr.getFullYear()].join('.') + ' /  ' + [(rnvr.getHours() < 10 ? '0' : '') + rnvr.getHours(), (rnvr.getMinutes() < 10 ? '0' : '') + rnvr.getMinutes()].join(':') : "";
                                             output += '<br><i><strong>Zatvorio nalog: </strong></i>  </strong>';
                                             output += (rma[i].dzime) ? rma[i].dzime + ' ' + rma[i].dzprezime : "";
                                             output += '<br>' +
-                                                    '<i><strong>Naplatiti: </strong></i>  </strong>' + rma[i].naplata + '<br>' +
-                                                    '</address>' +
-                                                    '</div>' +
-                                                    '</div>' +
-                                                    ' </div>' +
-                                                    '</div>';
+                                            '<i><strong>Naplatiti: </strong></i>  </strong>' + rma[i].naplata + '<br>' +
+                                            '</address>' +
+                                            '</div>' +
+                                            '</div>' +
+                                            ' </div>' +
+                                            '</div>';
 
                                         }
                                         $('#urn').html(output);
@@ -218,23 +218,23 @@ console.log(data);
                             }
                         });
 
-                    }
+}
                     //Ažuriranje upita
                     $('#azuriraj_status').on("click", this, function () {
 
                         var status = $('select').val();
                         if(confirm('Ažurirati status u: "'+status+'"?'))    
-                        $.ajax({
-                            async: false,
-                            url: "json/primka/primkaStatusUpdate.php",
-                            type: "POST",
-                            data: {
-                                "status": status, "id": pid
-                            },
-                            success: function (e) {
-                                if(status == 'Poslano u CS - Rovinj'){
-                                    var ruc = window.open('rucne.php?primka='+pid, '_blank');
-                                if (ruc) {
+                            $.ajax({
+                                async: false,
+                                url: "json/primka/primkaStatusUpdate.php",
+                                type: "POST",
+                                data: {
+                                    "status": status, "id": pid
+                                },
+                                success: function (e) {
+                                    if(status == 'Poslano u CS - Rovinj'){
+                                        var ruc = window.open('rucne.php?primka='+pid, '_blank');
+                                        if (ruc) {
                                                         //Browser has allowed it to be opened
                                                         ruc.focus();
                                                     } else {
@@ -242,13 +242,13 @@ console.log(data);
                                                         alert('Molim Vas, omogućite prikaz skočnih prozora');
                                                     }
                                                 }
-                                               
-                                window.location = "primke.php";
-                            },
-                            error: function (e) {
-                                alert('nije u redu' + e);
-                            }
-                        });
+
+                                                window.location = "primke.php";
+                                            },
+                                            error: function (e) {
+                                                alert('nije u redu' + e);
+                                            }
+                                        });
 
                     });
 
@@ -304,8 +304,8 @@ console.log(data);
                     
                     
                     $('#narudzba').click(function(){
-                    var pr= <?php echo $_GET['primka'] ?>;
-                    window.location = "narudzbe.php?primka="+pr+"&stranka="+$('#inputid').text();
+                        var pr= <?php echo $_GET['primka'] ?>;
+                        window.location = "narudzbe.php?primka="+pr+"&stranka="+$('#inputid').text();
                     })
 
 
@@ -364,7 +364,7 @@ console.log(data);
                         $('#status_primke option:last-child').remove();
                         
                         funPrimka();
-                         
+
 
                     });
 
@@ -375,7 +375,7 @@ console.log(data);
                     });
 
                     $('#ponistiUK').click(function () {
-                        
+
                         $('#status_primke option:last-child').remove();
                         funPrimka();
                         

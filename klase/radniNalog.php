@@ -541,17 +541,23 @@ class servisRN extends RN{
     public function sviRNostali($centar) {
        
         
-        $query=$this->mysqli->prepare("SELECT rn.rn_id, p.primka_id, p.naziv, p.serial, p.datumZaprimanja, s.ime as s_ime, s.prezime as s_prezime, s.tvrtka, rn.status, rn.pocetakRada, rn.danZavrsetka, rn.opisPopravka, rn.naplata, rn.napomena, rn.promijenjeno, rn.broj_ispisa, d1.ime, d1.prezime, d2.ime, d2.prezime 
+        $query=$this->mysqli->prepare("SELECT rn.rn_id, p.primka_id, p.naziv, p.brand, p.serial, p.datumZaprimanja, s.ime as s_ime, s.prezime as s_prezime, s.tvrtka, rn.status, rn.pocetakRada, rn.danZavrsetka, rn.opisPopravka, rn.naplata, rn.napomena, rn.promijenjeno, rn.broj_ispisa, d1.ime, d1.prezime, d2.ime, d2.prezime 
                 FROM radniNaloziServisa rn 
                 LEFT JOIN primka p ON p.primka_id = rn.primka_id 
                 LEFT JOIN stranka s ON p.stranka_id = s.stranka_id 
                 LEFT JOIN djelatnici d1 ON rn.djelatnik_zapoceoRn_id = d1.djelatnik_id 
                 LEFT JOIN djelatnici d2 ON rn.djelatnik_zavrsioRn_id = d2.djelatnik_id 
-                WHERE p.status != 'Kupac preuzeo' AND p.status != 'Ekološki zbrinuto' 
-                                        AND p.status !=  'Poslano u CS%'  
-                                        
-                                        and p.centar = ? 
-                                        ORDER BY p.primka_id ASC");
+                WHERE (p.status != 'Kupac preuzeo' AND p.status != 'Ekološki zbrinuto' AND p.status NOT LIKE  'Poslano u CS%') 
+                AND (rn.status != 'Stranka odustala od popravka' AND 
+                        rn.status != 'Popravak završen u jamstvu' AND 
+                        rn.status != 'Popravak završen van jamstva' AND 
+                        rn.status != 'Stranka odustala od popravka' AND 
+                        rn.status != 'Uređaj zamijenjen novim' AND 
+                        rn.status != 'Odobren povrat novca' AND 
+                        rn.status != 'DOA - Uređaj zamijenjen novim' AND 
+                        rn.status != 'DOA - Odobren povrat novca')
+                and p.centar = ? 
+                ORDER BY p.primka_id ASC");
         
         if($query === false){
             trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
@@ -560,11 +566,12 @@ class servisRN extends RN{
         $query->bind_param("s", $centar); 
         
         if($query->execute()){
-            $query->bind_result($this->id, $pid, $pn, $ps, $datZa, $si, $sp, $st, $status, $pocetak, $dz, $op, $naplata, $napomena, $promijenjeno, $ispisano, $d1ime, $d1prezime,$d2ime, $d2prezime );
+            $query->bind_result($this->id, $pid, $pn, $pb, $ps, $datZa, $si, $sp, $st, $status, $pocetak, $dz, $op, $naplata, $napomena, $promijenjeno, $ispisano, $d1ime, $d1prezime,$d2ime, $d2prezime );
             while($row = $query->fetch()){
                 $rn[] = array(
                     "id" => $this->id,
                     "naziv" => $pn,
+                    "brand" => $pb,
                     "datumZaprimanja" => $datZa,
                     "serijski" => $ps,
                     "s_ime" => $si,
@@ -594,10 +601,75 @@ class servisRN extends RN{
         } 
         
     }
+
+    public function sviRNostaliZavrseni($centar) {
+       
+        
+        $query=$this->mysqli->prepare("SELECT rn.rn_id, p.primka_id, p.naziv, p.brand, p.serial, p.datumZaprimanja, s.ime as s_ime, s.prezime as s_prezime, s.tvrtka, rn.status, rn.pocetakRada, rn.danZavrsetka, rn.opisPopravka, rn.naplata, rn.napomena, rn.promijenjeno, rn.broj_ispisa, d1.ime, d1.prezime, d2.ime, d2.prezime 
+                FROM radniNaloziServisa rn 
+                LEFT JOIN primka p ON p.primka_id = rn.primka_id 
+                LEFT JOIN stranka s ON p.stranka_id = s.stranka_id 
+                LEFT JOIN djelatnici d1 ON rn.djelatnik_zapoceoRn_id = d1.djelatnik_id 
+                LEFT JOIN djelatnici d2 ON rn.djelatnik_zavrsioRn_id = d2.djelatnik_id 
+                WHERE (p.status != 'Kupac preuzeo' AND p.status != 'Ekološki zbrinuto' AND p.status NOT LIKE  'Poslano u CS%') 
+                AND (rn.status = 'Stranka odustala od popravka' OR 
+                        rn.status = 'Popravak završen u jamstvu' OR 
+                        rn.status = 'Popravak završen van jamstva' OR 
+                        rn.status = 'Stranka odustala od popravka' OR 
+                        rn.status = 'Uređaj zamijenjen novim' OR 
+                        rn.status = 'Odobren povrat novca' OR 
+                        rn.status = 'DOA - Uređaj zamijenjen novim' OR 
+                        rn.status = 'DOA - Odobren povrat novca')
+                and p.centar = ? 
+                ORDER BY p.primka_id ASC");
+        
+        if($query === false){
+            trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
+        }
+        
+        $query->bind_param("s", $centar); 
+        
+        if($query->execute()){
+            $query->bind_result($this->id, $pid, $pn, $pb, $ps, $datZa, $si, $sp, $st, $status, $pocetak, $dz, $op, $naplata, $napomena, $promijenjeno, $ispisano, $d1ime, $d1prezime,$d2ime, $d2prezime );
+            while($row = $query->fetch()){
+                $rn[] = array(
+                    "id" => $this->id,
+                    "naziv" => $pn,
+                    "brand" => $pb,
+                    "datumZaprimanja" => $datZa,
+                    "serijski" => $ps,
+                    "s_ime" => $si,
+                    "s_prezime" => $sp,
+                    "tvrtka" => $st,
+                    "primka" => $pid,
+                    "status" => $status,
+                    "pocetak" => $pocetak,
+                    "zavrsetak" => $dz,
+                    "opis" => $op,
+                    "naplata" => $naplata,
+                    "napomena" => $napomena,
+                    "promijenjeno" => $promijenjeno,
+                    "ispisano" => $ispisano,
+                    "d1ime" => $d1ime,
+                    "d1prezime" => $d1prezime,
+                    "d2ime" => $d2ime,
+                    "d2prezime" => $d2prezime
+                    );
+            }
+            $query->close();
+            if(isset($rn))return $rn;
+        
+        }else{
+             $query->close();
+        die("Neuspješno ažuriranje radnog naloga");
+        } 
+        
+    }
+
     
      public function sviRNservis($centar) {
        
-        $query=$this->mysqli->prepare("SELECT rn.rn_id, p.primka_id, p.brand, p.naziv, p.serial, p.datumZaprimanja, s.ime as s_ime, s.prezime as s_prezime, s.tvrtka, rn.status, rn.pocetakRada, rn.danZavrsetka, rn.opisPopravka, rn.naplata, rn.napomena, rn.promijenjeno, rn.broj_ispisa, d1.ime, d1.prezime, d2.ime, d2.prezime 
+        $query=$this->mysqli->prepare("SELECT rn.rn_id, p.status as primka_status, p.primka_id, p.brand, p.naziv, p.serial, p.datumZaprimanja, s.ime as s_ime, s.prezime as s_prezime, s.tvrtka, rn.status, rn.pocetakRada, rn.danZavrsetka, rn.opisPopravka, rn.naplata, rn.napomena, rn.promijenjeno, rn.broj_ispisa, d1.ime, d1.prezime, d2.ime, d2.prezime 
                 FROM radniNaloziServisa rn 
                 LEFT JOIN primka p ON p.primka_id = rn.primka_id 
                 LEFT JOIN stranka s ON p.stranka_id = s.stranka_id 
@@ -614,10 +686,139 @@ class servisRN extends RN{
         $query->bind_param("s", $centar); 
         
         if($query->execute()){
-            $query->bind_result($this->id, $pid, $pb, $pn, $ps, $datZa, $si, $sp, $st, $status, $pocetak, $dz, $op, $naplata, $napomena, $promijenjeno, $ispisano, $d1ime, $d1prezime,$d2ime, $d2prezime );
+            $query->bind_result($this->id, $primka_status, $pid, $pb, $pn, $ps, $datZa, $si, $sp, $st, $status, $pocetak, $dz, $op, $naplata, $napomena, $promijenjeno, $ispisano, $d1ime, $d1prezime,$d2ime, $d2prezime );
             while($row = $query->fetch()){
                 $rn[] = array(
                     "id" => $this->id,
+                    "primka_status" => $primka_status,
+                    "naziv" => $pn,
+                    "brand" => $pb,
+                    "datumZaprimanja" => $datZa,
+                    "serijski" => $ps,
+                    "s_ime" => $si,
+                    "s_prezime" => $sp,
+                    "tvrtka" => $st,
+                    "primka" => $pid,
+                    "status" => $status,
+                    "pocetak" => $pocetak,
+                    "zavrsetak" => $dz,
+                    "opis" => $op,
+                    "naplata" => $naplata,
+                    "napomena" => $napomena,
+                    "promijenjeno" => $promijenjeno,
+                    "ispisano" => $ispisano,
+                    "d1ime" => $d1ime,
+                    "d1prezime" => $d1prezime,
+                    "d2ime" => $d2ime,
+                    "d2prezime" => $d2prezime
+                    );
+            }
+            $query->close();
+            if(isset($rn))return $rn;
+        
+        }else{
+             $query->close();
+        die("Neuspješno ažuriranje radnog naloga");
+        } 
+        
+    }
+
+    public function sviRNservisZavrseni($centar) {
+       
+        $query=$this->mysqli->prepare("SELECT rn.rn_id, p.status as primka_status, p.primka_id, p.brand, p.naziv, p.serial, p.datumZaprimanja, s.ime as s_ime, s.prezime as s_prezime, s.tvrtka, rn.status, rn.pocetakRada, rn.danZavrsetka, rn.opisPopravka, rn.naplata, rn.napomena, rn.promijenjeno, rn.broj_ispisa, d1.ime, d1.prezime, d2.ime, d2.prezime 
+                FROM radniNaloziServisa rn 
+                LEFT JOIN primka p ON p.primka_id = rn.primka_id 
+                LEFT JOIN stranka s ON p.stranka_id = s.stranka_id 
+                LEFT JOIN djelatnici d1 ON rn.djelatnik_zapoceoRn_id = d1.djelatnik_id 
+                LEFT JOIN djelatnici d2 ON rn.djelatnik_zavrsioRn_id = d2.djelatnik_id 
+                  WHERE (rn.status = 'Stranka odustala od popravka' or 
+                        rn.status = 'Popravak završen u jamstvu' or 
+                        rn.status = 'Popravak završen van jamstva' or 
+                        rn.status = 'Stranka odustala od popravka' or 
+                        rn.status = 'Uređaj zamijenjen novim' or 
+                        rn.status = 'Odobren povrat novca' or 
+                        rn.status = 'DOA - Uređaj zamijenjen novim' or 
+                        rn.status = 'DOA - Odobren povrat novca')
+                    AND (p.status != 'Kupac preuzeo' AND p.status != 'Ekološki zbrinuto'                                    
+                    AND (p.centar = ? OR p.status LIKE  'Poslano u CS%'))  
+                 ORDER BY p.primka_id ASC");
+        
+        if($query === false){
+            trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
+        }
+        
+        $query->bind_param("s", $centar); 
+        
+        if($query->execute()){
+            $query->bind_result($this->id, $primka_status, $pid, $pb, $pn, $ps, $datZa, $si, $sp, $st, $status, $pocetak, $dz, $op, $naplata, $napomena, $promijenjeno, $ispisano, $d1ime, $d1prezime,$d2ime, $d2prezime );
+            while($row = $query->fetch()){
+                $rn[] = array(
+                    "id" => $this->id,
+                    "primka_status" => $primka_status,
+                    "naziv" => $pn,
+                    "brand" => $pb,
+                    "datumZaprimanja" => $datZa,
+                    "serijski" => $ps,
+                    "s_ime" => $si,
+                    "s_prezime" => $sp,
+                    "tvrtka" => $st,
+                    "primka" => $pid,
+                    "status" => $status,
+                    "pocetak" => $pocetak,
+                    "zavrsetak" => $dz,
+                    "opis" => $op,
+                    "naplata" => $naplata,
+                    "napomena" => $napomena,
+                    "promijenjeno" => $promijenjeno,
+                    "ispisano" => $ispisano,
+                    "d1ime" => $d1ime,
+                    "d1prezime" => $d1prezime,
+                    "d2ime" => $d2ime,
+                    "d2prezime" => $d2prezime
+                    );
+            }
+            $query->close();
+            if(isset($rn))return $rn;
+        
+        }else{
+             $query->close();
+        die("Neuspješno ažuriranje radnog naloga");
+        } 
+        
+    }
+
+    public function sviRNservisOtvoreni($centar) {
+       
+        $query=$this->mysqli->prepare("SELECT rn.rn_id, p.status as primka_status, p.primka_id, p.brand, p.naziv, p.serial, p.datumZaprimanja, s.ime as s_ime, s.prezime as s_prezime, s.tvrtka, rn.status, rn.pocetakRada, rn.danZavrsetka, rn.opisPopravka, rn.naplata, rn.napomena, rn.promijenjeno, rn.broj_ispisa, d1.ime, d1.prezime, d2.ime, d2.prezime 
+                FROM radniNaloziServisa rn 
+                LEFT JOIN primka p ON p.primka_id = rn.primka_id 
+                LEFT JOIN stranka s ON p.stranka_id = s.stranka_id 
+                LEFT JOIN djelatnici d1 ON rn.djelatnik_zapoceoRn_id = d1.djelatnik_id 
+                LEFT JOIN djelatnici d2 ON rn.djelatnik_zavrsioRn_id = d2.djelatnik_id 
+                  WHERE (rn.status != 'Stranka odustala od popravka' AND 
+                        rn.status != 'Popravak završen u jamstvu' AND 
+                        rn.status != 'Popravak završen van jamstva' AND 
+                        rn.status != 'Stranka odustala od popravka' AND 
+                        rn.status != 'Uređaj zamijenjen novim' AND 
+                        rn.status != 'Odobren povrat novca' AND 
+                        rn.status != 'DOA - Uređaj zamijenjen novim' AND 
+                        rn.status != 'DOA - Odobren povrat novca')
+                    AND (p.status != 'Kupac preuzeo' AND p.status != 'Ekološki zbrinuto' 
+                    AND (p.centar = ? OR p.status LIKE  'Poslano u CS%'))  
+                 ORDER BY p.primka_id ASC");
+        
+        if($query === false){
+            trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
+        }
+        
+        $query->bind_param("s", $centar); 
+        
+        if($query->execute()){
+            $query->bind_result($this->id, $primka_status, $pid, $pb, $pn, $ps, $datZa, $si, $sp, $st, $status, $pocetak, $dz, $op, $naplata, $napomena, $promijenjeno, $ispisano, $d1ime, $d1prezime,$d2ime, $d2prezime );
+            while($row = $query->fetch()){
+                $rn[] = array(
+                    "id" => $this->id,
+                    "primka_status" => $primka_status,
                     "naziv" => $pn,
                     "brand" => $pb,
                     "datumZaprimanja" => $datZa,

@@ -26,7 +26,6 @@
                 $('#inputNaplata').val(rn[0].naplata);
                 $('#inputPromijenjeno').val(rn[0].promijenjeno);
                 $('#inputBI').val(rn[0].broj_ispisa);
-                $('#status_rn').val(rn[0].status);
                 if (zavrseno && zavrseno.getFullYear() != "1970") {
                     $('#zavrseno').text([zavrseno.getDate(), zavrseno.getMonth() + 1, zavrseno.getFullYear()].join('.') + ' / ' + [((zavrseno.getHours() < 10) ? '0' : '') + zavrseno.getHours(), (zavrseno.getMinutes() < 10 ? '0' : '') + zavrseno.getMinutes()].join(':'));
                     $('#zr').show();
@@ -99,6 +98,8 @@
                     $('#ok').text(primka[0].opisKvara);
                     $('#pp').text(primka[0].prilozeno_primijeceno);
                     $('#st').text(primka[0].p_status);
+                    $('#status_rn').append("<option selected>"+ primka[0].p_status +"</option>");
+
                     $('#primka_id').text(primka[0].primka_id);
 
                     if (primka[0].p_status == 'Kupac preuzeo') {
@@ -219,7 +220,9 @@
 
                     //  AŽURIRANJE STATUSA PRIMKE
                     if (trazi === "Poslano u CS") {
-                        $.post("json/primka/primkaStatusUpdate.php", {"status": "Poslano u CS - Rovinj / " + status, "id": primka_id}, function () {
+                        var istrazi_status = status.substring(0, 12);
+                        if(istrazi_status === "Poslano u CS") {
+                            $.post("json/primka/primkaStatusUpdate.php", {"status": status, "id": primka_id}, function () {
 
                             upisrn(rnid);
                             upisprik(rnid);
@@ -227,6 +230,18 @@
                             upisprik(rnid);
 
                         });
+                        }
+                        else{
+                          $.post("json/primka/primkaStatusUpdate.php", {"status": "Poslano u CS - Rovinj / " + status, "id": primka_id}, function () {
+
+                            upisrn(rnid);
+                            upisprik(rnid);
+                            upisrn(rnid);
+                            upisprik(rnid);
+
+                        });  
+                        }
+                        
                     } else {
                         $.post("json/primka/primkaStatusUpdate.php", {"status": status, "id": primka_id}, function () {
 
@@ -242,6 +257,7 @@
                 }
                 //  KRAJ    *   AŽURIRAJ STATUSE    *   KRAJ
             }
+            $('#status_rn').children().last().remove()
         });
 
         $('#uk').click(function () {

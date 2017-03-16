@@ -68,7 +68,81 @@ class primka{
         
         } 
     }
+
+    public function svePrimkeZavrsenServis() {
+        
+        $query = $this->mysqli->prepare("SELECT p.*, s.stranka_id, s.ime as s_ime, s.prezime as s_prezime, s.tvrtka FROM primka p 
+                                        LEFT JOIN stranka s ON  p.stranka_id = s.stranka_id
+                                        WHERE (p.status != 'Kupac preuzeo' AND p.status != 'Ekološki zbrinuto') 
+                                        AND (p.status = 'Stranka odustala od popravka' || p.status = 'Popravak završen u jamstvu' || p.status = 'Popravak završen van jamstva' || p.status ='Stranka odustala od popravka' || p.status = 'Uređaj zamijenjen novim' || p.status= 'Odobren povrat novca' || p.status='DOA - Uređaj zamijenjen novim' || p.status = 'DOA - Odobren povrat novca' || p.status = 'Čeka preuzimanje stranke') 
+                                        AND p.status NOT LIKE  'Poslano u CS%'  
+                                        
+                                        and p.centar = ?
+                                        ORDER BY p.primka_id ASC");
+        if($query === false){
+            trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
+        }
+        $query->bind_param('s', $_COOKIE['centar']);
+        if($query->execute()){
+            $meta = $query->result_metadata(); 
+            while ($field = $meta->fetch_field()) 
+        { 
+            $params[] = &$row[$field->name]; 
+        } 
+
+        call_user_func_array(array($query, 'bind_result'), $params); 
+
+        while ($query->fetch()) { 
+            foreach($row as $key => $val) 
+            { 
+                $c[$key] = $val; 
+            } 
+            $result[] = $c; 
+        } 
+        
+        $query->close(); 
+        return $result;
+
+        
+        } 
+    }
     
+    public function svePrimkeOtvorenServis() {
+        
+        $query = $this->mysqli->prepare("SELECT p.*, s.stranka_id, s.ime as s_ime, s.prezime as s_prezime, s.tvrtka FROM primka p 
+                                        LEFT JOIN stranka s ON  p.stranka_id = s.stranka_id
+                                        WHERE (p.status != 'Kupac preuzeo' AND p.status != 'Ekološki zbrinuto') 
+                                        AND (p.status != 'Stranka odustala od popravka' AND p.status != 'Popravak završen u jamstvu' AND p.status != 'Popravak završen van jamstva' AND p.status != 'Stranka odustala od popravka' AND p.status != 'Uređaj zamijenjen novim' AND p.status != 'Odobren povrat novca' AND p.status != 'DOA - Uređaj zamijenjen novim' AND p.status != 'DOA - Odobren povrat novca' AND p.status != 'Čeka preuzimanje stranke') 
+                                        AND p.status NOT LIKE  'Poslano u CS%'  
+                                        and p.centar = ?
+                                        ORDER BY p.primka_id ASC");
+        if($query === false){
+            trigger_error("Krivi SQL upit: " . $query . ", ERROR: " . $this->mysqli->errno . " " . $this->mysqli->error, E_USER_ERROR);
+        }
+        $query->bind_param('s', $_COOKIE['centar']);
+        if($query->execute()){
+            $meta = $query->result_metadata(); 
+            while ($field = $meta->fetch_field()) 
+        { 
+            $params[] = &$row[$field->name]; 
+        } 
+
+        call_user_func_array(array($query, 'bind_result'), $params); 
+
+        while ($query->fetch()) { 
+            foreach($row as $key => $val) 
+            { 
+                $c[$key] = $val; 
+            } 
+            $result[] = $c; 
+        } 
+        
+        $query->close(); 
+        return $result;
+
+        
+        } 
+    }
     
     public function svePrimke() {
         

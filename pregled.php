@@ -314,6 +314,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                                             opis_popravka += '<span class="no-print"><br>';
                                                             opis_popravka += '<b>Početak servisiranja uređaja:</b> ' + [pocetak_servisa.getDate(), pocetak_servisa.getMonth() + 1, pocetak_servisa.getFullYear()].join('.') + '. ';
+                                                            opis_popravka += '<br><b>Servisiranje započeo:</b> ' + rn.d1ime + ' ' + rn.d1prezime;
                                                             opis_popravka += '</span>';
 
                                                             var zavrsen_servis = new Date(rn.zavrsetak);

@@ -188,7 +188,7 @@
                                 
                                 <option>Pripremljeno za slanje OS-u</option>
                                 <option >Čeka dio u OS-u</option>
-                                <option value="Poslano u OS">Pošalji u OS</option>
+                                <option value="Poslano u OS">Poslano u OS</option>
                                 <option>Vraćeno is OS-a</option>
                                 <option>Popravak završen u jamstvu</option>
                                 <option>Popravak završen van jamstva</option>

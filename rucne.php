@@ -49,6 +49,12 @@ include_once './klase/checkLogin.php';
                     <div class="no-print" style="font-size: 20px; background-color: #d80200; color: white; width: 250px ">
                         <input id="op" type="checkbox" style="margin-left: 5px"> Dodati: Oprez - lomljivo</div>
 
+                       <br> <div id="t" class="row no-print">
+                            <div class="col-xs-12">
+                                <a  class="btn btn-default" onclick="printaj()"><i class="fa fa-print"></i> Print</a>
+                            </div>
+                        </div>
+
                     <!-- info row -->
                     <strong><div  style="margin-left: auto; margin-right: auto; text-align: center; ">
                     <div style="font-size: 20px">Ručna izdatnica br. </div>
@@ -138,21 +144,16 @@ include_once './klase/checkLogin.php';
                 </div>
 
                 <div class="col-xs-12" style="margin-top: 40px; width: 95%; ">
-                    <div style="float: left">
+                    <div class="col-xs-4" style="text-align: left;">
                         <b>Zatražio: </b><p id="z"></p><br>
-                        <b>Zaprimio skladištar: </b><p></p>
-                    </div>
-                    <div style="float: right">
+                   </div>
+                   <div class="col-xs-4" style="text-align: center;">
+                   </div>
+                    <div class="col-xs-4" style="text-align: right;">
                         <b>Datum: </b><p id="d"></p>
+                          <b>Zaprimio skladištar: </b><p></p>
                     </div>
-
-                </div>
-                
-                <div id="t" class="row no-print">
-                            <div class="col-xs-12">
-                                <a  class="btn btn-default" onclick="printaj()"><i class="fa fa-print"></i> Print</a>
-                            </div>
-                        </div>
+            </div>
  </div>
             </section><!-- /.content -->
         </div><!-- ./wrapper -->
