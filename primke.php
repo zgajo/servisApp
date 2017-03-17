@@ -249,14 +249,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 }, 30000);
                             }
 
-                            var table = $('#sve_primkeZavrsenServis').DataTable();
-                            var data = table
+                            var table2 = $('#sve_primkeZavrsenServis').DataTable();
+                            var data2 = table2
                                 .rows()
                                 .data();
                             // provjeri da li ima već unešenih redova i stavi interval osvježavanja ukoliko postoje redovi
-                            if (data.length != 0) {
+                            if (data2.length != 0) {
                                 setInterval(function () {
-                                    table.ajax.reload(null, false);
+                                    table2.ajax.reload(null, false);
                                 }, 30000);
                             }
 
@@ -284,15 +284,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             table.ajax.reload(null, false);
                                         }
 
-                                        var table = $('#sve_primkeZavrsenServis').DataTable();
-                                        var data = table
+                                        var table2 = $('#sve_primkeZavrsenServis').DataTable();
+                                        var data2 = table2
                                             .rows()
                                             .data();
                                         // provjeri da li ima već unešenih redova i osvježi ukoliko postoje redovi
-                                        if (data.length != 0) {
+                                        if (data2.length != 0) {
                                             console.log(data.length);
-                                            var table = $('#sve_primkeZavrsenServis').DataTable();
-                                            table.ajax.reload(null, false);
+                                            var table2 = $('#sve_primkeZavrsenServis').DataTable();
+                                            table2.ajax.reload(null, false);
                                         }
 
                                         console.log('active2');
