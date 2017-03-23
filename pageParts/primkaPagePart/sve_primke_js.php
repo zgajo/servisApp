@@ -356,7 +356,7 @@ $("#sve_primkeOtvorenServis").on("click", "#novi_rma", function () {
                     if(confirm('Stvoriti novi RMA nalog?'))  window.location = "rma.php?action=novi_rma&primka_id="+pr;
                 }
             }else{
-                if(confirm('Stvoriti novi RMA nalog?'))  window.open("rma.php?action=novi_rma&primka_id="+pr, "_blank");
+                if(confirm('Stvoriti novi RMA nalog?'))   window.location ="rma.php?action=novi_rma&primka_id="+pr;
             }
 
         }

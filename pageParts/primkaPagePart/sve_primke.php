@@ -71,7 +71,6 @@
                     <table id="svePoslanePrimkeServis" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>Započni servis</th>
                                 <th>Primka</th>
                                 <th>Uređaj</th>
                                 <th>Serijski</th>

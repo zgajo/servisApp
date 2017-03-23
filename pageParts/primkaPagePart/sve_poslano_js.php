@@ -18,18 +18,7 @@
                             "dataSrc": ""
                         },
                         "columns": [
-                            {
-                                data: "primka_id",
-                                "render": function (data, type, row, meta) {
-                                    var output = "";
-                                    if (odjel === "Servis" || odjel === "Reklamacije")
-
-                                        output += '<a  class="btn btn-app" id="novi_rn" name="' + row.primka_id + '" style=" height:initial; margin: 0 0 5px 5px; padding: 5px; background-color:ivory  " title="Otvori nalog servisiranja"><i class="glyphicon glyphicon-share" style="font-size:small; display:inline;"></i> Radni nalog</a>';
-                                    output += '<a  class="btn btn-app" id="novi_rma" name="' + row.primka_id + '" style="padding: 5px; margin: 0 0 5px 5px; height:initial; background-color:ivory  " title="Otvori nalog reklamacija"><i class="glyphicon glyphicon-random" style="font-size:small; display:inline;"></i> RMA nalog</a>';
-                                    return output;
-                                }
-                            },
-                            {
+                           {
                                 "data": "primka_id",
                                 "render": function (data, type, row, meta) { // render event defines the markup of the cell text
                                     var output = "";
@@ -44,7 +33,7 @@
                                         var sty = "label label-warning";
                                     if (diffDays > 17)
                                         var sty = "label label-danger";
-                                    output += '<a class="' + sty + '" href="pregled.php?primka=' + row.primka_id + '">' + row.primka_id + '</a>'; // row object contains the row data
+                                    output += '<a class="' + sty + '" id="primka_id" href="pregled.php?primka=' + row.primka_id + '">' + row.primka_id + '</a>'; // row object contains the row data
                                     return output;
                                 }
                             },
@@ -115,7 +104,7 @@
                                         var sty = "label label-warning";
                                     if (diffDays > 17)
                                         var sty = "label label-danger";
-                                    output += '<a class="' + sty + '">' + row.primka_id + '</a>'; // row object contains the row data
+                                    output += '<a class="' + sty + '" href="pregled.php?primka=' + row.primka_id + '">' + row.primka_id + '</a>'; // row object contains the row data
                                     return output;
                                 }
                             },
@@ -221,8 +210,27 @@
         $(this).find('#opcije').hide();
     });
 
+    function z(){
+    $("#svePoslanePrimkeServis tbody tr").nextAll("td").remove();
+}
 
-
+$("#svePoslanePrimkeServis").on("click", "tbody tr", function () {
+    
+    if($(this).next().is('td')){ $(this).next().remove()}
+    
+    else   {
+        z();
+        $(this).after('<td colspan=7 style="border:1px solid #F4F4F4; background-color:#e6ffe6 ; padding-right:15px" ><div style="margin-top:10px;">'+
+                
+                   '<a   class="btn btn-app" id="novi_rn" name="'+ $(this).find('#primka_id').text() +'"  style="  height:initial; background-color:ivory  ">'+
+                    '<i class="glyphicon glyphicon-share" style="font-size:small; display:inline;" ></i> Radni nalog'+
+                    '</a>  '+
+                          
+                   '<a class="btn btn-app" id="novi_rma" name="'+ $(this).find('#primka_id').text() +'" style="height:initial; background-color:ivory  ">'+
+                        '<i class="glyphicon glyphicon-random" style="font-size:small; display:inline;"></i> RMA nalog'+
+                    '</a>  ' +
+                '</div></td>')}
+        })
 
     //    KRAJ    *   LISTANJE SVIH POSLANIH PRIMKI  * KRAJ
 </script>
