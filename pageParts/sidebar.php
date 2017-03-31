@@ -31,6 +31,23 @@
             <li class="<?php echo ($_SERVER['PHP_SELF'] == "/servis/rma.php" ? "active" : ""); ?>"><a href="rma.php"><i class="glyphicon glyphicon-random"></i> <span>RMA nalozi</span></a></li>
             <?php if ($_COOKIE['odjel'] == "Servis") { ?><li class="<?php echo ($_SERVER['PHP_SELF'] == "/servis/narudzbe.php" ? "active" : "") ?>"><a href="./narudzbe.php"><i class="fa fa-reorder"></i> <span>Narudžbe</span></a></li><?php } ?>
 
+
+            <li class="treeview">
+                <a href="#">
+                  <i class="fa  fa-book"></i> 
+                  <span>Dokumentacija</span>
+                  <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu" style="display: none;">
+                    <li><a href="dokumentacija.php"><i class="fa fa-search"></i> Pregled</a></li>
+                    <li><a href="dokumentacija.php?stvori=Da"><i class="fa  fa-edit"></i> Stvori novo</a></li>
+                </ul>
+            </li>
+
+
+
+
+
         </ul><!-- /.sidebar-menu -->
         <ul class="sidebar-menu">
             <li class="header">PRETRAGA</li> 

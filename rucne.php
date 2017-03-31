@@ -212,7 +212,7 @@ include_once './klase/checkLogin.php';
                     //  PROVJERA KOJI CENTAR ŠALJE
                     switch(centar){
                         case "Rovinj":
-                            s_adresa = "Naselje Gripole spine 53/c";
+                            s_adresa = "Naselje Gripole 53/c";
                             s_grad = "Rovinj, 52210";
                             s_kontakt = "052 803 699";
                             break;
@@ -279,7 +279,7 @@ include_once './klase/checkLogin.php';
                             
                             switch(pr[0].centar){
                             case "Rovinj":
-                                p_adresa = "Naselje Gripole spine 53/c";
+                                p_adresa = "Naselje Gripole 53/c";
                                 p_grad = "Rovinj, 52210";
                                 p_kontakt = "052 803 699";
                             break;

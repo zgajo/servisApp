@@ -165,7 +165,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Pretrage u sidebaru -->
         <script type="text/javascript" src="search/searchkupca.js"></script>
         <script type="text/javascript" src="search/searchserijski.js"></script>
-<script type="text/javascript" src="search/searchprimka.js"></script>
+        <script type="text/javascript" src="search/searchprimka.js"></script>
 
         <?php
         if (!isset($_GET['primka']) && !isset($_GET['pregled_serijski'])) {
@@ -191,7 +191,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             {
                                 "data": "primka",
                                 "render": function (data, type, row, meta) {
-                                    var a = '<a style="margin-right:20px" href="pregled.php?primka=' + row.primka + '"><i style="" class="fa  fa-file-text-o"></i></a><p style="display:inline">' + row.primka + '</p>';
+                                    var a = '<a style="margin-right:20px" href="pregled.php?primka=' + row.primka + '"><i style="" class="fa  fa-file-text-o"></i></a><p style="display:inline" name="' + row.primka + '">' + row.primka + '</p>';
                                     return a;
                                 }
                             },
@@ -216,6 +216,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             }
                     ]
                     });
+
+                    $("#serijski_primke").on("click", "tbody tr", function () {
+                    console.log($(this).find( 'td:first-child p').attr('name'));
+                    window.location  = "pregled.php?primka=" + $(this).find( 'td:first-child p').attr('name');
+                })
+
                 </script>
                 <?php
         } else {
